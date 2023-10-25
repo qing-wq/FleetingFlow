@@ -1,0 +1,7 @@
+qiniu:
+  access_key:
+  secret_key:
+  bucket:
+  zone:
+  host:
+  type:

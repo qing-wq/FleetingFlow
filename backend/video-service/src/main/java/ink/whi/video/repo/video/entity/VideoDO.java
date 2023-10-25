@@ -1,4 +1,4 @@
-package ink.whi.video.repo.entity;
+package ink.whi.video.repo.video.entity;
 
 import ink.whi.common.vo.base.BaseDO;
 import lombok.Data;

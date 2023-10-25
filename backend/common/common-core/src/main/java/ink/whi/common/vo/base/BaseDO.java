@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author: qing
- * @Date: 2023/4/25 23:14
+ * @Date: 2023/10/25
  */
 @Data
 public class BaseDO implements Serializable {

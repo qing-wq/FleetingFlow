@@ -1,4 +1,4 @@
-package ink.whi;
+package ink.whi.video;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

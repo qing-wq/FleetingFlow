@@ -1,6 +1,5 @@
-package ink.whi.video.repo.entity;
+package ink.whi.video.repo.video.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import ink.whi.common.vo.base.BaseDO;
 import lombok.Data;
@@ -14,16 +13,20 @@ import java.io.Serial;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("category")
-public class CategoryDO extends BaseDO {
-
+@TableName("tag")
+public class TagDO extends BaseDO {
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3796460143933607644L;
 
     /**
-     * 类目名称
+     * 标签名称
      */
-    private String categoryName;
+    private String tagName;
+
+    /**
+     * 分类id
+     */
+    private Long categoryId;
 
     /**
      * 状态：0-未发布，1-已发布
@@ -31,9 +34,7 @@ public class CategoryDO extends BaseDO {
     private Integer status;
 
     /**
-     * 排序
+     * 是否删除
      */
-    private Integer rank;
-
     private Integer deleted;
 }
