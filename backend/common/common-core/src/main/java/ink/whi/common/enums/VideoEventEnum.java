@@ -12,7 +12,7 @@ import java.util.Map;
  * @date 2022/9/3
  */
 @Getter
-public enum ArticleEventEnum {
+public enum VideoEventEnum {
     CREATE(1, "创建"),
     ONLINE(2, "发布"),
     REVIEW(3, "审核"),
@@ -24,25 +24,25 @@ public enum ArticleEventEnum {
     private int type;
     private String msg;
 
-    private static Map<Integer, ArticleEventEnum> mapper;
+    private static Map<Integer, VideoEventEnum> mapper;
 
     static {
         mapper = new HashMap<>();
-        for (ArticleEventEnum type : values()) {
+        for (VideoEventEnum type : values()) {
             mapper.put(type.type, type);
         }
     }
 
-    ArticleEventEnum(int type, String msg) {
+    VideoEventEnum(int type, String msg) {
         this.type = type;
         this.msg = msg;
     }
 
-    public static ArticleEventEnum typeOf(int type) {
+    public static VideoEventEnum typeOf(int type) {
         return mapper.get(type);
     }
 
-    public static ArticleEventEnum typeOf(String type) {
+    public static VideoEventEnum typeOf(String type) {
         return valueOf(type.toUpperCase().trim());
     }
 }

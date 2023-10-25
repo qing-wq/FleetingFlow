@@ -1,11 +1,11 @@
-package ink.whi.common.utils;
+package ink.whi.utils;
 
 import javax.servlet.http.Cookie;
 
 /**
  * cookie 工具类
  * @author: qing
- * @Date: 2023/6/6
+ * @Date: 2023/10/25
  */
 public class SessionUtil {
     public static final String SESSION_KEY = "sai-session";

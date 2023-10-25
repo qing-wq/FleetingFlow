@@ -1,5 +1,8 @@
-package ink.whi.common.exception;
+package ink.whi.user.handler;
 
+import ink.whi.common.exception.BusinessException;
+import ink.whi.common.exception.Status;
+import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.vo.ResVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
