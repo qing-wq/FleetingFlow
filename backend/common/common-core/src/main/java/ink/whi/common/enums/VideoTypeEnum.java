@@ -3,13 +3,13 @@ package ink.whi.common.enums;
 import lombok.Getter;
 
 @Getter
-public enum DocumentTypeEnum {
+public enum VideoTypeEnum {
 
     EMPTY(0, ""),
     ARTICLE(1, "视频"),
     COMMENT(2, "评论");
 
-    DocumentTypeEnum(Integer code, String desc) {
+    VideoTypeEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }
@@ -17,13 +17,13 @@ public enum DocumentTypeEnum {
     private final Integer code;
     private final String desc;
 
-    public static DocumentTypeEnum formCode(Integer code) {
-        for (DocumentTypeEnum value : DocumentTypeEnum.values()) {
+    public static VideoTypeEnum formCode(Integer code) {
+        for (VideoTypeEnum value : VideoTypeEnum.values()) {
             if (value.getCode().equals(code)) {
                 return value;
             }
         }
-        return DocumentTypeEnum.EMPTY;
+        return VideoTypeEnum.EMPTY;
     }
 
 }

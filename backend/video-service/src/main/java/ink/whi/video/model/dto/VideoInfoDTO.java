@@ -1,7 +1,9 @@
 package ink.whi.video.model.dto;
 
+import ink.whi.common.vo.dto.SimpleUserInfoDTO;
 import ink.whi.video.model.video.CategoryDTO;
 import ink.whi.video.model.video.TagDTO;
+import ink.whi.video.repo.video.entity.VideoResource;
 import lombok.Data;
 
 import java.io.Serial;
@@ -48,11 +50,6 @@ public class VideoInfoDTO implements Serializable {
     private CategoryDTO category;
 
     /**
-     * 视频地址
-     */
-    private String url;
-
-    /**
      * 状态：0-未发布,1-已发布,2-待审核
      */
     private Integer status;
@@ -78,7 +75,17 @@ public class VideoInfoDTO implements Serializable {
     private Boolean collected;
 
     /**
+     * 作者信息
+     */
+    private SimpleUserInfoDTO simpleUserInfoDTO;
+
+    /**
      * 视频对应的统计计数
      */
     private VideoStatisticDTO count;
+
+    /**
+     * 视频资源对象
+     */
+    private List<VideoResource> resources;
 }

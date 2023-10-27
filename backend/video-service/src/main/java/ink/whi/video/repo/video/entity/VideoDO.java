@@ -19,7 +19,7 @@ public class VideoDO extends BaseDO {
     /**
      * 用户id
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 视频标题
@@ -42,16 +42,9 @@ public class VideoDO extends BaseDO {
     private Long categoryId;
 
     /**
-     * 视频地址
-     */
-    private String url;
-
-    /**
      * 状态：0-未发布,1-已发布,2-待审核
      */
     private Integer status;
-
-    private Integer deleted;
 
     /**
      * 空间名
@@ -64,12 +57,19 @@ public class VideoDO extends BaseDO {
     private String size;
 
     /**
-     * 文件类型
-     */
-    private String suffix;
-
-    /**
-     * 空间类型：公开/私有
+     * 文件类型：公开/私有
      */
     private String type = "公开";
+
+    /**
+     * 视频地址
+     */
+    private String url;
+
+    /**
+     * 视频格式
+     */
+    private String format;
+
+    private Integer deleted;
 }
