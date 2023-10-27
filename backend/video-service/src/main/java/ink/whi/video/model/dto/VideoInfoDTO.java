@@ -1,11 +1,12 @@
-package ink.whi.common.vo.dto;
+package ink.whi.video.model.dto;
 
-import ink.whi.common.vo.base.BaseDTO;
+import ink.whi.video.model.video.CategoryDTO;
+import ink.whi.video.model.video.TagDTO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author: qing
@@ -22,9 +23,9 @@ public class VideoInfoDTO implements Serializable {
     private Long videoId;
 
     /**
-     * 用户id
+     * 作者id
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 视频标题
@@ -44,7 +45,7 @@ public class VideoInfoDTO implements Serializable {
     /**
      * 分类
      */
-    private Integer categoryId;
+    private CategoryDTO category;
 
     /**
      * 视频连接
@@ -55,4 +56,29 @@ public class VideoInfoDTO implements Serializable {
      * 状态：0-未发布,1-已发布,2-待审核
      */
     private Integer status;
+
+    /**
+     * 标签
+     */
+    private List<TagDTO> tags;
+
+    /**
+     * 表示当前查看的用户是否已经点赞过
+     */
+    private Boolean praised;
+
+    /**
+     * 表示当用户是否评论过
+     */
+    private Boolean commented;
+
+    /**
+     * 表示当前用户是否收藏过
+     */
+    private Boolean collected;
+
+    /**
+     * 视频对应的统计计数
+     */
+    private VideoStatisticDTO count;
 }

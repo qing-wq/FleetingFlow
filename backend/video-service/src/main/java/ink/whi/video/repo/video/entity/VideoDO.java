@@ -39,10 +39,10 @@ public class VideoDO extends BaseDO {
     /**
      * 分类
      */
-    private Integer categoryId;
+    private Long categoryId;
 
     /**
-     * 视频连接
+     * 视频地址
      */
     private String url;
 
@@ -50,4 +50,26 @@ public class VideoDO extends BaseDO {
      * 状态：0-未发布,1-已发布,2-待审核
      */
     private Integer status;
+
+    private Integer deleted;
+
+    /**
+     * 空间名
+     */
+    private String bucket;
+
+    /**
+     * 大小
+     */
+    private String size;
+
+    /**
+     * 文件类型
+     */
+    private String suffix;
+
+    /**
+     * 空间类型：公开/私有
+     */
+    private String type = "公开";
 }

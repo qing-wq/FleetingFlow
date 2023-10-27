@@ -42,6 +42,11 @@ public class UserStatisticInfoDTO extends BaseUserInfoDTO {
     private Integer collectionCount;
 
     /**
+     * 视频播放总数
+     */
+    private Long totalReadCount;
+
+    /**
      * 是否关注当前用户
      */
     private Boolean followed;

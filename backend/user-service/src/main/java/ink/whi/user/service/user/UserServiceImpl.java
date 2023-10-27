@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
         UserStatisticInfoDTO userHomeDTO = UserConverter.toUserHomeDTO(userInfoDTO);
 
         // 获取视频相关统计
+        // todo：换成redis
         VideoFootCountDTO videoFootCount = countService.queryArticleCountInfoByUserId(userId);
         if (videoFootCount != null) {
             userHomeDTO.setPraiseCount(videoFootCount.getPraiseCount());
