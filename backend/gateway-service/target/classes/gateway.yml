@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.60.98.242:8848
+        file-extension: yml
+      discovery:
+        server-addr: 10.60.98.242:8848
+
+    gateway:
+      routes:
+#        - id: auth-service
+#          uri: lb://auth-service
+#          predicates:
+#            - Path=/uaa/**
+#          filters:
+#            - StripPrefix=1

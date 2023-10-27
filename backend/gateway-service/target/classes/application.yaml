@@ -1,0 +1,52 @@
+server:
+  port: 4000
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.60.98.242:8848
+        file-extension: yml
+      discovery:
+        server-addr: 10.60.98.242:8848
+
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+#            - StripPrefix=1
+        - id: not-found
+          uri: lb://user-service
+          predicates:
+            - Path=/**
+          order: 10000
+
+  zipkin:
+    base-url: http://10.60.98.242:9411/
+    discovery-client-enabled: false   # 禁用服务发现客户端
+    sender: rabbit
+    compression:
+      enabled: false      # 禁用跟踪数据的压缩
+
+  sleuth:
+    sampler:
+      probability: 1    # 采样率
+
+  config:
+    import:
+      - optional:nacos:gateway.yml
+      - gateway-service.yaml
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="85743d03-e393-4eeb-9fab-61c09f667d2f" name="Changes" comment="feat: 添加视频列表接口定义，调整数据模型定义，增加清晰度规则">
+      <change afterPath="$PROJECT_DIR$/common/common-core/src/main/java/ink/whi/common/enums/FileTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway-service/src/main/resources/gateway.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/src/main/resources/gateway.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/cache/RedisConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/cache/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/controller/VideoRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/controller/VideoRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoInfoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoInfoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoStatisticDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoStatisticDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/dao/QiniuContentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/dao/QiniuContentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/entity/QiniuContentDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/entity/QiniuContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/mapper/QiniuContentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/mapper/QiniuContentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/converter/VideoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/converter/VideoConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/entity/VideoDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/entity/VideoDO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/service/impl/VideoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/service/impl/VideoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/resources/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/resources/application-dal.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/src/test/java/VideoMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/test/java/VideoMapperTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="backend" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2XAaJiJipbsbs8mgD3Uat01v5eF" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "import_schema_mapping": "<schema-mapping>\n  <databases>\n    <list>\n      <schema-mapping-item>\n        <source-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</source-data-source-id>\n        <source-path>schema/&quot;eladmin&quot;</source-path>\n        <target-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</target-data-source-id>\n        <target-path>schema/&quot;qiniu&quot;</target-path>\n      </schema-mapping-item>\n      <schema-mapping-item>\n        <source-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</source-data-source-id>\n        <source-path>schema/&quot;sai-forum&quot;</source-path>\n        <target-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</target-data-source-id>\n        <target-path>schema/&quot;qiniu&quot;</target-path>\n      </schema-mapping-item>\n    </list>\n  </databases>\n</schema-mapping>",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "/home/qing/MyDocument/code/match/qiniu-dnwtn/backend/user-service/user-client/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.14053535",
+    "project.structure.side.proportion": "0.2",
+    "settings.build.tools.auto.reload": "ALL",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "spring.configuration.checksum": "1c15b296d17a8db77eb476c7c426a3e6",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/user-service/user-client/src/main/resources" />
+      <recent name="$PROJECT_DIR$/user-service/user-server/src/main/resources" />
+      <recent name="$PROJECT_DIR$/user-service/user-server/src/main/java/ink/whi" />
+      <recent name="$PROJECT_DIR$/user-service/user-client/src/main/java/ink/whi/user" />
+      <recent name="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/dao" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/common/src/main/java/ink/whi/common" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ink.whi" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="ink.whi.video.repo.video.entity" />
+      <recent name="ink.whi.common.vo.dto" />
+      <recent name="ink.whi.video.config" />
+      <recent name="ink.whi.video.utils" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.VideoServiceApplication">
+    <configuration name="VideoServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ink.whi.video.VideoServiceApplication" />
+      <module name="video-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ink.whi.video.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="generated-requests | #14" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="14" requestIdentifier="#14" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="MyTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MyTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="video-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MyTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VideoMapperTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="video-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="VideoMapperTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="gateway-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="user-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.user.UserServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="user-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.user.UserServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VideoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="video-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.video.VideoServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #14" />
+        <item itemvalue="JUnit.VideoMapperTest.test" />
+        <item itemvalue="JUnit.MyTest.test1" />
+        <item itemvalue="JUnit.MyTest.test" />
+        <item itemvalue="Application.VideoServiceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBeansView">
+    <option name="beanDetailsProportion" value="0.3" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85743d03-e393-4eeb-9fab-61c09f667d2f" name="Changes" comment="" />
+      <created>1698074268077</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698074268077</updated>
+      <workItem from="1698074269222" duration="77000" />
+      <workItem from="1698074349815" duration="20945000" />
+      <workItem from="1698143880561" duration="1370000" />
+      <workItem from="1698148453410" duration="14025000" />
+      <workItem from="1698207069298" duration="38669000" />
+      <workItem from="1698329931615" duration="32524000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: 项目初始化，用户系统搭建">
+      <created>1698214305943</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698214305943</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: 网关系统搭建">
+      <created>1698234976018</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698234976018</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat:  添加七牛云配置信息">
+      <created>1698255111622</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698255111623</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: 视频系统数据层搭建">
+      <created>1698369059880</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698369059880</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: 添加评论功能、七牛云配置">
+      <created>1698370447406</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698370447406</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: 分离用户系统远程调用模块，实现不同微服务之间局部依赖">
+      <created>1698403252021</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698403252021</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: 添加视频列表接口定义，调整数据模型定义，增加清晰度规则">
+      <created>1698403335194</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698403335194</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: 项目初始化，用户系统搭建" />
+    <MESSAGE value="feat: 网关系统" />
+    <MESSAGE value="feat: 网关系统搭建" />
+    <MESSAGE value="feat:  添加七牛云配置信息" />
+    <MESSAGE value="feat: 视频系统数据层搭建" />
+    <MESSAGE value="feat: 添加评论功能、七牛云配置" />
+    <MESSAGE value="feat: 分离用户系统远程调用模块，实现不同微服务之间局部依赖" />
+    <MESSAGE value="feat: 添加视频列表接口定义，调整数据模型定义，增加清晰度规则" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加视频列表接口定义，调整数据模型定义，增加清晰度规则" />
+  </component>
+</project>

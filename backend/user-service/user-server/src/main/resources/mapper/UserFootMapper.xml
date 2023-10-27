@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ink.whi.user.repo.mapper.UserFootMapper">
+
+    <select id="countVideoInfoByVideoId" resultType="ink.whi.user.model.dto.VideoFootCountDTO">
+        SELECT
+            sum(if (f.praise_stat =${@ink.whi.api.model.enums.PraiseStatEnum@PRAISE.code}, 1, 0)) as praiseCount,
+            sum(if (f.collection_stat =${@ink.whi.api.model.enums.CollectionStatEnum@COLLECTION.code}, 1, 0)) as collectionCount,
+            avg(r.`cnt`) as readCount
+        FROM
+            read_count as r
+        left join user_foot as f  on f.video_id = r.video_id and f.type = r.type
+        WHERE
+            r.type = ${@ink.whi.api.model.enums.DocumentTypeEnum@ARTICLE.code}
+            AND r.video_id = #{articleId}
+    </select>
+
+    <select id="countVideoByUserId" resultType="ink.whi.user.model.dto.VideoFootCountDTO">
+        SELECT
+            sum(if (f.praise_stat =${@ink.whi.api.model.enums.PraiseStatEnum@PRAISE.code}, 1, 0)) as praiseCount,
+            sum(if (f.collection_stat =${@ink.whi.api.model.enums.CollectionStatEnum@COLLECTION.code}, 1, 0)) as collectionCount,
+            avg(r.`cnt`) as readCount
+        FROM
+            read_count as r
+                left join user_foot as f  on f.video_id = r.video_id and f.type = r.type
+        WHERE
+                r.type = ${@ink.whi.api.model.enums.DocumentTypeEnum@ARTICLE.code}
+          AND f.video_user_id = #{userId}
+    </select>
+</mapper>

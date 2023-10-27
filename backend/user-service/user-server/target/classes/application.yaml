@@ -1,0 +1,37 @@
+server:
+  port: 8000
+  servlet:
+    session:
+      timeout: 5m # 设置session的有效期为五分钟
+  address: 0.0.0.0
+
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.60.98.242:8848
+        file-extension: yml
+      discovery:
+        server-addr: 10.60.98.242:8848
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - application-dal.yaml
+      - optional:nacos:user-service.yml
+
+database:
+  name: qiniu
+
+jwt:
+  key: secret-key
+
+security:
+  salt: salt-key
+  salt-index: 2
+
+logging:
+  level:
+    root: info
