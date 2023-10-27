@@ -30,7 +30,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("tool_qiniu_config")
-public class QiniuConfigDO implements Serializable {
+public class QiniuConfig implements Serializable {
 
     /**
      * 业务id

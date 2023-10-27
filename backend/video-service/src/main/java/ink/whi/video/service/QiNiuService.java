@@ -2,21 +2,27 @@ package ink.whi.video.service;
 
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
-import ink.whi.video.model.vo.QiniuQueryCriteria;
-import ink.whi.video.repo.qiniu.entity.QiniuConfigDO;
-import ink.whi.video.repo.qiniu.entity.QiniuContentDO;
+import ink.whi.video.model.dto.QiniuQueryCriteria;
+import ink.whi.video.repo.qiniu.entity.QiniuConfig;
+import ink.whi.video.repo.qiniu.entity.QiniuContent;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @author: qing
  * @Date: 2023/10/25
  */
 public interface QiNiuService {
-    QiniuConfigDO getConfig();
+    QiniuConfig getConfig();
 
-    void config(QiniuConfigDO config);
+    void setConfig(QiniuConfig config);
 
-    PageListVo<QiniuContentDO> queryFiles(QiniuQueryCriteria criteria, PageParam pageParam);
+    PageListVo<QiniuContent> queryFiles(QiniuQueryCriteria criteria, PageParam pageParam);
 
-    QiniuContentDO upload(MultipartFile file, QiniuConfigDO config);
+    QiniuContent upload(MultipartFile file, QiniuConfig config) throws IOException;
+
+    QiniuContent queryContentById(Long id);
+
+    String download(QiniuContent content, QiniuConfig config);
 }

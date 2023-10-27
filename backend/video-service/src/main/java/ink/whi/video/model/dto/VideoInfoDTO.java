@@ -48,7 +48,7 @@ public class VideoInfoDTO implements Serializable {
     private CategoryDTO category;
 
     /**
-     * 视频连接
+     * 视频地址
      */
     private String url;
 

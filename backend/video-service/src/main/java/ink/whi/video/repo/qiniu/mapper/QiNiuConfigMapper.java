@@ -17,13 +17,12 @@ package ink.whi.video.repo.qiniu.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ink.whi.video.repo.qiniu.entity.QiniuConfigDO;
+import ink.whi.video.repo.qiniu.entity.QiniuConfig;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author qing
  * @date 2023/10/25
  */
-@Repository
-public interface QiNiuConfigMapper extends BaseMapper<QiniuConfigDO> {
+public interface QiNiuConfigMapper extends BaseMapper<QiniuConfig> {
 }
