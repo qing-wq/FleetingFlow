@@ -3,6 +3,8 @@ package ink.whi.video.repo.video.dao;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
+import ink.whi.common.enums.FileTypeEnum;
+import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.enums.YesOrNoEnum;
 import ink.whi.common.vo.base.BaseDO;
 import ink.whi.common.vo.page.PageParam;
@@ -38,7 +40,7 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
     @Autowired
     private VideoResourceMapper videoResourceMapper;
 
-    public VideoInfoDTO queryBaseVideoInfo(Long videoId) {
+    public VideoInfoDTO getVideoInfoById(Long videoId) {
         VideoDO video = lambdaQuery().eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
                 .eq(BaseDO::getId, videoId)
                 .one();
@@ -60,6 +62,8 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
     public List<VideoDO> listVideosByCategory(Long categoryId, PageParam pageParam) {
         return lambdaQuery().eq(VideoDO::getCategoryId, categoryId)
                 .eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
+                .eq(VideoDO::getType, FileTypeEnum.PUBLIC.getCode())
+                .eq(VideoDO::getStatus, VideoTypeEnum.ARTICLE.getCode())
                 .last(PageParam.getLimitSql(pageParam))
                 .orderByDesc(BaseDO::getCreateTime)
                 .list();

@@ -19,4 +19,6 @@ public interface VideoService {
     PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, PageParam pageParam);
 
     Long upload(VideoPostReq videoPostReq) throws IOException;
+
+    VideoInfoDTO queryBaseVideoInfo(Long videoId);
 }

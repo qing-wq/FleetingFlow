@@ -62,6 +62,11 @@ public class VideoServiceImpl implements VideoService {
     private TransactionTemplate transactionTemplate;
 
     @Override
+    public VideoInfoDTO queryBaseVideoInfo(Long videoId) {
+        return videoDao.getVideoInfoById(videoId);
+    }
+
+    @Override
     public VideoInfoDTO queryTotalVideoInfo(Long videoId, Long readUser) {
         VideoInfoDTO video = queryDetailVideoInfo(videoId);
 
@@ -87,10 +92,9 @@ public class VideoServiceImpl implements VideoService {
         return video;
     }
 
-
     @Override
     public VideoInfoDTO queryDetailVideoInfo(Long videoId) {
-        VideoInfoDTO video = videoDao.queryBaseVideoInfo(videoId);
+        VideoInfoDTO video = videoDao.getVideoInfoById(videoId);
         if (video == null) {
             throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "视频不存在：" + videoId);
         }

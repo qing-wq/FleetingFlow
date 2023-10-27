@@ -14,7 +14,13 @@ import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 视频接口
@@ -53,7 +59,7 @@ public class VideoRestController extends BaseRestController {
     }
 
     /**
-     * 根据分类获取视频流
+     * 获取视频流
      * @param categoryId
      * @param page
      * @param size
@@ -74,7 +80,8 @@ public class VideoRestController extends BaseRestController {
      * @return
      */
     @PostMapping("upload")
-    public ResVo<Long> upload(@RequestBody VideoPostReq videoPostReq) {
-        videoService.upload(videoPostReq);
+    public ResVo<Long> upload(@RequestBody VideoPostReq videoPostReq) throws IOException {
+        Long videoId = videoService.upload(videoPostReq);
+        return ResVo.ok(videoId);
     }
 }
