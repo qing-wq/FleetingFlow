@@ -71,4 +71,11 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
         return wrapper.eq(VideoResource::getVideoId, videoId)
                 .list();
     }
+
+    public void saveResource(Long videoId, String key) {
+        VideoResource resource = new VideoResource();
+        resource.setVideoId(videoId);
+        resource.setUrl(key);
+
+    }
 }

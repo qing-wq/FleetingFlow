@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "security.jwt",
+      "type": "ink.whi.common.config.JwtConfig",
+      "sourceType": "ink.whi.common.config.JwtConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

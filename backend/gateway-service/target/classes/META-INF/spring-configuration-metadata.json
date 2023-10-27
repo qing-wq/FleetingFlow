@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "security.config",
+      "type": "ink.whi.gateway.config.SecurityConfig",
+      "sourceType": "ink.whi.gateway.config.SecurityConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

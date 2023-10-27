@@ -17,18 +17,18 @@ package ink.whi.video.repo.qiniu.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ink.whi.video.repo.qiniu.entity.QiniuContentDO;
+import ink.whi.video.repo.qiniu.entity.QiniuContent;
 
 /**
  * @author qing
  * @date 2023/10/25
  */
-public interface QiniuContentMapper extends BaseMapper<QiniuContentDO> {
+public interface QiniuContentMapper extends BaseMapper<QiniuContent> {
 
     /**
      * 根据文件名查询记录
      * @param key 文件名
      * @return QiniuContent
      */
-    QiniuContentDO findByKey(String key);
+    QiniuContent findByKey(String key);
 }

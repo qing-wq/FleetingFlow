@@ -2,6 +2,7 @@ package ink.whi.video.model.req;
 
 import ink.whi.common.enums.PushStatusEnum;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -22,6 +23,11 @@ public class VideoPostReq implements Serializable {
      * 视频ID(非必填)
      */
     private Long videoId;
+
+    /**
+     * 视频文件
+     */
+    private MultipartFile file;
 
     /**
      * 视频标题

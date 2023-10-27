@@ -62,11 +62,12 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public QiniuContent upload(MultipartFile file, QiniuConfig config) throws IOException {
+    public DefaultPutRet upload(MultipartFile file) throws IOException {
+
         // 检查文件大小
 //        FileUtil.checkSize(maxSize, file.getSize());
-
+        //todo: 配置可以加到caffeine缓存
+        QiniuConfig config = getConfig();
         String filename = file.getOriginalFilename();
         if (filename == null) {
             throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "文件名非法");
@@ -86,20 +87,22 @@ public class QiNiuServiceImpl implements QiNiuService {
         // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
         DefaultPutRet putRet = JsonUtil.toObj(response.bodyString(), DefaultPutRet.class);
-        QiniuContent content = qiniuContentDao.queryByKey(FileUtil.getFileNameNoEx(putRet.key));
-        if (content == null) {
-            //存入数据库
-            QiniuContent qiniuContent = new QiniuContent();
-            qiniuContent.setSuffix(FileUtil.getExtensionName(putRet.key));
-            qiniuContent.setBucket(config.getBucket());
-            qiniuContent.setType(config.getType());
-            qiniuContent.setKeyName(FileUtil.getFileNameNoEx(putRet.key));
-            qiniuContent.setUrl(config.getHost() + "/" + putRet.key);
-            qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
-            qiniuContentDao.save(qiniuContent);
-            return qiniuContent;
-        }
-        return content;
+//        System.out.println("putKey " + putRet.key + ":" + putRet.hash);
+//        QiniuContent content = qiniuContentDao.queryByKey(FileUtil.getFileNameNoEx(putRet.key));
+//        if (content == null) {
+//            //存入数据库
+//            QiniuContent qiniuContent = new QiniuContent();
+//            qiniuContent.setSuffix(FileUtil.getExtensionName(putRet.key));
+//            qiniuContent.setBucket(config.getBucket());
+//            qiniuContent.setType(config.getType());
+//            qiniuContent.setKeyName(FileUtil.getFileNameNoEx(putRet.key));
+//            qiniuContent.setUrl(config.getHost() + "/" + putRet.key);
+//            qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
+//            qiniuContentDao.save(qiniuContent);
+//            return qiniuContent;
+//        }
+//        return content;
+        return putRet;
     }
 
     @Override

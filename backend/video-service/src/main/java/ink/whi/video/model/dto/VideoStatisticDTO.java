@@ -17,12 +17,17 @@ public class VideoStatisticDTO {
     /**
      * 视频播放数
      */
-    private Integer  readCount;
+    private Integer viewCount;
 
     /**
      * 视频被收藏数
      */
-    private Integer  collectionCount;
+    private Integer collectionCount;
+
+    /**
+     * 转发数
+     */
+    private Integer forwardCount;
 
     /**
      * 评论数
@@ -31,7 +36,7 @@ public class VideoStatisticDTO {
 
     public VideoStatisticDTO() {
         praiseCount = 0;
-        readCount = 0;
+        viewCount = 0;
         collectionCount = 0;
         commentCount = 0;
     }

@@ -47,7 +47,7 @@ public class VideoInfoDTO implements Serializable {
     /**
      * 分类
      */
-    private CategoryDTO category;
+    private Long categoryId;
 
     /**
      * 状态：0-未发布,1-已发布,2-待审核
@@ -67,7 +67,7 @@ public class VideoInfoDTO implements Serializable {
     /**
      * 表示当用户是否评论过
      */
-    private Boolean commented;
+    private Boolean followed;
 
     /**
      * 表示当前用户是否收藏过
@@ -77,7 +77,7 @@ public class VideoInfoDTO implements Serializable {
     /**
      * 作者信息
      */
-    private SimpleUserInfoDTO simpleUserInfoDTO;
+    private SimpleUserInfoDTO author;
 
     /**
      * 视频对应的统计计数

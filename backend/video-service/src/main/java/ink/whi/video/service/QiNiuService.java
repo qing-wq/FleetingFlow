@@ -1,5 +1,6 @@
 package ink.whi.video.service;
 
+import com.qiniu.storage.model.DefaultPutRet;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
 import ink.whi.video.model.dto.QiniuQueryCriteria;
@@ -20,7 +21,7 @@ public interface QiNiuService {
 
     PageListVo<QiniuContent> queryFiles(QiniuQueryCriteria criteria, PageParam pageParam);
 
-    QiniuContent upload(MultipartFile file, QiniuConfig config) throws IOException;
+    DefaultPutRet upload(MultipartFile file) throws IOException;
 
     QiniuContent queryContentById(Long id);
 

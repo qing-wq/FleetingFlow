@@ -8,8 +8,11 @@ import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
 import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.vo.VideoDetailVO;
+import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.VideoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +21,16 @@ import org.springframework.web.bind.annotation.*;
  * @author: qing
  * @Date: 2023/10/26
  */
+@Slf4j
 @RestController
 @RequestMapping(path = "video")
 public class VideoRestController extends BaseRestController {
 
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private QiNiuService qiNiuService;
 
     /**
      * 视频详情页
@@ -45,12 +52,29 @@ public class VideoRestController extends BaseRestController {
         return null;
     }
 
+    /**
+     * 根据分类获取视频流
+     * @param categoryId
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping(path = "category/{category}")
-    public ResVo<PageListVo<VideoInfoDTO>> categoryList(@PathVariable("category") Long categoryId,
+    public ResVo<PageListVo<VideoInfoDTO>> feed(@PathVariable("category") Long categoryId,
                                               @RequestParam(name = "page") Long page,
                                               @RequestParam(name = "size", required = false) Long size) {
         PageParam pageParam = buildPageParam(page, size);
         PageListVo<VideoInfoDTO> list = videoService.queryVideosByCategory(categoryId, pageParam);
         return ResVo.ok(list);
+    }
+
+    /**
+     * 上传视频
+     * @param videoPostReq
+     * @return
+     */
+    @PostMapping("upload")
+    public ResVo<Long> upload(@RequestBody VideoPostReq videoPostReq) {
+        videoService.upload(videoPostReq);
     }
 }

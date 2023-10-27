@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/backend.iml" filepath="$PROJECT_DIR$/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common.iml" filepath="$PROJECT_DIR$/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-core.iml" filepath="$PROJECT_DIR$/common-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-web.iml" filepath="$PROJECT_DIR$/common-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway-service/gateway-service.iml" filepath="$PROJECT_DIR$/gateway-service/gateway-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-client.iml" filepath="$PROJECT_DIR$/user-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-server.iml" filepath="$PROJECT_DIR$/user-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service.iml" filepath="$PROJECT_DIR$/user-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video-service.iml" filepath="$PROJECT_DIR$/video-service.iml" />
+    </modules>
+  </component>
+</project>

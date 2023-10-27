@@ -15,6 +15,7 @@
  */
 package ink.whi.video.controller;
 
+import com.qiniu.storage.model.DefaultPutRet;
 import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
@@ -100,10 +101,9 @@ public class QiniuController {
      */
     @PostMapping
     public ResponseEntity<Object> uploadQiNiu(@RequestParam MultipartFile file) throws IOException {
-        QiniuContent qiniuContent = qiNiuService.upload(file, qiNiuService.getConfig());
+        DefaultPutRet putKey = qiNiuService.upload(file);
         Map<String, Object> map = new HashMap<>(2);
-        map.put("id", qiniuContent.getId());
-        map.put("data", qiniuContent.getUrl());
+        map.put("url", putKey.key);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 

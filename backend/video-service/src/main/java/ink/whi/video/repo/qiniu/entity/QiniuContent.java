@@ -15,6 +15,7 @@
  */
 package ink.whi.video.repo.qiniu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -26,14 +27,15 @@ import java.sql.Timestamp;
  */
 @Data
 @TableName("tool_qiniu_content")
-public class QiniuContentDO implements Serializable {
+public class QiniuContent implements Serializable {
 
     private Long id;
 
     /**
      * 文件名
      */
-    private String key;
+    @TableField(value = "name")
+    private String keyName;
 
     /**
      * 空间名

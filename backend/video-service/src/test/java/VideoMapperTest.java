@@ -17,7 +17,5 @@ public class VideoMapperTest extends BasicTest{
 
     @Test
     void test() {
-        List<VideoInfoDTO> videoInfoDTOS = videoMapper.listVideoWithResourceByCategory(1L, PageParam.newPageInstance());
-        System.out.println(videoInfoDTOS);
     }
 }

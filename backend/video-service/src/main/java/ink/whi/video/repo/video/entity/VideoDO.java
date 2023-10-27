@@ -1,5 +1,6 @@
 package ink.whi.video.repo.video.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import ink.whi.common.vo.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,6 +13,7 @@ import java.io.Serial;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@TableName("video")
 public class VideoDO extends BaseDO {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -60,16 +62,6 @@ public class VideoDO extends BaseDO {
      * 文件类型：公开/私有
      */
     private String type = "公开";
-
-    /**
-     * 视频地址
-     */
-    private String url;
-
-    /**
-     * 视频格式
-     */
-    private String format;
 
     private Integer deleted;
 }
