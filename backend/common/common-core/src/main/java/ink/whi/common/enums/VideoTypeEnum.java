@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum VideoTypeEnum {
 
     EMPTY(0, ""),
-    ARTICLE(1, "视频"),
+    VIDEO(1, "视频"),
     COMMENT(2, "评论");
 
     VideoTypeEnum(Integer code, String desc) {

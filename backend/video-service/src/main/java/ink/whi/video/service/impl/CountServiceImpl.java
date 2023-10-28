@@ -1,9 +1,13 @@
 package ink.whi.video.service.impl;
 
-import ink.whi.video.cache.RedisClient;
+import ink.whi.common.cache.RedisClient;
+import ink.whi.common.statistic.constants.CountConstants;
 import ink.whi.video.model.dto.VideoStatisticDTO;
+import ink.whi.video.repo.video.dao.VideoDao;
 import ink.whi.video.service.CountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  * @author: qing
@@ -12,22 +16,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class CountServiceImpl implements CountService {
 
-    private static final String USER_STATISTIC = "user_statistic";
-    private static final String USER_CACHE_PREFIX = "user_statistic_";
-
-    private static final String VIDEO_STATISTIC = "video_statistic";
-    public static final String VIDEO_CACHE_PREFIX = "video_statistic_";
-
+    @Autowired
+    private VideoDao videoDao;
 
     @Override
-    public void incrVideoReadCount(Long videoId) {
-        String field = VIDEO_CACHE_PREFIX + videoId;
-        RedisClient.hIncr(VIDEO_STATISTIC, field, 1);
+    public void incrVideoReadCount(Long videoId, Long authorId) {
+        // todo: 计数信息落到MySQL中
+        // redis计数信息 +1
+        RedisClient.pipelineAction()
+                .add(CountConstants.VIDEO_STATISTIC + videoId, CountConstants.READ_COUNT,
+                        (connection, key, value) -> connection.hIncrBy(key, value, 1))
+                .add(CountConstants.USER_STATISTIC + authorId, CountConstants.READ_COUNT,
+                        (connection, key, value) -> connection.hIncrBy(key, value, 1))
+                .execute();
     }
 
+    /**
+     * 获取视频全部计数信息
+     * @param videoId
+     * @return
+     */
     @Override
     public VideoStatisticDTO queryVideoStatisticInfo(Long videoId) {
-        String field = VIDEO_CACHE_PREFIX + videoId;
-        return RedisClient.hGet(VIDEO_STATISTIC, field, VideoStatisticDTO.class);
+        String key = CountConstants.VIDEO_STATISTIC + videoId;
+        return (VideoStatisticDTO) RedisClient.hGetAll(key, VideoStatisticDTO.class);
     }
 }

@@ -63,7 +63,7 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
         return lambdaQuery().eq(VideoDO::getCategoryId, categoryId)
                 .eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
                 .eq(VideoDO::getType, FileTypeEnum.PUBLIC.getCode())
-                .eq(VideoDO::getStatus, VideoTypeEnum.ARTICLE.getCode())
+                .eq(VideoDO::getStatus, VideoTypeEnum.VIDEO.getCode())
                 .last(PageParam.getLimitSql(pageParam))
                 .orderByDesc(BaseDO::getCreateTime)
                 .list();

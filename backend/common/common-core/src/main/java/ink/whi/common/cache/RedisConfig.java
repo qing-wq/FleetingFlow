@@ -1,6 +1,5 @@
-package ink.whi.video.cache;
+package ink.whi.common.cache;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 

@@ -11,10 +11,10 @@ import lombok.Getter;
 @Getter
 public enum HomeSelectEnum {
 
-    VIDEO("video", "视频"),
-    READ("read", "浏览记录"),
-    LIKE("follow", "关注"),
-    COLLECTION("collection", "收藏");
+    WORKS("video", "作品"),
+    READ("history", "浏览记录"),
+    COLLECTION("collection", "收藏"),
+    LIKE("like", "喜欢");
 
     HomeSelectEnum(String code, String desc) {
         this.code = code;
@@ -30,6 +30,6 @@ public enum HomeSelectEnum {
                 return value;
             }
         }
-        return HomeSelectEnum.VIDEO;
+        return HomeSelectEnum.WORKS;
     }
 }

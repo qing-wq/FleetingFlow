@@ -50,14 +50,14 @@ public class UserRestController extends BaseRestController {
      * 用户主页接口
      *
      * @param userId           如果不填默认为当前登录用户主页
-     * @param homeSelectType   主页选择标签，可选项{"article"(默认), "read", "follow", "collection"} 非必填
+     * @param homeSelectType   主页选择标签，默认works
      * @return
      */
     @GetMapping(path = "/{userId}")
     public ResVo<UserHomeVo> getUserHome(@PathVariable(name = "userId", required = false) Long userId,
                                          @RequestParam(name = "homeSelectType", required = false) String homeSelectType) {
         UserHomeVo vo = initUserHomeVo(userId, homeSelectType, PageParam.newPageInstance());
-        // 用户信息
+
         UserStatisticInfoDTO userInfo = userService.queryUserInfoWithStatistic(userId);
         vo.setUserHome(userInfo);
         return ResVo.ok(vo);
@@ -67,7 +67,7 @@ public class UserRestController extends BaseRestController {
      * 用户主页分页接口
      *
      * @param userId           如果不填默认为当前登录用户主页
-     * @param homeSelectType   主页选择标签，可选项{"article"(默认), "read", "follow", "collection"} 非必填
+     * @param homeSelectType   主页选择标签，默认works
      * @return
      */
     @GetMapping(path = "list")
@@ -82,7 +82,7 @@ public class UserRestController extends BaseRestController {
 
     private UserHomeVo initUserHomeVo(Long userId, String homeSelectType, PageParam pageParam) {
         UserHomeVo vo = new UserHomeVo();
-        vo.setHomeSelectType(StringUtils.isBlank(homeSelectType) ? HomeSelectEnum.VIDEO.getCode() : homeSelectType);
+        vo.setHomeSelectType(StringUtils.isBlank(homeSelectType) ? HomeSelectEnum.WORKS.getCode() : homeSelectType);
 
         if (userId == null) {
             userId = ReqInfoContext.getReqInfo().getUserId();
@@ -104,7 +104,7 @@ public class UserRestController extends BaseRestController {
         }
 
         switch (select) {
-            case VIDEO:
+            case WORKS:
             case READ:
             case COLLECTION:
 //                PageListVo<VideoInfoDTO> dto = articleReadService.queryArticlesByUserAndType(userId, pageParam, select);
@@ -193,18 +193,18 @@ public class UserRestController extends BaseRestController {
         return ResVo.ok(true);
     }
 
-//    /**
-//     * 更改密码
-//     *
-//     * @param olderPassword
-//     * @param newPassword
-//     * @return
-//     */
-//    @PostMapping(path = "update")
-//    public ResVo<String> updatePassword(@RequestParam(name = "old") String olderPassword,
-//                                        @RequestParam(name = "new") String newPassword) {
-//        Long userId = ReqInfoContext.getReqInfo().getUserId();
-//        userService.updateUserPwd(userId, olderPassword, newPassword);
-//        return ResVo.ok("ok");
-//    }
+    /**
+     * 更改密码
+     *
+     * @param olderPassword
+     * @param newPassword
+     * @return
+     */
+    @PostMapping(path = "update")
+    public ResVo<String> updatePassword(@RequestParam(name = "old") String olderPassword,
+                                        @RequestParam(name = "new") String newPassword) {
+        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        userService.updateUserPwd(userId, olderPassword, newPassword);
+        return ResVo.ok("ok");
+    }
 }

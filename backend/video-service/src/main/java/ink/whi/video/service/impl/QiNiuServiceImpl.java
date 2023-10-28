@@ -9,7 +9,7 @@ import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
-import ink.whi.utils.JsonUtil;
+import ink.whi.common.utils.JsonUtil;
 import ink.whi.video.model.dto.QiniuQueryCriteria;
 import ink.whi.video.repo.qiniu.dao.QiniuConfigDao;
 import ink.whi.video.repo.qiniu.dao.QiniuContentDao;
@@ -20,7 +20,6 @@ import ink.whi.video.utils.FileUtil;
 import ink.whi.video.utils.QiNiuUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -87,21 +86,6 @@ public class QiNiuServiceImpl implements QiNiuService {
         // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
         DefaultPutRet putRet = JsonUtil.toObj(response.bodyString(), DefaultPutRet.class);
-//        System.out.println("putKey " + putRet.key + ":" + putRet.hash);
-//        QiniuContent content = qiniuContentDao.queryByKey(FileUtil.getFileNameNoEx(putRet.key));
-//        if (content == null) {
-//            //存入数据库
-//            QiniuContent qiniuContent = new QiniuContent();
-//            qiniuContent.setSuffix(FileUtil.getExtensionName(putRet.key));
-//            qiniuContent.setBucket(config.getBucket());
-//            qiniuContent.setType(config.getType());
-//            qiniuContent.setKeyName(FileUtil.getFileNameNoEx(putRet.key));
-//            qiniuContent.setUrl(config.getHost() + "/" + putRet.key);
-//            qiniuContent.setSize(FileUtil.getSize(Integer.parseInt(file.getSize() + "")));
-//            qiniuContentDao.save(qiniuContent);
-//            return qiniuContent;
-//        }
-//        return content;
         return putRet;
     }
 

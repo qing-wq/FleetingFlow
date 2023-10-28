@@ -78,28 +78,23 @@ public class UserServiceImpl implements UserService {
         BaseUserInfoDTO userInfoDTO = queryBasicUserInfo(userId);
         UserStatisticInfoDTO userHomeDTO = UserConverter.toUserHomeDTO(userInfoDTO);
 
-        // 获取视频相关统计
-        // todo：换成redis
-        VideoFootCountDTO videoFootCount = countService.queryArticleCountInfoByUserId(userId);
+        // 用户计数信息
+        UserStatisticInfoDTO videoFootCount = countService.queryUserStatisticInfo(userId);
         if (videoFootCount != null) {
             userHomeDTO.setPraiseCount(videoFootCount.getPraiseCount());
             userHomeDTO.setCollectionCount(videoFootCount.getCollectionCount());
+            userHomeDTO.setVideoCount(videoFootCount.getVideoCount());
+            userHomeDTO.setFansCount(videoFootCount.getFansCount());
+            userHomeDTO.setCollectionCount(videoFootCount.getCollectionCount());
+            userHomeDTO.setFollowCount(videoFootCount.getFollowCount());
         } else {
             userHomeDTO.setPraiseCount(0);
             userHomeDTO.setCollectionCount(0);
+            userHomeDTO.setVideoCount(0);
+            userHomeDTO.setFansCount(0);
+            userHomeDTO.setCollectionCount(0);
+            userHomeDTO.setFollowCount(0);
         }
-
-        // todo: 获取发布视频总数
-//        int articleCount = articleReadService.queryArticleCount(userId);
-//        userHomeDTO.setArticleCount(articleCount);
-
-        // 粉丝数
-        Integer fansCount = userRelationDao.queryUserFansCount(userId);
-        userHomeDTO.setFansCount(fansCount);
-
-        // 关注人数
-        int followsCount = userRelationDao.queryUserFollowsCount(userId);
-        userHomeDTO.setFollowCount(followsCount);
 
         // 是否关注
         Long followUserId = ReqInfoContext.getReqInfo().getUserId();
@@ -141,5 +136,21 @@ public class UserServiceImpl implements UserService {
         UserInfoDO record = userDao.getByUserId(req.getUserId());
         info.setId(record.getId());
         userDao.updateById(info);
+    }
+
+    @Override
+    public void updateUserPwd(Long userId, String olderPwd, String newPassword) {
+        UserDO user = userDao.getUser(userId);
+        if (Objects.equals(user.getPassword(), passwordEncoder.encode(olderPwd))) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userDao.saveUser(user);
+            return;
+        }
+        throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS, "密码错误");
+    }
+
+    @Override
+    public BaseUserInfoDTO querySimpleUserInfo(Long userId) {
+        return null;
     }
 }

@@ -12,9 +12,10 @@ import ink.whi.common.vo.dto.UserFootDTO;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
 import ink.whi.user.client.UserFootClient;
-import ink.whi.video.cache.RedisClient;
-import ink.whi.video.cache.RedisConstant;
+import ink.whi.common.cache.RedisClient;
+import ink.whi.common.cache.RedisConstant;
 import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.model.dto.VideoStatisticDTO;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.repo.video.converter.VideoConverter;
 import ink.whi.video.repo.video.dao.VideoDao;
@@ -71,12 +72,11 @@ public class VideoServiceImpl implements VideoService {
         VideoInfoDTO video = queryDetailVideoInfo(videoId);
 
         // 视频浏览数 +1
-        countService.incrVideoReadCount(videoId);
+        countService.incrVideoReadCount(videoId, video.getUserId());
 
-        // 文章的操作标记
+        // 用户交互信息
         if (readUser != null) {
-            // 更新用于足迹，并判断是否点赞、评论、收藏
-            UserFootDTO foot = userFootClient.saveUserFoot(VideoTypeEnum.ARTICLE, videoId,
+            UserFootDTO foot = userFootClient.saveUserFoot(VideoTypeEnum.VIDEO, videoId,
                     video.getUserId(), readUser, OperateTypeEnum.READ);
             video.setPraised(Objects.equals(foot.getPraiseStat(), PraiseStatEnum.PRAISE.getCode()));
             video.setFollowed(Objects.equals(foot.getCommentStat(), CommentStatEnum.COMMENT.getCode()));
@@ -88,7 +88,8 @@ public class VideoServiceImpl implements VideoService {
             video.setCollected(false);
         }
 
-        // 视频计数信息
+        // 视频计数
+        video.setCount(countService.queryVideoStatisticInfo(videoId));
         return video;
     }
 

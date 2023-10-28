@@ -20,12 +20,13 @@ import java.util.List;
  */
 @Repository
 public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
+
     /**
      * 查询作者全部视频计数信息
      * @param userId
      * @return
      */
-    public VideoFootCountDTO countArticleByUserId(Long userId) {
+    public VideoFootCountDTO countVideoByUserId(Long userId) {
         return baseMapper.countVideoByUserId(userId);
     }
 
@@ -63,7 +64,7 @@ public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
     public List<Long> listReadArticleByUserId(Long userId, PageParam pageParam) {
         List<UserFootDO> list = lambdaQuery().eq(UserFootDO::getUserId, userId)
                 .eq(UserFootDO::getReadStat, ReadStatEnum.READ.getCode())
-                .eq(UserFootDO::getType, VideoTypeEnum.ARTICLE.getCode())
+                .eq(UserFootDO::getType, VideoTypeEnum.VIDEO.getCode())
                 .last(PageParam.getLimitSql(pageParam))
                 .orderByDesc(BaseDO::getUpdateTime)
                 .list();
@@ -79,7 +80,7 @@ public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
     public List<Long> listCollectedArticlesByUserId(Long userId, PageParam pageParam) {
         List<UserFootDO> list = lambdaQuery().eq(UserFootDO::getUserId, userId)
                 .eq(UserFootDO::getCollectionStat, CollectionStatEnum.COLLECTION.getCode())
-                .eq(UserFootDO::getType, VideoTypeEnum.ARTICLE.getCode())
+                .eq(UserFootDO::getType, VideoTypeEnum.VIDEO.getCode())
                 .orderByDesc(BaseDO::getUpdateTime)
                 .last(PageParam.getLimitSql(pageParam))
                 .list();

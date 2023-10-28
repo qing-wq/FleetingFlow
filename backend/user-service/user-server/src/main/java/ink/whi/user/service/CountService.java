@@ -1,6 +1,7 @@
 package ink.whi.user.service;
 
 
+import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.dto.VideoFootCountDTO;
 
 /**
@@ -13,14 +14,14 @@ public interface CountService {
      * @param userId
      * @return
      */
-    VideoFootCountDTO queryArticleCountInfoByUserId(Long userId);
+    VideoFootCountDTO queryVideoCountInfoByUserId(Long userId);
 
     /**
      * 视频点赞、阅读、评论、收藏
      * @param articleId
      * @return
      */
-    VideoFootCountDTO queryArticleCountInfoByArticleId(Long articleId);
+    VideoFootCountDTO queryVideoCountInfoByVideoId(Long articleId);
 
     /**
      * 查询点赞数
@@ -28,4 +29,6 @@ public interface CountService {
      * @return
      */
     Integer queryCommentPraiseCount(Long commentId);
+
+    UserStatisticInfoDTO queryUserStatisticInfo(Long userId);
 }

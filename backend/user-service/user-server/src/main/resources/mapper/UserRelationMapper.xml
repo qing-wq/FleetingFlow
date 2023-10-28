@@ -21,7 +21,7 @@
             left join user_info as u on r.user_id = u.user_id
         WHERE
             r.follow_user_id = #{followUserId}
-            and r.follow_state = ${@ink.whi.api.model.enums.FollowStateEnum@FOLLOW.code}
+            and r.follow_state = ${@ink.whi.common.enums.FollowStateEnum@FOLLOW.code}
         ORDER BY u.id desc
         <include refid="limit"/>
     </select>
@@ -37,7 +37,7 @@
             left join user_info as u on r.follow_user_id = u.user_id
         WHERE
             r.user_id = #{userId}
-            and r.follow_state = ${@ink.whi.api.model.enums.FollowStateEnum@FOLLOW.code}
+            and r.follow_state = ${@ink.whi.common.enums.FollowStateEnum@FOLLOW.code}
         ORDER BY u.id desc
         <include refid="limit"/>
     </select>

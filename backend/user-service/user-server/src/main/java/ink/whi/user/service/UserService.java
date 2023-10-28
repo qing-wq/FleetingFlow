@@ -19,4 +19,8 @@ public interface UserService {
     Long saveUser(UserSaveReq req);
 
     void saveUserInfo(UserInfoSaveReq req);
+
+    void updateUserPwd(Long userId, String olderPassword, String newPassword);
+
+    BaseUserInfoDTO querySimpleUserInfo(Long userId);
 }

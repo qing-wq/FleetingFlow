@@ -81,7 +81,7 @@ public enum OperateTypeEnum {
      * @return true 表示视频的相关操作 false 表示评论的相关视频
      */
     public static VideoTypeEnum getOperateDocumentType(OperateTypeEnum type) {
-        return (type == COMMENT || type == DELETE_COMMENT) ? VideoTypeEnum.COMMENT : VideoTypeEnum.ARTICLE;
+        return (type == COMMENT || type == DELETE_COMMENT) ? VideoTypeEnum.COMMENT : VideoTypeEnum.VIDEO;
     }
 
     public static NotifyTypeEnum getNotifyType(OperateTypeEnum type) {

@@ -1,7 +1,7 @@
-package ink.whi.video.cache;
+package ink.whi.common.cache;
 
 import com.google.common.collect.Maps;
-import ink.whi.utils.JsonUtil;
+import ink.whi.common.utils.JsonUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataAccessException;

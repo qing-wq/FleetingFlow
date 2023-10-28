@@ -1,4 +1,4 @@
-package ink.whi.video.cache;
+package ink.whi.common.cache;
 
 /**
  * @author: qing

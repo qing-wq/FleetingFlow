@@ -1,5 +1,6 @@
 package ink.whi.video.repo.video.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import ink.whi.common.enums.VideoQualityEnum;
 import lombok.Data;
@@ -13,6 +14,9 @@ import lombok.Data;
 @Data
 @TableName("video_resource")
 public class VideoResource {
+
+    @TableId
+    private Long id;
 
     /**
      * 视频id

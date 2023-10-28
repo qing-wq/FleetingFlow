@@ -1,4 +1,4 @@
-package ink.whi.utils;
+package ink.whi.common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author: qing
- * @Date: 2023/4/26
+ * @Date: 2023/10/28
  */
 public class JsonUtil {
     private static final ObjectMapper MAPPER = new ObjectMapper();

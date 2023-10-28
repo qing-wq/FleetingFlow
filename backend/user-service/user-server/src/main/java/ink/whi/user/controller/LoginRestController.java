@@ -8,6 +8,7 @@ import ink.whi.user.service.UserService;
 import ink.whi.utils.SessionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,4 +56,15 @@ public class LoginRestController {
         }
     }
 
+    /**
+     * 登出接口
+     * @param response
+     * @return
+     */
+//    @Permission(role = UserRole.LOGIN)
+    @GetMapping(path = "logout")
+    public ResVo<String> logout(HttpServletResponse response) {
+        response.addCookie(SessionUtil.delCookie(SESSION_KEY));
+        return ResVo.ok("ok");
+    }
 }

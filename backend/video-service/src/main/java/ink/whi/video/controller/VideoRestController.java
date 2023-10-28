@@ -7,6 +7,7 @@ import ink.whi.common.utils.NumUtil;
 import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
+import ink.whi.user.client.UserClient;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.vo.VideoDetailVO;
@@ -36,6 +37,9 @@ public class VideoRestController extends BaseRestController {
     private VideoService videoService;
 
     @Autowired
+    private UserClient userClient;
+
+    @Autowired
     private QiNiuService qiNiuService;
 
     /**
@@ -54,7 +58,10 @@ public class VideoRestController extends BaseRestController {
         VideoInfoDTO video = videoService.queryTotalVideoInfo(videoId, ReqInfoContext.getReqInfo().getUserId());
         vo.setVideo(video);
 
+        // todo：评论信息
+
         // 作者信息
+        vo.setAuthor(userClient.querySimpleUserInfo(video.getUserId()));
         return null;
     }
 
