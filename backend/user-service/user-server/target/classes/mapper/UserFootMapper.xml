@@ -3,28 +3,24 @@
 <mapper namespace="ink.whi.user.repo.mapper.UserFootMapper">
 
     <select id="countVideoInfoByVideoId" resultType="ink.whi.user.model.dto.VideoFootCountDTO">
-        SELECT
-            sum(if (f.praise_stat =${@ink.whi.api.model.enums.PraiseStatEnum@PRAISE.code}, 1, 0)) as praiseCount,
-            sum(if (f.collection_stat =${@ink.whi.api.model.enums.CollectionStatEnum@COLLECTION.code}, 1, 0)) as collectionCount,
-            avg(r.`cnt`) as readCount
-        FROM
-            read_count as r
-        left join user_foot as f  on f.video_id = r.video_id and f.type = r.type
-        WHERE
-            r.type = ${@ink.whi.api.model.enums.DocumentTypeEnum@ARTICLE.code}
-            AND r.video_id = #{articleId}
+        SELECT sum(if(f.praise_stat = ${@ink.whi.common.enums.PraiseStatEnum@PRAISE.code}, 1, 0))             as praiseCount,
+               sum(if(f.collection_stat = ${@ink.whi.common.enums.CollectionStatEnum@COLLECTION.code}, 1,
+                      0))                                                                                     as collectionCount,
+               avg(r.`cnt`)                                                                                   as readCount
+        FROM read_count as r
+                 left join user_foot as f on f.video_id = r.video_id
+        WHERE f.type = ${@ink.whi.common.enums.VideoTypeEnum@VIDEO.code}
+          AND r.video_id = #{articleId}
     </select>
 
     <select id="countVideoByUserId" resultType="ink.whi.user.model.dto.VideoFootCountDTO">
-        SELECT
-            sum(if (f.praise_stat =${@ink.whi.api.model.enums.PraiseStatEnum@PRAISE.code}, 1, 0)) as praiseCount,
-            sum(if (f.collection_stat =${@ink.whi.api.model.enums.CollectionStatEnum@COLLECTION.code}, 1, 0)) as collectionCount,
-            avg(r.`cnt`) as readCount
-        FROM
-            read_count as r
-                left join user_foot as f  on f.video_id = r.video_id and f.type = r.type
-        WHERE
-                r.type = ${@ink.whi.api.model.enums.DocumentTypeEnum@ARTICLE.code}
+        SELECT sum(if(f.praise_stat = ${@ink.whi.common.enums.PraiseStatEnum@PRAISE.code}, 1, 0))             as praiseCount,
+               sum(if(f.collection_stat = ${@ink.whi.common.enums.CollectionStatEnum@COLLECTION.code}, 1,
+                      0))                                                                                     as collectionCount,
+               avg(r.`cnt`)                                                                                   as readCount
+        FROM read_count as r
+                 left join user_foot as f on f.video_id = r.video_id
+        WHERE f.type = ${@ink.whi.common.enums.VideoTypeEnum@VIDEO.code}
           AND f.video_user_id = #{userId}
     </select>
 </mapper>

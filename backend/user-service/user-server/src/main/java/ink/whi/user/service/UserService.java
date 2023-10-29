@@ -2,6 +2,7 @@ package ink.whi.user.service;
 
 
 import ink.whi.common.vo.dto.BaseUserDTO;
+import ink.whi.common.vo.dto.SimpleUserInfoDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.req.UserInfoSaveReq;
@@ -22,5 +23,7 @@ public interface UserService {
 
     void updateUserPwd(Long userId, String olderPassword, String newPassword);
 
-    BaseUserInfoDTO querySimpleUserInfo(Long userId);
+    SimpleUserInfoDTO querySimpleUserInfo(Long userId);
+
+    BaseUserDTO queryBasicUser(Long userId);
 }

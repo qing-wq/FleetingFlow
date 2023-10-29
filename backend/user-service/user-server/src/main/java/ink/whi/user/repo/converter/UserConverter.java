@@ -3,6 +3,7 @@ package ink.whi.user.repo.converter;
 import ink.whi.common.enums.LoginTypeEnum;
 import ink.whi.common.enums.RoleEnum;
 import ink.whi.common.vo.dto.BaseUserDTO;
+import ink.whi.common.vo.dto.SimpleUserInfoDTO;
 import ink.whi.common.vo.dto.UserFootDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
@@ -74,6 +75,12 @@ public class UserConverter {
     public static UserFootDTO toDTO(UserFootDO foot) {
         UserFootDTO dto = new UserFootDTO();
         BeanUtils.copyProperties(foot, dto);
+        return dto;
+    }
+
+    public static SimpleUserInfoDTO toSimpleUserDTO(UserInfoDO user) {
+        SimpleUserInfoDTO dto = new SimpleUserInfoDTO();
+        BeanUtils.copyProperties(user, dto);
         return dto;
     }
 }

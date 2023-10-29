@@ -5,9 +5,9 @@ import ink.whi.common.enums.FollowStateEnum;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.vo.dto.BaseUserDTO;
+import ink.whi.common.vo.dto.SimpleUserInfoDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
-import ink.whi.user.model.dto.VideoFootCountDTO;
 import ink.whi.user.model.req.UserInfoSaveReq;
 import ink.whi.user.model.req.UserSaveReq;
 import ink.whi.user.repo.converter.UserConverter;
@@ -125,6 +125,7 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(user);
         UserInfoDO userInfo = UserConverter.toUserInfoDo(req);
         userInfo.setUserId(user.getId());
+        // 生成默认初始用户名
         userInfo.setUserName("默认用户" + UUID.randomUUID());
         userDao.save(userInfo);
         return user.getId();
@@ -150,7 +151,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public BaseUserInfoDTO querySimpleUserInfo(Long userId) {
+    public SimpleUserInfoDTO querySimpleUserInfo(Long userId) {
+        UserInfoDO user = userDao.getByUserId(userId);
+        if (user == null) {
+            throw BusinessException.newInstance(StatusEnum.USER_NOT_EXISTS);
+        }
+        return UserConverter.toSimpleUserDTO(user);
+    }
+
+    @Override
+    public BaseUserDTO queryBasicUser(Long userId) {
         return null;
     }
 }

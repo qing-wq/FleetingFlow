@@ -5,7 +5,7 @@ import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.JwtUtil;
 import ink.whi.common.vo.dto.BaseUserDTO;
-import ink.whi.user.client.UserClient;
+import ink.whi.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,7 @@ import static org.apache.http.nio.reactor.ssl.SSLIOSession.SESSION_KEY;
 public class GlobalInitHelper {
 
     @Resource
-    private UserClient userClient;
+    private UserService userClient;
 
     /**
      * 初始化用户信息
@@ -65,7 +65,7 @@ public class GlobalInitHelper {
             return null;
         }
         Long userId = JwtUtil.isVerify(token);
-        BaseUserDTO user = userClient.queryBasicUserInfo(userId);
+        BaseUserDTO user = userClient.queryBasicUser(userId);
         if (user == null) {
             throw BusinessException.newInstance(StatusEnum.JWT_VERIFY_EXISTS);
         }

@@ -2,6 +2,7 @@ package ink.whi.user.controller;
 
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
+import ink.whi.common.vo.dto.SimpleUserInfoDTO;
 import ink.whi.common.vo.dto.UserFootDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.repo.converter.UserConverter;
@@ -49,7 +50,7 @@ public class UserClientRestController {
     }
 
     @GetMapping(path = "client/simple/{userId}")
-    public BaseUserInfoDTO querySimpleUserInfo(@PathVariable Long userId) {
+    public SimpleUserInfoDTO querySimpleUserInfo(@PathVariable Long userId) {
         return userService.querySimpleUserInfo(userId);
     }
 }

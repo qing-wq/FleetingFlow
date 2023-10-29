@@ -1,0 +1,35 @@
+server:
+  port: 8001
+  servlet:
+    session:
+      timeout: 5m # 设置session的有效期为五分钟
+  address: 0.0.0.0
+
+spring:
+  # servlet文件传输限制
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 300MB
+  application:
+    name: video-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.60.98.242:8848
+        file-extension: yml
+      discovery:
+        server-addr: 10.60.98.242:8848
+  main:
+    allow-circular-references: true
+  config:
+    import:
+      - application-dal.yaml
+      - optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+
+database:
+  name: qiniu
+
+logging:
+  level:
+    root: info
