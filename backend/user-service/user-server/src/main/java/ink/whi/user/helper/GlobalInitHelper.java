@@ -8,11 +8,11 @@ import ink.whi.common.vo.dto.BaseUserDTO;
 import ink.whi.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,8 +28,8 @@ import static org.apache.http.nio.reactor.ssl.SSLIOSession.SESSION_KEY;
 @Component
 public class GlobalInitHelper {
 
-    @Resource
-    private UserService userClient;
+    @Autowired
+    private UserService userService;
 
     /**
      * 初始化用户信息
@@ -65,7 +65,7 @@ public class GlobalInitHelper {
             return null;
         }
         Long userId = JwtUtil.isVerify(token);
-        BaseUserDTO user = userClient.queryBasicUser(userId);
+        BaseUserDTO user = userService.queryBasicUser(userId);
         if (user == null) {
             throw BusinessException.newInstance(StatusEnum.JWT_VERIFY_EXISTS);
         }

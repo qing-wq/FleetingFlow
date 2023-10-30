@@ -10,7 +10,7 @@
         FROM read_count as r
                  left join user_foot as f on f.video_id = r.video_id
         WHERE f.type = ${@ink.whi.common.enums.VideoTypeEnum@VIDEO.code}
-          AND r.video_id = #{articleId}
+          AND r.video_id = #{video}
     </select>
 
     <select id="countVideoByUserId" resultType="ink.whi.user.model.dto.VideoFootCountDTO">

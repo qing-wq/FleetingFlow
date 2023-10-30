@@ -94,4 +94,17 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
                 .list();
         return VideoConverter.toTagDtoList(list);
     }
+
+    /**
+     * 查询用户发布视频数
+     * @param userId
+     * @return
+     */
+    public Integer countVideo(Long userId) {
+        return lambdaQuery().eq(VideoDO::getUserId, userId)
+                .eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
+                .eq(VideoDO::getStatus, PushStatusEnum.ONLINE.getCode())
+                .eq(VideoDO::getType, FileTypeEnum.PUBLIC.getCode())
+                .count().intValue();
+    }
 }

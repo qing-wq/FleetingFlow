@@ -33,7 +33,7 @@ public class VideoListRestController extends BaseRestController {
      *
      * @return
      */
-    @GetMapping(path = "category")
+//    @GetMapping(path = "category")
     public ResVo<List<CategoryDTO>> listCategory() {
         List<CategoryDTO> list = categoryService.loadAllCategories();
         return ResVo.ok(list);

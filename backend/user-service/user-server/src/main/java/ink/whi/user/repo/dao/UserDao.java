@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import ink.whi.common.enums.YesOrNoEnum;
 import ink.whi.common.vo.dto.BaseUserDTO;
+import ink.whi.common.vo.page.PageParam;
 import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.entity.UserDO;
 import ink.whi.user.repo.entity.UserInfoDO;
@@ -14,6 +15,8 @@ import ink.whi.user.repo.mapper.UserInfoMapper;
 import ink.whi.user.repo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -58,5 +61,9 @@ public class UserDao extends ServiceImpl<UserInfoMapper, UserInfoDO> {
         } else {
             userMapper.updateById(user);
         }
+    }
+
+    public List<Long> scanUserId(Long userId, Integer size) {
+        return userMapper.getUserIdsOrderByIdAsc(userId, size == null ? PageParam.DEFAULT_PAGE_SIZE : size);
     }
 }

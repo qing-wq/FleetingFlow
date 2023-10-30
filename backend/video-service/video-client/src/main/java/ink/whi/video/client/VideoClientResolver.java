@@ -17,4 +17,10 @@ public class VideoClientResolver implements VideoClient{
         log.error("Video 服务异常：queryBasicVideoInfo 请求失败");
         return null;
     }
+
+    @Override
+    public Integer countVideoByUserId(Long userId) {
+        log.error("Video 服务异常：countVideoByUserId 请求失败");
+        return null;
+    }
 }

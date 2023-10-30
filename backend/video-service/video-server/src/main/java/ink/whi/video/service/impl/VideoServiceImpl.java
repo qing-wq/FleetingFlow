@@ -129,11 +129,11 @@ public class VideoServiceImpl implements VideoService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long upload(VideoPostReq videoPostReq) throws IOException {
-        DefaultPutRet putKey = qiNiuService.upload(videoPostReq.getFile());
+        String key = qiNiuService.upload(videoPostReq.getFile());
         String format = FileUtil.getExtensionName(videoPostReq.getFile().getOriginalFilename());
         VideoDO video = VideoConverter.toDo(videoPostReq, ReqInfoContext.getReqInfo().getUserId());
         video.setFormat(format);
-        video.setUrl(putKey.key);
+        video.setUrl(key);
         // todo: 获取视频编码格式、分辨率
 
         //  video + video_tag + video_resource

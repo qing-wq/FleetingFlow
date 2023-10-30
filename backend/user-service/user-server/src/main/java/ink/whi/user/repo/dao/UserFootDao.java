@@ -22,16 +22,23 @@ import java.util.List;
 public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
 
     /**
-     * 查询作者全部视频计数信息
+     * 获取用户的视频点赞数，收藏数，浏览数
+     * 
      * @param userId
      * @return
      */
-    public VideoFootCountDTO countVideoByUserId(Long userId) {
+    public VideoFootCountDTO countVideoStatisticByUserId(Long userId) {
         return baseMapper.countVideoByUserId(userId);
     }
 
-    public VideoFootCountDTO countArticleByArticleId(Long articleId) {
-        return baseMapper.countVideoInfoByVideoId(articleId);
+    /**
+     * 获取视频点赞数，收藏数，浏览数
+     *
+     * @param videoId
+     * @return
+     */
+    public VideoFootCountDTO countVideoStatisticByVideoId(Long videoId) {
+        return baseMapper.countVideoInfoByVideoId(videoId);
     }
 
     public UserFootDO getRecordByDocumentAndUserId(VideoTypeEnum type, Long articleId, Long userId) {

@@ -61,7 +61,7 @@ public class VideoDO extends BaseDO {
     /**
      * 视频类型：公开/私有
      */
-    private String type = "公开";
+    private Integer type;
 
     /**
      * 视频地址

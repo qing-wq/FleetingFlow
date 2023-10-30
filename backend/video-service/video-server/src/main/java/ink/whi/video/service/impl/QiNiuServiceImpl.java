@@ -3,8 +3,8 @@ package ink.whi.video.service.impl;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
-import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import ink.whi.common.enums.FileTypeEnum;
 import com.qiniu.util.StringMap;
 import com.qiniu.util.UrlSafeBase64;
 import ink.whi.common.exception.BusinessException;
@@ -14,7 +14,6 @@ import ink.whi.common.vo.page.PageParam;
 import ink.whi.common.utils.JsonUtil;
 import ink.whi.video.model.dto.QiniuQueryCriteria;
 import ink.whi.video.model.dto.VideoInfoDTO;
-import ink.whi.video.properties.PolicyPutRet;
 import ink.whi.video.repo.qiniu.dao.QiniuConfigDao;
 import ink.whi.video.repo.qiniu.dao.QiniuContentDao;
 import ink.whi.video.repo.qiniu.entity.QiniuConfig;
@@ -28,9 +27,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ws.schild.jave.info.MultimediaInfo;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Map;
 
 /**
  * @author: qing
@@ -69,9 +67,8 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    public DefaultPutRet upload(MultipartFile file) throws IOException {
-
-        // 检查文件大小
+    public String upload(MultipartFile file) throws IOException {
+        // todo: 检查文件大小
 //        FileUtil.checkSize(maxSize, file.getSize());
         //todo: 配置可以加到caffeine缓存
         QiniuConfig config = getConfig();
@@ -85,6 +82,10 @@ public class QiNiuServiceImpl implements QiNiuService {
 
         // 考虑数据安全，对文件名进行hash
         String key = FileUtil.calculateHash(filename) + "." + FileUtil.getExtensionName(filename);
+        // 如果存在同名文件，加上日期避免冲突
+        if (qiniuContentDao.queryByKey(key) != null) {
+            key = QiNiuUtil.genTmpFileName(key);
+        }
 
         // 获取视频信息，用来进行视频转码规则判定
         MultimediaInfo info = FileUtil.getVideoInfo(file);
@@ -103,16 +104,13 @@ public class QiNiuServiceImpl implements QiNiuService {
 
         String upToken = auth.uploadToken(config.getBucket(), key, 3600, policy);
 
-        // 如果存在同名文件，加上日期避免冲突
-        if (qiniuContentDao.queryByKey(key) != null) {
-            key = QiNiuUtil.genTmpFileName(key);
-        }
+
 
         // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
         System.out.println(response.bodyString());
-        return null;
-//        return JsonUtil.toObj(response.bodyString(), PolicyPutRet.class);
+        Map resultMap = JsonUtil.toObj(response.bodyString(), Map.class);
+        return resultMap.get("key").toString();
     }
 
     @Override
@@ -127,8 +125,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     @Override
     public String download(VideoInfoDTO videoInfoDTO, QiniuConfig config) {
         String finalUrl;
-        String type = "公开";
-        if (type.equals(videoInfoDTO.getType())) {
+        if (videoInfoDTO.getType() == FileTypeEnum.PUBLIC.getCode()) {
             finalUrl = videoInfoDTO.getUrl();
         } else {
             Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());

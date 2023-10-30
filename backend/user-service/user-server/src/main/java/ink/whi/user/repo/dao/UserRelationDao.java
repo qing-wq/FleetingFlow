@@ -16,10 +16,26 @@ import java.util.List;
 @Repository
 public class UserRelationDao extends ServiceImpl<UserRelationMapper, UserRelationDO> {
 
-    public int queryUserFansCount(Long userId) {
+    /**
+     * 查询用户粉丝数
+     * @param userId
+     * @return
+     */
+    public Long queryUserFansCount(Long userId) {
         return lambdaQuery().eq(UserRelationDO::getUserId, userId)
                 .eq(UserRelationDO::getFollowState, FollowStateEnum.FOLLOW.getCode())
-                .count().intValue();
+                .count();
+    }
+
+    /**
+     * 查询用户关注数
+     * @param userId
+     * @return
+     */
+    public Long queryUserFollowsCount(Long userId) {
+        return lambdaQuery().eq(UserRelationDO::getFollowUserId, userId)
+                .eq(UserRelationDO::getFollowState, FollowStateEnum.FOLLOW.getCode())
+                .count();
     }
 
     public UserRelationDO getUserRelationByUserId(Long userId, Long followUserId) {
@@ -60,11 +76,5 @@ public class UserRelationDao extends ServiceImpl<UserRelationMapper, UserRelatio
     public List<UserRelationDO> listUserRelations(Long followUserId, Collection<Long> targetUserId) {
         return lambdaQuery().eq(UserRelationDO::getFollowUserId, followUserId)
                 .in(UserRelationDO::getUserId, targetUserId).list();
-    }
-
-    public int queryUserFollowsCount(Long userId) {
-        return lambdaQuery().eq(UserRelationDO::getFollowUserId, userId)
-                .eq(UserRelationDO::getFollowState, FollowStateEnum.FOLLOW.getCode())
-                .count().intValue();
     }
 }

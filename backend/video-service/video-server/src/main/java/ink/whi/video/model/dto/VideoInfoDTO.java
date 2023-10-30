@@ -92,7 +92,7 @@ public class VideoInfoDTO implements Serializable {
      * 文件类型
      * {@link FileTypeEnum}
      */
-    private String type;
+    private Integer type;
 
     /**
      * 作者信息

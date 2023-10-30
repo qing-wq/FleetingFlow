@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author: qing
  * @Date: 2023/10/24
  */
-@FeignClient(value = "user-server", fallback = UserClientResolver.class)
+@FeignClient(value = "user-service", fallback = UserClientResolver.class)
 public interface UserClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "client/base/{userId}")

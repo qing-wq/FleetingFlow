@@ -50,51 +50,8 @@ public class CountServiceImpl implements CountService {
         return info;
     }
 
-    /**
-     * 更新用户的统计信息
-     *
-     * @param userId
-     */
-//    public void refreshUserStatisticInfo(Long userId) {
-//        // 用户的文章点赞数，收藏数，阅读计数
-//        ArticleFootCountDTO count = userFootDao.countArticleByUserId(userId);
-//        if (count == null) {
-//            count = new ArticleFootCountDTO();
-//        }
-//
-//        // 获取关注数
-//        Long followCount = userRelationDao.queryUserFollowCount(userId);
-//        // 粉丝数
-//        Long fansCount = userRelationDao.queryUserFansCount(userId);
-//
-//        // 查询用户发布的文章数
-//        Integer articleNum = articleDao.countArticleByUser(userId);
-//
-//        String key = CountConstants.USER_STATISTIC_INFO + userId;
-//        RedisClient.hMSet(key, MapUtils.create(CountConstants.PRAISE_COUNT, count.getPraiseCount(),
-//                CountConstants.COLLECTION_COUNT, count.getCollectionCount(),
-//                CountConstants.READ_COUNT, count.getReadCount(),
-//                CountConstants.FANS_COUNT, fansCount,
-//                CountConstants.FOLLOW_COUNT, followCount,
-//                CountConstants.ARTICLE_COUNT, articleNum));
-//
-//    }
-
-
-//    public void refreshArticleStatisticInfo(Long articleId) {
-//        ArticleFootCountDTO res = userFootDao.countArticleByArticleId(articleId);
-//        if (res == null) {
-//            res = new ArticleFootCountDTO();
-//        } else {
-//            res.setCommentCount(commentReadService.queryCommentCount(articleId));
-//        }
-//
-//        RedisClient.hMSet(CountConstants.ARTICLE_STATISTIC_INFO + articleId,
-//                MapUtils.create(CountConstants.COLLECTION_COUNT, res.getCollectionCount(),
-//                        CountConstants.PRAISE_COUNT, res.getPraiseCount(),
-//                        CountConstants.READ_COUNT, res.getReadCount(),
-//                        CountConstants.COMMENT_COUNT, res.getCommentCount()
-//                )
-//        );
-//    }
+    @Override
+    public Integer countVideoByUserId(Long userId) {
+        return videoDao.countVideo(userId);
+    }
 }

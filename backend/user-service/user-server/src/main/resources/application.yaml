@@ -20,6 +20,7 @@ spring:
   config:
     import:
       - application-dal.yaml
+      - public-security.yaml
       - optional:nacos:user-service.yml
 
 database:

@@ -112,7 +112,6 @@ public class VideoRestController extends BaseRestController {
      */
     @GetMapping(value = "/download/{videoId}")
     public ResVo<String> downloadFile(@PathVariable Long videoId) {
-        Map<String, Object> map = new HashMap<>(1);
         String url = qiNiuService.download(videoService.queryBaseVideoInfo(videoId), qiNiuService.getConfig());
         return ResVo.ok(url);
     }
