@@ -2,12 +2,14 @@ package ink.whi.video.model.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author: qing
  * @Date: 2023/10/27
  */
 @Data
-public class VideoStatisticDTO {
+public class VideoStatisticDTO implements Serializable {
 
     /**
      * 视频点赞数

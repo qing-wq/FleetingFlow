@@ -13,7 +13,7 @@ import java.io.Serial;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("ink/whi/video")
+@TableName("video")
 public class VideoDO extends BaseDO {
     @Serial
     private static final long serialVersionUID = 1L;

@@ -15,14 +15,14 @@ public interface CountConstants {
      * field:
      *  -  followCount: 关注数
      *  -  fansCount: 粉丝数
-     *  -  articleCount: 已发布文章数
-     *  -  praiseCount: 文章点赞数
-     *  -  readCount: 文章被阅读数
-     *  -  collectionCount: 文章被收藏数
+     *  -  articleCount: 已发布视频数
+     *  -  praiseCount: 视频点赞数
+     *  -  readCount: 视频被阅读数
+     *  -  collectionCount: 视频被收藏数
      */
     String USER_STATISTIC = "user_statistic_";
     /**
-     * 文章相关统计信息
+     * 视频相关统计信息
      */
     String VIDEO_STATISTIC = "video_statistic_";
 
@@ -37,22 +37,22 @@ public interface CountConstants {
     String FANS_COUNT = "fansCount";
 
     /**
-     * 已发布文章数
+     * 已发布视频数
      */
-    String ARTICLE_COUNT = "articleCount";
+    String FORWARD_COUNT = "forwardCount";
 
     /**
-     * 文章点赞数
+     * 视频点赞数
      */
     String PRAISE_COUNT = "praiseCount";
 
     /**
-     * 文章被阅读数
+     * 视频播放数
      */
-    String READ_COUNT = "readCount";
+    String VIEW_COUNT = "viewCount";
 
     /**
-     * 文章被收藏数
+     * 视频被收藏数
      */
     String COLLECTION_COUNT = "collectionCount";
 
