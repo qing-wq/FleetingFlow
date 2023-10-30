@@ -12,7 +12,7 @@ public interface CountService {
      * @param videoId
      * @param authorId
      */
-    void incrVideoReadCount(Long videoId, Long authorId);
+    void incrVideoViewCount(Long videoId, Long authorId);
 
     VideoStatisticDTO queryVideoStatisticInfo(Long videoId);
 }

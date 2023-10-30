@@ -70,7 +70,7 @@ public class VideoServiceImpl implements VideoService {
         VideoInfoDTO video = queryDetailVideoInfo(videoId);
 
         // 视频浏览数 +1
-        countService.incrVideoReadCount(videoId, video.getUserId());
+        countService.incrVideoViewCount(videoId, video.getUserId());
 
         // 用户交互信息
         if (readUser != null) {

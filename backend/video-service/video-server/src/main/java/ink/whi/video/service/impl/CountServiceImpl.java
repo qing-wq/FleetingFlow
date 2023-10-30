@@ -22,13 +22,13 @@ public class CountServiceImpl implements CountService {
     private VideoDao videoDao;
 
     @Override
-    public void incrVideoReadCount(Long videoId, Long authorId) {
+    public void incrVideoViewCount(Long videoId, Long authorId) {
         // todo: 计数信息落到MySQL中
         // redis计数信息 +1
         RedisClient.pipelineAction()
-                .add(CountConstants.VIDEO_STATISTIC + videoId, CountConstants.READ_COUNT,
+                .add(CountConstants.VIDEO_STATISTIC + videoId, CountConstants.VIEW_COUNT,
                         (connection, key, value) -> connection.hIncrBy(key, value, 1))
-                .add(CountConstants.USER_STATISTIC + authorId, CountConstants.READ_COUNT,
+                .add(CountConstants.USER_STATISTIC + authorId, CountConstants.VIEW_COUNT,
                         (connection, key, value) -> connection.hIncrBy(key, value, 1))
                 .execute();
     }
@@ -55,46 +55,46 @@ public class CountServiceImpl implements CountService {
      *
      * @param userId
      */
-    public void refreshUserStatisticInfo(Long userId) {
-        // 用户的文章点赞数，收藏数，阅读计数
-        ArticleFootCountDTO count = userFootDao.countArticleByUserId(userId);
-        if (count == null) {
-            count = new ArticleFootCountDTO();
-        }
+//    public void refreshUserStatisticInfo(Long userId) {
+//        // 用户的文章点赞数，收藏数，阅读计数
+//        ArticleFootCountDTO count = userFootDao.countArticleByUserId(userId);
+//        if (count == null) {
+//            count = new ArticleFootCountDTO();
+//        }
+//
+//        // 获取关注数
+//        Long followCount = userRelationDao.queryUserFollowCount(userId);
+//        // 粉丝数
+//        Long fansCount = userRelationDao.queryUserFansCount(userId);
+//
+//        // 查询用户发布的文章数
+//        Integer articleNum = articleDao.countArticleByUser(userId);
+//
+//        String key = CountConstants.USER_STATISTIC_INFO + userId;
+//        RedisClient.hMSet(key, MapUtils.create(CountConstants.PRAISE_COUNT, count.getPraiseCount(),
+//                CountConstants.COLLECTION_COUNT, count.getCollectionCount(),
+//                CountConstants.READ_COUNT, count.getReadCount(),
+//                CountConstants.FANS_COUNT, fansCount,
+//                CountConstants.FOLLOW_COUNT, followCount,
+//                CountConstants.ARTICLE_COUNT, articleNum));
+//
+//    }
 
-        // 获取关注数
-        Long followCount = userRelationDao.queryUserFollowCount(userId);
-        // 粉丝数
-        Long fansCount = userRelationDao.queryUserFansCount(userId);
 
-        // 查询用户发布的文章数
-        Integer articleNum = articleDao.countArticleByUser(userId);
-
-        String key = CountConstants.USER_STATISTIC_INFO + userId;
-        RedisClient.hMSet(key, MapUtils.create(CountConstants.PRAISE_COUNT, count.getPraiseCount(),
-                CountConstants.COLLECTION_COUNT, count.getCollectionCount(),
-                CountConstants.READ_COUNT, count.getReadCount(),
-                CountConstants.FANS_COUNT, fansCount,
-                CountConstants.FOLLOW_COUNT, followCount,
-                CountConstants.ARTICLE_COUNT, articleNum));
-
-    }
-
-
-    public void refreshArticleStatisticInfo(Long articleId) {
-        ArticleFootCountDTO res = userFootDao.countArticleByArticleId(articleId);
-        if (res == null) {
-            res = new ArticleFootCountDTO();
-        } else {
-            res.setCommentCount(commentReadService.queryCommentCount(articleId));
-        }
-
-        RedisClient.hMSet(CountConstants.ARTICLE_STATISTIC_INFO + articleId,
-                MapUtils.create(CountConstants.COLLECTION_COUNT, res.getCollectionCount(),
-                        CountConstants.PRAISE_COUNT, res.getPraiseCount(),
-                        CountConstants.READ_COUNT, res.getReadCount(),
-                        CountConstants.COMMENT_COUNT, res.getCommentCount()
-                )
-        );
-    }
+//    public void refreshArticleStatisticInfo(Long articleId) {
+//        ArticleFootCountDTO res = userFootDao.countArticleByArticleId(articleId);
+//        if (res == null) {
+//            res = new ArticleFootCountDTO();
+//        } else {
+//            res.setCommentCount(commentReadService.queryCommentCount(articleId));
+//        }
+//
+//        RedisClient.hMSet(CountConstants.ARTICLE_STATISTIC_INFO + articleId,
+//                MapUtils.create(CountConstants.COLLECTION_COUNT, res.getCollectionCount(),
+//                        CountConstants.PRAISE_COUNT, res.getPraiseCount(),
+//                        CountConstants.READ_COUNT, res.getReadCount(),
+//                        CountConstants.COMMENT_COUNT, res.getCommentCount()
+//                )
+//        );
+//    }
 }
