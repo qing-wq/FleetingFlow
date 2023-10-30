@@ -19,6 +19,7 @@ import ink.whi.video.repo.qiniu.entity.QiniuContent;
 import ink.whi.video.service.QiNiuService;
 import ink.whi.video.utils.FileUtil;
 import ink.whi.video.utils.QiNiuUtil;
+import ink.whi.video.utils.VideoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,7 @@ import ws.schild.jave.info.MultimediaInfo;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * @author: qing
@@ -78,8 +80,14 @@ public class QiNiuServiceImpl implements QiNiuService {
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
 
+        // 获取视频信息，用来进行视频转码规则判定
         MultimediaInfo info = FileUtil.getVideoInfo(file);
-        System.out.println(info.getVideo().getSize());
+        int H = info.getVideo().getSize().getHeight();
+        int W = info.getVideo().getSize().getWidth();
+
+        System.out.println("H: " + H + " W: " + W);
+
+        System.out.println(Arrays.deepToString(VideoUtil.getVideoScales(1080, 1080)));
 
         String upToken = auth.uploadToken(config.getBucket());
 
