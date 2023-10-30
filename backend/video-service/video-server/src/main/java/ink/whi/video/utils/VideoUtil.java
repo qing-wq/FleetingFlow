@@ -14,8 +14,13 @@ public class VideoUtil {
     public static final long r1080p = 1920 * 1080;
     public static final long r4k = 3840 * 2160;
 
-    private static final long[] resolutions = {r360p, r480p, r720p, r1080p, r4k};
+    private static final long[] resolutions =   {r360p, r480p,  r720p, r1080p, r4k};
+    public static final String[] multiVb =      {"200k","450k", "850k", "2250k", "17000k"};
+    public static final int[] envBandWidth =    {200000, 450000, 850000, 2250000, 17000000};
     private static final int[][] resolutionsHW = {{640, 360}, {854, 480}, {1280, 720}, {1920, 1080}, {3840, 2160}};
+
+    // Refer: https://help.aliyun.com/zh/live/developer-reference/what-resolutions-and-bitrates-does-apsaravideo-live-support
+
 
     /**
      * 获取视频等级
@@ -98,6 +103,58 @@ public class VideoUtil {
         scales[level][1] = height;
 
         return scales;
+    }
+
+    public static String getResolutionCommand(int[][] scales) {
+        StringBuilder sb = new StringBuilder();
+        for (int[] scale : scales) {
+            sb.append(scale[0]).append(":").append(scale[1]).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+    public static String getEnvBandWidthCommand(int level) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i <= level; i++) {
+            sb.append(envBandWidth[i]).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+
+    }
+
+    public static String getMultiVbCommand(int level) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i <= level; i++) {
+            sb.append(multiVb[i]).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+    public static String getCommand(int width, int height) {
+        int[][] scales = getVideoScales(width, height);
+        StringBuilder sb = new StringBuilder();
+        sb.append("adapt/m3u8/");
+
+        // MultiResolution Part
+        sb.append("multiResolution/");
+        sb.append(getResolutionCommand(scales));
+        sb.append("/");
+
+        // envBandWidth Part
+        sb.append("envBandWidth/");
+        sb.append(getEnvBandWidthCommand(scales.length - 1));
+        sb.append("/");
+
+        // multiVb Part
+        sb.append("multiVb/");
+        sb.append(getMultiVbCommand(scales.length - 1));
+        sb.append("/");
+
+
+        return sb.toString();
     }
 
 

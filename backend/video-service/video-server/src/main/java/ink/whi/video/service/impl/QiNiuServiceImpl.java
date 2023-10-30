@@ -5,6 +5,8 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
+import com.qiniu.util.UrlSafeBase64;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.vo.page.PageListVo;
@@ -12,6 +14,7 @@ import ink.whi.common.vo.page.PageParam;
 import ink.whi.common.utils.JsonUtil;
 import ink.whi.video.model.dto.QiniuQueryCriteria;
 import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.properties.PolicyPutRet;
 import ink.whi.video.repo.qiniu.dao.QiniuConfigDao;
 import ink.whi.video.repo.qiniu.dao.QiniuContentDao;
 import ink.whi.video.repo.qiniu.entity.QiniuConfig;
@@ -80,6 +83,9 @@ public class QiNiuServiceImpl implements QiNiuService {
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
 
+        // 考虑数据安全，对文件名进行hash
+        String key = FileUtil.calculateHash(filename) + "." + FileUtil.getExtensionName(filename);
+
         // 获取视频信息，用来进行视频转码规则判定
         MultimediaInfo info = FileUtil.getVideoInfo(file);
         int H = info.getVideo().getSize().getHeight();
@@ -87,12 +93,16 @@ public class QiNiuServiceImpl implements QiNiuService {
 
         System.out.println("H: " + H + " W: " + W);
 
-        System.out.println(Arrays.deepToString(VideoUtil.getVideoScales(1080, 1080)));
+        System.out.println(VideoUtil.getCommand(W, H));
 
-        String upToken = auth.uploadToken(config.getBucket());
+        String command =  String.format(VideoUtil.getCommand(W, H) + "|saveas/%s", UrlSafeBase64.encodeToString(config.getBucket() + ":" + key + ".m3u8"));
 
-        // 考虑数据安全，对文件名进行hash
-        String key = FileUtil.calculateHash(filename);
+//        String upToken = auth.uploadToken(config.getBucket());
+        StringMap policy = new StringMap();
+        policy.put("persistentOps", command);
+
+        String upToken = auth.uploadToken(config.getBucket(), key, 3600, policy);
+
         // 如果存在同名文件，加上日期避免冲突
         if (qiniuContentDao.queryByKey(key) != null) {
             key = QiNiuUtil.genTmpFileName(key);
@@ -100,7 +110,9 @@ public class QiNiuServiceImpl implements QiNiuService {
 
         // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
-        return JsonUtil.toObj(response.bodyString(), DefaultPutRet.class);
+        System.out.println(response.bodyString());
+        return null;
+//        return JsonUtil.toObj(response.bodyString(), PolicyPutRet.class);
     }
 
     @Override
