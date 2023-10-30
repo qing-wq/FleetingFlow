@@ -47,6 +47,8 @@ public class CountServiceImpl implements CountService {
 
     @PostConstruct
     public void initCache() {
+        Long now = System.currentTimeMillis();
+        log.info("开始自动刷新用户统计信息");
         Long userId = 0L;
         int batchSize = 20;
         while (true) {
@@ -59,6 +61,7 @@ public class CountServiceImpl implements CountService {
                 userId = userIds.get(batchSize - 1);
             }
         }
+        log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, userId);
     }
 
     @Override
