@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -45,9 +44,10 @@ public class CountServiceImpl implements CountService {
         this.userRelationDao = userRelationDao;
     }
 
-    @PostConstruct
+//    @PostConstruct
+    @Override
     public void initCache() {
-        Long now = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
         log.info("开始自动刷新用户统计信息");
         Long userId = 0L;
         int batchSize = 20;

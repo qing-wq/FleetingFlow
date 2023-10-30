@@ -101,9 +101,9 @@ public class QiniuController {
      */
     @PostMapping
     public ResponseEntity<Object> uploadQiNiu(@RequestParam MultipartFile file) throws IOException {
-        DefaultPutRet putKey = qiNiuService.upload(file);
+        String key = qiNiuService.upload(file);
         Map<String, Object> map = new HashMap<>(2);
-        map.put("url", putKey.key);
+        map.put("url", key);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 

@@ -17,6 +17,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
@@ -38,7 +39,7 @@ public class UserInteractionController extends BaseRestController {
 //    @Autowired
 //    private CommentReadService commentReadService;
 
-    @Autowired
+    @Resource
     private VideoClient videoClient;
 
     @Autowired

@@ -9,6 +9,9 @@ import ink.whi.user.model.dto.VideoFootCountDTO;
  * @Date: 2023/4/27
  */
 public interface CountService {
+    //    @PostConstruct
+    void initCache();
+
     /**
      * 查询作者全部视频计数的统计
      * @param userId

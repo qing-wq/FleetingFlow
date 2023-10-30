@@ -1,8 +1,0 @@
-security:
-  config:
-    identity-header: user-id
-    # 配置需要认证的接口，中间不能加空格
-    must-auth-url: /blog-console/**
-  # JWT配置
-  jwt:
-    key: "secret_key"

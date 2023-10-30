@@ -2,6 +2,7 @@ package ink.whi.user.controller;
 
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
+import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.dto.SimpleUserInfoDTO;
 import ink.whi.common.vo.dto.UserFootDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
@@ -31,25 +32,27 @@ public class UserClientRestController {
     /**
      * 保存/更新用户足迹
      *
-     * @param type VideoTypeEnum
+     * @param videoTypeEnum VideoTypeEnum
      * @param videoId
      * @param author
      * @param userId
      * @param operateTypeEnum
      * @return
      */
-    @PostMapping(path = "client/foot/update")
-    public UserFootDTO saveUserFoot(VideoTypeEnum type, Long videoId, Long author, Long userId, OperateTypeEnum operateTypeEnum) {
-        UserFootDO foot = userFootService.saveOrUpdateUserFoot(type, videoId, author, userId, operateTypeEnum);
+    @PostMapping(path = "foot/update")
+    public UserFootDTO saveUserFoot(Integer videoTypeEnum, Long videoId, Long author, Long userId, Integer operateTypeEnum) {
+        VideoTypeEnum type = VideoTypeEnum.formCode(videoTypeEnum);
+        OperateTypeEnum operate = OperateTypeEnum.fromCode(operateTypeEnum);
+        UserFootDO foot = userFootService.saveOrUpdateUserFoot(type, videoId, author, userId, operate);
         return UserConverter.toDTO(foot);
     }
 
-    @GetMapping(path = "client/base/{userId}")
+    @GetMapping(path = "base/{userId}")
     public BaseUserInfoDTO queryBasicUserInfo(@PathVariable Long userId) {
         return userService.queryBasicUserInfo(userId);
     }
 
-    @GetMapping(path = "client/simple/{userId}")
+    @GetMapping(path = "simple/{userId}")
     public SimpleUserInfoDTO querySimpleUserInfo(@PathVariable Long userId) {
         return userService.querySimpleUserInfo(userId);
     }

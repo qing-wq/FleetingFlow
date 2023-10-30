@@ -3,6 +3,7 @@ package ink.whi.user.filter;
 import ink.whi.common.context.ReqInfoContext;
 import ink.whi.user.helper.GlobalInitHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import javax.servlet.*;
@@ -21,7 +22,7 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "/*", filterName = "authFilter", asyncSupported = true)
 public class AuthFilter implements Filter {
 
-    @Resource
+    @Autowired
     private GlobalInitHelper globalInitService;
 
     @Override

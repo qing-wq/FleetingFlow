@@ -1,17 +1,17 @@
 package ink.whi.video.service.impl;
 
-import com.qiniu.storage.model.DefaultPutRet;
 import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.*;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.permission.UserRole;
 import ink.whi.common.utils.NumUtil;
+import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.dto.BaseUserDTO;
 import ink.whi.common.vo.dto.UserFootDTO;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
-import ink.whi.user.client.UserFootClient;
+import ink.whi.user.client.UserClient;
 import ink.whi.common.cache.RedisClient;
 import ink.whi.common.statistic.constants.SettingsConstant;
 import ink.whi.video.model.dto.VideoInfoDTO;
@@ -26,10 +26,12 @@ import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.VideoService;
 import ink.whi.video.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -51,8 +53,9 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private CountService countService;
 
-    @Autowired
-    private UserFootClient userFootClient;
+//    @Qualifier("ink.whi.user.client.UserClient")
+    @Resource
+    private UserClient userClient;
 
     @Autowired
     private QiNiuService qiNiuService;
@@ -74,8 +77,8 @@ public class VideoServiceImpl implements VideoService {
 
         // 用户交互信息
         if (readUser != null) {
-            UserFootDTO foot = userFootClient.saveUserFoot(VideoTypeEnum.VIDEO, videoId,
-                    video.getUserId(), readUser, OperateTypeEnum.READ);
+            UserFootDTO foot  = userClient.saveUserFoot(VideoTypeEnum.VIDEO.getCode(), videoId,
+                    video.getUserId(), readUser, OperateTypeEnum.READ.getCode());
             video.setPraised(Objects.equals(foot.getPraiseStat(), PraiseStatEnum.PRAISE.getCode()));
             video.setFollowed(Objects.equals(foot.getCommentStat(), CommentStatEnum.COMMENT.getCode()));
             video.setCollected(Objects.equals(foot.getCollectionStat(), CollectionStatEnum.COLLECTION.getCode()));

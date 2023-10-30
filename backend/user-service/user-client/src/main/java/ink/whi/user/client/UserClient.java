@@ -1,12 +1,13 @@
 package ink.whi.user.client;
 
+import ink.whi.common.enums.OperateTypeEnum;
+import ink.whi.common.enums.VideoTypeEnum;
+import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.dto.BaseUserDTO;
 import ink.whi.common.vo.dto.SimpleUserInfoDTO;
+import ink.whi.common.vo.dto.UserFootDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: qing
@@ -20,4 +21,7 @@ public interface UserClient {
 
     @GetMapping(path = "client/simple/{userId}")
     SimpleUserInfoDTO querySimpleUserInfo(@PathVariable Long userId);
+
+    @PostMapping(path = "client/foot/update")
+    UserFootDTO saveUserFoot(@RequestParam Integer videoTypeEnum, @RequestParam Long videoId, @RequestParam Long author, @RequestParam Long userId, @RequestParam Integer operateTypeEnum);
 }

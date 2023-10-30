@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class VideoRestController extends BaseRestController {
     @Autowired
     private VideoService videoService;
 
-    @Autowired
+    @Resource
     private UserClient userClient;
 
     @Autowired

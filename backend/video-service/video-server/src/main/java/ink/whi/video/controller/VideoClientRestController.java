@@ -30,7 +30,7 @@ public class VideoClientRestController {
      * @param videoId
      * @return
      */
-    @GetMapping(path = "client/video/{videoId}")
+    @GetMapping(path = "video/{videoId}")
     SimpleVideoInfoDTO queryBasicVideoInfo(@PathVariable Long videoId) {
         VideoInfoDTO video = videoService.queryBaseVideoInfo(videoId);
         SimpleVideoInfoDTO dto = new SimpleVideoInfoDTO();
@@ -45,7 +45,7 @@ public class VideoClientRestController {
      * @param userId
      * @return
      */
-    @GetMapping(path = "client/count/{userId}")
+    @GetMapping(path = "count/{userId}")
     Integer countVideoByUserId(@PathVariable Long userId) {
         return countService.countVideoByUserId(userId);
     }
