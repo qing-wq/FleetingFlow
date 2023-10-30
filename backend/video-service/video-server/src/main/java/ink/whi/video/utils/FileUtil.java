@@ -15,8 +15,13 @@
  */
 package ink.whi.video.utils;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import ws.schild.jave.MultimediaObject;
+import ws.schild.jave.info.MultimediaInfo;
 
 import java.io.*;
 import java.security.MessageDigest;
@@ -147,5 +152,21 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
      */
     public static String genTmpFileName() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmmssSSS")) + "_" + random.nextInt(100);
+    }
+
+    public static MultimediaInfo getVideoInfo(File file) {
+        MultimediaInfo result = null;
+        try {
+            result = new MultimediaObject(file).getInfo();
+        } catch (Exception e) {
+            log.error("获取视频信息失败", e);
+        }
+        return result;
+    }
+    public static MultimediaInfo getVideoInfo(MultipartFile multipartFile) {
+        CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) multipartFile;
+        DiskFileItem diskFileItem = (DiskFileItem) commonsmultipartfile.getFileItem();
+        File file = diskFileItem.getStoreLocation();
+        return getVideoInfo(file);
     }
 }

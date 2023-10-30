@@ -22,7 +22,9 @@ import ink.whi.video.utils.QiNiuUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ws.schild.jave.info.MultimediaInfo;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -75,6 +77,10 @@ public class QiNiuServiceImpl implements QiNiuService {
         Configuration cfg = new Configuration(QiNiuUtil.getRegion(config.getZone()));
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
+
+        MultimediaInfo info = FileUtil.getVideoInfo(file);
+        System.out.println(info.getVideo().getSize());
+
         String upToken = auth.uploadToken(config.getBucket());
 
         // 考虑数据安全，对文件名进行hash
