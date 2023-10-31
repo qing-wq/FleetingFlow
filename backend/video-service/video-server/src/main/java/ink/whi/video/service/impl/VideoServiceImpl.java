@@ -144,9 +144,11 @@ public class VideoServiceImpl implements VideoService {
     @Transactional(rollbackFor = Exception.class)
     public Long upload(VideoPostReq videoPostReq) throws IOException {
         String key = qiNiuService.upload(videoPostReq.getFile());
+        long size = videoPostReq.getFile().getSize();
         String format = FileUtil.getExtensionName(videoPostReq.getFile().getOriginalFilename());
         VideoDO video = VideoConverter.toDo(videoPostReq, ReqInfoContext.getReqInfo().getUserId());
         video.setFormat(format);
+        video.setSize(String.valueOf(size));
         video.setUrl(key);
         // todo: 获取视频编码格式、分辨率
 

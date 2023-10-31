@@ -29,6 +29,7 @@ import ws.schild.jave.info.MultimediaInfo;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author: qing
@@ -68,8 +69,10 @@ public class QiNiuServiceImpl implements QiNiuService {
 
     @Override
     public String upload(MultipartFile file) throws IOException {
-        // todo: 检查文件大小
-//        FileUtil.checkSize(maxSize, file.getSize());
+
+        // 获取文件大小
+        long videoFileSize = file.getSize();
+
         //todo: 配置可以加到caffeine缓存
         QiniuConfig config = getConfig();
         String filename = file.getOriginalFilename();
@@ -81,7 +84,8 @@ public class QiNiuServiceImpl implements QiNiuService {
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
 
         // 考虑数据安全，对文件名进行hash
-        String key = FileUtil.calculateHash(filename) + "." + FileUtil.getExtensionName(filename);
+//        String key = FileUtil.calculateHash(filename) + "." + FileUtil.getExtensionName(filename);
+        String key = UUID.randomUUID().toString().replace("-", "") + "." + FileUtil.getExtensionName(filename);
         // 如果存在同名文件，加上日期避免冲突
         if (qiniuContentDao.queryByKey(key) != null) {
             key = QiNiuUtil.genTmpFileName(key);
@@ -104,13 +108,13 @@ public class QiNiuServiceImpl implements QiNiuService {
 
         String upToken = auth.uploadToken(config.getBucket(), key, 3600, policy);
 
-
-
         // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
         System.out.println(response.bodyString());
         Map resultMap = JsonUtil.toObj(response.bodyString(), Map.class);
-        return resultMap.get("key").toString();
+        System.out.println(resultMap.get("key").toString());
+        System.out.println(resultMap.keySet());
+        return key + ".m3u8";
     }
 
     @Override

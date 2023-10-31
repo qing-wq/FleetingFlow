@@ -31,8 +31,8 @@ public class VideoClientRestController {
 
     /**
      * 查询视频信息
-     * @param videoId
-     * @return
+     * @param videoId 视频ID
+     * @return 视频信息
      */
     @GetMapping(path = "video/{videoId}")
     SimpleVideoInfoDTO queryBasicVideoInfo(@PathVariable Long videoId) {
@@ -46,8 +46,8 @@ public class VideoClientRestController {
 
     /**
      * 获取用户已发布视频数
-     * @param userId
-     * @return
+     * @param userId 用户ID
+     * @return 已发布视频数
      */
     @GetMapping(path = "count/{userId}")
     Integer countVideoByUserId(@PathVariable Long userId) {

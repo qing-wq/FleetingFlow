@@ -24,8 +24,8 @@ public class VideoUtil {
 
     /**
      * 获取视频等级
-     * @param width
-     * @param height
+     * @param width 宽度
+     * @param height 高度
      * @return int 等级, -1 为未知，0 为 360p，1 为 480p，2 为 720p，3 为 1080p，4 为 4k
      */
     public static int getLevel(int width, int height) {

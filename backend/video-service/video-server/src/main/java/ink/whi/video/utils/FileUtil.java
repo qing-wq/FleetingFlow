@@ -163,10 +163,14 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
         }
         return result;
     }
-    public static MultimediaInfo getVideoInfo(MultipartFile multipartFile) {
-        CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) multipartFile;
+
+    public static File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException {
+        CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) multipart;
         DiskFileItem diskFileItem = (DiskFileItem) commonsmultipartfile.getFileItem();
-        File file = diskFileItem.getStoreLocation();
-        return getVideoInfo(file);
+        return diskFileItem.getStoreLocation();
+    }
+
+    public static MultimediaInfo getVideoInfo(MultipartFile multipartFile) throws IOException {
+        return getVideoInfo(multipartToFile(multipartFile));
     }
 }
