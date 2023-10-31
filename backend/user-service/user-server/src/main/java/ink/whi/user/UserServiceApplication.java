@@ -24,7 +24,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @LoadBalancerClients({
         @LoadBalancerClient("video-service")
 })
-@MapperScan(value = "ink.whi.user.repo")
+@MapperScan(value = {"ink.whi.user.repo", "ink.whi.user.notify.repo"})
 public class UserServiceApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder(UserServiceApplication.class).allowCircularReferences(true).run(args);

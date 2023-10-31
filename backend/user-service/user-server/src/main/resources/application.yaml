@@ -21,7 +21,8 @@ spring:
     import:
       - application-dal.yaml
       - public-security.yaml
-#      - default-feign.yaml
+      - default-feign.yaml
+      - default-rabbitmq.yaml
       - optional:nacos:user-service.yml
 
 database:

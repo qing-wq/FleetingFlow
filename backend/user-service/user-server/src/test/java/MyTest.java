@@ -19,6 +19,7 @@ public class MyTest extends BasicTest{
     @Test
     void test() {
         RedisClient.register(redisTemplate);
-        countService.initCache();
+        countService.initUserCache();
+        countService.initViewCache();
     }
 }

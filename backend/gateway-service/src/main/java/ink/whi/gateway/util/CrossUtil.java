@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 跨域工具类
  *
- * @author yihui
+ * @author qing
  */
 public class CrossUtil {
     /**

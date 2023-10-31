@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 基本用户信息
  *
  * @author: qing
- * @Date: 2023/4/27
+ * @Date: 2023/10/31
  */
 
 @Data

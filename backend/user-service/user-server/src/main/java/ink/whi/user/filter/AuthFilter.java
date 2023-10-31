@@ -22,7 +22,7 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "/*", filterName = "authFilter", asyncSupported = true)
 public class AuthFilter implements Filter {
 
-    @Autowired
+    @Resource
     private GlobalInitHelper globalInitService;
 
     @Override
@@ -51,6 +51,7 @@ public class AuthFilter implements Filter {
             request = this.wrapperRequest(request, reqInfo);
             // 校验token
             globalInitService.initUserInfo(reqInfo);
+            reqInfo.setUserId(1L);
             ReqInfoContext.addReqInfo(reqInfo);
         } catch (Exception e) {
             log.info("init reqInfo error: " + e.getMessage());

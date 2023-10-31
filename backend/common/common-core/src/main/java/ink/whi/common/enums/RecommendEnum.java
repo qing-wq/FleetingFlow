@@ -11,8 +11,8 @@ import lombok.Getter;
 @Getter
 public enum RecommendEnum {
 
-    NOT_RECOMMEND(0, "不加精"),
-    RECOMMEND(1, "加精");
+    NOT_RECOMMEND(0, "不推荐"),
+    RECOMMEND(1, "推荐");
 
     RecommendEnum(Integer code, String desc) {
         this.code = code;

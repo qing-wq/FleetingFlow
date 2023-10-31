@@ -14,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 计数服务
@@ -33,7 +35,7 @@ public class CountServiceImpl implements CountService {
 
     private final UserRelationDao userRelationDao;
 
-    @Autowired
+    @Resource
     private VideoClient videoClient;
 
 //    @Autowired
@@ -45,24 +47,44 @@ public class CountServiceImpl implements CountService {
     }
 
 //    @PostConstruct
+@Override
+public void initUserCache() {
+    long now = System.currentTimeMillis();
+    log.info("开始自动刷新用户统计信息");
+    Long userId = 0L;
+    int batchSize = 20;
+    while (true) {
+        List<Long> userIds = userDao.scanUserId(userId, batchSize);
+        userIds.forEach(this::refreshUserStatisticInfo);
+        if (userIds.size() < batchSize) {
+            userId = userIds.get(userIds.size() - 1);
+            break;
+        } else {
+            userId = userIds.get(batchSize - 1);
+        }
+    }
+    log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, userId);
+}
+
     @Override
-    public void initCache() {
+    public void initViewCache() {
         long now = System.currentTimeMillis();
-        log.info("开始自动刷新用户统计信息");
-        Long userId = 0L;
+        log.info("开始自动刷新视频统计信息");
+        Long videoId = 0L;
         int batchSize = 20;
         while (true) {
-            List<Long> userIds = userDao.scanUserId(userId, batchSize);
-            userIds.forEach(this::refreshUserStatisticInfo);
+            List<Long> userIds = userDao.scanUserId(videoId, batchSize);
+            userIds.forEach(this::refreshVideoStatisticInfo);
             if (userIds.size() < batchSize) {
-                userId = userIds.get(userIds.size() - 1);
+                videoId = userIds.get(userIds.size() - 1);
                 break;
             } else {
-                userId = userIds.get(batchSize - 1);
+                videoId = userIds.get(batchSize - 1);
             }
         }
-        log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, userId);
+        log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, videoId);
     }
+
 
     @Override
     public VideoFootCountDTO queryVideoCountInfoByUserId(Long userId) {
@@ -94,7 +116,14 @@ public class CountServiceImpl implements CountService {
     @Override
     public UserStatisticInfoDTO queryUserStatisticInfo(Long userId) {
         String key = CountConstants.USER_STATISTIC + userId;
-        return (UserStatisticInfoDTO) RedisClient.hGetAll(key, UserStatisticInfoDTO.class);
+        Map<String, Integer> resutMap = RedisClient.hGetAll(key, Integer.class);
+        UserStatisticInfoDTO dto = new UserStatisticInfoDTO();
+        dto.setFollowCount(resutMap.get(CountConstants.FOLLOW_COUNT));
+        dto.setFansCount(resutMap.get(CountConstants.FANS_COUNT));
+        dto.setVideoCount(resutMap.get(CountConstants.VIDEO_COUNT));
+        dto.setPraiseCount(resutMap.get(CountConstants.PRAISE_COUNT));
+        dto.setTotalReadCount(resutMap.get(CountConstants.VIEW_COUNT));
+        return dto;
     }
 
     /**
@@ -119,11 +148,10 @@ public class CountServiceImpl implements CountService {
         String key = CountConstants.USER_STATISTIC + userId;
         RedisClient.hMSet(key, MapUtils.create(CountConstants.PRAISE_COUNT, count.getPraiseCount(),
                 CountConstants.COLLECTION_COUNT, count.getCollectionCount(),
-                CountConstants.VIEW_COUNT, count.getReadCount(),
+                CountConstants.VIEW_COUNT, count.getViewCount(),
                 CountConstants.FANS_COUNT, fansCount,
                 CountConstants.FOLLOW_COUNT, followCount,
                 CountConstants.VIDEO_COUNT, articleNum));
-
     }
 
     /**
@@ -131,7 +159,7 @@ public class CountServiceImpl implements CountService {
      *
      * @param videoId
      */
-    public void refreshArticleStatisticInfo(Long videoId) {
+    public void refreshVideoStatisticInfo(Long videoId) {
         VideoFootCountDTO res = userFootDao.countVideoStatisticByVideoId(videoId);
         if (res == null) {
             res = new VideoFootCountDTO();
@@ -141,7 +169,7 @@ public class CountServiceImpl implements CountService {
         RedisClient.hMSet(CountConstants.VIDEO_STATISTIC + videoId,
                 MapUtils.create(CountConstants.COLLECTION_COUNT, res.getCollectionCount(),
                         CountConstants.PRAISE_COUNT, res.getPraiseCount(),
-                        CountConstants.VIEW_COUNT, res.getReadCount(),
+                        CountConstants.VIEW_COUNT, res.getViewCount(),
                         CountConstants.COMMENT_COUNT, res.getCommentCount()
                 )
         );

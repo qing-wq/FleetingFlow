@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author: qing
- * @Date: 2023/4/27
+ * @Date: 2023/10/31
  */
 @Data
 public class CommentSaveReq {
@@ -15,9 +15,9 @@ public class CommentSaveReq {
     private Long commentId;
 
     /**
-     * 文章ID
+     * 视频ID
      */
-    private Long articleId;
+    private Long videoId;
 
     /**
      * 用户ID
