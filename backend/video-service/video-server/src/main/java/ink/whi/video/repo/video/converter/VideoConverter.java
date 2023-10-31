@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import ink.whi.common.vo.dto.SimpleUserInfoDTO;
 import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
 import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.video.CategoryDTO;
 import ink.whi.video.model.video.TagDTO;
@@ -22,6 +23,7 @@ public class VideoConverter {
     public static VideoInfoDTO toDto(VideoDO video) {
         VideoInfoDTO dto = new VideoInfoDTO();
         BeanUtil.copyProperties(video, dto);
+        dto.setVideoId(video.getId());
 
         SimpleUserInfoDTO user = new SimpleUserInfoDTO();
         user.setUserId(video.getUserId());
@@ -70,5 +72,14 @@ public class VideoConverter {
 
     public static List<SimpleVideoInfoDTO> toSimpleVideoDTOList(List<VideoDO> list) {
         return list.stream().map(VideoConverter::toSimpleVideoDTO).toList();
+    }
+
+    public static TagDO toDo(TagReq tagReq) {
+        if (tagReq == null) {
+            return null;
+        }
+        TagDO tagDO = new TagDO();
+        tagDO.setTagName(tagReq.getTag());
+        return tagDO;
     }
 }

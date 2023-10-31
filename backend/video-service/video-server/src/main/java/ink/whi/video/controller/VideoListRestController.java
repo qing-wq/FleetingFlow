@@ -4,8 +4,10 @@ import ink.whi.common.base.BaseRestController;
 import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
+import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.video.CategoryDTO;
 import ink.whi.video.model.video.TagDTO;
+import ink.whi.video.repo.video.dao.VideoDao;
 import ink.whi.video.service.CategoryService;
 import ink.whi.video.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +55,17 @@ public class VideoListRestController extends BaseRestController {
         PageParam pageParam = buildPageParam(pageNum, pageSize);
         PageListVo<TagDTO> list = videoService.queryTagsList(categoryId, pageParam);
         return ResVo.ok(list);
+    }
+
+    /**
+     * 添加标签
+     * @param req
+     * @return
+     */
+//    @Permission(role = UserRole.ADMIN)
+    @PostMapping(path = "save")
+    public ResVo<Long> save(@RequestBody TagReq req) {
+        Long tagId = videoService.saveTag(req);
+        return ResVo.ok(tagId);
     }
 }

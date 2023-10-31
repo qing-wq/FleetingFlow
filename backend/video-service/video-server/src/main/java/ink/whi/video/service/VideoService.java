@@ -4,6 +4,7 @@ import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
 import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.video.TagDTO;
 
@@ -27,4 +28,6 @@ public interface VideoService {
     PageListVo<TagDTO> queryTagsList(Long categoryId, PageParam pageParam);
 
     PageListVo<SimpleVideoInfoDTO> queryUserVideoList(Long userId, PageParam pageParam);
+
+    Long saveTag(TagReq req);
 }

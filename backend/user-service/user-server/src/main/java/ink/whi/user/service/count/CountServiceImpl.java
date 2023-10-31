@@ -46,25 +46,24 @@ public class CountServiceImpl implements CountService {
         this.userRelationDao = userRelationDao;
     }
 
-//    @PostConstruct
-@Override
-public void initUserCache() {
-    long now = System.currentTimeMillis();
-    log.info("开始自动刷新用户统计信息");
-    Long userId = 0L;
-    int batchSize = 20;
-    while (true) {
-        List<Long> userIds = userDao.scanUserId(userId, batchSize);
-        userIds.forEach(this::refreshUserStatisticInfo);
-        if (userIds.size() < batchSize) {
-            userId = userIds.get(userIds.size() - 1);
-            break;
-        } else {
-            userId = userIds.get(batchSize - 1);
+    @Override
+    public void initUserCache() {
+        long now = System.currentTimeMillis();
+        log.info("开始自动刷新用户统计信息");
+        Long userId = 0L;
+        int batchSize = 20;
+        while (true) {
+            List<Long> userIds = userDao.scanUserId(userId, batchSize);
+            userIds.forEach(this::refreshUserStatisticInfo);
+            if (userIds.size() < batchSize) {
+                userId = userIds.get(userIds.size() - 1);
+                break;
+            } else {
+                userId = userIds.get(batchSize - 1);
+            }
         }
+        log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, userId);
     }
-    log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, userId);
-}
 
     @Override
     public void initViewCache() {
@@ -104,6 +103,7 @@ public void initUserCache() {
 
     /**
      * 获取评论点赞数量
+     *
      * @param commentId
      * @return
      */

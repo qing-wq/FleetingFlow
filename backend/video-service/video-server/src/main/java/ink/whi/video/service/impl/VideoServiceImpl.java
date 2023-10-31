@@ -15,11 +15,13 @@ import ink.whi.user.client.UserClient;
 import ink.whi.common.cache.RedisClient;
 import ink.whi.common.statistic.constants.SettingsConstant;
 import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.video.TagDTO;
 import ink.whi.video.repo.video.converter.VideoConverter;
 import ink.whi.video.repo.video.dao.VideoDao;
 import ink.whi.video.repo.video.dao.VideoTagDao;
+import ink.whi.video.repo.video.entity.TagDO;
 import ink.whi.video.repo.video.entity.VideoDO;
 import ink.whi.video.service.CountService;
 import ink.whi.video.service.QiNiuService;
@@ -28,7 +30,6 @@ import ink.whi.video.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -58,8 +59,6 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private QiNiuService qiNiuService;
 
-    @Autowired
-    private TransactionTemplate transactionTemplate;
 
     @Override
     public VideoInfoDTO queryBaseVideoInfo(Long videoId) {
@@ -230,5 +229,11 @@ public class VideoServiceImpl implements VideoService {
 
         // 作者本人和超管可以看到审核内容
         return user.getUserId().equals(video.getUserId()) || (user.getRole() != null && user.getRole().equalsIgnoreCase(UserRole.ADMIN.name()));
+    }
+
+    @Override
+    public Long saveTag(TagReq req) {
+        TagDO tag = VideoConverter.toDo(req);
+        return videoDao.saveTag(tag);
     }
 }

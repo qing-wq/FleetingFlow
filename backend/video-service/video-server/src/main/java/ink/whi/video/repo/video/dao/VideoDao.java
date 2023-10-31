@@ -42,6 +42,7 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
     @Autowired
     private VideoResourceMapper videoResourceMapper;
 
+
     public VideoInfoDTO getVideoInfoById(Long videoId) {
         VideoDO video = lambdaQuery().eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
                 .eq(BaseDO::getId, videoId)
@@ -116,5 +117,10 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
                 .last(PageParam.getLimitSql(pageParam))
                 .orderByDesc(BaseDO::getCreateTime)
                 .list();
+    }
+
+    public Long saveTag(TagDO tag) {
+        tagMapper.insert(tag);
+        return tag.getId();
     }
 }

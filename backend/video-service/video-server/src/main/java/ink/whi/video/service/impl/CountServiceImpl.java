@@ -3,6 +3,7 @@ package ink.whi.video.service.impl;
 import ink.whi.common.cache.RedisClient;
 import ink.whi.common.statistic.constants.CountConstants;
 import ink.whi.video.model.dto.VideoStatisticDTO;
+import ink.whi.video.repo.video.dao.ReadCountDao;
 import ink.whi.video.repo.video.dao.VideoDao;
 import ink.whi.video.service.CountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,13 @@ public class CountServiceImpl implements CountService {
     @Autowired
     private VideoDao videoDao;
 
+    @Autowired
+    private ReadCountDao readCountDao;
+
     @Override
     public void incrVideoViewCount(Long videoId, Long authorId) {
         // todo: 计数信息落到MySQL中
+        readCountDao.incrViewCount(videoId);
         // redis计数信息 +1
         RedisClient.pipelineAction()
                 .add(CountConstants.VIDEO_STATISTIC + videoId, CountConstants.VIEW_COUNT,
