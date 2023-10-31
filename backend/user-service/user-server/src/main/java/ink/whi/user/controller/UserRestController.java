@@ -2,6 +2,7 @@ package ink.whi.user.controller;
 
 import ink.whi.common.base.BaseRestController;
 import ink.whi.common.context.ReqInfoContext;
+import ink.whi.common.enums.FollowTypeEnum;
 import ink.whi.common.enums.HomeSelectEnum;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.permission.Permission;
@@ -11,6 +12,7 @@ import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
+import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.req.UserInfoSaveReq;
 import ink.whi.user.model.req.UserRelationReq;
@@ -49,8 +51,8 @@ public class UserRestController extends BaseRestController {
     /**
      * 用户主页接口
      *
-     * @param userId           如果不填默认为当前登录用户主页
-     * @param homeSelectType   主页选择标签，默认works
+     * @param userId         如果不填默认为当前登录用户主页
+     * @param homeSelectType 主页选择标签，默认works
      * @return
      */
     @GetMapping(path = "/{userId}")
@@ -66,8 +68,8 @@ public class UserRestController extends BaseRestController {
     /**
      * 用户主页分页接口
      *
-     * @param userId           如果不填默认为当前登录用户主页
-     * @param homeSelectType   主页选择标签，默认works
+     * @param userId         如果不填默认为当前登录用户主页
+     * @param homeSelectType 主页选择标签，默认works
      * @return
      */
     @GetMapping(path = "list")
@@ -76,7 +78,7 @@ public class UserRestController extends BaseRestController {
                                   @RequestParam("page") Long page,
                                   @RequestParam(name = "pageSize", required = false) Long pageSize) {
         PageParam pageParam = buildPageParam(page, pageSize);
-        UserHomeVo vo = initUserHomeVo(userId, homeSelectType,  pageParam);
+        UserHomeVo vo = initUserHomeVo(userId, homeSelectType, pageParam);
         return ResVo.ok(vo);
     }
 
@@ -118,26 +120,40 @@ public class UserRestController extends BaseRestController {
         }
     }
 
-//    private void initFollowFansList(UserHomeVo vo, Long userId, PageParam pageParam) {
-//        PageListVo<FollowUserInfoDTO> followList;
-//        boolean needUpdateRelation = false;
-//        if (vo.getFollowSelectType().equals(FollowTypeEnum.FOLLOW.getCode())) {
-//            followList = userRelationService.getUserFollowList(userId, pageParam);
-//        } else {
-//            // 查询粉丝列表时，只能确定粉丝关注了userId，但是不能反向判断，因此需要再更新下映射关系，判断userId是否有关注这个用户
-//            followList = userRelationService.getUserFansList(userId, pageParam);
-//            needUpdateRelation = true;
-//        }
-//
-//        Long loginUserId = ReqInfoContext.getReqInfo().getUserId();
-//        if (!Objects.equals(loginUserId, userId) || needUpdateRelation) {
-//            userRelationService.updateUserFollowRelationId(followList, loginUserId);
-//        }
-//        vo.setFollowList(followList);
-//    }
+    /**
+     * 获取粉丝/关注列表
+     *
+     * @param userId
+     * @param type     follow-关注，fans-粉丝
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GetMapping(path = "follow/{userId}")
+    public ResVo<PageListVo<FollowUserInfoDTO>> initFollowFansList(@PathVariable(name = "userId") Long userId,
+                                                                   @RequestParam(name = "type", required = false) String type,
+                                                                   @RequestParam("page") Long page,
+                                                                   @RequestParam(name = "pageSize", required = false) Long pageSize) {
+        PageListVo<FollowUserInfoDTO> followList;
+        PageParam pageParam = buildPageParam(page, pageSize);
+        boolean needUpdateRelation = false;
+        if (type.equals(FollowTypeEnum.FOLLOW.getCode())) {
+            followList = userRelationService.getUserFollowList(userId, pageParam);
+        } else {
+            followList = userRelationService.getUserFansList(userId, pageParam);
+            needUpdateRelation = true;
+        }
+
+        Long loginUserId = ReqInfoContext.getReqInfo().getUserId();
+        if (!Objects.equals(loginUserId, userId) || needUpdateRelation) {
+            userRelationService.updateUserFollowRelationId(followList, loginUserId);
+        }
+        return ResVo.ok(followList);
+    }
 
     /**
      * 用户注册
+     *
      * @param req
      * @return
      */

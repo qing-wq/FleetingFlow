@@ -16,4 +16,6 @@ public interface UserRelationService {
     PageListVo<FollowUserInfoDTO> getUserFollowList(Long userId, PageParam pageParam);
 
     void saveUserRelation(UserRelationReq req);
+
+    void updateUserFollowRelationId(PageListVo<FollowUserInfoDTO> followList, Long loginUserId);
 }
