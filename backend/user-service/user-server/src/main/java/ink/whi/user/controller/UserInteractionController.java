@@ -6,9 +6,9 @@ import ink.whi.common.enums.NotifyTypeEnum;
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.exception.StatusEnum;
-import ink.whi.common.statistic.rabbitmq.VideoMqConstants;
 import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
+import ink.whi.user.rabbitmq.VideoMqConstants;
 import ink.whi.user.repo.entity.UserFootDO;
 import ink.whi.user.service.UserFootService;
 import ink.whi.user.service.UserService;
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
- * 文章查询接口
+ * 视频查询接口
  *
  * @author: qing
  * @Date: 2023/10/29
@@ -46,7 +46,7 @@ public class UserInteractionController extends BaseRestController {
     private RabbitTemplate rabbitTemplate;
 
     /**
-     * 文章点赞、收藏相关操作
+     * 视频点赞、收藏相关操作
      *
      * @param videoId
      * @param operateType 2-点赞 3-收藏 4-取消点赞 5-取消收藏
@@ -54,7 +54,7 @@ public class UserInteractionController extends BaseRestController {
      */
 //    @Permission(role = UserRole.LOGIN)
     @GetMapping(path = "favor")
-    public ResVo<Boolean> favor(@RequestParam(name = "articleId") Long videoId,
+    public ResVo<Boolean> favor(@RequestParam(name = "videoId") Long videoId,
                                 @RequestParam(name = "operate") Integer operateType) {
         OperateTypeEnum type = OperateTypeEnum.fromCode(operateType);
         if (type == null) {
@@ -72,5 +72,4 @@ public class UserInteractionController extends BaseRestController {
                 s == NotifyTypeEnum.PRAISE ? VideoMqConstants.VIDEO_PRAISE_KEY : VideoMqConstants.VIDEO_CANCEL_PRAISE_KEY, foot));
         return ResVo.ok(true);
     }
-
 }

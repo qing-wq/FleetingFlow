@@ -17,7 +17,7 @@ public class VideoFootCountDTO {
     /**
      * 视频被阅读数
      */
-    private Integer  readCount;
+    private Integer viewCount;
 
     /**
      * 视频被收藏数
@@ -31,7 +31,7 @@ public class VideoFootCountDTO {
 
     public VideoFootCountDTO() {
         praiseCount = 0;
-        readCount = 0;
+        viewCount = 0;
         collectionCount = 0;
         commentCount = 0;
     }

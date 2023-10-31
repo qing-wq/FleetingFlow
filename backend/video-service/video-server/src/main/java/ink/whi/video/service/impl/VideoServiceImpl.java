@@ -6,8 +6,8 @@ import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.permission.UserRole;
 import ink.whi.common.utils.NumUtil;
-import ink.whi.common.vo.ResVo;
 import ink.whi.common.vo.dto.BaseUserDTO;
+import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
 import ink.whi.common.vo.dto.UserFootDTO;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
@@ -26,7 +26,6 @@ import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.VideoService;
 import ink.whi.video.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -53,7 +52,6 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private CountService countService;
 
-//    @Qualifier("ink.whi.user.client.UserClient")
     @Resource
     private UserClient userClient;
 
@@ -120,6 +118,19 @@ public class VideoServiceImpl implements VideoService {
     public PageListVo<TagDTO> queryTagsList(Long categoryId, PageParam pageParam) {
         List<TagDTO> list = videoDao.listTagsByCategory(categoryId, pageParam);
         return PageListVo.newVo(list, pageParam.getPageSize());
+    }
+
+    /**
+     * 查询用户已发布的视频信息列表
+     * @param userId
+     * @param pageParam
+     * @return
+     */
+    @Override
+    public PageListVo<SimpleVideoInfoDTO> queryUserVideoList(Long userId, PageParam pageParam) {
+        List<VideoDO> videos = videoDao.listVideoByUserId(userId, pageParam);
+        List<SimpleVideoInfoDTO> result = VideoConverter.toSimpleVideoDTOList(videos);
+        return PageListVo.newVo(result, pageParam.getPageSize());
     }
 
     /**

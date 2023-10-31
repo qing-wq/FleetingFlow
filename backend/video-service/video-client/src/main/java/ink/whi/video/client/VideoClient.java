@@ -1,10 +1,15 @@
 package ink.whi.video.client;
 
-
 import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
+import ink.whi.common.vo.page.PageListVo;
+import ink.whi.common.vo.page.PageParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
 
 /**
  * @author: qing
@@ -28,4 +33,12 @@ public interface VideoClient {
      */
     @GetMapping(path = "client/count/{userId}")
     Integer countVideoByUserId(@PathVariable Long userId);
+
+    /**
+     * 获取用户发布的视频列表
+     * @param userId
+     * @return
+     */
+    @GetMapping(path = "client/user/{userId}")
+    PageListVo<SimpleVideoInfoDTO> listVideosByUserId(@PathVariable Long userId, @RequestParam PageParam pageParam);
 }

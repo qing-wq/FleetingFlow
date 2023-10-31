@@ -2,6 +2,7 @@ package ink.whi.video.repo.video.converter;
 
 import cn.hutool.core.bean.BeanUtil;
 import ink.whi.common.vo.dto.SimpleUserInfoDTO;
+import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.video.CategoryDTO;
@@ -53,10 +54,21 @@ public class VideoConverter {
         return list.stream().map(VideoConverter::toDto).toList();
     }
 
-    private static TagDTO toDto(TagDO tag) {
+    public static TagDTO toDto(TagDO tag) {
         TagDTO dto = new TagDTO();
         dto.setTagId(tag.getId());
         dto.setTag(tag.getTagName());
         return dto;
+    }
+
+    public static SimpleVideoInfoDTO toSimpleVideoDTO(VideoDO video) {
+        SimpleVideoInfoDTO dto = new SimpleVideoInfoDTO();
+        BeanUtil.copyProperties(video, dto);
+        dto.setVideoId(video.getId());
+        return dto;
+    }
+
+    public static List<SimpleVideoInfoDTO> toSimpleVideoDTOList(List<VideoDO> list) {
+        return list.stream().map(VideoConverter::toSimpleVideoDTO).toList();
     }
 }

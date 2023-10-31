@@ -1,4 +1,4 @@
-package ink.whi.common.statistic.rabbitmq;
+package ink.whi.user.rabbitmq;
 
 /**
  * @author qing
@@ -19,4 +19,5 @@ public class VideoMqConstants {
     public static final String VIDEO_DELETE_REPLY_KEY = "video.reply.delete";
     public static final String VIDEO_CANCEL_PRAISE_KEY = "video.praise.cancel";
     public static final String VIDEO_CANCEL_COLLECT_KEY = "video.collect.cancel";
+    public static final String SYSTEM_KEY = "system";
 }

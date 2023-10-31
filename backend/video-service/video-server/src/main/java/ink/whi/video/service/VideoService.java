@@ -1,5 +1,6 @@
 package ink.whi.video.service;
 
+import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
 import ink.whi.common.vo.page.PageListVo;
 import ink.whi.common.vo.page.PageParam;
 import ink.whi.video.model.dto.VideoInfoDTO;
@@ -24,4 +25,6 @@ public interface VideoService {
     VideoInfoDTO queryBaseVideoInfo(Long videoId);
 
     PageListVo<TagDTO> queryTagsList(Long categoryId, PageParam pageParam);
+
+    PageListVo<SimpleVideoInfoDTO> queryUserVideoList(Long userId, PageParam pageParam);
 }

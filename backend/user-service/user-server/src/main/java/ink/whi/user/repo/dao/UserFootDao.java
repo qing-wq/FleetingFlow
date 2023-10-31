@@ -41,8 +41,8 @@ public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
         return baseMapper.countVideoInfoByVideoId(videoId);
     }
 
-    public UserFootDO getRecordByDocumentAndUserId(VideoTypeEnum type, Long articleId, Long userId) {
-        return lambdaQuery().eq(UserFootDO::getVideoId, articleId)
+    public UserFootDO getRecordByVideoAndUserId(VideoTypeEnum type, Long videoId, Long userId) {
+        return lambdaQuery().eq(UserFootDO::getVideoId, videoId)
                 .eq(UserFootDO::getUserId, userId)
                 .eq(UserFootDO::getType, type.getCode())
                 .one();

@@ -59,7 +59,9 @@ public class VideoRestController extends BaseRestController {
         VideoDetailVO vo = new VideoDetailVO();
 
         // 视频详情
-        VideoInfoDTO video = videoService.queryTotalVideoInfo(videoId, ReqInfoContext.getReqInfo().getUserId());
+        // todo: ThreadLocal管理
+//        Long readUser = ReqInfoContext.getReqInfo().getUserId();
+        VideoInfoDTO video = videoService.queryTotalVideoInfo(videoId, null);
         vo.setVideo(video);
 
         // todo：评论信息
@@ -78,8 +80,8 @@ public class VideoRestController extends BaseRestController {
      */
     @GetMapping(path = "category/{category}")
     public ResVo<PageListVo<VideoInfoDTO>> feed(@PathVariable("category") Long categoryId,
-                                              @RequestParam(name = "page") Long page,
-                                              @RequestParam(name = "size", required = false) Long size) {
+                                                @RequestParam(name = "page") Long page,
+                                                @RequestParam(name = "size", required = false) Long size) {
         PageParam pageParam = buildPageParam(page, size);
         PageListVo<VideoInfoDTO> list = videoService.queryVideosByCategory(categoryId, pageParam);
         return ResVo.ok(list);

@@ -27,7 +27,7 @@ public class UserFootServiceImpl implements UserFootService {
     /**
      * 保存/更新用户足迹
      * @param type
-     * @param articleId
+     * @param videoId
      * @param author
      * @param userId
      * @param operateTypeEnum
@@ -35,7 +35,8 @@ public class UserFootServiceImpl implements UserFootService {
      */
     @Override
     public UserFootDO saveOrUpdateUserFoot(VideoTypeEnum type, Long videoId, Long author, Long userId, OperateTypeEnum operateTypeEnum) {
-        UserFootDO record = userFootDao.getRecordByDocumentAndUserId(type, videoId,  userId);
+        UserFootDO record = userFootDao.getRecordByVideoAndUserId(type, videoId,  userId);
+        System.out.println(record);
         if (record == null) {
             record = new UserFootDO();
             record.setUserId(userId);

@@ -1,6 +1,8 @@
 package ink.whi.video.controller;
 
 import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
+import ink.whi.common.vo.page.PageListVo;
+import ink.whi.common.vo.page.PageParam;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.service.CountService;
 import ink.whi.video.service.VideoService;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 视频远程调用接口
@@ -48,5 +52,15 @@ public class VideoClientRestController {
     @GetMapping(path = "count/{userId}")
     Integer countVideoByUserId(@PathVariable Long userId) {
         return countService.countVideoByUserId(userId);
+    }
+
+    /**
+     * 获取用户发布的视频列表
+     * @param userId
+     * @return
+     */
+    @GetMapping(path = "user/{userId}")
+    PageListVo<SimpleVideoInfoDTO> listVideosByUserId(@PathVariable Long userId, PageParam pageParam) {
+        return videoService.queryUserVideoList(userId, pageParam);
     }
 }

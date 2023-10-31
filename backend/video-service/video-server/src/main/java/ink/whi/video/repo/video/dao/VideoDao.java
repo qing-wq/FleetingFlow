@@ -107,4 +107,14 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
                 .eq(VideoDO::getType, FileTypeEnum.PUBLIC.getCode())
                 .count().intValue();
     }
+
+    public List<VideoDO> listVideoByUserId(Long userId, PageParam pageParam) {
+        return lambdaQuery().eq(VideoDO::getUserId, userId)
+                .eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
+                .eq(VideoDO::getStatus, PushStatusEnum.ONLINE.getCode())
+                .eq(VideoDO::getType, FileTypeEnum.PUBLIC.getCode())
+                .last(PageParam.getLimitSql(pageParam))
+                .orderByDesc(BaseDO::getCreateTime)
+                .list();
+    }
 }

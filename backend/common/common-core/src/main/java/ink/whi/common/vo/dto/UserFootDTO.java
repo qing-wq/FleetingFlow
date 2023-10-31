@@ -25,12 +25,12 @@ public class UserFootDTO extends BaseDTO {
     private Long userId;
 
     /**
-     * 文档ID（文章/评论）
+     * 文档ID（视频/评论）
      */
     private Long documentId;
 
     /**
-     * 文档类型：1-文章，2-评论
+     * 文档类型：1-视频，2-评论
      */
     private Integer documentType;
     /**
