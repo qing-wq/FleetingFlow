@@ -1,7 +1,7 @@
-package ink.whi.common;
+package ink.whi.cache;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
-import ink.whi.common.cache.RedisClient;
+import ink.whi.cache.redis.RedisClient;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2023/4/27
  */
 @Configuration
-@ComponentScan("ink.whi.common")
+@ComponentScan("ink.whi.cache")
 public class CoreAutoConfig {
     public CoreAutoConfig(RedisTemplate<String, String> redisTemplate) {
         RedisClient.register(redisTemplate);

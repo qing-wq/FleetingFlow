@@ -1,6 +1,6 @@
 package ink.whi.user.service.count;
 
-import ink.whi.common.cache.RedisClient;
+import ink.whi.cache.redis.RedisClient;
 import ink.whi.common.statistic.constants.CountConstants;
 import ink.whi.common.utils.MapUtils;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;

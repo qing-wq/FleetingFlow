@@ -1,4 +1,4 @@
-import ink.whi.common.cache.RedisClient;
+import ink.whi.cache.redis.RedisClient;
 import ink.whi.user.service.CountService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

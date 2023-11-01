@@ -72,7 +72,7 @@ public class UserRestController extends BaseRestController {
      * @param homeSelectType 主页选择标签，默认works
      * @return
      */
-    @GetMapping(path = "list")
+    @GetMapping(path = "page")
     public ResVo<UserHomeVo> page(@RequestParam(name = "userId", required = false) Long userId,
                                   @RequestParam(name = "homeSelectType", required = false) String homeSelectType,
                                   @RequestParam("page") Long page,

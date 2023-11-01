@@ -1,4 +1,4 @@
-package ink.whi.common.cache;
+package ink.whi.cache.redis;
 
 import com.google.common.collect.Maps;
 import ink.whi.common.utils.JsonUtil;
