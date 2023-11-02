@@ -1,11 +1,9 @@
 package ink.whi.user.client;
 
-import ink.whi.common.enums.OperateTypeEnum;
-import ink.whi.common.enums.VideoTypeEnum;
-import ink.whi.common.vo.ResVo;
-import ink.whi.common.vo.dto.BaseUserDTO;
-import ink.whi.common.vo.dto.SimpleUserInfoDTO;
-import ink.whi.common.vo.dto.UserFootDTO;
+import ink.whi.common.model.dto.BaseUserDTO;
+import ink.whi.common.model.dto.CommentDTO;
+import ink.whi.common.model.dto.SimpleUserInfoDTO;
+import ink.whi.common.model.dto.UserFootDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +30,12 @@ public class UserClientResolver implements UserClient {
 	@Override
 	public UserFootDTO saveUserFoot(Integer videoTypeEnum, Long videoId, Long author, Long userId, Integer operateTypeEnum) {
 		log.error("User 服务异常：saveUserFoot 请求失败");
+		return null;
+	}
+
+	@Override
+	public UserFootDTO saveCommentFoot(CommentDTO comment, Long userId, Long parentCommentUser) {
+		log.error("User 服务异常：saveCommentFoot 请求失败");
 		return null;
 	}
 }

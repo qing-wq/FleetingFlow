@@ -2,9 +2,9 @@ package ink.whi.user.controller;
 
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
-import ink.whi.common.vo.ResVo;
-import ink.whi.common.vo.dto.SimpleUserInfoDTO;
-import ink.whi.common.vo.dto.UserFootDTO;
+import ink.whi.common.model.dto.CommentDTO;
+import ink.whi.common.model.dto.SimpleUserInfoDTO;
+import ink.whi.common.model.dto.UserFootDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.entity.UserFootDO;
@@ -45,6 +45,11 @@ public class UserClientRestController {
         OperateTypeEnum operate = OperateTypeEnum.fromCode(operateTypeEnum);
         UserFootDO foot = userFootService.saveOrUpdateUserFoot(type, videoId, author, userId, operate);
         return UserConverter.toDTO(foot);
+    }
+
+    @GetMapping(path = "foot/comment")
+    UserFootDTO saveCommentFoot(@RequestParam CommentDTO comment, @RequestParam Long userId, @RequestParam Long parentCommentUser) {
+
     }
 
     @GetMapping(path = "base/{userId}")

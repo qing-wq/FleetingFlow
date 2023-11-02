@@ -4,7 +4,7 @@ import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.JwtUtil;
-import ink.whi.common.vo.dto.BaseUserDTO;
+import ink.whi.common.model.dto.BaseUserDTO;
 import ink.whi.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

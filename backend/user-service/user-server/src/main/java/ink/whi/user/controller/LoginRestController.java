@@ -2,7 +2,7 @@ package ink.whi.user.controller;
 
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.JwtUtil;
-import ink.whi.common.vo.ResVo;
+import ink.whi.common.model.ResVo;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.service.UserService;
 import ink.whi.utils.SessionUtil;
