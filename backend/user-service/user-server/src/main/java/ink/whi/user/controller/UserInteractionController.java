@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
- * 视频查询接口
+ * 用户交互接口
  *
  * @author: qing
  * @Date: 2023/10/29

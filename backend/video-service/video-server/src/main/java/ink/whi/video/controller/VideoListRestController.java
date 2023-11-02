@@ -63,7 +63,7 @@ public class VideoListRestController extends BaseRestController {
      * @return
      */
 //    @Permission(role = UserRole.ADMIN)
-    @PostMapping(path = "save")
+    @PostMapping(path = "tag/save")
     public ResVo<Long> save(@RequestBody TagReq req) {
         Long tagId = videoService.saveTag(req);
         return ResVo.ok(tagId);

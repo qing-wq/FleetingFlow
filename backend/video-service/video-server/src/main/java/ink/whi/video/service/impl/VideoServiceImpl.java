@@ -110,6 +110,10 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, PageParam pageParam) {
         List<VideoDO> list = videoDao.listVideosByCategory(categoryId, pageParam);
+        String domain = "s34mqjagr.hn-bkt.clouddn.com/";
+        list.forEach(s -> {
+            s.setUrl(domain + s.getUrl());
+        });
         return buildVideoListVo(list, pageParam.getPageSize());
     }
 

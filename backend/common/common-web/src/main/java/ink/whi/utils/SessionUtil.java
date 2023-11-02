@@ -8,7 +8,7 @@ import javax.servlet.http.Cookie;
  * @Date: 2023/10/25
  */
 public class SessionUtil {
-    public static final String SESSION_KEY = "sai-session";
+    public static final String SESSION_KEY = "ff-session";
     private static final int COOKIE_AGE = 30 * 86400;
 
     public static Cookie newCookie(String key, String session) {

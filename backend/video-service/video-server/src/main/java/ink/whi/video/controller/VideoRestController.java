@@ -102,7 +102,6 @@ public class VideoRestController extends BaseRestController {
 
         VideoPostReq videoPostReq = JsonUtil.toObj(json, VideoPostReq.class);
         videoPostReq.setFile(file);
-        ReqInfoContext.addReqInfo(new ReqInfoContext.ReqInfo());
         Long videoId = videoService.upload(videoPostReq);
         return ResVo.ok(videoId);
     }

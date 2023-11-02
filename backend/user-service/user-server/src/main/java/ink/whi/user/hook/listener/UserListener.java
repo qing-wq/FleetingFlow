@@ -1,4 +1,4 @@
-package ink.whi.user.listener;
+package ink.whi.user.hook.listener;
 
 import ink.whi.common.enums.FollowStateEnum;
 import ink.whi.user.notify.service.NotifyMsgService;

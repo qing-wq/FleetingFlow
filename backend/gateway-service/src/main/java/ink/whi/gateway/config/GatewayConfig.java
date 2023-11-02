@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 public class GatewayConfig {
 
-    @Bean
-    public GlobalExceptionHandler globalExceptionHandler() {
-        return new GlobalExceptionHandler();
-    }
+//    @Bean
+//    public GlobalExceptionHandler globalExceptionHandler() {
+//        return new GlobalExceptionHandler();
+//    }
 }

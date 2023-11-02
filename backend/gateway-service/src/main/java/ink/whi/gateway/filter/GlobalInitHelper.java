@@ -3,16 +3,14 @@ package ink.whi.gateway.filter;
 import ink.whi.common.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpCookie;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.util.MultiValueMap;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import static org.apache.http.nio.reactor.ssl.SSLIOSession.SESSION_KEY;
-
+import java.util.List;
 
 /**
  * @author: qing
@@ -22,18 +20,18 @@ import static org.apache.http.nio.reactor.ssl.SSLIOSession.SESSION_KEY;
 @Component
 public class GlobalInitHelper {
 
+    public static final String SESSION_KEY = "ff-session";
+
     /**
      * 获取token中的用户信息
      */
-    public Long initUserInfo() {
-        HttpServletRequest request =
-                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        HttpServletResponse response =
-                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
-        if (request.getCookies() == null) {
+    public Long initUserInfo(ServerHttpRequest request, ServerHttpResponse response) {
+        MultiValueMap<String, HttpCookie> cookies = request.getCookies();
+        List<HttpCookie> token = cookies.get("token");
+        if (token == null) {
             return null;
         }
-        for (Cookie cookie : request.getCookies()) {
+        for (HttpCookie cookie : token) {
             if (SESSION_KEY.equalsIgnoreCase(cookie.getName())) {
                 return VerifyToken(cookie.getValue(), response);
             }
@@ -43,11 +41,11 @@ public class GlobalInitHelper {
 
     /**
      * 校验token
-     *
      * @param token
      * @param response
+     * @return userId
      */
-    private Long VerifyToken(String token, HttpServletResponse response) {
+    private Long VerifyToken(String token, ServerHttpResponse response) {
         if (StringUtils.isBlank(token)) {
             return null;
         }
@@ -56,7 +54,7 @@ public class GlobalInitHelper {
         // 检查token是否需要更新
         if (JwtUtil.isNeedUpdate(token)) {
             token = JwtUtil.createToken(userId);
-            response.addCookie(new Cookie(SESSION_KEY, token));
+            response.addCookie(ResponseCookie.from(SESSION_KEY, token).build());
         }
         return userId;
     }
