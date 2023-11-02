@@ -151,7 +151,7 @@ public class VideoServiceImpl implements VideoService {
         String format = FileUtil.getExtensionName(videoPostReq.getFile().getOriginalFilename());
         VideoDO video = VideoConverter.toDo(videoPostReq, ReqInfoContext.getReqInfo().getUserId());
         video.setFormat(format);
-        video.setSize(String.valueOf(size));
+        video.setSize(FileUtil.getSize(size));
         video.setUrl(key);
         // todo: 获取视频编码格式、分辨率
 

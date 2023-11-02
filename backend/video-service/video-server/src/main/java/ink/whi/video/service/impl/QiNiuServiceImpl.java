@@ -69,10 +69,6 @@ public class QiNiuServiceImpl implements QiNiuService {
 
     @Override
     public String upload(MultipartFile file) throws IOException {
-
-        // 获取文件大小
-//        long videoFileSize = file.getSize();
-
         //todo: 配置可以加到caffeine缓存
         QiniuConfig config = getConfig();
         String filename = file.getOriginalFilename();
@@ -83,15 +79,9 @@ public class QiNiuServiceImpl implements QiNiuService {
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
 
-        // 考虑数据安全，对文件名进行hash
-//        String key = FileUtil.calculateHash(filename) + "." + FileUtil.getExtensionName(filename);
+        // 使用uuid重命名文件
         String key = UUID.randomUUID().toString().replace("-", "") + "." + FileUtil.getExtensionName(filename);
-        // 如果存在同名文件，加上日期避免冲突
-        if (qiniuContentDao.queryByKey(key) != null) {
-            key = QiNiuUtil.genTmpFileName(key);
-        }
 
-        System.out.println(file.isEmpty());
         // 获取视频信息，用来进行视频转码规则判定
         MultimediaInfo info = FileUtil.getVideoInfo(file);
         int H = info.getVideo().getSize().getHeight();
@@ -102,19 +92,14 @@ public class QiNiuServiceImpl implements QiNiuService {
         System.out.println(VideoUtil.getCommand(W, H));
 
         String command =  String.format(VideoUtil.getCommand(W, H) + "|saveas/%s", UrlSafeBase64.encodeToString(config.getBucket() + ":" + key + ".m3u8"));
-
-//        String upToken = auth.uploadToken(config.getBucket());
         StringMap policy = new StringMap();
         policy.put("persistentOps", command);
-
         String upToken = auth.uploadToken(config.getBucket(), key, 3600, policy);
 
         // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
-        System.out.println(response.bodyString());
         Map resultMap = JsonUtil.toObj(response.bodyString(), Map.class);
-        System.out.println(resultMap.get("key").toString());
-        System.out.println(resultMap.keySet());
+        System.out.println("resultMap" + resultMap);
         return key + ".m3u8";
     }
 

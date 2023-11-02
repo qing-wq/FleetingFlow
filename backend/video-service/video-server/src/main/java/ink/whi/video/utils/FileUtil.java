@@ -126,25 +126,6 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
         return resultSize;
     }
 
-    public static String calculateHash(String input) {
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = md.digest(input.getBytes());
-            StringBuilder hexString = new StringBuilder();
-            for (byte hashByte : hashBytes) {
-                String hex = Integer.toHexString(0xff & hashByte);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * 获取文件临时名称
      *
@@ -155,7 +136,6 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
     }
 
     public static MultimediaInfo getVideoInfo(File file) {
-        System.out.println("file:;;;" + file.exists());
         MultimediaInfo result = null;
         try {
             result = new MultimediaObject(file).getInfo();
@@ -164,10 +144,20 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
         }
         return result;
     }
-    public static MultimediaInfo getVideoInfo(MultipartFile multipartFile) {
-        CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) multipartFile;
-        DiskFileItem diskFileItem = (DiskFileItem) commonsmultipartfile.getFileItem();
-        File file = diskFileItem.getStoreLocation();
-        return getVideoInfo(file);
+
+    public static MultimediaInfo getVideoInfo(MultipartFile file) throws IOException {
+        // 创建临时文件
+        File tempFile = File.createTempFile("temp", file.getOriginalFilename());
+
+        // 将 MultipartFile 对象的输入流写入临时文件
+        try (InputStream inputStream = file.getInputStream();
+             FileOutputStream outputStream = new FileOutputStream(tempFile)) {
+            byte[] buffer = new byte[4096]; // 4KB 缓冲区大小
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        }
+        return getVideoInfo(tempFile);
     }
 }
