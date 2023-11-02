@@ -76,6 +76,11 @@ public class QiNiuServiceImpl implements QiNiuService {
             throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "文件名非法");
         }
         Configuration cfg = new Configuration(QiNiuUtil.getRegion(config.getZone()));
+
+        // 分片上传
+        cfg.resumableUploadAPIVersion = Configuration.ResumableUploadAPIVersion.V2;
+        cfg.resumableUploadMaxConcurrentTaskCount = 3; // 3 并发上传
+
         UploadManager uploadManager = new UploadManager(cfg);
         Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
 
@@ -95,12 +100,13 @@ public class QiNiuServiceImpl implements QiNiuService {
         StringMap policy = new StringMap();
         policy.put("persistentOps", command);
         String upToken = auth.uploadToken(config.getBucket(), key, 3600, policy);
-
-        // 上传kodo
+//
+//        // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
         Map resultMap = JsonUtil.toObj(response.bodyString(), Map.class);
         System.out.println("resultMap" + resultMap);
         return key + ".m3u8";
+
     }
 
     @Override

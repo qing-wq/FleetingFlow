@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     // key-categoryId value-dto
     private LoadingCache<Long, CategoryDTO> categoryCaches;
 
-    private CategoryDao categoryDao;
+    private final CategoryDao categoryDao;
 
     public CategoryServiceImpl(CategoryDao categoryDao) {
         this.categoryDao = categoryDao;
@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @PostConstruct
     public void init() {
-        categoryCaches = CacheBuilder.newBuilder().maximumSize(300).build(new CacheLoader<Long, CategoryDTO>() {
+        categoryCaches = CacheBuilder.newBuilder().maximumSize(300).build(new CacheLoader<>() {
             @Override
             public CategoryDTO load(@NotNull Long categoryId) throws Exception {
                 CategoryDO category = categoryDao.getById(categoryId);
