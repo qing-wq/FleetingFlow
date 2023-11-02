@@ -84,7 +84,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
      * 获取文件扩展名
      */
     public static String getExtensionName(String filename) {
-        if ((filename != null) && (filename.length() > 0)) {
+        if ((filename != null) && (!filename.isEmpty())) {
             int dot = filename.lastIndexOf('.');
             if ((dot > -1) && (dot < (filename.length() - 1))) {
                 return filename.substring(dot + 1);
@@ -97,7 +97,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
      * Java文件操作 获取不带扩展名的文件名
      */
     public static String getFileNameNoEx(String filename) {
-        if ((filename != null) && (filename.length() > 0)) {
+        if ((filename != null) && (!filename.isEmpty())) {
             int dot = filename.lastIndexOf('.');
             if ((dot > -1) && (dot < (filename.length()))) {
                 return filename.substring(0, dot);
@@ -164,14 +164,10 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
         }
         return result;
     }
-
-    public static File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException {
-        CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) multipart;
+    public static MultimediaInfo getVideoInfo(MultipartFile multipartFile) {
+        CommonsMultipartFile commonsmultipartfile = (CommonsMultipartFile) multipartFile;
         DiskFileItem diskFileItem = (DiskFileItem) commonsmultipartfile.getFileItem();
-        return diskFileItem.getStoreLocation();
-    }
-
-    public static MultimediaInfo getVideoInfo(MultipartFile multipartFile) throws IOException {
-        return getVideoInfo(multipartToFile(multipartFile));
+        File file = diskFileItem.getStoreLocation();
+        return getVideoInfo(file);
     }
 }
