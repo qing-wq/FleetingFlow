@@ -2,9 +2,9 @@ package ink.whi.user.repo.converter;
 
 import ink.whi.common.enums.LoginTypeEnum;
 import ink.whi.common.enums.RoleEnum;
-import ink.whi.common.vo.dto.BaseUserDTO;
-import ink.whi.common.vo.dto.SimpleUserInfoDTO;
-import ink.whi.common.vo.dto.UserFootDTO;
+import ink.whi.common.model.dto.BaseUserDTO;
+import ink.whi.common.model.dto.SimpleUserInfoDTO;
+import ink.whi.common.model.dto.UserFootDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.req.UserInfoSaveReq;

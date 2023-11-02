@@ -3,7 +3,7 @@ package ink.whi.video.repo.video.dao;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ink.whi.common.enums.PushStatusEnum;
 import ink.whi.common.enums.YesOrNoEnum;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.video.model.video.CategoryDTO;
 import ink.whi.video.repo.video.converter.VideoConverter;
 import ink.whi.video.repo.video.entity.CategoryDO;

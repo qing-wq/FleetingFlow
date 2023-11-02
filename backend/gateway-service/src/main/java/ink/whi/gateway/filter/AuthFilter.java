@@ -2,7 +2,7 @@ package ink.whi.gateway.filter;
 
 import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.exception.StatusEnum;
-import ink.whi.common.vo.ResVo;
+import ink.whi.common.model.ResVo;
 import ink.whi.gateway.config.SecurityConfig;
 import ink.whi.gateway.util.MonoUtils;
 import lombok.extern.slf4j.Slf4j;

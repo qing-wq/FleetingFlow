@@ -2,7 +2,7 @@ package ink.whi.user.service.userfoot;
 
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.repo.dao.UserFootDao;
 import ink.whi.user.repo.entity.UserFootDO;
 import ink.whi.user.service.UserFootService;

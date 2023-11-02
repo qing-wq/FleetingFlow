@@ -3,7 +3,7 @@ package ink.whi.video.repo.video.dao;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ink.whi.common.enums.YesOrNoEnum;
-import ink.whi.common.vo.base.BaseDO;
+import ink.whi.common.model.base.BaseDO;
 import ink.whi.video.repo.video.mapper.VideoTagMapper;
 import ink.whi.video.repo.video.entity.VideoTagDO;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package ink.whi.video.model.vo;
 
-import ink.whi.common.vo.dto.SimpleUserInfoDTO;
+import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.video.model.dto.TopCommentDTO;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import lombok.Data;

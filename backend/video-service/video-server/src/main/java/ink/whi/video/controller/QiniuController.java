@@ -15,10 +15,9 @@
  */
 package ink.whi.video.controller;
 
-import com.qiniu.storage.model.DefaultPutRet;
-import ink.whi.common.vo.ResVo;
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.ResVo;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.video.model.dto.QiniuQueryCriteria;
 import ink.whi.video.repo.qiniu.entity.QiniuConfig;
 import ink.whi.video.repo.qiniu.entity.QiniuContent;

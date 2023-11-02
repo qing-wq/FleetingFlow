@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import ink.whi.common.enums.YesOrNoEnum;
-import ink.whi.common.vo.dto.BaseUserDTO;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.dto.BaseUserDTO;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.entity.UserDO;
 import ink.whi.user.repo.entity.UserInfoDO;

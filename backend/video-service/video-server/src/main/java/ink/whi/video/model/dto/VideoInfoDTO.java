@@ -1,7 +1,7 @@
 package ink.whi.video.model.dto;
 
 import ink.whi.common.enums.FileTypeEnum;
-import ink.whi.common.vo.dto.SimpleUserInfoDTO;
+import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.video.model.video.TagDTO;
 import lombok.Data;
 

@@ -8,9 +8,9 @@ import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.permission.Permission;
 import ink.whi.common.permission.UserRole;
 import ink.whi.common.utils.JwtUtil;
-import ink.whi.common.vo.ResVo;
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.ResVo;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
@@ -124,7 +124,7 @@ public class UserRestController extends BaseRestController {
      * 获取粉丝/关注列表
      *
      * @param userId
-     * @param type     follow-关注，fans-粉丝
+     * @param type follow-关注，fans-粉丝
      * @param page
      * @param pageSize
      * @return
@@ -172,26 +172,6 @@ public class UserRestController extends BaseRestController {
         return ResVo.ok(userId);
     }
 
-    /**
-     * 用户关注
-     *
-     * @param req
-     * @return
-     * @throws Exception
-     */
-    @Permission(role = UserRole.LOGIN)
-    @PostMapping(path = "follow")
-    public ResVo<Boolean> saveUserRelation(@RequestBody UserRelationReq req) {
-        Long userId = ReqInfoContext.getReqInfo().getUserId();
-        // 校验关注的用户是否存在
-        BaseUserInfoDTO userInfo = userService.queryBasicUserInfo(req.getUserId());
-        req.setFollowUserId(userId);
-        if (Objects.equals(req.getUserId(), userId)) {
-            return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "操作非法：不允许关注自己");
-        }
-        userRelationService.saveUserRelation(req);
-        return ResVo.ok(true);
-    }
 
     /**
      * 保存用户信息

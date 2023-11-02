@@ -1,6 +1,6 @@
 package ink.whi.common.context;
 
-import ink.whi.common.vo.dto.BaseUserDTO;
+import ink.whi.common.model.dto.BaseUserDTO;
 import lombok.Data;
 
 /**

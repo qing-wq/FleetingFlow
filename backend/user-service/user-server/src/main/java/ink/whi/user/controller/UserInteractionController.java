@@ -6,11 +6,16 @@ import ink.whi.common.enums.NotifyTypeEnum;
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.exception.StatusEnum;
-import ink.whi.common.vo.ResVo;
-import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
-import ink.whi.user.rabbitmq.VideoMqConstants;
+import ink.whi.common.model.ResVo;
+import ink.whi.common.model.dto.SimpleVideoInfoDTO;
+import ink.whi.common.permission.Permission;
+import ink.whi.common.permission.UserRole;
+import ink.whi.notify.constants.VideoMqConstants;
+import ink.whi.user.model.dto.BaseUserInfoDTO;
+import ink.whi.user.model.req.UserRelationReq;
 import ink.whi.user.repo.entity.UserFootDO;
 import ink.whi.user.service.UserFootService;
+import ink.whi.user.service.UserRelationService;
 import ink.whi.user.service.UserService;
 import ink.whi.video.client.VideoClient;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -18,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -36,11 +42,11 @@ public class UserInteractionController extends BaseRestController {
     @Autowired
     private UserFootService userFootService;
 
-//    @Autowired
-//    private CommentReadService commentReadService;
-
     @Resource
     private VideoClient videoClient;
+
+    @Autowired
+    private UserRelationService userRelationService;
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -70,6 +76,28 @@ public class UserInteractionController extends BaseRestController {
         NotifyTypeEnum notifyType = OperateTypeEnum.getNotifyType(type);
         Optional.ofNullable(notifyType).ifPresent(s -> rabbitTemplate.convertAndSend(VideoMqConstants.VIDEO_TOPIC_EXCHANGE,
                 s == NotifyTypeEnum.PRAISE ? VideoMqConstants.VIDEO_PRAISE_KEY : VideoMqConstants.VIDEO_CANCEL_PRAISE_KEY, foot));
+        return ResVo.ok(true);
+    }
+
+    /**
+     * 用户关注
+     *
+     * @param req
+     * @return
+     */
+    @Permission(role = UserRole.LOGIN)
+    @PostMapping(path = "follow")
+    public ResVo<Boolean> saveUserRelation(@RequestBody UserRelationReq req) {
+        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        // 校验关注的用户是否存在
+        BaseUserInfoDTO userInfo = userService.queryBasicUserInfo(req.getUserId());
+        req.setFollowUserId(userId);
+        if (Objects.equals(req.getUserId(), userId)) {
+            return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "操作非法：不允许关注自己");
+        }
+        userRelationService.saveUserRelation(req);
+
+        // todo：消息通知
         return ResVo.ok(true);
     }
 }

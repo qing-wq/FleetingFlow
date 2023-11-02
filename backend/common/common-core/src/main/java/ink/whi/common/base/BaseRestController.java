@@ -3,7 +3,7 @@ package ink.whi.common.base;
 
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.page.PageParam;
 
 /**
  * @author: qing

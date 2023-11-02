@@ -1,13 +1,12 @@
 package ink.whi.video.controller;
 
 import ink.whi.common.base.BaseRestController;
-import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.JsonUtil;
 import ink.whi.common.utils.NumUtil;
-import ink.whi.common.vo.ResVo;
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.ResVo;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.client.UserClient;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.model.req.VideoPostReq;
@@ -16,16 +15,12 @@ import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 视频接口

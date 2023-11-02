@@ -1,4 +1,4 @@
-package ink.whi.common.vo.page;
+package ink.whi.common.model.page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

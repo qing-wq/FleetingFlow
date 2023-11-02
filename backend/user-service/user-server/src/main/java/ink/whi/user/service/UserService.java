@@ -1,8 +1,8 @@
 package ink.whi.user.service;
 
 
-import ink.whi.common.vo.dto.BaseUserDTO;
-import ink.whi.common.vo.dto.SimpleUserInfoDTO;
+import ink.whi.common.model.dto.BaseUserDTO;
+import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.req.UserInfoSaveReq;

@@ -2,14 +2,11 @@ package ink.whi.video.client;
 
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
-import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.dto.SimpleVideoInfoDTO;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 /**
  * @author: qing

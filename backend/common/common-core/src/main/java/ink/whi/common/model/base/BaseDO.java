@@ -1,4 +1,4 @@
-package ink.whi.common.vo.base;
+package ink.whi.common.model.base;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

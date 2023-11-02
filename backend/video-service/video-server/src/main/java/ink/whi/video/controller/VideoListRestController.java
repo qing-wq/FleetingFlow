@@ -1,13 +1,12 @@
 package ink.whi.video.controller;
 
 import ink.whi.common.base.BaseRestController;
-import ink.whi.common.vo.ResVo;
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.ResVo;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.video.CategoryDTO;
 import ink.whi.video.model.video.TagDTO;
-import ink.whi.video.repo.video.dao.VideoDao;
 import ink.whi.video.service.CategoryService;
 import ink.whi.video.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;

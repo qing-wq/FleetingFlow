@@ -1,8 +1,8 @@
 package ink.whi.video.service;
 
-import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.dto.SimpleVideoInfoDTO;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.req.VideoPostReq;

@@ -1,8 +1,8 @@
 package ink.whi.video.repo.video.converter;
 
 import cn.hutool.core.bean.BeanUtil;
-import ink.whi.common.vo.dto.SimpleUserInfoDTO;
-import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
+import ink.whi.common.model.dto.SimpleUserInfoDTO;
+import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.req.VideoPostReq;

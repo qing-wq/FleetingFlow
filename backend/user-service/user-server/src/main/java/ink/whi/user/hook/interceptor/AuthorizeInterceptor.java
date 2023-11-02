@@ -5,7 +5,7 @@ import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.permission.Permission;
 import ink.whi.common.permission.UserRole;
 import ink.whi.common.utils.JsonUtil;
-import ink.whi.common.vo.ResVo;
+import ink.whi.common.model.ResVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

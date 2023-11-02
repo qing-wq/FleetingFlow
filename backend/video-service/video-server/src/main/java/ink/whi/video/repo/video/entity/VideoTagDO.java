@@ -1,10 +1,9 @@
 package ink.whi.video.repo.video.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import ink.whi.common.vo.base.BaseDO;
+import ink.whi.common.model.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author: qing

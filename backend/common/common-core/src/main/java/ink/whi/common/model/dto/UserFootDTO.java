@@ -1,10 +1,11 @@
-package ink.whi.common.vo.dto;
+package ink.whi.common.model.dto;
 
-import ink.whi.common.vo.base.BaseDTO;
+import ink.whi.common.model.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 用户足迹
@@ -13,8 +14,7 @@ import java.io.Serial;
  * @date 2023/10/27
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class UserFootDTO extends BaseDTO {
+public class UserFootDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -25,18 +25,20 @@ public class UserFootDTO extends BaseDTO {
     private Long userId;
 
     /**
-     * 文档ID（视频/评论）
+     * 视频/评论ID
      */
-    private Long documentId;
+    private Long videoId;
 
     /**
      * 文档类型：1-视频，2-评论
+     * {@link ink.whi.common.enums.VideoTypeEnum}
      */
-    private Integer documentType;
+    private Integer type;
+
     /**
      * 发布该文档的用户ID
      */
-    private Long documentUserId;
+    private Long videoUserId;
     /**
      * 收藏状态: 0-未收藏，1-已收藏
      */

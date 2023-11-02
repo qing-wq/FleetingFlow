@@ -1,7 +1,7 @@
 package ink.whi.user.repo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.repo.entity.UserRelationDO;
 

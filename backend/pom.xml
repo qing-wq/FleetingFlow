@@ -20,6 +20,8 @@
         <module>video-service</module>
         <module>common</module>
         <module>gateway-service</module>
+        <module>comment-service</module>
+        <module>notification-service</module>
     </modules>
 
     <properties>

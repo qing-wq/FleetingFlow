@@ -1,6 +1,6 @@
 package ink.whi.user.model.dto;
 
-import ink.whi.common.vo.base.BaseDTO;
+import ink.whi.common.model.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

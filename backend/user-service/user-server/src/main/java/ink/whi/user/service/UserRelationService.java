@@ -1,7 +1,7 @@
 package ink.whi.user.service;
 
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.model.req.UserRelationReq;
 

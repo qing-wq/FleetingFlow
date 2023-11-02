@@ -1,7 +1,7 @@
 package ink.whi.user.model.vo;
 
-import ink.whi.common.vo.dto.SimpleVideoInfoDTO;
-import ink.whi.common.vo.page.PageListVo;
+import ink.whi.common.model.dto.SimpleVideoInfoDTO;
+import ink.whi.common.model.page.PageListVo;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import lombok.Data;

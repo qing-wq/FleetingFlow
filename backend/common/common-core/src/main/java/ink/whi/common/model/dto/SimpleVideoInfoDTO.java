@@ -1,10 +1,9 @@
-package ink.whi.common.vo.dto;
+package ink.whi.common.model.dto;
 
 import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author: qing

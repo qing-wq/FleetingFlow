@@ -26,6 +26,12 @@
 
         <dependency>
             <groupId>ink.whi</groupId>
+            <artifactId>notification-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ink.whi</groupId>
             <artifactId>common-auth</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -54,11 +60,6 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>ink.whi</groupId>
-            <artifactId>user-service</artifactId>
-        </dependency>
-
         <!--nacos-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -69,18 +70,6 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
-<!--        &lt;!&ndash;feign客户端依赖&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; feign熔断功能所需依赖 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-circuitbreaker-resilience4j</artifactId>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

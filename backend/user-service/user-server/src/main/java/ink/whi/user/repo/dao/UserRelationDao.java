@@ -2,7 +2,7 @@ package ink.whi.user.repo.dao;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ink.whi.common.enums.FollowStateEnum;
-import ink.whi.common.vo.page.PageParam;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.repo.entity.UserRelationDO;
 import ink.whi.user.repo.mapper.UserRelationMapper;

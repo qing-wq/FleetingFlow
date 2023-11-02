@@ -3,7 +3,7 @@ package ink.whi.user.repo.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import ink.whi.common.vo.base.BaseDO;
+import ink.whi.common.model.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
