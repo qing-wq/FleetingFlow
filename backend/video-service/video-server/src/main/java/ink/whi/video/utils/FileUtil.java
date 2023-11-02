@@ -155,6 +155,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
     }
 
     public static MultimediaInfo getVideoInfo(File file) {
+        System.out.println("file:;;;" + file.exists());
         MultimediaInfo result = null;
         try {
             result = new MultimediaObject(file).getInfo();

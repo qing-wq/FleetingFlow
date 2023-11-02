@@ -9,8 +9,8 @@ public class FileConfig {
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver getCommonsMultipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(20971520);
-        multipartResolver.setMaxInMemorySize(1048576);
+        multipartResolver.setMaxUploadSize(302886672);
+        multipartResolver.setMaxInMemorySize(302886672);
         return multipartResolver;
     }
 }

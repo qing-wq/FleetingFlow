@@ -9,8 +9,9 @@ spring:
   # servlet文件传输限制
   servlet:
     multipart:
-      max-file-size: 1G
-      max-request-size: 1G
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 500MB
   application:
     name: video-service
   cloud:

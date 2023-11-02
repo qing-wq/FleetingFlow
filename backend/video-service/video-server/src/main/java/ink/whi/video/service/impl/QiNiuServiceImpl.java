@@ -71,7 +71,7 @@ public class QiNiuServiceImpl implements QiNiuService {
     public String upload(MultipartFile file) throws IOException {
 
         // 获取文件大小
-        long videoFileSize = file.getSize();
+//        long videoFileSize = file.getSize();
 
         //todo: 配置可以加到caffeine缓存
         QiniuConfig config = getConfig();
@@ -91,6 +91,7 @@ public class QiNiuServiceImpl implements QiNiuService {
             key = QiNiuUtil.genTmpFileName(key);
         }
 
+        System.out.println(file.isEmpty());
         // 获取视频信息，用来进行视频转码规则判定
         MultimediaInfo info = FileUtil.getVideoInfo(file);
         int H = info.getVideo().getSize().getHeight();
