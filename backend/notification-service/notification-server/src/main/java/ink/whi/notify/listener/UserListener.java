@@ -1,8 +1,8 @@
-package ink.whi.user.hook.listener;
+package ink.whi.notify.listener;
 
 import ink.whi.common.enums.FollowStateEnum;
-import ink.whi.user.notify.service.NotifyMsgService;
-import ink.whi.user.repo.entity.UserRelationDO;
+import ink.whi.common.model.dto.UserRelationDTO;
+import ink.whi.notify.service.NotifyMsgService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-import static ink.whi.user.rabbitmq.UserMqConstants.*;
+import static ink.whi.notify.constants.UserMqConstants.*;
 
 
 /**
@@ -41,7 +41,7 @@ public class UserListener {
             value = @Queue(name = USER_FOLLOW_QUEUE),
             key = USER_FOLLOW_KEY
     ))
-    public void saveFollowNotify(UserRelationDO relation) {
+    public void saveFollowNotify(UserRelationDTO relation) {
         log.info("[INFO]  用户 {} 关注了用户 {} ", relation.getFollowUserId(), relation.getUserId());
         notifyService.saveFollowNotify(relation);
     }
@@ -56,7 +56,7 @@ public class UserListener {
             value = @Queue(name = USER_CANCEL_FOLLOW_QUEUE),
             key = USER_CANCEL_FOLLOW_KEY
     ))
-    public void removeFollowNotify(UserRelationDO relation) {
+    public void removeFollowNotify(UserRelationDTO relation) {
         if (Objects.equals(relation.getFollowState(), FollowStateEnum.FOLLOW.getCode())) {
             log.info("[INFO]  用户 {} 关注了用户 {} ", relation.getFollowUserId(), relation.getUserId());
         } else {

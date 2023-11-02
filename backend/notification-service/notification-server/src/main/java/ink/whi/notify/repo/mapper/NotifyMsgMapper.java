@@ -1,10 +1,9 @@
-package ink.whi.user.notify.repo.mapper;
+package ink.whi.notify.repo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ink.whi.common.vo.page.PageParam;
-import ink.whi.user.model.dto.NotifyMsgDTO;
-import ink.whi.user.notify.repo.entity.NotifyMsgDO;
-import org.springframework.stereotype.Component;
+import ink.whi.common.model.dto.NotifyMsgDTO;
+import ink.whi.common.model.page.PageParam;
+import ink.whi.notify.repo.entity.NotifyMsgDO;
 
 import java.util.List;
 

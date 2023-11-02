@@ -1,21 +1,17 @@
-package ink.whi.user.notify.repo.dao;
+package ink.whi.notify.repo.dao;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
 import ink.whi.common.enums.NotifyStatEnum;
 import ink.whi.common.enums.NotifyTypeEnum;
+import ink.whi.common.model.dto.*;
 import ink.whi.common.utils.SpringUtil;
-import ink.whi.common.vo.page.PageParam;
-import ink.whi.user.model.dto.NotifyMsgDTO;
-import ink.whi.user.notify.repo.entity.NotifyMsgDO;
-import ink.whi.user.notify.repo.mapper.NotifyMsgMapper;
-import ink.whi.user.repo.dao.UserDao;
-import ink.whi.user.repo.entity.UserFootDO;
-import ink.whi.user.repo.entity.UserRelationDO;
-import org.springframework.beans.factory.annotation.Autowired;
+import ink.whi.common.model.page.PageParam;
+import ink.whi.notify.repo.entity.NotifyMsgDO;
+import ink.whi.notify.repo.mapper.NotifyMsgMapper;
+import ink.whi.user.client.UserClient;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -29,6 +25,8 @@ import java.util.Map;
 @Repository
 public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
     private static final Long ADMIN_ID = 0L;
+
+    private UserClient userClient;
 
     /**
      * 查询用户消息数
@@ -116,31 +114,31 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         updateBatchById(notify);
     }
 
-//    public void saveCommentNotify(CommentDO comment, Long userId) {
-//        UserInfoDO user = userDao.getByUserId(comment.getUserId());
-//        String msg = String.format("%s 评论了：%s", user.getUserName(), comment.getContent());
-//        NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(comment.getArticleId())
-//                .msg(msg)
-//                .notifyUserId(userId)
-//                .operateUserId(comment.getUserId())
-//                .type(NotifyTypeEnum.COMMENT.getType())
-//                .state(NotifyStatEnum.UNREAD.getStat()).build();
-//        save(notify);
-//    }
-//
-//    public void saveReplyNotify(CommentDO comment, Long parentCommentUserId) {
-//        UserInfoDO user = userDao.getByUserId(comment.getUserId());
-//        String msg = String.format("%s 回复了：%s", user.getUserName(), comment.getContent());
-//        NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(comment.getArticleId())
-//                .msg(msg)
-//                .notifyUserId(parentCommentUserId)
-//                .operateUserId(comment.getUserId())
-//                .type(NotifyTypeEnum.REPLY.getType())
-//                .state(NotifyStatEnum.UNREAD.getStat()).build();
-//        save(notify);
-//    }
+    public void saveCommentNotify(CommentDTO comment, Long userId) {
+        SimpleUserInfoDTO user = userClient.querySimpleUserInfo(comment.getUserId());
+        String msg = String.format("%s 评论了：%s", user.getUserName(), comment.getContent());
+        NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(comment.getVideoId())
+                .msg(msg)
+                .notifyUserId(userId)
+                .operateUserId(comment.getUserId())
+                .type(NotifyTypeEnum.COMMENT.getType())
+                .state(NotifyStatEnum.UNREAD.getStat()).build();
+        save(notify);
+    }
 
-    public void saveArticlePraise(UserFootDO foot) {
+    public void saveReplyNotify(CommentDTO comment, Long parentCommentUserId) {
+        SimpleUserInfoDTO user = userClient.querySimpleUserInfo(comment.getUserId());
+        String msg = String.format("%s 回复了：%s", user.getUserName(), comment.getContent());
+        NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(comment.getVideoId())
+                .msg(msg)
+                .notifyUserId(parentCommentUserId)
+                .operateUserId(comment.getUserId())
+                .type(NotifyTypeEnum.REPLY.getType())
+                .state(NotifyStatEnum.UNREAD.getStat()).build();
+        save(notify);
+    }
+
+    public void saveArticlePraise(UserFootDTO foot) {
         NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(foot.getVideoId())
                 .msg("用户点赞")
                 .notifyUserId(foot.getVideoUserId())
@@ -154,7 +152,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         }
     }
 
-    public void saveArticleCollect(UserFootDO foot) {
+    public void saveArticleCollect(UserFootDTO foot) {
         NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(foot.getVideoId())
                 .msg("用户收藏视频")
                 .notifyUserId(foot.getVideoUserId())
@@ -167,7 +165,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         }
     }
 
-    public void removeArticlePraise(UserFootDO foot) {
+    public void removeArticlePraise(UserFootDTO foot) {
         NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(foot.getVideoId())
                 .notifyUserId(foot.getVideoUserId())
                 .operateUserId(foot.getUserId())
@@ -178,7 +176,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         }
     }
 
-    public void removeArticleCollect(UserFootDO foot) {
+    public void removeVideoCollect(UserFootDTO foot) {
         NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(foot.getVideoId())
                 .notifyUserId(foot.getVideoUserId())
                 .operateUserId(foot.getUserId())
@@ -189,7 +187,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         }
     }
 
-    public void saveFollowNotify(UserRelationDO relation) {
+    public void saveFollowNotify(UserRelationDTO relation) {
         NotifyMsgDO msg = new NotifyMsgDO().setRelatedId(0L)
                 .setNotifyUserId(relation.getUserId())
                 .setOperateUserId(relation.getFollowUserId())
@@ -202,7 +200,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         }
     }
 
-    public void removeFollowNotify(UserRelationDO relation) {
+    public void removeFollowNotify(UserRelationDTO relation) {
         NotifyMsgDO msg = new NotifyMsgDO()
                 .setRelatedId(0L)
                 .setNotifyUserId(relation.getUserId())

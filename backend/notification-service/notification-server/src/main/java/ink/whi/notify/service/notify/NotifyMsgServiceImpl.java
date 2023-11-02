@@ -1,16 +1,16 @@
-package ink.whi.user.notify.service.notify;
+package ink.whi.notify.service.notify;
 
+import ink.whi.comment.client.CommentClient;
 import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.NotifyStatEnum;
 import ink.whi.common.enums.NotifyTypeEnum;
+import ink.whi.common.model.dto.*;
 import ink.whi.common.utils.NumUtil;
-import ink.whi.common.vo.page.PageListVo;
-import ink.whi.common.vo.page.PageParam;
-import ink.whi.user.model.dto.NotifyMsgDTO;
-import ink.whi.user.notify.repo.dao.NotifyMsgDao;
-import ink.whi.user.notify.service.NotifyMsgService;
-import ink.whi.user.repo.entity.UserFootDO;
-import ink.whi.user.repo.entity.UserRelationDO;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
+import ink.whi.notify.repo.dao.NotifyMsgDao;
+import ink.whi.notify.service.NotifyMsgService;
+import ink.whi.video.client.VideoClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +29,11 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
     @Autowired
     private NotifyMsgDao notifyMsgDao;
 
-//    @Autowired
-//    private ArticleReadService articleReadService;
+    @Autowired
+    private VideoClient videoClient;
 
-//    @Autowired
-//    private CommentReadService commentReadService;
+    @Autowired
+    private CommentClient commentClient;
 
     /**
      * 查询用户未读消息数
@@ -93,28 +93,28 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      * 用户评论消息
      * @param comment
      */
-//    @Override
-//    public void saveCommentNotify(CommentDO comment) {
-//        ArticleDO article = articleReadService.queryBasicArticle(comment.getArticleId());
-//        notifyMsgDao.saveCommentNotify(comment, article.getUserId());
-//    }
+    @Override
+    public void saveCommentNotify(CommentDTO comment) {
+        SimpleVideoInfoDTO video = videoClient.queryBasicVideoInfo(comment.getVideoId());
+        notifyMsgDao.saveCommentNotify(comment, video.getUserId());
+    }
 
     /**
      * 用户回复消息
      * @param comment
      */
-//    @Override
-//    public void saveReplyNotify(CommentDO comment) {
-//        CommentDO parentComment = commentReadService.queryComment(comment.getParentCommentId());
-//        notifyMsgDao.saveReplyNotify(comment, parentComment.getUserId());
-//    }
+    @Override
+    public void saveReplyNotify(CommentDTO comment) {
+        CommentDTO parentComment = commentClient.queryComment(comment.getParentCommentId());
+        notifyMsgDao.saveReplyNotify(comment, parentComment.getVideoId());
+    }
 
     /**
      * 视频点赞消息
      * @param foot
      */
     @Override
-    public void saveArticlePraise(UserFootDO foot){
+    public void saveVideoPraise(UserFootDTO foot){
         notifyMsgDao.saveArticlePraise(foot);
     }
 
@@ -123,7 +123,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      * @param foot
      */
     @Override
-    public void saveArticleCollect(UserFootDO foot){
+    public void saveVideoCollect(UserFootDTO foot){
         notifyMsgDao.saveArticleCollect(foot);
     }
 
@@ -132,7 +132,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      * @param foot
      */
     @Override
-    public void removeArticlePraise(UserFootDO foot) {
+    public void removeVideoPraise(UserFootDTO foot) {
         notifyMsgDao.removeArticlePraise(foot);
     }
 
@@ -141,8 +141,8 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      * @param foot
      */
     @Override
-    public void removeArticleCollect(UserFootDO foot) {
-        notifyMsgDao.removeArticleCollect(foot);
+    public void removeVideoCollect(UserFootDTO foot) {
+        notifyMsgDao.removeVideoCollect(foot);
     }
 
     /**
@@ -150,7 +150,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      * @param relation
      */
     @Override
-    public void saveFollowNotify(UserRelationDO relation) {
+    public void saveFollowNotify(UserRelationDTO relation) {
         notifyMsgDao.saveFollowNotify(relation);
     }
 
@@ -159,7 +159,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      * @param relation
      */
     @Override
-    public void removeFollowNotify(UserRelationDO relation) {
+    public void removeFollowNotify(UserRelationDTO relation) {
         notifyMsgDao.removeFollowNotify(relation);
     }
 

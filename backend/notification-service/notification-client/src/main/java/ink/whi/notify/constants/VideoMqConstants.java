@@ -1,4 +1,4 @@
-package ink.whi.user.rabbitmq;
+package ink.whi.notify.constants;
 
 /**
  * @author qing

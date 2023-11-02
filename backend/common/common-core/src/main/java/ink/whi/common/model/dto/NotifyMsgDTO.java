@@ -1,4 +1,4 @@
-package ink.whi.user.model.dto;
+package ink.whi.common.model.dto;
 
 import lombok.Data;
 

@@ -1,8 +1,8 @@
-package ink.whi.user.notify.repo.entity;
+package ink.whi.notify.repo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import ink.whi.common.enums.NotifyTypeEnum;
-import ink.whi.common.vo.base.BaseDO;
+import ink.whi.common.model.base.BaseDO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
