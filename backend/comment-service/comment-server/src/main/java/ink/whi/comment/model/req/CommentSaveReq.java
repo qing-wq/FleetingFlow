@@ -1,10 +1,10 @@
-package ink.whi.video.model.req;
+package ink.whi.comment.model.req;
 
 import lombok.Data;
 
 /**
  * @author: qing
- * @Date: 2023/10/31
+ * @Date: 2023/11/2
  */
 @Data
 public class CommentSaveReq {
@@ -15,9 +15,9 @@ public class CommentSaveReq {
     private Long commentId;
 
     /**
-     * 视频ID
+     * 文章ID
      */
-    private Long videoId;
+    private Long articleId;
 
     /**
      * 用户ID
