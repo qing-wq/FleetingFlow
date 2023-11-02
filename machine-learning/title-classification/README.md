@@ -47,7 +47,7 @@
 ```python
 import requests
 
-response = requests.post("http://10.60.96.141:7675/run/predict", json={
+response = requests.post("http://10.60.99.144:7675/run/predict", json={
 	"data": [
 		"hello world",
 	]
@@ -57,7 +57,7 @@ data = response["data"]
 ```
 #### JavaScript
 ```javascript
-const response = await fetch("http://10.60.96.141:7675/run/predict", {
+const response = await fetch("http://10.60.99.144:7675/run/predict", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
