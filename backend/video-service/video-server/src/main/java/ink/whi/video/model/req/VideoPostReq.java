@@ -27,6 +27,8 @@ public class VideoPostReq implements Serializable {
      */
     private Long videoId;
 
+    private Long userId;
+
     /**
      * 视频文件
      */

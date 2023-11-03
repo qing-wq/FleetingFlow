@@ -88,9 +88,7 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
 
     public List<TagDTO> listTagsByCategory(Long categoryId, PageParam pageParam) {
         LambdaQueryChainWrapper<TagDO> wrapper = ChainWrappers.lambdaQueryChain(tagMapper);
-        List<TagDO> list = wrapper.eq(TagDO::getCategoryId, categoryId)
-                .eq(TagDO::getStatus, PushStatusEnum.ONLINE.getCode())
-                .eq(TagDO::getDeleted, YesOrNoEnum.NO.getCode())
+        List<TagDO> list = wrapper.eq(TagDO::getDeleted, YesOrNoEnum.NO.getCode())
                 .last(PageParam.getLimitSql(pageParam))
                 .list();
         return VideoConverter.toTagDtoList(list);
@@ -119,8 +117,16 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
                 .list();
     }
 
-    public Long saveTag(TagDO tag) {
-        tagMapper.insert(tag);
-        return tag.getId();
+    public Long getTagId(String tag) {
+        LambdaQueryChainWrapper<TagDO> wrapper = ChainWrappers.lambdaQueryChain(tagMapper);
+        TagDO record = wrapper.eq(TagDO::getTagName, tag)
+                .eq(TagDO::getDeleted, YesOrNoEnum.NO.getCode())
+                .one();
+        if (record == null) {
+            record = new TagDO();
+            record.setTagName(tag);
+            tagMapper.insert(record);
+        }
+        return record.getId();
     }
 }

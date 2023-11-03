@@ -21,6 +21,9 @@ import java.util.List;
 public class VideoConverter {
 
     public static VideoInfoDTO toDto(VideoDO video) {
+        if (video == null) {
+            return null;
+        }
         VideoInfoDTO dto = new VideoInfoDTO();
         BeanUtil.copyProperties(video, dto);
         dto.setVideoId(video.getId());
@@ -43,7 +46,7 @@ public class VideoConverter {
 
     public static VideoDO toDo(VideoPostReq req, Long userId) {
         VideoDO video = new VideoDO();
-        BeanUtil.copyProperties(video, req);
+        BeanUtil.copyProperties(req, video);
         video.setUserId(userId);
         return video;
     }

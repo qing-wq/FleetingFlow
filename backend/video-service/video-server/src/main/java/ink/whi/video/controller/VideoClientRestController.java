@@ -1,5 +1,6 @@
 package ink.whi.video.controller;
 
+import ink.whi.common.model.ResVo;
 import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
@@ -7,10 +8,10 @@ import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.service.CountService;
 import ink.whi.video.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * 视频远程调用接口
@@ -39,6 +40,7 @@ public class VideoClientRestController {
         dto.setVideoId(videoId);
         dto.setUserId(video.getUserId());
         dto.setUrl(video.getUrl());
+        dto.setStatus(video.getStatus());
         return dto;
     }
 

@@ -29,5 +29,5 @@ public interface VideoService {
 
     PageListVo<SimpleVideoInfoDTO> queryUserVideoList(Long userId, PageParam pageParam);
 
-    Long saveTag(TagReq req);
+    Long getTagId(String tag);
 }

@@ -7,6 +7,8 @@ import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author: qing
@@ -16,8 +18,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class VideoClientResolver implements VideoClient{
 
+    @GetMapping(path = "client/video/{videoId}")
     @Override
-    public SimpleVideoInfoDTO queryBasicVideoInfo(Long videoId) {
+    public SimpleVideoInfoDTO queryBasicVideoInfo(@PathVariable Long videoId) {
         log.error("Video 服务异常：queryBasicVideoInfo 请求失败");
         return null;
     }

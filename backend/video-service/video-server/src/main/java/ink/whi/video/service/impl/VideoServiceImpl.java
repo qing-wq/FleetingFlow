@@ -74,8 +74,8 @@ public class VideoServiceImpl implements VideoService {
 
         // 用户交互信息
         if (readUser != null) {
-            UserFootDTO foot  = userClient.saveUserFoot(VideoTypeEnum.VIDEO.getCode(), videoId,
-                    video.getUserId(), readUser, OperateTypeEnum.READ.getCode());
+            UserFootDTO foot  = userClient.saveUserFoot(VideoTypeEnum.VIDEO, videoId,
+                    video.getUserId(), readUser, OperateTypeEnum.READ);
             video.setPraised(Objects.equals(foot.getPraiseStat(), PraiseStatEnum.PRAISE.getCode()));
             video.setFollowed(Objects.equals(foot.getCommentStat(), CommentStatEnum.COMMENT.getCode()));
             video.setCollected(Objects.equals(foot.getCollectionStat(), CollectionStatEnum.COLLECTION.getCode()));
@@ -110,7 +110,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, PageParam pageParam) {
         List<VideoDO> list = videoDao.listVideosByCategory(categoryId, pageParam);
-        String domain = "s34mqjagr.hn-bkt.clouddn.com/";
+        String domain = "s3anmft1h.hn-bkt.clouddn.com/";
         list.forEach(s -> {
             s.setUrl(domain + s.getUrl());
         });
@@ -149,7 +149,9 @@ public class VideoServiceImpl implements VideoService {
         String key = qiNiuService.upload(videoPostReq.getFile());
         long size = videoPostReq.getFile().getSize();
         String format = FileUtil.getExtensionName(videoPostReq.getFile().getOriginalFilename());
-        VideoDO video = VideoConverter.toDo(videoPostReq, ReqInfoContext.getReqInfo().getUserId());
+        // fixme: 临时测试
+//        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        VideoDO video = VideoConverter.toDo(videoPostReq, videoPostReq.getUserId());
         video.setFormat(format);
         video.setSize(FileUtil.getSize(size));
         video.setUrl(key);
@@ -177,9 +179,6 @@ public class VideoServiceImpl implements VideoService {
 
         // 保存视频标签
         videoTagDao.insertBatch(videoId, tagIds);
-
-        // 保存视频资源
-//        videoDao.saveResource(video.getId(), putKey.key);
         return videoId;
     }
 
@@ -215,8 +214,6 @@ public class VideoServiceImpl implements VideoService {
         dto.setTags(videoDao.listTagsDetail(videoId));
         // 阅读计数统计
         dto.setCount(countService.queryVideoStatisticInfo(videoId));
-        // 视频资源列表
-//        dto.setResources(videoDao.listVideoResources(videoId));
         return dto;
     }
 
@@ -230,14 +227,17 @@ public class VideoServiceImpl implements VideoService {
         if (user == null) {
             return false;
         }
-
         // 作者本人和超管可以看到审核内容
         return user.getUserId().equals(video.getUserId()) || (user.getRole() != null && user.getRole().equalsIgnoreCase(UserRole.ADMIN.name()));
     }
 
+    /**
+     * 获取标签ID
+     * @param tag tagName
+     * @return tagId
+     */
     @Override
-    public Long saveTag(TagReq req) {
-        TagDO tag = VideoConverter.toDo(req);
-        return videoDao.saveTag(tag);
+    public Long getTagId(String tag) {
+        return videoDao.getTagId(tag);
     }
 }

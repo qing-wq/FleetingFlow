@@ -84,6 +84,7 @@ public class VideoRestController extends BaseRestController {
 
     /**
      * 上传视频
+     * fixme: 分片上传，断点续传
      * @param file 视频文件
      * @param json 其他参数的json封装
      * @return
@@ -96,6 +97,7 @@ public class VideoRestController extends BaseRestController {
         }
 
         VideoPostReq videoPostReq = JsonUtil.toObj(json, VideoPostReq.class);
+        log.info("接受到视频：" + videoPostReq);
         videoPostReq.setFile(file);
         Long videoId = videoService.upload(videoPostReq);
         return ResVo.ok(videoId);
@@ -111,5 +113,28 @@ public class VideoRestController extends BaseRestController {
     public ResVo<String> downloadFile(@PathVariable Long videoId) {
         String url = qiNiuService.download(videoService.queryBaseVideoInfo(videoId), qiNiuService.getConfig());
         return ResVo.ok(url);
+    }
+
+    /**
+     * 创建/获取标签id
+     * @param tag
+     * @return
+     */
+    @GetMapping(path = "tag")
+    public ResVo<Long> getTagId(@RequestParam String tag) {
+        return ResVo.ok(videoService.getTagId(tag));
+    }
+
+    /**
+     * 上传图片
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @PostMapping(path = "image/upload")
+    public ResVo<String> uploadImage(MultipartFile file) throws IOException {
+        String key = qiNiuService.uploadImage(file);
+        String domain = "s3anmft1h.hn-bkt.clouddn.com/";
+        return ResVo.ok(domain + key);
     }
 }
