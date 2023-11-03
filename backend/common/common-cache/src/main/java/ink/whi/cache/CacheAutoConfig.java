@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 @ComponentScan("ink.whi.cache")
-public class CoreAutoConfig {
-    public CoreAutoConfig(RedisTemplate<String, String> redisTemplate) {
+public class CacheAutoConfig {
+    public CacheAutoConfig(RedisTemplate<String, String> redisTemplate) {
         RedisClient.register(redisTemplate);
     }
 

@@ -2,7 +2,8 @@ package ink.whi.comment.service;
 
 
 import ink.whi.comment.model.dto.TopCommentDTO;
-import ink.whi.comment.repo.entity.CommentDO;
+import ink.whi.common.model.dto.CommentDTO;
+import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 
 import java.util.List;
@@ -13,9 +14,9 @@ import java.util.List;
  * @Date: 2023/11/2
  */
 public interface CommentReadService {
-    Integer queryCommentCount(Long articleId);
+    Integer queryCommentCount(Long videoId);
 
-    List<TopCommentDTO> getVideoComments(Long articleId, PageParam newPageInstance);
+    CommentDTO queryComment(Long commentId);
 
-    CommentDO queryComment(Long commentId);
+    PageListVo<TopCommentDTO> queryVideoComments(Long videoId, PageParam pageParam);
 }

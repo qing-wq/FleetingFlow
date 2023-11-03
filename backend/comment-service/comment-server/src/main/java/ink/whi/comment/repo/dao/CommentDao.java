@@ -18,25 +18,25 @@ import java.util.Set;
 public class CommentDao extends ServiceImpl<CommentMapper, CommentDO> {
     /**
      * 查询文章评论数量
-     * @param articleId
+     * @param videoId
      * @return
      */
-    public Integer countCommentByArticleId(Long articleId) {
-        return lambdaQuery().eq(CommentDO::getVideoId, articleId)
+    public Integer countCommentByVideoId(Long videoId) {
+        return lambdaQuery().eq(CommentDO::getVideoId, videoId)
                 .eq(CommentDO::getDeleted, YesOrNoEnum.NO.getCode())
                 .count().intValue();
     }
 
     /**
      * 顶级评论
-     * @param articleId
+     * @param videoId
      * @param page
      * @return
      */
-    public List<CommentDO> listTopCommentList(Long articleId, PageParam page) {
+    public List<CommentDO> listTopCommentList(Long videoId, PageParam page) {
         return lambdaQuery()
                 .eq(CommentDO::getTopCommentId, 0)
-                .eq(CommentDO::getVideoId, articleId)
+                .eq(CommentDO::getVideoId, videoId)
                 .eq(CommentDO::getDeleted, YesOrNoEnum.NO.getCode())
                 .last(PageParam.getLimitSql(page))
                 .orderByDesc(CommentDO::getId).list();
@@ -44,14 +44,14 @@ public class CommentDao extends ServiceImpl<CommentMapper, CommentDO> {
 
     /**
      * 非顶级评论
-     * @param articleId
+     * @param videoId
      * @param topCommentIds
      * @return
      */
-    public List<CommentDO> listSubCommentIdMappers(Long articleId, Set<Long> topCommentIds) {
+    public List<CommentDO> listSubCommentIdMappers(Long videoId, Set<Long> topCommentIds) {
         return lambdaQuery()
                 .in(CommentDO::getTopCommentId, topCommentIds)
-                .eq(CommentDO::getVideoId, articleId)
+                .eq(CommentDO::getVideoId, videoId)
                 .eq(CommentDO::getDeleted, YesOrNoEnum.NO.getCode()).list();
     }
 }

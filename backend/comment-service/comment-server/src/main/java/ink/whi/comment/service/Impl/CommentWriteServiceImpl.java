@@ -1,6 +1,5 @@
 package ink.whi.comment.service.Impl;
 
-import ink.whi.comment.listener.VideoMqConstants;
 import ink.whi.comment.model.req.CommentSaveReq;
 import ink.whi.comment.repo.converter.CommentConverter;
 import ink.whi.comment.repo.dao.CommentDao;
@@ -11,6 +10,7 @@ import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.NumUtil;
 import ink.whi.common.model.dto.SimpleVideoInfoDTO;
+import ink.whi.notify.constants.VideoMqConstants;
 import ink.whi.user.client.UserClient;
 import ink.whi.video.client.VideoClient;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -30,10 +31,10 @@ public class CommentWriteServiceImpl implements CommentWriteService {
     @Autowired
     private CommentDao commentDao;
 
-    @Autowired
+    @Resource
     private UserClient userClient;
 
-    @Autowired
+    @Resource
     private VideoClient videoClient;
 
     @Autowired
@@ -52,16 +53,16 @@ public class CommentWriteServiceImpl implements CommentWriteService {
     }
 
     private CommentDO addComment(CommentSaveReq req) {
-        SimpleVideoInfoDTO video = videoClient.queryBasicVideoInfo(req.getArticleId());
+        SimpleVideoInfoDTO video = videoClient.queryBasicVideoInfo(req.getVideoId());
         if (video.getStatus() == PushStatusEnum.REVIEW.getCode()) {
             throw BusinessException.newInstance(StatusEnum.ILLEGAL_OPERATE, "审核中的视频不能评论");
         }
 
         CommentDO comment = CommentConverter.toDo(req);
+        Long parentCommentUser = getParentComment(comment);
         commentDao.save(comment);
 
-        Long parentCommentUser = getParentComment(comment);
-        // 保存足迹
+        // 保存评论足迹
         userClient.saveCommentFoot(CommentConverter.toDto(comment), video.getUserId(), parentCommentUser);
 
         // 发布事件

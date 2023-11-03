@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * feign远程调用接口
+ *
  * @author: qing
  * @Date: 2023/11/2
  */
@@ -22,6 +23,6 @@ public class CommentClientController {
 
     @GetMapping(path = "client/{commentId}")
     CommentDTO queryComment(@PathVariable Long commentId) {
-
+        return commentReadService.queryComment(commentId);
     }
 }

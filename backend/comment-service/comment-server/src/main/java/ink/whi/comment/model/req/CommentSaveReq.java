@@ -15,9 +15,9 @@ public class CommentSaveReq {
     private Long commentId;
 
     /**
-     * 文章ID
+     * 视频ID
      */
-    private Long articleId;
+    private Long videoId;
 
     /**
      * 用户ID

@@ -23,7 +23,7 @@ public class CommentConverter {
         }
         CommentDO commentDO = new CommentDO();
         commentDO.setId(req.getCommentId());
-        commentDO.setVideoId(req.getArticleId());
+        commentDO.setVideoId(req.getVideoId());
         commentDO.setUserId(req.getUserId());
         commentDO.setContent(req.getCommentContent());
         commentDO.setParentCommentId(req.getParentCommentId() == null ? 0L : req.getParentCommentId());
