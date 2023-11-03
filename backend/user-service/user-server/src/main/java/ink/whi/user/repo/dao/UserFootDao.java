@@ -68,7 +68,7 @@ public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
      * @param pageParam
      * @return
      */
-    public List<Long> listReadArticleByUserId(Long userId, PageParam pageParam) {
+    public List<Long> listReadVideoByUserId(Long userId, PageParam pageParam) {
         List<UserFootDO> list = lambdaQuery().eq(UserFootDO::getUserId, userId)
                 .eq(UserFootDO::getReadStat, ReadStatEnum.READ.getCode())
                 .eq(UserFootDO::getType, VideoTypeEnum.VIDEO.getCode())
@@ -84,7 +84,7 @@ public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
      * @param pageParam
      * @return
      */
-    public List<Long> listCollectedArticlesByUserId(Long userId, PageParam pageParam) {
+    public List<Long> listCollectedVideosByUserId(Long userId, PageParam pageParam) {
         List<UserFootDO> list = lambdaQuery().eq(UserFootDO::getUserId, userId)
                 .eq(UserFootDO::getCollectionStat, CollectionStatEnum.COLLECTION.getCode())
                 .eq(UserFootDO::getType, VideoTypeEnum.VIDEO.getCode())

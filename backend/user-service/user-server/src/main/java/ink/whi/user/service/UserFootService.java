@@ -2,6 +2,7 @@ package ink.whi.user.service;
 
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
+import ink.whi.common.model.dto.CommentDTO;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.user.repo.entity.UserFootDO;
 
@@ -16,9 +17,9 @@ public interface UserFootService {
 
     UserFootDO queryUserFoot(Long commentId, Integer code, Long userId);
 
-    List<Long> queryUserReadArticleList(Long userId, PageParam pageParam);
+    List<Long> queryUserReadVideoList(Long userId, PageParam pageParam);
 
-    List<Long> queryUserCollectionArticleList(Long userId, PageParam pageParam);
+    List<Long> queryUserCollectionVideoList(Long userId, PageParam pageParam);
 
-//    void saveCommentFoot(CommentDO comment, Long userId, Long parentCommentId);
+    void saveCommentFoot(CommentDTO comment, Long userId, Long parentCommentUser);
 }

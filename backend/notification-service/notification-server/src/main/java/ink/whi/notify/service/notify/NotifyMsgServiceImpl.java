@@ -14,6 +14,7 @@ import ink.whi.video.client.VideoClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,10 +30,10 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
     @Autowired
     private NotifyMsgDao notifyMsgDao;
 
-    @Autowired
+    @Resource
     private VideoClient videoClient;
 
-    @Autowired
+    @Resource
     private CommentClient commentClient;
 
     /**
@@ -115,7 +116,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      */
     @Override
     public void saveVideoPraise(UserFootDTO foot){
-        notifyMsgDao.saveArticlePraise(foot);
+        notifyMsgDao.saveVideoPraise(foot);
     }
 
     /**
@@ -124,7 +125,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      */
     @Override
     public void saveVideoCollect(UserFootDTO foot){
-        notifyMsgDao.saveArticleCollect(foot);
+        notifyMsgDao.saveVideoCollect(foot);
     }
 
     /**
@@ -133,7 +134,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
      */
     @Override
     public void removeVideoPraise(UserFootDTO foot) {
-        notifyMsgDao.removeArticlePraise(foot);
+        notifyMsgDao.removeVideoPraise(foot);
     }
 
     /**

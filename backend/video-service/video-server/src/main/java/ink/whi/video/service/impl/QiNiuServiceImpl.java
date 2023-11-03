@@ -3,6 +3,7 @@ package ink.whi.video.service.impl;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
+import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import ink.whi.common.enums.FileTypeEnum;
 import com.qiniu.util.StringMap;
@@ -92,21 +93,16 @@ public class QiNiuServiceImpl implements QiNiuService {
         int H = info.getVideo().getSize().getHeight();
         int W = info.getVideo().getSize().getWidth();
 
-        System.out.println("H: " + H + " W: " + W);
-
-        System.out.println(VideoUtil.getCommand(W, H));
-
         String command =  String.format(VideoUtil.getCommand(W, H) + "|saveas/%s", UrlSafeBase64.encodeToString(config.getBucket() + ":" + key + ".m3u8"));
         StringMap policy = new StringMap();
         policy.put("persistentOps", command);
         String upToken = auth.uploadToken(config.getBucket(), key, 3600, policy);
-//
-//        // 上传kodo
+
+        // 上传kodo
         Response response = uploadManager.put(file.getBytes(), key, upToken);
         Map resultMap = JsonUtil.toObj(response.bodyString(), Map.class);
         System.out.println("resultMap" + resultMap);
         return key + ".m3u8";
-
     }
 
     @Override
@@ -129,5 +125,22 @@ public class QiNiuServiceImpl implements QiNiuService {
             finalUrl = auth.privateDownloadUrl(videoInfoDTO.getUrl(), expireInSeconds);
         }
         return finalUrl;
+    }
+
+    @Override
+    public String uploadImage(MultipartFile file) throws IOException {
+        QiniuConfig config = getConfig();
+        String filename = file.getOriginalFilename();
+        Configuration cfg = new Configuration(QiNiuUtil.getRegion(config.getZone()));
+        UploadManager uploadManager = new UploadManager(cfg);
+        Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
+
+        String key = UUID.randomUUID().toString().replace("-", "") + "." + FileUtil.getExtensionName(filename);
+        String upToken = auth.uploadToken(config.getBucket(), key);
+
+        // 使用uuid重命名文件
+        Response response = uploadManager.put(file.getBytes(), key, upToken);
+        DefaultPutRet putRet = JsonUtil.toObj(response.bodyString(), DefaultPutRet.class);
+        return putRet.key;
     }
 }

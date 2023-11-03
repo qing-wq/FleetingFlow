@@ -109,7 +109,7 @@ public class UserRestController extends BaseRestController {
             case WORKS:
             case READ:
             case COLLECTION:
-//                PageListVo<VideoInfoDTO> dto = articleReadService.queryArticlesByUserAndType(userId, pageParam, select);
+//                PageListVo<VideoInfoDTO> dto = videoReadService.queryVideosByUserAndType(userId, pageParam, select);
 //                vo.setHomeSelectList(dto);
                 return;
             case LIKE:

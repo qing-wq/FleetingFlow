@@ -24,16 +24,6 @@ public class TagDO extends BaseDO {
     private String tagName;
 
     /**
-     * 分类id
-     */
-    private Long categoryId;
-
-    /**
-     * 状态：0-未发布，1-已发布
-     */
-    private Integer status;
-
-    /**
      * 是否删除
      */
     private Integer deleted;

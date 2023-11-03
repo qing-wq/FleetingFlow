@@ -16,6 +16,7 @@ import ink.whi.user.repo.dao.UserRelationDao;
 import ink.whi.user.repo.entity.UserDO;
 import ink.whi.user.repo.entity.UserInfoDO;
 import ink.whi.user.repo.entity.UserRelationDO;
+import ink.whi.user.service.CountReadService;
 import ink.whi.user.service.CountService;
 import ink.whi.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
     private UserRelationDao userRelationDao;
 
     @Autowired
-    private CountService countService;
+    private CountReadService countService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

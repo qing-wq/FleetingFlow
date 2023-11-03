@@ -19,7 +19,7 @@ public interface NotifyMsgMapper extends BaseMapper<NotifyMsgDO> {
      * @param pageParam
      * @return
      */
-    List<NotifyMsgDTO> listArticleRelatedNotices(Long userId, Integer type, PageParam pageParam);
+    List<NotifyMsgDTO> listVideoRelatedNotices(Long userId, Integer type, PageParam pageParam);
 
     /**
      * 普通消息，如关注等

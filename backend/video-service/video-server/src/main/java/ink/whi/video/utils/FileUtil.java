@@ -139,6 +139,8 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
         MultimediaInfo result = null;
         try {
             result = new MultimediaObject(file).getInfo();
+            // 删除临时文件
+            file.delete();
         } catch (Exception e) {
             log.error("获取视频信息失败", e);
         }

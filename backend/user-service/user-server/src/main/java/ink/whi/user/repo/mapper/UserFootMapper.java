@@ -6,7 +6,7 @@ import ink.whi.user.repo.entity.UserFootDO;
 
 
 public interface UserFootMapper extends BaseMapper<UserFootDO> {
-    VideoFootCountDTO countVideoInfoByVideoId(Long articleId);
+    VideoFootCountDTO countVideoInfoByVideoId(Long videoId);
 
     VideoFootCountDTO countVideoByUserId(Long userId);
 }

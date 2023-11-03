@@ -1,9 +1,9 @@
 package ink.whi.user.service.count;
 
 import ink.whi.cache.redis.RedisClient;
+import ink.whi.comment.client.CommentClient;
 import ink.whi.common.statistic.constants.CountConstants;
 import ink.whi.common.utils.MapUtils;
-import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.dto.VideoFootCountDTO;
 import ink.whi.user.repo.dao.UserDao;
 import ink.whi.user.repo.dao.UserFootDao;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 计数服务
@@ -38,14 +37,44 @@ public class CountServiceImpl implements CountService {
     @Resource
     private VideoClient videoClient;
 
-//    @Autowired
-//    private CommentReadService commentReadService;
+    @Autowired
+    private CommentClient commentClient;
 
     public CountServiceImpl(UserFootDao userFootDao, UserRelationDao userRelationDao) {
         this.userFootDao = userFootDao;
         this.userRelationDao = userRelationDao;
     }
 
+    @Override
+    public VideoFootCountDTO queryVideoCountInfoByUserId(Long userId) {
+        return userFootDao.countVideoStatisticByUserId(userId);
+    }
+
+    @Override
+    public VideoFootCountDTO queryVideoCountInfoByVideoId(Long videoId) {
+        VideoFootCountDTO res = userFootDao.countVideoStatisticByVideoId(videoId);
+        if (res == null) {
+            res = new VideoFootCountDTO();
+        } else {
+            res.setCommentCount(commentClient.queryCommentCount(videoId));
+        }
+        return res;
+    }
+
+    /**
+     * 获取评论点赞数量
+     *
+     * @param commentId
+     * @return
+     */
+    @Override
+    public Integer queryCommentPraiseCount(Long commentId) {
+        return userFootDao.countCommentPraise(commentId);
+    }
+
+    /**
+     * 初始化用户缓存
+     */
     @Override
     public void initUserCache() {
         long now = System.currentTimeMillis();
@@ -65,8 +94,11 @@ public class CountServiceImpl implements CountService {
         log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, userId);
     }
 
+    /**
+     * 初始化视频缓存
+     */
     @Override
-    public void initViewCache() {
+    public void initVideoCache() {
         long now = System.currentTimeMillis();
         log.info("开始自动刷新视频统计信息");
         Long videoId = 0L;
@@ -82,48 +114,6 @@ public class CountServiceImpl implements CountService {
             }
         }
         log.info("结束自动刷新用户统计信息，共耗时: {}ms, maxUserId: {}", System.currentTimeMillis() - now, videoId);
-    }
-
-
-    @Override
-    public VideoFootCountDTO queryVideoCountInfoByUserId(Long userId) {
-        return userFootDao.countVideoStatisticByUserId(userId);
-    }
-
-    @Override
-    public VideoFootCountDTO queryVideoCountInfoByVideoId(Long videoId) {
-        VideoFootCountDTO res = userFootDao.countVideoStatisticByVideoId(videoId);
-        if (res == null) {
-            res = new VideoFootCountDTO();
-        } else {
-//            res.setCommentCount(commentReadService.queryCommentCount(articleId));
-        }
-        return res;
-    }
-
-    /**
-     * 获取评论点赞数量
-     *
-     * @param commentId
-     * @return
-     */
-    @Override
-    public Integer queryCommentPraiseCount(Long commentId) {
-        return userFootDao.countCommentPraise(commentId);
-    }
-
-
-    @Override
-    public UserStatisticInfoDTO queryUserStatisticInfo(Long userId) {
-        String key = CountConstants.USER_STATISTIC + userId;
-        Map<String, Integer> resutMap = RedisClient.hGetAll(key, Integer.class);
-        UserStatisticInfoDTO dto = new UserStatisticInfoDTO();
-        dto.setFollowCount(resutMap.get(CountConstants.FOLLOW_COUNT));
-        dto.setFansCount(resutMap.get(CountConstants.FANS_COUNT));
-        dto.setVideoCount(resutMap.get(CountConstants.VIDEO_COUNT));
-        dto.setPraiseCount(resutMap.get(CountConstants.PRAISE_COUNT));
-        dto.setTotalReadCount(resutMap.get(CountConstants.VIEW_COUNT));
-        return dto;
     }
 
     /**
@@ -143,7 +133,7 @@ public class CountServiceImpl implements CountService {
         Long fansCount = userRelationDao.queryUserFansCount(userId);
 
         // 查询用户发布的视频数
-        Integer articleNum = videoClient.countVideoByUserId(userId);
+        Integer videoNum = videoClient.countVideoByUserId(userId);
 
         String key = CountConstants.USER_STATISTIC + userId;
         RedisClient.hMSet(key, MapUtils.create(CountConstants.PRAISE_COUNT, count.getPraiseCount(),
@@ -151,7 +141,7 @@ public class CountServiceImpl implements CountService {
                 CountConstants.VIEW_COUNT, count.getViewCount(),
                 CountConstants.FANS_COUNT, fansCount,
                 CountConstants.FOLLOW_COUNT, followCount,
-                CountConstants.VIDEO_COUNT, articleNum));
+                CountConstants.VIDEO_COUNT, videoNum));
     }
 
     /**
@@ -164,7 +154,7 @@ public class CountServiceImpl implements CountService {
         if (res == null) {
             res = new VideoFootCountDTO();
         } else {
-//            res.setCommentCount(commentReadService.queryCommentCount(videoId));
+            res.setCommentCount(commentClient.queryCommentCount(videoId));
         }
         RedisClient.hMSet(CountConstants.VIDEO_STATISTIC + videoId,
                 MapUtils.create(CountConstants.COLLECTION_COUNT, res.getCollectionCount(),

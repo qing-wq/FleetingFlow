@@ -26,4 +26,6 @@ public interface QiNiuService {
     QiniuContent queryContentById(Long id);
 
     String download(VideoInfoDTO videoInfoDTO, QiniuConfig config);
+
+    String uploadImage(MultipartFile file) throws IOException;
 }

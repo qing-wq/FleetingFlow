@@ -55,6 +55,11 @@ public class CountServiceImpl implements CountService {
         return info;
     }
 
+    /**
+     * 获取用户已发布视频数
+     * @param userId 用户ID
+     * @return 已发布视频数
+     */
     @Override
     public Integer countVideoByUserId(Long userId) {
         return videoDao.countVideo(userId);

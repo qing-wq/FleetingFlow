@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8002
   servlet:
     session:
       timeout: 5m # 设置session的有效期为五分钟
@@ -7,7 +7,7 @@ server:
 
 spring:
   application:
-    name: user-service
+    name: comment-service
   cloud:
     nacos:
       config:
@@ -20,20 +20,13 @@ spring:
   config:
     import:
       - application-dal.yaml
-      - public-security.yaml
       - default-feign.yaml
-      - optional:nacos:user-service.yml
+      - optional:nacos:comment-service.yml
 
 database:
   name: qiniu
 
-jwt:
-  key: secret-key
-
-security:
-  salt: salt-key
-  salt-index: 2
-
 logging:
   level:
     root: info
+    feign.Logger: debug

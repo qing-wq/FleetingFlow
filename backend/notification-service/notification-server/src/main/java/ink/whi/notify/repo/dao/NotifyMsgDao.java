@@ -69,7 +69,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
             case COMMENT:
             case COLLECT:
             case PRAISE:
-                return baseMapper.listArticleRelatedNotices(userId, type.getType(), page);
+                return baseMapper.listVideoRelatedNotices(userId, type.getType(), page);
             default:
                 return baseMapper.listNormalNotices(userId, type.getType(), page);
         }
@@ -138,7 +138,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         save(notify);
     }
 
-    public void saveArticlePraise(UserFootDTO foot) {
+    public void saveVideoPraise(UserFootDTO foot) {
         NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(foot.getVideoId())
                 .msg("用户点赞")
                 .notifyUserId(foot.getVideoUserId())
@@ -152,7 +152,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         }
     }
 
-    public void saveArticleCollect(UserFootDTO foot) {
+    public void saveVideoCollect(UserFootDTO foot) {
         NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(foot.getVideoId())
                 .msg("用户收藏视频")
                 .notifyUserId(foot.getVideoUserId())
@@ -165,7 +165,7 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
         }
     }
 
-    public void removeArticlePraise(UserFootDTO foot) {
+    public void removeVideoPraise(UserFootDTO foot) {
         NotifyMsgDO notify = NotifyMsgDO.builder().relatedId(foot.getVideoId())
                 .notifyUserId(foot.getVideoUserId())
                 .operateUserId(foot.getUserId())

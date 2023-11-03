@@ -2,6 +2,7 @@ package ink.whi.user.service.userfoot;
 
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
+import ink.whi.common.model.dto.CommentDTO;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.user.repo.dao.UserFootDao;
 import ink.whi.user.repo.entity.UserFootDO;
@@ -30,22 +31,21 @@ public class UserFootServiceImpl implements UserFootService {
      * @param videoId
      * @param author
      * @param userId
-     * @param operateTypeEnum
+     * @param operate
      * @return
      */
     @Override
-    public UserFootDO saveOrUpdateUserFoot(VideoTypeEnum type, Long videoId, Long author, Long userId, OperateTypeEnum operateTypeEnum) {
+    public UserFootDO saveOrUpdateUserFoot(VideoTypeEnum type, Long videoId, Long author, Long userId, OperateTypeEnum operate) {
         UserFootDO record = userFootDao.getRecordByVideoAndUserId(type, videoId,  userId);
-        System.out.println(record);
         if (record == null) {
             record = new UserFootDO();
             record.setUserId(userId);
             record.setVideoId(videoId);
             record.setType(type.getCode());
             record.setVideoUserId(author);
-            setUserFootStat(record, operateTypeEnum);
+            setUserFootStat(record, operate);
             userFootDao.save(record);
-        } else if (setUserFootStat(record, operateTypeEnum)) {
+        } else if (setUserFootStat(record, operate)) {
             record.setUpdateTime(new Date());
             userFootDao.updateById(record);
         }
@@ -64,8 +64,8 @@ public class UserFootServiceImpl implements UserFootService {
      * @return
      */
     @Override
-    public List<Long> queryUserReadArticleList(Long userId, PageParam pageParam) {
-        return userFootDao.listReadArticleByUserId(userId, pageParam);
+    public List<Long> queryUserReadVideoList(Long userId, PageParam pageParam) {
+        return userFootDao.listReadVideoByUserId(userId, pageParam);
     }
 
     /**
@@ -75,18 +75,18 @@ public class UserFootServiceImpl implements UserFootService {
      * @return
      */
     @Override
-    public List<Long> queryUserCollectionArticleList(Long userId, PageParam pageParam) {
-        return userFootDao.listCollectedArticlesByUserId(userId, pageParam);
+    public List<Long> queryUserCollectionVideoList(Long userId, PageParam pageParam) {
+        return userFootDao.listCollectedVideosByUserId(userId, pageParam);
     }
 
-//    @Override
-//    public void saveCommentFoot(CommentDO comment, Long userId, Long parentCommentUser) {
-//        // 视频已评 + 父评论已评
-//        saveOrUpdateUserFoot(DocumentTypeEnum.ARTICLE, comment.getArticleId(), userId, comment.getUserId(), OperateTypeEnum.COMMENT);
-//        if (parentCommentUser != null && comment.getParentCommentId() != 0) {
-//            saveOrUpdateUserFoot(DocumentTypeEnum.COMMENT, comment.getParentCommentId(), parentCommentUser, comment.getUserId(), OperateTypeEnum.COMMENT);
-//        }
-//    }
+    @Override
+    public void saveCommentFoot(CommentDTO comment, Long authorId, Long parentCommentUser) {
+        // 视频已评 + 父评论已评
+        saveOrUpdateUserFoot(VideoTypeEnum.VIDEO, comment.getVideoId(), authorId, comment.getUserId(), OperateTypeEnum.COMMENT);
+        if (parentCommentUser != null && comment.getParentCommentId() != 0) {
+            saveOrUpdateUserFoot(VideoTypeEnum.COMMENT, comment.getParentCommentId(), parentCommentUser, comment.getUserId(), OperateTypeEnum.COMMENT);
+        }
+    }
 
     private boolean setUserFootStat(UserFootDO userFootDO, OperateTypeEnum operate) {
         switch (operate) {

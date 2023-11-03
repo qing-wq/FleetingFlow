@@ -1,6 +1,6 @@
-package ink.whi.user;
+package ink.whi.notify;
 
-import ink.whi.user.hook.interceptor.AuthorizeInterceptor;
+import ink.whi.notify.hook.interceptor.AuthorizeInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,17 +20,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Date: 2023/10/24
  */
 @EnableAsync
-@EnableCaching
-@ServletComponentScan
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {"ink.whi.video.client", "ink.whi.comment.client"})
+@EnableFeignClients(basePackages = {"ink.whi.video.client", "ink.whi.comment.client", "ink.whi.user.client"})
 @LoadBalancerClients({
-        @LoadBalancerClient("video-service"),
-        @LoadBalancerClient("comment-service")
+        @LoadBalancerClient("user-service")
 })
-@MapperScan(value = {"ink.whi.user.repo", "ink.whi.user.notify.repo"})
-public class UserServiceApplication implements WebMvcConfigurer {
+@MapperScan(value = "ink.whi.notify.repo")
+public class NotificationApplication implements WebMvcConfigurer {
 
     @Autowired
     private AuthorizeInterceptor authorizeInterceptor;
@@ -41,6 +38,6 @@ public class UserServiceApplication implements WebMvcConfigurer {
     }
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(UserServiceApplication.class).allowCircularReferences(true).run(args);
+        new SpringApplicationBuilder(NotificationApplication.class).allowCircularReferences(true).run(args);
     }
 }
