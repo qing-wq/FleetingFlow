@@ -32,7 +32,7 @@ create table comment
 )
     comment '评论表' charset = utf8mb4;
 
-create index idx_article_id
+create index idx_video_id
     on comment (video_id);
 
 create index idx_user_id
@@ -84,52 +84,6 @@ create table tag
 
 create index idx_category_id
     on tag (category_id);
-
-create table tool_local_storage
-(
-    storage_id  bigint auto_increment comment 'ID'
-        primary key,
-    real_name   varchar(255) null comment '文件真实的名称',
-    name        varchar(255) null comment '文件名',
-    suffix      varchar(255) null comment '后缀',
-    path        varchar(255) null comment '路径',
-    type        varchar(255) null comment '类型',
-    size        varchar(100) null comment '大小',
-    create_by   varchar(255) null comment '创建者',
-    update_by   varchar(255) null comment '更新者',
-    create_time datetime     null comment '创建日期',
-    update_time datetime     null comment '更新时间'
-)
-    comment '本地存储';
-
-create table tool_qiniu_config
-(
-    id         bigint       not null comment 'ID'
-        primary key,
-    access_key text         null comment 'accessKey',
-    bucket     varchar(255) null comment 'Bucket 识别符',
-    host       varchar(255) not null comment '外链域名',
-    secret_key text         null comment 'secretKey',
-    type       varchar(255) null comment '空间类型',
-    zone       varchar(255) null comment '机房'
-)
-    comment '七牛云配置';
-
-create table tool_qiniu_content
-(
-    id          bigint auto_increment comment 'ID'
-        primary key,
-    name        varchar(180)                          null comment '文件名称',
-    bucket      varchar(255)                          null comment 'Bucket 识别符',
-    size        varchar(255)                          null comment '文件大小',
-    type        varchar(255)                          null comment '文件类型：私有或公开',
-    url         varchar(255)                          null comment '文件url',
-    suffix      varchar(255)                          null comment '文件后缀',
-    update_time timestamp default current_timestamp() null comment '上传或同步的时间',
-    constraint uniq_name
-        unique (name)
-)
-    comment '七牛云文件存储';
 
 create table user
 (
@@ -232,17 +186,6 @@ create table video
 
 create index idx_category_id
     on video (category_id);
-
-create table video_resource
-(
-    id       int auto_increment comment '业务id'
-        primary key,
-    video_id int          default 0  not null comment '视频id',
-    url      varchar(300) default '' not null comment '视频地址',
-    format   varchar(50)  default '' not null comment '视频格式',
-    quality  int          default 0  not null comment '视频清晰度'
-)
-    comment '视频资源表';
 
 create table video_tag
 (

@@ -1,11 +1,11 @@
-package ink.whi.video.repo.video.dao;
+package ink.whi.video.repo.dao;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ink.whi.common.enums.YesOrNoEnum;
 import ink.whi.common.model.base.BaseDO;
-import ink.whi.video.repo.video.mapper.VideoTagMapper;
-import ink.whi.video.repo.video.entity.VideoTagDO;
+import ink.whi.video.repo.mapper.VideoTagMapper;
+import ink.whi.video.repo.entity.VideoTagDO;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

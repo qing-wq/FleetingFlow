@@ -42,11 +42,13 @@ public class UserClientResolver implements UserClient {
 
 	@Override
 	public Integer queryCommentPraiseCount(Long commentId) {
+		log.error("User 服务异常：queryCommentPraiseCount 请求失败");
 		return null;
 	}
 
 	@Override
 	public UserFootDTO queryUserFoot(Long commentId, Integer type, Long loginUserId) {
+		log.error("User 服务异常：queryUserFoot 请求失败");
 		return null;
 	}
 }

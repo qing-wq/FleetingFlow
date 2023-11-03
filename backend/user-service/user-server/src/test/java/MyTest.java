@@ -20,6 +20,6 @@ public class MyTest extends BasicTest{
     void test() {
         RedisClient.register(redisTemplate);
         countService.initUserCache();
-        countService.initViewCache();
+        countService.initVideoCache();
     }
 }

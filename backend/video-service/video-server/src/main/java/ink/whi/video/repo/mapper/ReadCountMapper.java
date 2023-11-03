@@ -1,7 +1,7 @@
-package ink.whi.video.repo.video.mapper;
+package ink.whi.video.repo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ink.whi.video.repo.video.entity.ReadCountDO;
+import ink.whi.video.repo.entity.ReadCountDO;
 import org.springframework.stereotype.Component;
 
 /**

@@ -1,4 +1,4 @@
-package ink.whi.video.repo.video.entity;
+package ink.whi.video.repo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import ink.whi.common.model.base.BaseDO;

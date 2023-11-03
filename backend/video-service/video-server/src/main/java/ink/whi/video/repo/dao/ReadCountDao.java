@@ -1,8 +1,8 @@
-package ink.whi.video.repo.video.dao;
+package ink.whi.video.repo.dao;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import ink.whi.video.repo.video.entity.ReadCountDO;
-import ink.whi.video.repo.video.mapper.ReadCountMapper;
+import ink.whi.video.repo.entity.ReadCountDO;
+import ink.whi.video.repo.mapper.ReadCountMapper;
 import org.springframework.stereotype.Repository;
 
 /**

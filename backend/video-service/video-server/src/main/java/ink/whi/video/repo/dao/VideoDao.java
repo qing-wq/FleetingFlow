@@ -1,4 +1,4 @@
-package ink.whi.video.repo.video.dao;
+package ink.whi.video.repo.dao;
 
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -12,11 +12,14 @@ import ink.whi.common.model.page.PageParam;
 import ink.whi.video.model.dto.VideoInfoDTO;
 import ink.whi.video.model.video.CategoryDTO;
 import ink.whi.video.model.video.TagDTO;
-import ink.whi.video.repo.video.converter.VideoConverter;
-import ink.whi.video.repo.video.entity.CategoryDO;
-import ink.whi.video.repo.video.entity.TagDO;
-import ink.whi.video.repo.video.entity.VideoDO;
-import ink.whi.video.repo.video.entity.VideoResource;
+import ink.whi.video.repo.converter.VideoConverter;
+import ink.whi.video.repo.entity.CategoryDO;
+import ink.whi.video.repo.entity.TagDO;
+import ink.whi.video.repo.entity.VideoDO;
+import ink.whi.video.repo.mapper.CategoryMapper;
+import ink.whi.video.repo.mapper.TagMapper;
+import ink.whi.video.repo.mapper.VideoMapper;
+import ink.whi.video.repo.mapper.VideoTagMapper;
 import ink.whi.video.repo.video.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,10 +41,6 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
 
     @Autowired
     private TagMapper tagMapper;
-
-    @Autowired
-    private VideoResourceMapper videoResourceMapper;
-
 
     public VideoInfoDTO getVideoInfoById(Long videoId) {
         VideoDO video = lambdaQuery().eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
@@ -70,20 +69,6 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
                 .last(PageParam.getLimitSql(pageParam))
                 .orderByDesc(BaseDO::getCreateTime)
                 .list();
-    }
-
-
-    public List<VideoResource> listVideoResources(Long videoId) {
-        LambdaQueryChainWrapper<VideoResource> wrapper = ChainWrappers.lambdaQueryChain(videoResourceMapper);
-        return wrapper.eq(VideoResource::getVideoId, videoId)
-                .list();
-    }
-
-    public void saveResource(Long videoId, String key) {
-        VideoResource resource = new VideoResource();
-        resource.setVideoId(videoId);
-        resource.setUrl(key);
-
     }
 
     public List<TagDTO> listTagsByCategory(Long categoryId, PageParam pageParam) {

@@ -15,10 +15,7 @@ import ink.whi.common.model.page.PageParam;
 import ink.whi.common.utils.JsonUtil;
 import ink.whi.video.model.dto.QiniuQueryCriteria;
 import ink.whi.video.model.dto.VideoInfoDTO;
-import ink.whi.video.repo.qiniu.dao.QiniuConfigDao;
-import ink.whi.video.repo.qiniu.dao.QiniuContentDao;
-import ink.whi.video.repo.qiniu.entity.QiniuConfig;
-import ink.whi.video.repo.qiniu.entity.QiniuContent;
+import ink.whi.video.properties.QiniuConfigProperties;
 import ink.whi.video.service.QiNiuService;
 import ink.whi.video.utils.FileUtil;
 import ink.whi.video.utils.QiNiuUtil;
@@ -40,38 +37,11 @@ import java.util.UUID;
 public class QiNiuServiceImpl implements QiNiuService {
 
     @Autowired
-    private QiniuConfigDao qiniuConfigDao;
-
-    @Autowired
-    private QiniuContentDao qiniuContentDao;
-
-    @Override
-    public QiniuConfig getConfig() {
-        QiniuConfig config = qiniuConfigDao.getConfig();
-        if (config == null) {
-            throw BusinessException.newInstance(StatusEnum.ILLEGAL_OPERATE, "请先添加相应配置");
-        }
-        return config;
-    }
-
-    @Override
-    public void setConfig(QiniuConfig config) {
-        String http = "http://", https = "https://";
-        if (!(config.getHost().toLowerCase().startsWith(http) || config.getHost().toLowerCase().startsWith(https))) {
-            throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "外链域名必须以http://或者https://开头");
-        }
-        qiniuConfigDao.save(config);
-    }
-
-    @Override
-    public PageListVo<QiniuContent> queryFiles(QiniuQueryCriteria criteria, PageParam pageParam) {
-        return null;
-    }
+    private QiniuConfigProperties config;
 
     @Override
     public String upload(MultipartFile file) throws IOException {
         //todo: 配置可以加到caffeine缓存
-        QiniuConfig config = getConfig();
         String filename = file.getOriginalFilename();
         if (filename == null) {
             throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "文件名非法");
@@ -93,6 +63,7 @@ public class QiNiuServiceImpl implements QiNiuService {
         int H = info.getVideo().getSize().getHeight();
         int W = info.getVideo().getSize().getWidth();
 
+        // 视频转码为m3u8
         String command =  String.format(VideoUtil.getCommand(W, H) + "|saveas/%s", UrlSafeBase64.encodeToString(config.getBucket() + ":" + key + ".m3u8"));
         StringMap policy = new StringMap();
         policy.put("persistentOps", command);
@@ -106,22 +77,13 @@ public class QiNiuServiceImpl implements QiNiuService {
     }
 
     @Override
-    public QiniuContent queryContentById(Long videoId) {
-        QiniuContent content = qiniuContentDao.getById(videoId);
-        if (content == null) {
-            throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "id 不存在");
-        }
-        return content;
-    }
-
-    @Override
-    public String download(VideoInfoDTO videoInfoDTO, QiniuConfig config) {
+    public String download(VideoInfoDTO videoInfoDTO) {
         String finalUrl;
         if (videoInfoDTO.getType() == FileTypeEnum.PUBLIC.getCode()) {
             finalUrl = videoInfoDTO.getUrl();
         } else {
             Auth auth = Auth.create(config.getAccessKey(), config.getSecretKey());
-            long expireInSeconds = 3600;    // 1小时
+            long expireInSeconds = 3600;    // 设置过期时间为1小时
             finalUrl = auth.privateDownloadUrl(videoInfoDTO.getUrl(), expireInSeconds);
         }
         return finalUrl;
@@ -129,7 +91,6 @@ public class QiNiuServiceImpl implements QiNiuService {
 
     @Override
     public String uploadImage(MultipartFile file) throws IOException {
-        QiniuConfig config = getConfig();
         String filename = file.getOriginalFilename();
         Configuration cfg = new Configuration(QiNiuUtil.getRegion(config.getZone()));
         UploadManager uploadManager = new UploadManager(cfg);
@@ -141,6 +102,6 @@ public class QiNiuServiceImpl implements QiNiuService {
         // 使用uuid重命名文件
         Response response = uploadManager.put(file.getBytes(), key, upToken);
         DefaultPutRet putRet = JsonUtil.toObj(response.bodyString(), DefaultPutRet.class);
-        return putRet.key;
+        return config.buildUrl(putRet.key);
     }
 }

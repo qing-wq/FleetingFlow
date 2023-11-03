@@ -1,13 +1,13 @@
-package ink.whi.video.repo.video.dao;
+package ink.whi.video.repo.dao;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ink.whi.common.enums.PushStatusEnum;
 import ink.whi.common.enums.YesOrNoEnum;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.video.model.video.CategoryDTO;
-import ink.whi.video.repo.video.converter.VideoConverter;
-import ink.whi.video.repo.video.entity.CategoryDO;
-import ink.whi.video.repo.video.mapper.CategoryMapper;
+import ink.whi.video.repo.converter.VideoConverter;
+import ink.whi.video.repo.entity.CategoryDO;
+import ink.whi.video.repo.mapper.CategoryMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

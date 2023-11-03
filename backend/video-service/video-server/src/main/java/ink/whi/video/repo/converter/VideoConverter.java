@@ -1,4 +1,4 @@
-package ink.whi.video.repo.video.converter;
+package ink.whi.video.repo.converter;
 
 import cn.hutool.core.bean.BeanUtil;
 import ink.whi.common.model.dto.SimpleUserInfoDTO;
@@ -8,9 +8,9 @@ import ink.whi.video.model.req.TagReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.video.CategoryDTO;
 import ink.whi.video.model.video.TagDTO;
-import ink.whi.video.repo.video.entity.CategoryDO;
-import ink.whi.video.repo.video.entity.TagDO;
-import ink.whi.video.repo.video.entity.VideoDO;
+import ink.whi.video.repo.entity.CategoryDO;
+import ink.whi.video.repo.entity.VideoDO;
+import ink.whi.video.repo.entity.TagDO;
 
 import java.util.List;
 

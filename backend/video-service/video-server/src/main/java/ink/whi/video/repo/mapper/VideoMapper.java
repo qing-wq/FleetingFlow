@@ -1,7 +1,7 @@
-package ink.whi.video.repo.video.mapper;
+package ink.whi.video.repo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ink.whi.video.repo.video.entity.TagDO;
+import ink.whi.video.repo.entity.VideoDO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Component;
  * @Date: 2023/10/26
  */
 @Component
-public interface TagMapper extends BaseMapper<TagDO> {
+public interface VideoMapper extends BaseMapper<VideoDO> {
 }

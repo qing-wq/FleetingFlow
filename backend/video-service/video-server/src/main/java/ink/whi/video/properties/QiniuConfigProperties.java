@@ -15,54 +15,61 @@
  */
 package ink.whi.video.properties;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 
 /**
  * 七牛云对象存储配置类
+ *
  * @author qing
  * @date 2023/10/25
  */
 @Data
-@Configuration(value = "qiniu")
-public class QiniuConfigProperties{
+@Component
+@ConfigurationProperties(prefix = "qiniu.config")
+public class QiniuConfigProperties {
 
     /**
      * accessKey
      */
-    private String accessKey;
+    public String accessKey;
 
     /**
      * secretKey
      */
-    private String secretKey;
+    public String secretKey;
 
     /**
-     * 存储空间名称作为唯一的 Bucket 识别符
+     * Bucket
      */
-    private String bucket;
+    public String bucket;
 
     /**
-     * Zone表示与机房的对应关系
-     * 华东	Zone.zone0()
-     * 华北	Zone.zone1()
-     * 华南	Zone.zone2()
-     * 北美	Zone.zoneNa0()
-     * 东南亚	Zone.zoneAs0()
+     * 地域
      */
-    private String zone;
+    public String zone;
 
     /**
-     * 外链域名，可自定义，需在七牛云绑定
+     * 外链域名
      */
-    private String host;
+    public String host;
 
     /**
      * 空间类型：公开/私有
      */
-    private String type = "公开";
+    public String type = "公开";
+
+    public String buildUrl(String url) {
+        if (!url.startsWith(host)) {
+            return host + "/" + url;
+        }
+        return url;
+    }
 }

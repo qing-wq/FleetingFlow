@@ -24,6 +24,7 @@ import java.io.IOException;
 
 /**
  * 视频接口
+ *
  * @author: qing
  * @Date: 2023/10/26
  */
@@ -43,6 +44,7 @@ public class VideoRestController extends BaseRestController {
 
     /**
      * 视频详情页
+     *
      * @param videoId
      * @return
      */
@@ -68,6 +70,7 @@ public class VideoRestController extends BaseRestController {
 
     /**
      * 获取视频流
+     *
      * @param categoryId
      * @param page
      * @param size
@@ -85,13 +88,14 @@ public class VideoRestController extends BaseRestController {
     /**
      * 上传视频
      * fixme: 分片上传，断点续传
+     *
      * @param file 视频文件
      * @param json 其他参数的json封装
      * @return
      * @throws IOException
      */
     @PostMapping(path = "upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResVo<Long> upload( MultipartFile file, String json) throws IOException {
+    public ResVo<Long> upload(MultipartFile file, String json) throws IOException {
         if (file == null) {  // todo：判断文件是否是视频
             return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "请上传视频文件");
         }
@@ -111,12 +115,13 @@ public class VideoRestController extends BaseRestController {
      */
     @GetMapping(value = "/download/{videoId}")
     public ResVo<String> downloadFile(@PathVariable Long videoId) {
-        String url = qiNiuService.download(videoService.queryBaseVideoInfo(videoId), qiNiuService.getConfig());
+        String url = qiNiuService.download(videoService.queryBaseVideoInfo(videoId));
         return ResVo.ok(url);
     }
 
     /**
      * 创建/获取标签id
+     *
      * @param tag
      * @return
      */
@@ -127,6 +132,8 @@ public class VideoRestController extends BaseRestController {
 
     /**
      * 上传图片
+     * todo 图片上传到cdn
+     *
      * @param file
      * @return
      * @throws IOException
@@ -134,7 +141,6 @@ public class VideoRestController extends BaseRestController {
     @PostMapping(path = "image/upload")
     public ResVo<String> uploadImage(MultipartFile file) throws IOException {
         String key = qiNiuService.uploadImage(file);
-        String domain = "s3anmft1h.hn-bkt.clouddn.com/";
-        return ResVo.ok(domain + key);
+        return ResVo.ok(key);
     }
 }
