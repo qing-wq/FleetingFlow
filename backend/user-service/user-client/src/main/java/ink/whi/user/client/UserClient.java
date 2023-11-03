@@ -1,10 +1,12 @@
 package ink.whi.user.client;
 
-import ink.whi.common.model.dto.BaseUserDTO;
+import ink.whi.common.enums.OperateTypeEnum;
+import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
 import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.common.model.dto.UserFootDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,14 +17,34 @@ import org.springframework.web.bind.annotation.*;
 public interface UserClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "client/base/{userId}")
-    BaseUserDTO queryBasicUserInfo(@PathVariable Long userId);
+    SimpleUserInfoDTO queryBasicUserInfo(@PathVariable Long userId);
 
     @GetMapping(path = "client/simple/{userId}")
     SimpleUserInfoDTO querySimpleUserInfo(@PathVariable Long userId);
 
     @GetMapping(path = "client/foot/user")
-    UserFootDTO saveUserFoot(@RequestParam Integer videoTypeEnum, @RequestParam Long videoId, @RequestParam Long author, @RequestParam Long userId, @RequestParam Integer operateTypeEnum);
+    UserFootDTO saveUserFoot(@RequestParam VideoTypeEnum videoType, @RequestParam Long videoId,
+                             @RequestParam Long author, @RequestParam Long userId, @RequestParam OperateTypeEnum operate);
 
-    @GetMapping(path = "client/foot/comment")
-    UserFootDTO saveCommentFoot(@RequestParam CommentDTO comment, @RequestParam Long userId, @RequestParam Long parentCommentUser);
+    @PostMapping(path = "client/foot/comment")
+    void saveCommentFoot(@RequestBody CommentDTO comment, @RequestParam Long userId, @RequestParam(required = false) Long parentCommentUser);
+
+    /**
+     * 获取评论点赞数
+     *
+     * @param commentId
+     * @return
+     */
+    @GetMapping(path = "client/comment/{commentId}")
+    Integer queryCommentPraiseCount(@PathVariable Long commentId);
+
+    /**
+     * 获取当前用户点赞状态
+     *
+     * @param commentId
+     * @param loginUserId
+     * @return
+     */
+    @GetMapping(path = "client/foot/praise")
+    UserFootDTO queryUserFoot(@RequestParam Long commentId, @RequestParam Integer type, @RequestParam Long loginUserId);
 }

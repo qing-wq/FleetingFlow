@@ -32,24 +32,32 @@ public class UserClientRestController {
     /**
      * 保存/更新用户足迹
      *
-     * @param videoTypeEnum VideoTypeEnum
+     * @param videoType VideoTypeEnum
      * @param videoId
      * @param author
      * @param userId
-     * @param operateTypeEnum
+     * @param operate   OperateTypeEnum
      * @return
      */
-    @PostMapping(path = "foot/update")
-    public UserFootDTO saveUserFoot(Integer videoTypeEnum, Long videoId, Long author, Long userId, Integer operateTypeEnum) {
-        VideoTypeEnum type = VideoTypeEnum.formCode(videoTypeEnum);
-        OperateTypeEnum operate = OperateTypeEnum.fromCode(operateTypeEnum);
-        UserFootDO foot = userFootService.saveOrUpdateUserFoot(type, videoId, author, userId, operate);
+    @PostMapping(path = "foot/user")
+    public UserFootDTO saveUserFoot(@RequestParam VideoTypeEnum videoType, @RequestParam Long videoId,
+                                    @RequestParam Long author, @RequestParam Long userId, @RequestParam OperateTypeEnum operate) {
+        UserFootDO foot = userFootService.saveOrUpdateUserFoot(videoType, videoId, author, userId, operate);
         return UserConverter.toDTO(foot);
     }
 
-    @GetMapping(path = "foot/comment")
-    UserFootDTO saveCommentFoot(@RequestParam CommentDTO comment, @RequestParam Long userId, @RequestParam Long parentCommentUser) {
-
+    /**
+     * 保存/更新评论足迹
+     *
+     * @param comment
+     * @param userId
+     * @param parentCommentUser
+     * @return
+     */
+    @PostMapping(path = "foot/comment")
+    public void saveCommentFoot(@RequestBody CommentDTO comment, @RequestParam Long userId,
+                                @RequestParam(required = false) Long parentCommentUser) {
+        userFootService.saveCommentFoot(comment, userId, parentCommentUser);
     }
 
     @GetMapping(path = "base/{userId}")
