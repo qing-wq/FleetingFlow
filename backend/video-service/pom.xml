@@ -14,6 +14,7 @@
     <modules>
         <module>video-server</module>
         <module>video-client</module>
+        <module>video-search-server</module>
     </modules>
 
     <properties>

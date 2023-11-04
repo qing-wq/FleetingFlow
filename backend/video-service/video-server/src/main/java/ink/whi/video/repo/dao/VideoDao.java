@@ -20,7 +20,6 @@ import ink.whi.video.repo.mapper.CategoryMapper;
 import ink.whi.video.repo.mapper.TagMapper;
 import ink.whi.video.repo.mapper.VideoMapper;
 import ink.whi.video.repo.mapper.VideoTagMapper;
-import ink.whi.video.repo.video.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

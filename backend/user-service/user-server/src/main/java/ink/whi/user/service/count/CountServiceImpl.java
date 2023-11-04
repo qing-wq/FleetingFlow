@@ -37,7 +37,7 @@ public class CountServiceImpl implements CountService {
     @Resource
     private VideoClient videoClient;
 
-    @Autowired
+    @Resource
     private CommentClient commentClient;
 
     public CountServiceImpl(UserFootDao userFootDao, UserRelationDao userRelationDao) {
