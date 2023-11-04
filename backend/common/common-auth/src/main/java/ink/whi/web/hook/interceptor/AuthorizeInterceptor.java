@@ -1,11 +1,11 @@
-package ink.whi.video.hook.interceptor;
+package ink.whi.web.hook.interceptor;
 
 import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.exception.StatusEnum;
-import ink.whi.common.permission.Permission;
-import ink.whi.common.permission.UserRole;
-import ink.whi.common.utils.JsonUtil;
 import ink.whi.common.model.ResVo;
+import ink.whi.common.utils.JsonUtil;
+import ink.whi.web.auth.Permission;
+import ink.whi.web.auth.UserRole;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

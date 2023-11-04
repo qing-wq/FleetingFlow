@@ -1,4 +1,4 @@
-package ink.whi.common.permission;
+package ink.whi.web.auth;
 
 import java.lang.annotation.*;
 

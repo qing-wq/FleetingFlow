@@ -4,7 +4,7 @@ import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.*;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
-import ink.whi.common.permission.UserRole;
+import ink.whi.web.auth.UserRole;
 import ink.whi.common.utils.NumUtil;
 import ink.whi.common.model.dto.BaseUserDTO;
 import ink.whi.common.model.dto.SimpleVideoInfoDTO;

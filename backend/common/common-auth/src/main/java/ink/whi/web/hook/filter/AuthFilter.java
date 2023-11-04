@@ -1,7 +1,8 @@
-package ink.whi.video.hook.filter;
+package ink.whi.web.hook.filter;
 
 import ink.whi.common.context.ReqInfoContext;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -15,6 +16,7 @@ import java.io.IOException;
  * @Date: 2023/11/1
  */
 @Slf4j
+@Component
 @WebFilter(urlPatterns = "/*", filterName = "authFilter", asyncSupported = true)
 public class AuthFilter implements Filter {
 
@@ -29,8 +31,9 @@ public class AuthFilter implements Filter {
                 ReqInfoContext.ReqInfo reqInfo = new ReqInfoContext.ReqInfo();
                 reqInfo.setUserId(Long.valueOf(userId));
                 ReqInfoContext.addReqInfo(reqInfo);
+                log.info("init reqInfo success");
             } catch (NumberFormatException e) {
-                log.info("init reqInfo error: " + e.getMessage());
+                log.error("init reqInfo error: " + e.getMessage());
             }
         }
         filterChain.doFilter(servletRequest, servletResponse);

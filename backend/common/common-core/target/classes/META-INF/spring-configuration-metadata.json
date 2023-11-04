@@ -1,11 +1,59 @@
 {
   "groups": [
     {
+      "name": "qiniu.config",
+      "type": "ink.whi.common.properties.QiniuConfigProperties",
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
+    },
+    {
       "name": "security.jwt",
-      "type": "ink.whi.common.config.JwtConfig",
-      "sourceType": "ink.whi.common.config.JwtConfig"
+      "type": "ink.whi.common.properties.JwtConfigProperties",
+      "sourceType": "ink.whi.common.properties.JwtConfigProperties"
     }
   ],
-  "properties": [],
+  "properties": [
+    {
+      "name": "qiniu.config.access-key",
+      "type": "java.lang.String",
+      "description": "accessKey",
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
+    },
+    {
+      "name": "qiniu.config.bucket",
+      "type": "java.lang.String",
+      "description": "Bucket",
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
+    },
+    {
+      "name": "qiniu.config.host",
+      "type": "java.lang.String",
+      "description": "外链域名",
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
+    },
+    {
+      "name": "qiniu.config.secret-key",
+      "type": "java.lang.String",
+      "description": "secretKey",
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
+    },
+    {
+      "name": "qiniu.config.type",
+      "type": "java.lang.String",
+      "description": "空间类型：公开\/私有",
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
+    },
+    {
+      "name": "qiniu.config.zone",
+      "type": "java.lang.String",
+      "description": "地域",
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
+    },
+    {
+      "name": "security.jwt.key",
+      "type": "java.lang.String",
+      "description": "密钥KEY",
+      "sourceType": "ink.whi.common.properties.JwtConfigProperties"
+    }
+  ],
   "hints": []
 }

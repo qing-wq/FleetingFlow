@@ -1,4 +1,4 @@
-package ink.whi.utils;
+package ink.whi.web.utils;
 
 import javax.servlet.http.Cookie;
 

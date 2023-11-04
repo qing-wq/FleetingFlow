@@ -5,7 +5,7 @@ import ink.whi.common.utils.JwtUtil;
 import ink.whi.common.model.ResVo;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.service.UserService;
-import ink.whi.utils.SessionUtil;
+import ink.whi.web.utils.SessionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static ink.whi.utils.SessionUtil.SESSION_KEY;
+import static ink.whi.web.utils.SessionUtil.SESSION_KEY;
 
 
 /**

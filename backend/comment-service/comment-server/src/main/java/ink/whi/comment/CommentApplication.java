@@ -1,6 +1,6 @@
 package ink.whi.comment;
 
-import ink.whi.comment.hook.interceptor.AuthorizeInterceptor;
+import ink.whi.web.hook.interceptor.AuthorizeInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

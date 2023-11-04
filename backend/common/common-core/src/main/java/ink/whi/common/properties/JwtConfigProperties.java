@@ -1,11 +1,16 @@
-package ink.whi.common.config;
+package ink.whi.common.properties;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+/**
+ * JWT配置
+ */
+@Data
+@Component
 @ConfigurationProperties(prefix = "security.jwt")
-public class JwtConfig {
+public class JwtConfigProperties {
 
 	/**
 	 * 密钥KEY
@@ -13,7 +18,6 @@ public class JwtConfig {
 	public static String key;
 
 	public void setKey(String secret) {
-		JwtConfig.key = secret;
+		JwtConfigProperties.key = secret;
 	}
-
 }

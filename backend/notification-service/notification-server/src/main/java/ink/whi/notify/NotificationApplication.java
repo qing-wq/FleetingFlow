@@ -1,12 +1,11 @@
 package ink.whi.notify;
 
-import ink.whi.notify.hook.interceptor.AuthorizeInterceptor;
+import ink.whi.web.hook.interceptor.AuthorizeInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
@@ -20,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Date: 2023/10/24
  */
 @EnableAsync
+@ServletComponentScan
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"ink.whi.video.client", "ink.whi.comment.client", "ink.whi.user.client"})

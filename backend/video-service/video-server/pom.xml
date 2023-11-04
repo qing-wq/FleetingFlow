@@ -38,12 +38,6 @@
 
         <dependency>
             <groupId>ink.whi</groupId>
-            <artifactId>common-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ink.whi</groupId>
             <artifactId>common-auth</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

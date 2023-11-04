@@ -1,16 +1,13 @@
-package ink.whi.common;
+package ink.whi.web;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author qing
  * @date 2023/11/4
  */
 @Configuration
-@ComponentScan("ink.whi.common")
-public class CoreAutoConfig {
-
+@ComponentScan("ink.whi.web")
+public class WebAutoConfig {
 }
