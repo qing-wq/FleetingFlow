@@ -46,9 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
                 return new CategoryDTO(categoryId, category.getCategoryName(), category.getRank());
             }
         });
-        // get platform
-        if (!System.getProperty("os.name").startsWith("Mac"))
-            refreshCache();  // 将数据放入缓存
+        refreshCache();  // 将数据放入缓存
     }
 
     /**

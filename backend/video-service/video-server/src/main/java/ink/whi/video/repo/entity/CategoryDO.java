@@ -1,5 +1,6 @@
 package ink.whi.video.repo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import ink.whi.common.model.base.BaseDO;
 import lombok.Data;
@@ -32,7 +33,11 @@ public class CategoryDO extends BaseDO {
     /**
      * 排序
      */
+    @TableField("`rank`")
     private Integer rank;
 
+    /**
+     * 0未删除 1 已删除
+     */
     private Integer deleted;
 }
