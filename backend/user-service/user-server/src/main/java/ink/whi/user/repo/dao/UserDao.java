@@ -48,9 +48,11 @@ public class UserDao extends ServiceImpl<UserInfoMapper, UserInfoDO> {
         return userMapper.selectById(userId);
     }
 
-    public UserDO getUserByName(String username) {
+    public UserDO getUserByNameOrEmail(String username) {
         LambdaQueryWrapper<UserDO> query = Wrappers.lambdaQuery();
         query.eq(UserDO::getUserName, username)
+                .or()
+                .eq(UserDO::getEmail, username)
                 .eq(UserDO::getDeleted, YesOrNoEnum.NO.getCode());
         return userMapper.selectOne(query);
     }

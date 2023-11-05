@@ -4,6 +4,7 @@ import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
+import ink.whi.video.dto.VideoInfoDTO;
 import lombok.Data;
 
 /**
@@ -20,7 +21,7 @@ public class UserHomeVo {
     /**
      * 视频列表
      */
-    private PageListVo<SimpleVideoInfoDTO> homeSelectList;
+    private PageListVo<VideoInfoDTO> homeSelectList;
 
     /**
      * 关注列表/粉丝列表

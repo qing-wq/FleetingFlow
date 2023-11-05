@@ -12,7 +12,7 @@ import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.properties.QiniuConfigProperties;
 import ink.whi.common.utils.JsonUtil;
-import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.service.QiNiuService;
 import ink.whi.video.utils.FileUtil;
 import ink.whi.video.utils.QiNiuUtil;

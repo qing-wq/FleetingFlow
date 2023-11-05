@@ -1,19 +1,22 @@
 package ink.whi.user.controller;
 
+import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.JwtUtil;
 import ink.whi.common.model.ResVo;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
+import ink.whi.user.model.req.UserSaveReq;
 import ink.whi.user.service.UserService;
+import ink.whi.user.service.help.LoginHelper;
+import ink.whi.web.auth.Permission;
+import ink.whi.web.auth.UserRole;
 import ink.whi.web.utils.SessionUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.nio.reactor.ssl.SSLIOSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static ink.whi.web.utils.SessionUtil.SESSION_KEY;
@@ -21,27 +24,31 @@ import static ink.whi.web.utils.SessionUtil.SESSION_KEY;
 
 /**
  * 登录接口
+ *
  * @author: qing
  * @Date: 2023/10/24
  */
 @RestController
-@RequestMapping(path = "login")
+@RequestMapping
 public class LoginRestController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private LoginHelper loginHelper;
+
     /**
      * 账号密码登录
-     * @param request
-     * @param response
+     *
+     * @param username 用户名/邮箱
+     * @param password
      * @return
      */
-    @PostMapping(path = {""})
-    public ResVo<BaseUserInfoDTO> login(HttpServletRequest request,
-                                    HttpServletResponse response) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    @PostMapping(path = "login")
+    public ResVo<BaseUserInfoDTO> login(@RequestParam(name = "username") String username,
+                                        @RequestParam(name = "password") String password,
+                                        HttpServletResponse response) {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "用户名或密码不能为空");
         }
@@ -58,13 +65,49 @@ public class LoginRestController {
 
     /**
      * 登出接口
+     *
      * @param response
      * @return
      */
-//    @Permission(role = UserRole.LOGIN)
     @GetMapping(path = "logout")
+    @Permission(role = UserRole.LOGIN)
     public ResVo<String> logout(HttpServletResponse response) {
         response.addCookie(SessionUtil.delCookie(SESSION_KEY));
         return ResVo.ok("ok");
+    }
+
+    /**
+     * 用户注册
+     *
+     * @param req
+     * @return
+     */
+    @PostMapping(path = "register")
+    public ResVo<Long> register(@Validated @RequestBody UserSaveReq req, HttpServletResponse response) {
+        if (StringUtils.isBlank(req.getUsername()) || StringUtils.isBlank(req.getPassword())) {
+            return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "账号密码不能为空");
+        }
+
+        loginHelper.verifyEmail(req.getEmail(), req.getCode());
+
+        Long userId = userService.saveUser(req);
+        // 签发token
+        String token = JwtUtil.createToken(userId);
+        if (StringUtils.isBlank(token)) {
+            return ResVo.fail(StatusEnum.TOKEN_NOT_EXISTS);
+        }
+        response.addCookie(SessionUtil.newCookie(SSLIOSession.SESSION_KEY, token));
+        return ResVo.ok(userId);
+    }
+
+    /**
+     * 获取验证码
+     *
+     * @return
+     */
+    @PostMapping(path = "code")
+    public ResVo<String> code(@RequestParam("email") String email) {
+        String code = loginHelper.subscribe(email);
+        return ResVo.ok(code);
     }
 }

@@ -27,7 +27,7 @@ public class GlobalInitHelper {
      */
     public Long initUserInfo(ServerHttpRequest request, ServerHttpResponse response) {
         MultiValueMap<String, HttpCookie> cookies = request.getCookies();
-        List<HttpCookie> token = cookies.get("token");
+        List<HttpCookie> token = cookies.get(SESSION_KEY);
         if (token == null) {
             return null;
         }

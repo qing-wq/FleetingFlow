@@ -1,6 +1,6 @@
 package ink.whi.video.service;
 
-import ink.whi.video.model.dto.VideoStatisticDTO;
+import ink.whi.video.dto.VideoStatisticDTO;
 
 /**
  * @author: qing

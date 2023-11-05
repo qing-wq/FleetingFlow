@@ -3,6 +3,7 @@ package ink.whi.user.repo.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import ink.whi.common.model.base.BaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serial;
@@ -12,6 +13,7 @@ import java.io.Serial;
  * @Date: 2023/10/16
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("user")
 public class UserDO extends BaseDO {
@@ -24,9 +26,14 @@ public class UserDO extends BaseDO {
     private String userName;
 
     /**
-     * 第三方用户ID（用于微信登录）
+     * 登录密码
      */
-    private String thirdAccountId;
+    private String password;
+
+    /**
+     * 邮箱
+     */
+    private String email;
 
     /**
      * 登录方式: 0-微信登录，1-账号密码登录
@@ -34,9 +41,9 @@ public class UserDO extends BaseDO {
     private Integer loginType;
 
     /**
-     * 登录密码
+     * 第三方用户ID（用于微信登录）
      */
-    private String password;
+    private String thirdAccountId;
 
     /**
      * 删除标记

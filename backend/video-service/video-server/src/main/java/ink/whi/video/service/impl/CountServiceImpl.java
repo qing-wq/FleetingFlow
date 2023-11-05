@@ -2,7 +2,7 @@ package ink.whi.video.service.impl;
 
 import ink.whi.cache.redis.RedisClient;
 import ink.whi.common.statistic.constants.CountConstants;
-import ink.whi.video.model.dto.VideoStatisticDTO;
+import ink.whi.video.dto.VideoStatisticDTO;
 import ink.whi.video.repo.dao.ReadCountDao;
 import ink.whi.video.repo.dao.VideoDao;
 import ink.whi.video.service.CountService;

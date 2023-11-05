@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ink.whi.video.repo.mapper.VideoTagMapper">
 
-    <select id="listVideoTagDetails" resultType="ink.whi.video.model.video.TagDTO">
+    <select id="listVideoTagDetails" resultType="ink.whi.video.dto.TagDTO">
         select v.tag_id as tagId, t.tag_name as tag
         from video_tag as v
                  left join tag as t on v.tag_id = t.id

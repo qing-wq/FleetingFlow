@@ -1,4 +1,4 @@
-package ink.whi.video.model.dto;
+package ink.whi.video.dto;
 
 import lombok.Data;
 

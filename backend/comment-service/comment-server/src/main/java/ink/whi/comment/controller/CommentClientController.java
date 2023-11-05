@@ -21,8 +21,13 @@ public class CommentClientController {
     @Autowired
     private CommentReadService commentReadService;
 
-    @GetMapping(path = "client/{commentId}")
+    @GetMapping(path = "comment/{commentId}")
     CommentDTO queryComment(@PathVariable Long commentId) {
         return commentReadService.queryComment(commentId);
+    }
+
+    @GetMapping(path = "video/{videoId}")
+    Integer queryCommentCount(@PathVariable Long videoId) {
+        return commentReadService.queryCommentCount(videoId);
     }
 }

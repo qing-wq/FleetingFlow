@@ -4,7 +4,7 @@ import ink.whi.common.model.ResVo;
 import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
-import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.service.CountService;
 import ink.whi.video.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class VideoClientRestController {
      * @return
      */
     @GetMapping(path = "user/{userId}")
-    PageListVo<SimpleVideoInfoDTO> listVideosByUserId(@PathVariable Long userId, PageParam pageParam) {
+    PageListVo<VideoInfoDTO> listVideosByUserId(@PathVariable Long userId, PageParam pageParam) {
         return videoService.queryUserVideoList(userId, pageParam);
     }
 }

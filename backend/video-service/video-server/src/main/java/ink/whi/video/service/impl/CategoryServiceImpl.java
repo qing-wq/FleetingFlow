@@ -4,7 +4,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import ink.whi.common.enums.YesOrNoEnum;
-import ink.whi.video.model.video.CategoryDTO;
+import ink.whi.video.dto.CategoryDTO;
 import ink.whi.video.repo.converter.VideoConverter;
 import ink.whi.video.repo.entity.CategoryDO;
 import ink.whi.video.repo.dao.CategoryDao;

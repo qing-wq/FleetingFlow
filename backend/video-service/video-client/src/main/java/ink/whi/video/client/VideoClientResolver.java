@@ -5,6 +5,7 @@ import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
+import ink.whi.video.dto.VideoInfoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class VideoClientResolver implements VideoClient{
     }
 
     @Override
-    public PageListVo<SimpleVideoInfoDTO> listVideosByUserId(Long userId, PageParam pageParam) {
+    public PageListVo<VideoInfoDTO> listVideosByUserId(Long userId, PageParam pageParam) {
         log.error("Video 服务异常：listVideosByUserId 请求失败");
         throw BusinessException.newInstance(StatusEnum.UNEXPECT_ERROR, " video-server 服务异常");
 //        return null;

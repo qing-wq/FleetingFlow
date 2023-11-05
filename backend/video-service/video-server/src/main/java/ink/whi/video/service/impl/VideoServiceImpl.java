@@ -4,6 +4,7 @@ import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.*;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
+import ink.whi.common.properties.QiniuConfigProperties;
 import ink.whi.web.auth.UserRole;
 import ink.whi.common.utils.NumUtil;
 import ink.whi.common.model.dto.BaseUserDTO;
@@ -14,9 +15,9 @@ import ink.whi.common.model.page.PageParam;
 import ink.whi.user.client.UserClient;
 import ink.whi.cache.redis.RedisClient;
 import ink.whi.common.statistic.constants.SettingsConstant;
-import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.model.req.VideoPostReq;
-import ink.whi.video.model.video.TagDTO;
+import ink.whi.video.dto.TagDTO;
 import ink.whi.video.repo.converter.VideoConverter;
 import ink.whi.video.repo.dao.VideoDao;
 import ink.whi.video.repo.dao.VideoTagDao;
@@ -27,7 +28,9 @@ import ink.whi.video.service.VideoService;
 import ink.whi.video.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -57,6 +60,11 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private QiNiuService qiNiuService;
 
+    @Autowired
+    private QiniuConfigProperties config;
+
+    @Autowired
+    private TransactionTemplate transactionTemplate;
 
     @Override
     public VideoInfoDTO queryBaseVideoInfo(Long videoId) {
@@ -108,9 +116,8 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, PageParam pageParam) {
         List<VideoDO> list = videoDao.listVideosByCategory(categoryId, pageParam);
-        String domain = "s3anmft1h.hn-bkt.clouddn.com/";
         list.forEach(s -> {
-            s.setUrl(domain + s.getUrl());
+            s.setUrl(config.buildUrl(s.getUrl()));
         });
         return buildVideoListVo(list, pageParam.getPageSize());
     }
@@ -128,10 +135,9 @@ public class VideoServiceImpl implements VideoService {
      * @return
      */
     @Override
-    public PageListVo<SimpleVideoInfoDTO> queryUserVideoList(Long userId, PageParam pageParam) {
+    public PageListVo<VideoInfoDTO> queryUserVideoList(Long userId, PageParam pageParam) {
         List<VideoDO> videos = videoDao.listVideoByUserId(userId, pageParam);
-        List<SimpleVideoInfoDTO> result = VideoConverter.toSimpleVideoDTOList(videos);
-        return PageListVo.newVo(result, pageParam.getPageSize());
+        return buildVideoListVo(videos, pageParam.getPageSize());
     }
 
     /**
@@ -142,31 +148,35 @@ public class VideoServiceImpl implements VideoService {
      * @throws IOException
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
     public Long upload(VideoPostReq videoPostReq) throws IOException {
         String key = qiNiuService.upload(videoPostReq.getFile());
         long size = videoPostReq.getFile().getSize();
         String format = FileUtil.getExtensionName(videoPostReq.getFile().getOriginalFilename());
-        // fixme: 临时测试
-//        Long userId = ReqInfoContext.getReqInfo().getUserId();
-        VideoDO video = VideoConverter.toDo(videoPostReq, videoPostReq.getUserId());
+
+        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        VideoDO video = VideoConverter.toDo(videoPostReq, userId);
         video.setFormat(format);
         video.setSize(FileUtil.getSize(size));
         video.setUrl(key);
-        // todo: 获取视频编码格式、分辨率
 
-        //  video + video_tag + video_resource
-        if (!NumUtil.upZero(videoPostReq.getVideoId())) {
-            return insertVideo(video, videoPostReq.getTagIds());
-        } else {
-            // 更新视频信息
-            VideoDO record = videoDao.getById(video.getId());
-            if (!Objects.equals(record.getUserId(), video.getUserId())) {
-                throw BusinessException.newInstance(StatusEnum.FORBID_ERROR);
+        return transactionTemplate.execute(new TransactionCallback<Long>() {
+            @Override
+            public Long doInTransaction(TransactionStatus status) {
+                //  video + video_tag + video_resource
+                if (!NumUtil.upZero(videoPostReq.getVideoId())) {
+                    return insertVideo(video, videoPostReq.getTagIds());
+                } else {
+                    // 更新视频信息
+                    VideoDO record = videoDao.getById(video.getId());
+                    if (!Objects.equals(record.getUserId(), video.getUserId())) {
+                        throw BusinessException.newInstance(StatusEnum.FORBID_ERROR);
+                    }
+                    updateVideo(video, videoPostReq.getTagIds());
+                    return video.getId();
+                }
             }
-            updateVideo(video, videoPostReq.getTagIds());
-            return video.getId();
-        }
+        });
     }
 
     private Long insertVideo(VideoDO video, Set<Long> tagIds) {

@@ -2,9 +2,9 @@ package ink.whi.comment.service.Impl;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 
-import ink.whi.comment.model.dto.BaseCommentDTO;
-import ink.whi.comment.model.dto.SubCommentDTO;
-import ink.whi.comment.model.dto.TopCommentDTO;
+import ink.whi.comment.dto.BaseCommentDTO;
+import ink.whi.comment.dto.SubCommentDTO;
+import ink.whi.comment.dto.TopCommentDTO;
 import ink.whi.comment.repo.converter.CommentConverter;
 import ink.whi.comment.repo.dao.CommentDao;
 import ink.whi.comment.repo.entity.CommentDO;

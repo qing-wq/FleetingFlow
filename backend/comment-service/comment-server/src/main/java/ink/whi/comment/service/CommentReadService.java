@@ -1,12 +1,10 @@
 package ink.whi.comment.service;
 
 
-import ink.whi.comment.model.dto.TopCommentDTO;
+import ink.whi.comment.dto.TopCommentDTO;
 import ink.whi.common.model.dto.CommentDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
-
-import java.util.List;
 
 /**
  * 评论读接口

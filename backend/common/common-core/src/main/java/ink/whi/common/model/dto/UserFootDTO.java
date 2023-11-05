@@ -1,9 +1,6 @@
 package ink.whi.common.model.dto;
 
-import ink.whi.common.model.base.BaseDTO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import java.io.Serial;
 import java.io.Serializable;
 

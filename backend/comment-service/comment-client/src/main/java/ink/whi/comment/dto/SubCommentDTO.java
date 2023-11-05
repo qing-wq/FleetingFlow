@@ -1,4 +1,4 @@
-package ink.whi.comment.model.dto;
+package ink.whi.comment.dto;
 
 import lombok.Data;
 import lombok.ToString;

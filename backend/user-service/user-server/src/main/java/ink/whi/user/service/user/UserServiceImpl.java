@@ -17,7 +17,6 @@ import ink.whi.user.repo.entity.UserDO;
 import ink.whi.user.repo.entity.UserInfoDO;
 import ink.whi.user.repo.entity.UserRelationDO;
 import ink.whi.user.service.CountReadService;
-import ink.whi.user.service.CountService;
 import ink.whi.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -53,12 +52,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BaseUserInfoDTO passwordLogin(String username, String password) {
-        UserDO user = userDao.getUserByName(username);
+        UserDO user = userDao.getUserByNameOrEmail(username);
         if (user == null) {
             throw BusinessException.newInstance(StatusEnum.USER_NOT_EXISTS, username);
         }
 
-        // 密码加密
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw BusinessException.newInstance(StatusEnum.USER_PWD_ERROR);
         }
@@ -118,7 +116,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     public Long saveUser(UserSaveReq req) {
         UserDO user = UserConverter.toUserDo(req);
-        UserDO record = userDao.getUserByName(user.getUserName());
+        UserDO record = userDao.getUserByNameOrEmail(user.getUserName());
         if (record != null) {
             throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "用户已存在");
         }

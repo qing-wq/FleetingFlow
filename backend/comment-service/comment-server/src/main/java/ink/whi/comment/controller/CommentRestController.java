@@ -1,6 +1,6 @@
 package ink.whi.comment.controller;
 
-import ink.whi.comment.model.dto.TopCommentDTO;
+import ink.whi.comment.dto.TopCommentDTO;
 import ink.whi.comment.model.req.CommentSaveReq;
 import ink.whi.comment.service.CommentReadService;
 import ink.whi.comment.service.CommentWriteService;
@@ -91,7 +91,7 @@ public class CommentRestController extends BaseRestController {
      * @param operateType 2-点赞 4-取消点赞
      * @return
      */
-//    @Permission(role = UserRole.LOGIN)
+    @Permission(role = UserRole.LOGIN)
     @GetMapping(path = "favor")
     public ResVo<String> favor(@RequestParam(name = "commentId") Long commentId,
                                @RequestParam(name = "type") Integer operateType) {

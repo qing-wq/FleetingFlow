@@ -1,6 +1,8 @@
 package ink.whi.video.controller;
 
+import ink.whi.comment.client.CommentClient;
 import ink.whi.common.base.BaseRestController;
+import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.JsonUtil;
 import ink.whi.common.utils.NumUtil;
@@ -8,7 +10,7 @@ import ink.whi.common.model.ResVo;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.user.client.UserClient;
-import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.vo.VideoDetailVO;
 import ink.whi.video.service.QiNiuService;
@@ -42,6 +44,9 @@ public class VideoRestController extends BaseRestController {
     @Autowired
     private QiNiuService qiNiuService;
 
+    @Resource
+    private CommentClient commentClient;
+
     /**
      * 视频详情页
      *
@@ -56,12 +61,12 @@ public class VideoRestController extends BaseRestController {
         VideoDetailVO vo = new VideoDetailVO();
 
         // 视频详情
-        // todo: ThreadLocal管理
-//        Long readUser = ReqInfoContext.getReqInfo().getUserId();
-        VideoInfoDTO video = videoService.queryTotalVideoInfo(videoId, null);
+        Long readUser = ReqInfoContext.getReqInfo().getUserId();
+        VideoInfoDTO video = videoService.queryTotalVideoInfo(videoId, readUser);
         vo.setVideo(video);
 
-        // todo：评论信息
+        // fixme 评论信息
+        commentClient.listVideoComment(videoId, PageParam.newPageInstance());
 
         // 作者信息
         vo.setAuthor(userClient.querySimpleUserInfo(video.getUserId()));
@@ -142,5 +147,25 @@ public class VideoRestController extends BaseRestController {
     public ResVo<String> uploadImage(MultipartFile file) throws IOException {
         String key = qiNiuService.uploadImage(file);
         return ResVo.ok(key);
+    }
+
+    /**
+     * 视频分享
+     * @param videoId
+     * @return
+     */
+    @GetMapping("share/{videoId}")
+    public ResVo<String> share(@PathVariable Long videoId) {
+        return null;
+    }
+
+    @GetMapping(path = "")
+    public ResVo<String> delete() {
+
+        return null;
+    }
+
+    public ResVo<String> score() {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package ink.whi.common.properties;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

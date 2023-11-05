@@ -7,10 +7,10 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 10.60.102.53:8848
+        server-addr: 10.60.98.242:8848
         file-extension: yml
       discovery:
-        server-addr: 10.60.102.53:8848
+        server-addr: 10.60.98.242:8848
 
     gateway:
       routes:
@@ -48,7 +48,7 @@ spring:
             maxAge: 360000 # 本次跨域检查的有效期
 
   zipkin:
-    base-url: http://10.60.102.53:9411/
+    base-url: http://10.60.98.242:9411/
     discovery-client-enabled: false   # 禁用服务发现客户端
     sender: rabbit
     compression:

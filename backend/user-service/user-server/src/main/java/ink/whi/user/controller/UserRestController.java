@@ -4,29 +4,26 @@ import ink.whi.common.base.BaseRestController;
 import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.FollowTypeEnum;
 import ink.whi.common.enums.HomeSelectEnum;
-import ink.whi.common.exception.StatusEnum;
+import ink.whi.user.model.dto.BaseUserInfoDTO;
+import ink.whi.video.client.VideoClient;
+import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.web.auth.Permission;
 import ink.whi.web.auth.UserRole;
-import ink.whi.common.utils.JwtUtil;
 import ink.whi.common.model.ResVo;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.req.UserInfoSaveReq;
-import ink.whi.user.model.req.UserSaveReq;
 import ink.whi.user.model.vo.UserHomeVo;
 import ink.whi.user.service.UserRelationService;
 import ink.whi.user.service.UserService;
-import ink.whi.web.utils.SessionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.annotation.Resource;
 import java.util.Objects;
-
-import static org.apache.http.nio.reactor.ssl.SSLIOSession.SESSION_KEY;
 
 
 /**
@@ -42,9 +39,11 @@ public class UserRestController extends BaseRestController {
     @Autowired
     private UserService userService;
 
-
     @Autowired
     private UserRelationService userRelationService;
+
+    @Resource
+    private VideoClient videoClient;
 
     /**
      * 用户主页接口
@@ -56,10 +55,17 @@ public class UserRestController extends BaseRestController {
     @GetMapping(path = "/{userId}")
     public ResVo<UserHomeVo> getUserHome(@PathVariable(name = "userId", required = false) Long userId,
                                          @RequestParam(name = "homeSelectType", required = false) String homeSelectType) {
-        UserHomeVo vo = initUserHomeVo(userId, homeSelectType, PageParam.newPageInstance());
+        PageParam pageParam = PageParam.newPageInstance();
+        UserHomeVo vo = initUserHomeVo(userId, homeSelectType, pageParam);
 
+        // 用户信息
         UserStatisticInfoDTO userInfo = userService.queryUserInfoWithStatistic(userId);
         vo.setUserHome(userInfo);
+
+        // 视频列表
+        PageListVo<VideoInfoDTO> videos = videoClient.listVideosByUserId(userId, pageParam);
+        vo.setHomeSelectList(videos);
+
         return ResVo.ok(vo);
     }
 
@@ -149,27 +155,19 @@ public class UserRestController extends BaseRestController {
         return ResVo.ok(followList);
     }
 
+
     /**
-     * 用户注册
+     * 获取用户信息
      *
-     * @param req
      * @return
      */
-    @PostMapping(path = "register")
-    public ResVo<Long> register(@RequestBody UserSaveReq req, HttpServletResponse response) {
-        if (StringUtils.isBlank(req.getUsername()) || StringUtils.isBlank(req.getPassword())) {
-            return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "账号密码不能为空");
-        }
-        Long userId = userService.saveUser(req);
-        // 签发token
-        String token = JwtUtil.createToken(userId);
-        if (StringUtils.isBlank(token)) {
-            return ResVo.fail(StatusEnum.TOKEN_NOT_EXISTS);
-        }
-        response.addCookie(SessionUtil.newCookie(SESSION_KEY, token));
-        return ResVo.ok(userId);
+    @GetMapping("info")
+    @Permission(role = UserRole.LOGIN)
+    public ResVo<BaseUserInfoDTO> info() {
+        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        BaseUserInfoDTO info = userService.queryBasicUserInfo(userId);
+        return ResVo.ok(info);
     }
-
 
     /**
      * 保存用户信息

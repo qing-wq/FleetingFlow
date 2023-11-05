@@ -1,6 +1,9 @@
 package ink.whi.comment.client;
 
+import ink.whi.comment.dto.TopCommentDTO;
 import ink.whi.common.model.dto.CommentDTO;
+import ink.whi.common.model.page.PageListVo;
+import ink.whi.common.model.page.PageParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +24,12 @@ public class CommentClientResolver implements CommentClient {
 	@Override
 	public Integer queryCommentCount(Long videoId) {
 		log.error("Comment 服务异常：queryCommentCount 请求失败");
+		return null;
+	}
+
+	@Override
+	public PageListVo<TopCommentDTO> listVideoComment(Long videoId, PageParam pageParam) {
+		log.error("Comment 服务异常：listVideoComment 请求失败");
 		return null;
 	}
 }

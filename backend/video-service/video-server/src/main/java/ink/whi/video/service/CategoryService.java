@@ -1,6 +1,6 @@
 package ink.whi.video.service;
 
-import ink.whi.video.model.video.CategoryDTO;
+import ink.whi.video.dto.CategoryDTO;
 
 import java.util.List;
 

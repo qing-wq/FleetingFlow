@@ -1,8 +1,8 @@
 package ink.whi.video.model.vo;
 
+import ink.whi.comment.dto.TopCommentDTO;
 import ink.whi.common.model.dto.SimpleUserInfoDTO;
-import ink.whi.video.model.dto.TopCommentDTO;
-import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.dto.VideoInfoDTO;
 import lombok.Data;
 
 import java.util.List;

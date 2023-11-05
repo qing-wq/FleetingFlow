@@ -1,4 +1,4 @@
-package ink.whi.video.model.video;
+package ink.whi.video.dto;
 
 import ink.whi.common.enums.PushStatusEnum;
 import lombok.AllArgsConstructor;

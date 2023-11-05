@@ -1,6 +1,6 @@
 package ink.whi.video.service;
 
-import ink.whi.video.model.dto.VideoInfoDTO;
+import ink.whi.video.dto.VideoInfoDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

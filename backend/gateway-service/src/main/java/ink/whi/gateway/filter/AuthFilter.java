@@ -48,8 +48,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
         try {
             Long userId = initReqInfo(request, response);
-            // fixme: 临时测试
-            userId = 1L;
             if (userId != null) {
                 // 将用户id放到request header中，传递用户信息
                 ServerHttpRequest build = request.mutate().header("user-id", userId.toString()).build();
