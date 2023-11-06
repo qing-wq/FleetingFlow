@@ -14,12 +14,10 @@ import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.model.req.InteractionReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.vo.VideoDetailVO;
-import ink.whi.video.repo.entity.Score;
 import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.ScoreService;
 import ink.whi.video.service.VideoService;
 import ink.whi.video.utils.AIUtil;
-import ink.whi.video.utils.UserInteractionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +72,7 @@ public class VideoRestController extends BaseRestController {
         VideoInfoDTO video = videoService.queryTotalVideoInfo(videoId, readUser);
         vo.setVideo(video);
 
-        // fixme 评论信息
+        // 评论信息
         PageParam pageParam = PageParam.newPageInstance();
         commentClient.listVideoComment(videoId, pageParam.getPageNum(), pageParam.getPageSize());
 
@@ -169,9 +167,12 @@ public class VideoRestController extends BaseRestController {
         return null;
     }
 
-    @GetMapping(path = "")
-    public ResVo<String> delete() {
-
+    /**
+     * 视频删除
+     * @return
+     */
+    @GetMapping(path = "del/{videoId}")
+    public ResVo<String> delete(@PathVariable Long videoId) {
         return null;
     }
 
@@ -190,7 +191,7 @@ public class VideoRestController extends BaseRestController {
 
         try {
             System.out.println(AIUtil.getCategoryByTitle("狗狗被猫咪欺负了#萌宠 #狗狗 #金太阳原创"));
-            System.out.println(AIUtil.getVideoRecommandResults(3L, 3L));
+            System.out.println(AIUtil.getVideoRecommendResults(3L, 3L));
         } catch (JSONException e) {
             e.printStackTrace();
         }

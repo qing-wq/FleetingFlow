@@ -9,6 +9,7 @@ import ink.whi.video.search.service.VideoSearchService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanMap;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,8 @@ public class VideoSearchServiceImpl implements VideoSearchService {
     @Override
     public PageListVo<VideoDoc> searchVideo(String searchKey, PageParam pageParam) {
         log.debug("searchQuery:{}", searchKey);
-        SearchPage<VideoDoc> searchPage = videoSearchRepository.findByDescriptiveContent(searchKey, pageParam);
+        SearchPage<VideoDoc> searchPage = videoSearchRepository.findByDescriptiveContent(searchKey,
+                PageRequest.of((int) (pageParam.getPageNum() - 1), (int) pageParam.getPageSize()));
         log.debug("result number:{}", searchPage.getTotalElements());
         // 数据解析
         List<SearchHit<VideoDoc>> searchHitList = searchPage.getContent();

@@ -52,7 +52,7 @@ public class VideoDoc {
 	/**
 	 * 状态：0-未发布,1-已发布,2-待审核
 	 */
-	@Field(type = FieldType.Integer)
+	@Field(type = FieldType.Integer, index = false)
 	Integer status;
 
 	/**

@@ -5,9 +5,8 @@ import ink.whi.common.enums.*;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.properties.QiniuConfigProperties;
-import ink.whi.web.auth.UserRole;
+import ink.whi.video.service.CountReadService;
 import ink.whi.common.utils.NumUtil;
-import ink.whi.common.model.dto.BaseUserDTO;
 import ink.whi.common.model.dto.UserFootDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
@@ -53,6 +52,9 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private CountService countService;
 
+    @Autowired
+    private CountReadService countReadService;
+
     @Resource
     private UserClient userClient;
 
@@ -70,6 +72,12 @@ public class VideoServiceImpl implements VideoService {
         return videoDao.getVideoInfoById(videoId);
     }
 
+    /**
+     * video + tag + interact + count
+     * @param videoId
+     * @param readUser
+     * @return
+     */
     @Override
     public VideoInfoDTO queryTotalVideoInfo(Long videoId, Long readUser) {
         VideoInfoDTO video = queryDetailVideoInfo(videoId);
@@ -78,24 +86,18 @@ public class VideoServiceImpl implements VideoService {
         countService.incrVideoViewCount(videoId, video.getUserId());
 
         // 用户交互信息
-        if (readUser != null) {
-            UserFootDTO foot  = userClient.saveUserFoot(VideoTypeEnum.VIDEO, videoId,
-                    video.getUserId(), readUser, OperateTypeEnum.READ);
-            video.setPraised(Objects.equals(foot.getPraiseStat(), PraiseStatEnum.PRAISE.getCode()));
-            video.setFollowed(Objects.equals(foot.getCommentStat(), CommentStatEnum.COMMENT.getCode()));
-            video.setCollected(Objects.equals(foot.getCollectionStat(), CollectionStatEnum.COLLECTION.getCode()));
-        } else {
-            // 未登录，全部设置为未处理
-            video.setPraised(false);
-            video.setFollowed(false);
-            video.setCollected(false);
-        }
+        setUserInteract(video, readUser, videoId);
 
         // 视频计数
-        video.setCount(countService.queryVideoStatisticInfo(videoId));
+        video.setCount(countReadService.queryVideoStatisticInfo(videoId));
         return video;
     }
 
+    /**
+     * video + tag
+     * @param videoId
+     * @return
+     */
     @Override
     public VideoInfoDTO queryDetailVideoInfo(Long videoId) {
         VideoInfoDTO video = videoDao.getVideoInfoById(videoId);
@@ -179,8 +181,8 @@ public class VideoServiceImpl implements VideoService {
     }
 
     private Long insertVideo(VideoDO video, Set<Long> tagIds) {
-        // 是否开启审核
-        video.setStatus(review() ? PushStatusEnum.REVIEW.getCode() : PushStatusEnum.ONLINE.getCode());
+        // fixme 是否开启审核
+        video.setStatus(PushStatusEnum.ONLINE.getCode());
         videoDao.save(video);
         Long videoId = video.getId();
 
@@ -209,6 +211,7 @@ public class VideoServiceImpl implements VideoService {
 
     /**
      * 补全视频的计数、分类、标签、视频资源列表等信息
+     * video + tag + count + user + interact
      *
      * @param record
      * @return
@@ -220,9 +223,30 @@ public class VideoServiceImpl implements VideoService {
         // 标签
         dto.setTags(videoDao.listTagsDetail(videoId));
         // 阅读计数统计
-        dto.setCount(countService.queryVideoStatisticInfo(videoId));
+        dto.setCount(countReadService.queryVideoStatisticInfo(videoId));
+        // 用户信息
+        dto.setAuthor(userClient.querySimpleUserInfo(record.getUserId()));
+        // 用户交互信息
+        Long readUser = ReqInfoContext.getReqInfo().getUserId();
+        setUserInteract(dto, readUser, record.getId());
         return dto;
     }
+
+    private void setUserInteract(VideoInfoDTO dto, Long readUser, Long videoId) {
+        if (readUser != null) {
+            UserFootDTO foot  = userClient.saveUserFoot(VideoTypeEnum.VIDEO.getCode(), videoId,
+                    dto.getUserId(), readUser, OperateTypeEnum.READ.getCode());
+            dto.setPraised(Objects.equals(foot.getPraiseStat(), PraiseStatEnum.PRAISE.getCode()));
+            dto.setFollowed(Objects.equals(foot.getCommentStat(), CommentStatEnum.COMMENT.getCode()));
+            dto.setCollected(Objects.equals(foot.getCollectionStat(), CollectionStatEnum.COLLECTION.getCode()));
+        } else {
+            // 未登录，全部设置为未处理
+            dto.setPraised(false);
+            dto.setFollowed(false);
+            dto.setCollected(false);
+        }
+    }
+
 
     public static boolean showContent(VideoInfoDTO video) {
         // 只能查看已上线的视频

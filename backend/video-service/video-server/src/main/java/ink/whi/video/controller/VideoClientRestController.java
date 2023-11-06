@@ -1,6 +1,5 @@
 package ink.whi.video.controller;
 
-import ink.whi.common.model.ResVo;
 import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
@@ -9,9 +8,6 @@ import ink.whi.video.service.CountService;
 import ink.whi.video.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 /**
  * 视频远程调用接口
@@ -38,7 +34,7 @@ public class VideoClientRestController {
         VideoInfoDTO video = videoService.queryBaseVideoInfo(videoId);
         SimpleVideoInfoDTO dto = new SimpleVideoInfoDTO();
         dto.setVideoId(videoId);
-        dto.setUserId(video.getUserId());
+        dto.setAuthorId(video.getUserId());
         dto.setUrl(video.getUrl());
         dto.setStatus(video.getStatus());
         return dto;
