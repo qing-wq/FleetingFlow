@@ -22,7 +22,7 @@ public class SimpleVideoInfoDTO implements Serializable {
     /**
      * 作者id
      */
-    private Long userId;
+    private Long authorId;
 
     /**
      * 视频头图

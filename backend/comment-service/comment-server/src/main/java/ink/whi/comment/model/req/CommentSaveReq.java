@@ -20,7 +20,7 @@ public class CommentSaveReq {
     private Long videoId;
 
     /**
-     * 用户ID
+     * 用户ID(非必须)
      */
     private Long userId;
 

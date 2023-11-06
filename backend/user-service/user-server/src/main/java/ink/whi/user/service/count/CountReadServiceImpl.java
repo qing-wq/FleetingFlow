@@ -22,8 +22,7 @@ public class CountReadServiceImpl implements CountReadService {
      */
     @Override
     public UserStatisticInfoDTO queryUserStatisticInfo(Long userId) {
-        String key = CountConstants.USER_STATISTIC + userId;
-        Map<String, Integer> resutMap = RedisClient.hGetAll(key, Integer.class);
+        Map<String, Integer> resutMap = RedisClient.hGetAll(CountConstants.USER_STATISTIC + userId, Integer.class);
         UserStatisticInfoDTO dto = new UserStatisticInfoDTO();
         dto.setFollowCount(resutMap.get(CountConstants.FOLLOW_COUNT));
         dto.setFansCount(resutMap.get(CountConstants.FANS_COUNT));

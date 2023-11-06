@@ -1,5 +1,6 @@
 package ink.whi.user.controller;
 
+import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
@@ -11,6 +12,8 @@ import ink.whi.user.repo.entity.UserFootDO;
 import ink.whi.user.service.CountService;
 import ink.whi.user.service.UserFootService;
 import ink.whi.user.service.UserService;
+import ink.whi.web.auth.Permission;
+import ink.whi.web.auth.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,10 +46,13 @@ public class UserClientRestController {
      * @param operate   OperateTypeEnum
      * @return
      */
-    @PostMapping(path = "foot/user")
-    public UserFootDTO saveUserFoot(@RequestParam VideoTypeEnum videoType, @RequestParam Long videoId,
-                                    @RequestParam Long author, @RequestParam Long userId, @RequestParam OperateTypeEnum operate) {
-        UserFootDO foot = userFootService.saveOrUpdateUserFoot(videoType, videoId, author, userId, operate);
+    @GetMapping(path = "foot/user")
+    @Permission(role = UserRole.LOGIN)
+    public UserFootDTO saveUserFoot(@RequestParam Integer videoType, @RequestParam Long videoId,
+                                    @RequestParam Long author, @RequestParam Long userId, @RequestParam Integer operate) {
+        VideoTypeEnum videoEnum = VideoTypeEnum.formCode(videoType);
+        OperateTypeEnum operateEnum = OperateTypeEnum.fromCode(operate);
+        UserFootDO foot = userFootService.saveOrUpdateUserFoot(videoEnum, videoId, author, userId, operateEnum);
         return UserConverter.toDTO(foot);
     }
 
@@ -97,5 +103,4 @@ public class UserClientRestController {
     public Integer queryCommentPraiseCount(@PathVariable Long commentId){
         return countService.queryCommentPraiseCount(commentId);
     }
-
 }

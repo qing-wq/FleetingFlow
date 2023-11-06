@@ -14,7 +14,5 @@ public interface CountService {
      */
     void incrVideoViewCount(Long videoId, Long authorId);
 
-    VideoStatisticDTO queryVideoStatisticInfo(Long videoId);
-
     Integer countVideoByUserId(Long userId);
 }

@@ -12,6 +12,7 @@ import ink.whi.notify.constants.VideoMqConstants;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.req.UserRelationReq;
 import ink.whi.user.repo.entity.UserFootDO;
+import ink.whi.user.service.CountService;
 import ink.whi.user.service.UserFootService;
 import ink.whi.user.service.UserRelationService;
 import ink.whi.user.service.UserService;
@@ -49,6 +50,9 @@ public class UserInteractionController extends BaseRestController {
     private UserRelationService userRelationService;
 
     @Autowired
+    private CountService countService;
+
+    @Autowired
     private RabbitTemplate rabbitTemplate;
 
     /**
@@ -58,7 +62,7 @@ public class UserInteractionController extends BaseRestController {
      * @param operateType 2-点赞 3-收藏 4-取消点赞 5-取消收藏
      * @return
      */
-//    @Permission(role = UserRole.LOGIN)
+    @Permission(role = UserRole.LOGIN)
     @GetMapping(path = "favor")
     public ResVo<Boolean> favor(@RequestParam(name = "videoId") Long videoId,
                                 @RequestParam(name = "operate") Integer operateType) {
@@ -68,8 +72,12 @@ public class UserInteractionController extends BaseRestController {
         }
 
         SimpleVideoInfoDTO video = videoClient.queryBasicVideoInfo(videoId);
+        if (video == null) {
+            return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "视频不存在");
+        }
 
-        UserFootDO foot = userFootService.saveOrUpdateUserFoot(VideoTypeEnum.VIDEO, videoId, video.getUserId(),
+        countService.incrVideoStatisticCount(videoId, video.getAuthorId(), type);
+        UserFootDO foot = userFootService.saveOrUpdateUserFoot(VideoTypeEnum.VIDEO, videoId, video.getAuthorId(),
                 ReqInfoContext.getReqInfo().getUserId(), type);
 
         // 消息通知

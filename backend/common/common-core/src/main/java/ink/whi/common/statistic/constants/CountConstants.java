@@ -11,7 +11,7 @@ public interface CountConstants {
     /**
      * 用户相关统计信息
      *
-     * key: user_statistic_$userId
+     * key: user_statistic_${userId}
      * field:
      *  -  followCount: 关注数
      *  -  fansCount: 粉丝数

@@ -2,6 +2,7 @@ package ink.whi.user.service.count;
 
 import ink.whi.cache.redis.RedisClient;
 import ink.whi.comment.client.CommentClient;
+import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.statistic.constants.CountConstants;
 import ink.whi.common.utils.MapUtils;
 import ink.whi.user.model.dto.VideoFootCountDTO;
@@ -45,22 +46,6 @@ public class CountServiceImpl implements CountService {
         this.userRelationDao = userRelationDao;
     }
 
-    @Override
-    public VideoFootCountDTO queryVideoCountInfoByUserId(Long userId) {
-        return userFootDao.countVideoStatisticByUserId(userId);
-    }
-
-    @Override
-    public VideoFootCountDTO queryVideoCountInfoByVideoId(Long videoId) {
-        VideoFootCountDTO res = userFootDao.countVideoStatisticByVideoId(videoId);
-        if (res == null) {
-            res = new VideoFootCountDTO();
-        } else {
-            res.setCommentCount(commentClient.queryCommentCount(videoId));
-        }
-        return res;
-    }
-
     /**
      * 获取评论点赞数量
      *
@@ -70,6 +55,34 @@ public class CountServiceImpl implements CountService {
     @Override
     public Integer queryCommentPraiseCount(Long commentId) {
         return userFootDao.countCommentPraise(commentId);
+    }
+
+    /**
+     * videoPraiseCount +1
+     *
+     * @param videoId
+     * @param authorId
+     */
+    public void incrVideoStatisticCountByType(Long videoId, Long authorId, String constant, Integer cnt) {
+        // todo: 计数信息落到MySQL中
+        // redis计数信息 +1
+        RedisClient.pipelineAction()
+                .add(CountConstants.VIDEO_STATISTIC + videoId, constant,
+                        (connection, key, value) -> connection.hIncrBy(key, value, cnt))
+                .add(CountConstants.USER_STATISTIC + authorId, constant,
+                        (connection, key, value) -> connection.hIncrBy(key, value, cnt))
+                .execute();
+    }
+
+    @Override
+    public void incrVideoStatisticCount(Long videoId, Long authorId, OperateTypeEnum type) {
+        switch (type) {
+            case PRAISE -> incrVideoStatisticCountByType(videoId, authorId, CountConstants.PRAISE_COUNT, 1);
+            case CANCEL_PRAISE -> incrVideoStatisticCountByType(videoId, authorId, CountConstants.PRAISE_COUNT, -1);
+            case COLLECTION -> incrVideoStatisticCountByType(videoId, authorId, CountConstants.COLLECTION_COUNT, 1);
+            case CANCEL_COLLECTION ->
+                    incrVideoStatisticCountByType(videoId, authorId, CountConstants.COLLECTION_COUNT, -1);
+        }
     }
 
     /**

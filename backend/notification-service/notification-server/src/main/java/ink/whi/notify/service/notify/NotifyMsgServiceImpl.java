@@ -97,7 +97,7 @@ public class NotifyMsgServiceImpl implements NotifyMsgService {
     @Override
     public void saveCommentNotify(CommentDTO comment) {
         SimpleVideoInfoDTO video = videoClient.queryBasicVideoInfo(comment.getVideoId());
-        notifyMsgDao.saveCommentNotify(comment, video.getUserId());
+        notifyMsgDao.saveCommentNotify(comment, video.getAuthorId());
     }
 
     /**

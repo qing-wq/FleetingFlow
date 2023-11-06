@@ -30,7 +30,7 @@ public class UserClientResolver implements UserClient {
 	}
 
 	@Override
-	public UserFootDTO saveUserFoot(VideoTypeEnum videoType, Long videoId, Long author, Long userId, OperateTypeEnum operate) {
+	public UserFootDTO saveUserFoot(Integer videoType, Long videoId, Long author, Long userId, Integer operate) {
 		log.error("User 服务异常：saveUserFoot 请求失败");
 		return null;
 	}

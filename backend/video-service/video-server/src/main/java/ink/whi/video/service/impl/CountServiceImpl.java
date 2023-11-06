@@ -38,23 +38,6 @@ public class CountServiceImpl implements CountService {
     }
 
     /**
-     * 获取视频全部计数信息
-     * @param videoId
-     * @return
-     */
-    @Override
-    public VideoStatisticDTO queryVideoStatisticInfo(Long videoId) {
-        Map<String, Integer> ans = RedisClient.hGetAll(CountConstants.USER_STATISTIC + videoId, Integer.class);
-        VideoStatisticDTO info = new VideoStatisticDTO();
-        info.setForwardCount(ans.getOrDefault(CountConstants.FORWARD_COUNT, 0));
-        info.setPraiseCount(ans.getOrDefault(CountConstants.PRAISE_COUNT, 0));
-        info.setCollectionCount(ans.getOrDefault(CountConstants.COLLECTION_COUNT, 0));
-        info.setViewCount(ans.getOrDefault(CountConstants.VIEW_COUNT, 0));
-        info.setForwardCount(ans.getOrDefault(CountConstants.FANS_COUNT, 0));
-        return info;
-    }
-
-    /**
      * 获取用户已发布视频数
      * @param userId 用户ID
      * @return 已发布视频数

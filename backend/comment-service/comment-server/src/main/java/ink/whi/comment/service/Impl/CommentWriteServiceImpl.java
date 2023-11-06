@@ -63,7 +63,7 @@ public class CommentWriteServiceImpl implements CommentWriteService {
         commentDao.save(comment);
 
         // 保存评论足迹
-        userClient.saveCommentFoot(CommentConverter.toDto(comment), video.getUserId(), parentCommentUser);
+        userClient.saveCommentFoot(CommentConverter.toDto(comment), video.getAuthorId(), parentCommentUser);
 
         // 发布事件
         rabbitTemplate.convertAndSend(VideoMqConstants.VIDEO_TOPIC_EXCHANGE, VideoMqConstants.VIDEO_COMMENT_KEY, comment);

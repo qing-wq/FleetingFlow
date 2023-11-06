@@ -19,14 +19,27 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**, /foot/**, /login/**
+        # 视频服务
         - id: video-service
           uri: lb://video-service
           predicates:
             - Path=/video/**
+        # 评论服务
         - id: comment-service
           uri: lb://comment-service
           predicates:
             - Path=/comment/**
+        # 搜索服务
+        - id: search-service
+          uri: lb://search-service
+          predicates:
+            - Path=/search/**
+        # 消息服务
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notice/**
+        # 404
         - id: not-found
           uri: lb://user-service
           predicates:

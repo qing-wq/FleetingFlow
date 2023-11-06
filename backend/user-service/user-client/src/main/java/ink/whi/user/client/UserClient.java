@@ -22,9 +22,9 @@ public interface UserClient {
     @GetMapping(path = "client/simple/{userId}")
     SimpleUserInfoDTO querySimpleUserInfo(@PathVariable Long userId);
 
-    @PostMapping(path = "client/foot/user")
-    UserFootDTO saveUserFoot(@RequestParam VideoTypeEnum videoType, @RequestParam Long videoId,
-                             @RequestParam Long author, @RequestParam Long userId, @RequestParam OperateTypeEnum operate);
+    @GetMapping(path = "client/foot/user")
+    UserFootDTO saveUserFoot(@RequestParam Integer videoType, @RequestParam Long videoId,
+                             @RequestParam Long author, @RequestParam Long userId, @RequestParam Integer operate);
 
     @PostMapping(path = "client/foot/comment")
     void saveCommentFoot(@RequestBody CommentDTO comment, @RequestParam Long userId, @RequestParam(required = false) Long parentCommentUser);

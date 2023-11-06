@@ -22,7 +22,7 @@ public class CountReadServiceImpl implements CountReadService {
      */
     @Override
     public VideoStatisticDTO queryVideoStatisticInfo(Long videoId) {
-        Map<String, Integer> ans = RedisClient.hGetAll(CountConstants.USER_STATISTIC + videoId, Integer.class);
+        Map<String, Integer> ans = RedisClient.hGetAll(CountConstants.VIDEO_STATISTIC + videoId, Integer.class);
         VideoStatisticDTO info = new VideoStatisticDTO();
         info.setForwardCount(ans.getOrDefault(CountConstants.FORWARD_COUNT, 0));
         info.setPraiseCount(ans.getOrDefault(CountConstants.PRAISE_COUNT, 0));

@@ -1,14 +1,10 @@
 package ink.whi.video.utils;
 
-import com.qiniu.util.Json;
-import com.qiniu.util.StringMap;
-import ink.whi.common.utils.JsonUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
 
@@ -41,7 +37,7 @@ public class AIUtil {
         return category;
     }
 
-    public static List<Long> getVideoRecommandResults(Long userId, Long categoryId) throws JSONException {
+    public static List<Long> getVideoRecommendResults(Long userId, Long categoryId) throws JSONException {
         List<Long> result = new ArrayList<>(10);
 
         RestTemplate restTemplate = new RestTemplate();

@@ -91,8 +91,8 @@ public class CommentRestController extends BaseRestController {
      * @param operateType 2-点赞 4-取消点赞
      * @return
      */
-    @Permission(role = UserRole.LOGIN)
     @GetMapping(path = "favor")
+    @Permission(role = UserRole.LOGIN)
     public ResVo<String> favor(@RequestParam(name = "commentId") Long commentId,
                                @RequestParam(name = "type") Integer operateType) {
         CommentDTO comment = commentReadService.queryComment(commentId);
@@ -105,7 +105,7 @@ public class CommentRestController extends BaseRestController {
             // 评论只能进行点赞操作
             return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "操作非法: " + operateType);
         }
-        UserFootDTO foot = userClient.saveUserFoot(VideoTypeEnum.COMMENT, commentId, comment.getUserId(), ReqInfoContext.getReqInfo().getUserId(), type);
+        UserFootDTO foot = userClient.saveUserFoot(VideoTypeEnum.COMMENT.getCode(), commentId, comment.getUserId(), ReqInfoContext.getReqInfo().getUserId(), type.getCode());
 
         NotifyTypeEnum notifyType = OperateTypeEnum.getNotifyType(type);
 
