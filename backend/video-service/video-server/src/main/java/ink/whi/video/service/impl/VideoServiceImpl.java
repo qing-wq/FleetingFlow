@@ -8,7 +8,6 @@ import ink.whi.common.properties.QiniuConfigProperties;
 import ink.whi.web.auth.UserRole;
 import ink.whi.common.utils.NumUtil;
 import ink.whi.common.model.dto.BaseUserDTO;
-import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.common.model.dto.UserFootDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
@@ -231,12 +230,12 @@ public class VideoServiceImpl implements VideoService {
             return true;
         }
 
-        BaseUserDTO user = ReqInfoContext.getReqInfo().getUser();
-        if (user == null) {
+        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        if (userId == null) {
             return false;
         }
-        // 作者本人和超管可以看到审核内容
-        return user.getUserId().equals(video.getUserId()) || (user.getRole() != null && user.getRole().equalsIgnoreCase(UserRole.ADMIN.name()));
+        // 作者本人可以看到审核内容
+        return userId.equals(video.getUserId()) ;
     }
 
     /**
