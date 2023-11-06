@@ -18,8 +18,10 @@ import ink.whi.video.repo.entity.Score;
 import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.ScoreService;
 import ink.whi.video.service.VideoService;
+import ink.whi.video.utils.AIUtil;
 import ink.whi.video.utils.UserInteractionUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -180,11 +182,19 @@ public class VideoRestController extends BaseRestController {
      */
     @PostMapping(path = "interaction")
     public ResVo<String> interaction(@RequestBody InteractionReq req) {
-        Score score = scoreService.queryScore(req.getVideoId(), ReqInfoContext.getReqInfo().getUserId());
-        Float nowScore = score.getScore();
-        float newScore = UserInteractionUtil.getScoreChange(req, nowScore);
-        score.setScore(newScore);
-        scoreService.updateScore(score);
+//        Score score = scoreService.queryScore(req.getVideoId(), ReqInfoContext.getReqInfo().getUserId());
+//        Float nowScore = score.getScore();
+//        float newScore = UserInteractionUtil.getScoreChange(req, nowScore);
+//        score.setScore(newScore);
+//        scoreService.updateScore(score);
+
+        try {
+            System.out.println(AIUtil.getCategoryByTitle("狗狗被猫咪欺负了#萌宠 #狗狗 #金太阳原创"));
+            System.out.println(AIUtil.getVideoRecommandResults(3L, 3L));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return ResVo.ok("ok");
     }
 }

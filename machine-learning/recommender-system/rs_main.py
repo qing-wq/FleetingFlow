@@ -12,7 +12,7 @@ train_data3, test_data3 = generate_fake_datas()
 model, user_id_mapping, movie_id_mapping, movie_id_backup = lightfm_library(train_data3, test_data3)
 
 def main(user_id, category_id):
-    global p_time, train_data3, test_data3, model, user_id_mapping, movie_id_mapping, movie_id_backup
+    global p_time, train_data3, test_data3, model, user_id_mapping, movie_id_mapping, movie_id_backup, sample_size
     try:
 
         if time.time() - p_time > 60 or category_id != -1:

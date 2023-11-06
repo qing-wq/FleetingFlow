@@ -52,14 +52,13 @@ public class UserInteractionUtil {
     }
 
     public static float getScoreChange(InteractionReq req, float nowScore) {
-        float result = 0f;
+        float result;
         int data = req.getData();
         int type = req.getType();
         // to Enum
         InteractionType interactionType = InteractionType.values()[type - 1];
-
         switch (interactionType) {
-            case WATCH -> result = 0.1f;
+            case WATCH -> result = nowScore == 0 ? 0.1f : -0.5f;
             case WATCH_PERCENT -> result = (float) (Math.log1p(data) / 2.0);
             case COMMENT -> result = 1f;
             case LIKE -> result = 2f;
