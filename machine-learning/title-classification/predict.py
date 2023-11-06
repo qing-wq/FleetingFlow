@@ -70,7 +70,7 @@ class Model(nn.Module):
 
 config = Config()
 model = Model(config).to(config.device)
-model.load_state_dict(torch.load(config.save_path, map_location='cuda:2'))
+model.load_state_dict(torch.load(config.save_path, map_location='cpu'))
 
 
 def prediction_model(text):
@@ -87,9 +87,7 @@ def pred_gradio(inp):
 
 if __name__ == '__main__':
     print(prediction_model('这猫差点被💩憋死，来医院的时候严重酸中毒，高炎症，低体温34度，不夸张的说，能救活的概率不超3成，这次就不是咱医术好了，全靠小家伙命硬#猫咪#一线兽医工作者'))
-    inputs = gradio.inputs.Textbox(type='text')
-    outputs = gradio.outputs.Textbox()
     gradio.Interface(
-        fn=prediction_model, inputs=inputs, outputs=outputs
-        ).launch(server_name='0.0.0.0', share=True, server_port=7675)
+        fn=prediction_model, inputs=["text"], outputs=["text"]
+        ).launch(server_name='0.0.0.0', share=True, server_port=7670)
     
