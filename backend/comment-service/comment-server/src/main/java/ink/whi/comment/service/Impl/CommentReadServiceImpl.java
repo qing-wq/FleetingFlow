@@ -36,7 +36,7 @@ public class CommentReadServiceImpl implements CommentReadService {
     private CommentDao commentDao;
 
     @Resource
-    private UserClient userService;
+    private UserClient userClient;
 
     @Override
     public Integer queryCommentCount(Long videoId) {
@@ -116,7 +116,7 @@ public class CommentReadServiceImpl implements CommentReadService {
      * @param comment
      */
     private void fillCommentInfo(BaseCommentDTO comment) {
-        SimpleUserInfoDTO userInfo = userService.queryBasicUserInfo(comment.getUserId());
+        SimpleUserInfoDTO userInfo = userClient.queryBasicUserInfo(comment.getUserId());
         if (userInfo == null) {
             // 如果用户注销，给一个默认的用户
             comment.setUserName("账号已注销");
@@ -133,14 +133,14 @@ public class CommentReadServiceImpl implements CommentReadService {
         }
 
         // 点赞数
-        Integer praiseCount = userService.queryCommentPraiseCount(comment.getCommentId());
+        Integer praiseCount = userClient.queryCommentPraiseCount(comment.getCommentId());
         comment.setPraiseCount(praiseCount);
 
         // 查询当前登录用于是否点赞过
         Long loginUserId = ReqInfoContext.getReqInfo().getUserId();
         if (loginUserId != null) {
             // 判断当前用户是否点过赞
-            UserFootDTO foot = userService.queryUserFoot(comment.getCommentId(), VideoTypeEnum.COMMENT.getCode(), loginUserId);
+            UserFootDTO foot = userClient.queryUserFoot(comment.getCommentId(), VideoTypeEnum.COMMENT.getCode(), loginUserId);
             comment.setPraised(foot != null && Objects.equals(foot.getPraiseStat(), PraiseStatEnum.PRAISE.getCode()));
         } else {
             comment.setPraised(false);

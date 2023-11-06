@@ -23,6 +23,6 @@ public interface CommentClient {
     Integer queryCommentCount(@PathVariable Long videoId);
 
     @GetMapping(path = "comment/api/page")
-    PageListVo<TopCommentDTO> listVideoComment(@RequestParam Long videoId, @RequestParam Long pageNum,
+    PageListVo<TopCommentDTO> listVideoComment(@RequestParam Long videoId, @RequestParam Long page,
                                                @RequestParam(required = false) Long pageSize);
 }

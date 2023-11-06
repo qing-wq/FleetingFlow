@@ -66,7 +66,8 @@ public class VideoRestController extends BaseRestController {
         vo.setVideo(video);
 
         // fixme 评论信息
-        commentClient.listVideoComment(videoId, PageParam.newPageInstance());
+        PageParam pageParam = PageParam.newPageInstance();
+        commentClient.listVideoComment(videoId, pageParam.getPageNum(), pageParam.getPageSize());
 
         // 作者信息
         vo.setAuthor(userClient.querySimpleUserInfo(video.getUserId()));

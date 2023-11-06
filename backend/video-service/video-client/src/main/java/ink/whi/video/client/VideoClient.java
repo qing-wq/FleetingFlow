@@ -5,6 +5,7 @@ import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.video.dto.VideoInfoDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +43,5 @@ public interface VideoClient {
      * @return
      */
     @GetMapping(path = "client/user/{userId}")
-    PageListVo<VideoInfoDTO> listVideosByUserId(@PathVariable Long userId, @RequestParam PageParam pageParam);
+    PageListVo<VideoInfoDTO> listVideosByUserId(@PathVariable Long userId, @SpringQueryMap PageParam pageParam);
 }

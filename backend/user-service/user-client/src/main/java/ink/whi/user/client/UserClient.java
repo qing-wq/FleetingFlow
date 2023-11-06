@@ -22,7 +22,7 @@ public interface UserClient {
     @GetMapping(path = "client/simple/{userId}")
     SimpleUserInfoDTO querySimpleUserInfo(@PathVariable Long userId);
 
-    @GetMapping(path = "client/foot/user")
+    @PostMapping(path = "client/foot/user")
     UserFootDTO saveUserFoot(@RequestParam VideoTypeEnum videoType, @RequestParam Long videoId,
                              @RequestParam Long author, @RequestParam Long userId, @RequestParam OperateTypeEnum operate);
 
