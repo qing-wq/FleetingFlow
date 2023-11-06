@@ -76,6 +76,13 @@ public class VideoUtil {
         }
     }
 
+    /**
+     * 获取视频分辨率
+     * @param width
+     * @param height
+     * @return int[][] 分辨率
+     */
+
     public static int[][] getVideoScales(int width, int height) {
         int level = getLevel(width, height);
         int[][] scales = new int[level + 1][2];
@@ -105,6 +112,12 @@ public class VideoUtil {
         return scales;
     }
 
+    /**
+     * 根据视频等级获取视频分辨率命令
+     * @param scales
+     * @return String 命令
+     */
+
     public static String getResolutionCommand(int[][] scales) {
         StringBuilder sb = new StringBuilder();
         for (int[] scale : scales) {
@@ -113,6 +126,12 @@ public class VideoUtil {
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
+
+    /**
+     * 根据视频等级获取视频带宽命令
+     * @param level
+     * @return String 命令
+     */
 
     public static String getEnvBandWidthCommand(int level) {
         StringBuilder sb = new StringBuilder();
@@ -124,6 +143,12 @@ public class VideoUtil {
 
     }
 
+    /**
+     * 获取视频转码命令
+     * @param level
+     * @return String 命令
+     */
+
     public static String getMultiVbCommand(int level) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i <= level; i++) {
@@ -132,6 +157,13 @@ public class VideoUtil {
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
+
+    /**
+     * 获取视频转码命令
+     * @param width
+     * @param height
+     * @return String 命令
+     */
 
     public static String getCommand(int width, int height) {
         int[][] scales = getVideoScales(width, height);

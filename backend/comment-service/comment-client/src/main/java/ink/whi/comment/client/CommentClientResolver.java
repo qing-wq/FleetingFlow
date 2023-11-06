@@ -16,20 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Component
 public class CommentClientResolver implements CommentClient {
 
-    @Override
-    public CommentDTO queryComment(Long comment) {
-        log.error("Comment 服务异常：queryComment 请求失败");
-        return null;
-    }
+	@Override
+	public CommentDTO queryComment(Long comment) {
+		log.error("Comment 服务异常：queryComment 请求失败");
+		return null;
+	}
+
+	@Override
+	public Integer queryCommentCount(Long videoId) {
+		log.error("Comment 服务异常：queryCommentCount 请求失败");
+		return null;
+	}
 
     @Override
-    public Integer queryCommentCount(Long videoId) {
-        log.error("Comment 服务异常：queryCommentCount 请求失败");
-        return null;
-    }
-
-    @Override
-    public PageListVo<TopCommentDTO> listVideoComment(Long videoId, @RequestParam Long pageNum,
+    public PageListVo<TopCommentDTO> listVideoComment(Long videoId, @RequestParam Long page,
                                                       @RequestParam(required = false) Long pageSize) {
         log.error("Comment 服务异常：listVideoComment 请求失败");
         return null;

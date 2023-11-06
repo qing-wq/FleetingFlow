@@ -11,10 +11,12 @@ import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.user.client.UserClient;
 import ink.whi.video.dto.VideoInfoDTO;
+import ink.whi.video.model.req.InteractionReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.vo.VideoDetailVO;
 import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.VideoService;
+import ink.whi.video.utils.UserInteractionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -166,7 +168,9 @@ public class VideoRestController extends BaseRestController {
         return null;
     }
 
-    public ResVo<String> score() {
+    @PostMapping(path = "interaction")
+    public ResVo<String> interaction(@RequestBody InteractionReq req) {
+        System.out.println(UserInteractionUtil.getScoreChange(req));
         return null;
     }
 }
