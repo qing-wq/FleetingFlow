@@ -51,21 +51,19 @@ public class UserInteractionUtil {
 
     }
 
-    public static float getScoreChange(InteractionReq req) {
+    public static float getScoreChange(InteractionReq req, float nowScore) {
         float result = 0f;
         int data = req.getData();
         int type = req.getType();
         // to Enum
         InteractionType interactionType = InteractionType.values()[type - 1];
 
-//        System.out.println(WATCH);
         switch (interactionType) {
             case WATCH -> result = 0.1f;
             case WATCH_PERCENT -> result = (float) (Math.log1p(data) / 2.0);
             case COMMENT -> result = 1f;
             case LIKE -> result = 2f;
-            case FORWARD -> result = 2.5f;
-            case COLLECT -> result = 2.5f;
+            case FORWARD, COLLECT -> result = 2.5f;
             default -> result = 0f;
         }
         return result;

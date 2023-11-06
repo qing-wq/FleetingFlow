@@ -3,7 +3,9 @@ package ink.whi.user.service.userfoot;
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
+import ink.whi.common.model.dto.UserFootDTO;
 import ink.whi.common.model.page.PageParam;
+import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.dao.UserFootDao;
 import ink.whi.user.repo.entity.UserFootDO;
 import ink.whi.user.service.UserFootService;
@@ -52,9 +54,18 @@ public class UserFootServiceImpl implements UserFootService {
         return record;
     }
 
+    /**
+     * 获取用户和评论关系
+     *
+     * @param commentId
+     * @param documentType
+     * @param userId
+     * @return
+     */
     @Override
-    public UserFootDO queryUserFoot(Long commentId, Integer documentType, Long userId) {
-        return userFootDao.getByDocumentAndUserId(commentId, documentType, userId);
+    public UserFootDTO queryUserFoot(Long commentId, Integer documentType, Long userId) {
+        UserFootDO foot = userFootDao.getByDocumentAndUserId(commentId, documentType, userId);
+        return UserConverter.toDTO(foot);
     }
 
     /**

@@ -8,6 +8,7 @@ import ink.whi.common.model.dto.UserFootDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.entity.UserFootDO;
+import ink.whi.user.service.CountService;
 import ink.whi.user.service.UserFootService;
 import ink.whi.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class UserClientRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CountService countService;
 
     /**
      * 保存/更新用户足迹
@@ -60,6 +64,19 @@ public class UserClientRestController {
         userFootService.saveCommentFoot(comment, userId, parentCommentUser);
     }
 
+    /**
+     * 获取当前用户点赞状态
+     *
+     * @param commentId
+     * @param loginUserId
+     * @return
+     */
+    @GetMapping(path = "foot/praise")
+    UserFootDTO queryUserFoot(Long commentId, Integer type, Long loginUserId) {
+         return userFootService.queryUserFoot(commentId, type, loginUserId);
+    }
+
+
     @GetMapping(path = "base/{userId}")
     public BaseUserInfoDTO queryBasicUserInfo(@PathVariable Long userId) {
         return userService.queryBasicUserInfo(userId);
@@ -69,4 +86,16 @@ public class UserClientRestController {
     public SimpleUserInfoDTO querySimpleUserInfo(@PathVariable Long userId) {
         return userService.querySimpleUserInfo(userId);
     }
+
+    /**
+     * 获取评论点赞数
+     *
+     * @param commentId
+     * @return
+     */
+    @GetMapping(path = "comment/{commentId}")
+    public Integer queryCommentPraiseCount(@PathVariable Long commentId){
+        return countService.queryCommentPraiseCount(commentId);
+    }
+
 }

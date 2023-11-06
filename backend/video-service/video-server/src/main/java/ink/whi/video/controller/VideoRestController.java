@@ -14,7 +14,9 @@ import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.model.req.InteractionReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.vo.VideoDetailVO;
+import ink.whi.video.repo.entity.Score;
 import ink.whi.video.service.QiNiuService;
+import ink.whi.video.service.ScoreService;
 import ink.whi.video.service.VideoService;
 import ink.whi.video.utils.UserInteractionUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +50,9 @@ public class VideoRestController extends BaseRestController {
 
     @Resource
     private CommentClient commentClient;
+
+    @Autowired
+    private ScoreService scoreService;
 
     /**
      * 视频详情页
@@ -109,7 +114,7 @@ public class VideoRestController extends BaseRestController {
         }
 
         VideoPostReq videoPostReq = JsonUtil.toObj(json, VideoPostReq.class);
-        log.info("接受到视频：" + videoPostReq);
+        log.info("接收到视频：" + videoPostReq);
         videoPostReq.setFile(file);
         Long videoId = videoService.upload(videoPostReq);
         return ResVo.ok(videoId);
@@ -168,9 +173,18 @@ public class VideoRestController extends BaseRestController {
         return null;
     }
 
+    /**
+     * 推荐权重埋点
+     * @param req
+     * @return
+     */
     @PostMapping(path = "interaction")
     public ResVo<String> interaction(@RequestBody InteractionReq req) {
-        System.out.println(UserInteractionUtil.getScoreChange(req));
-        return null;
+        Score score = scoreService.queryScore(req.getVideoId(), ReqInfoContext.getReqInfo().getUserId());
+        Float nowScore = score.getScore();
+        float newScore = UserInteractionUtil.getScoreChange(req, nowScore);
+        score.setScore(newScore);
+        scoreService.updateScore(score);
+        return ResVo.ok("ok");
     }
 }

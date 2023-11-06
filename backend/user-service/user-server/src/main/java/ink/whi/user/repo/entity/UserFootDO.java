@@ -32,7 +32,7 @@ public class UserFootDO extends BaseDO {
     private Long videoId;
 
     /**
-     * 文档类型：1-video，2-评论
+     * 类型：1-video，2-评论
      */
     private Integer type;
 

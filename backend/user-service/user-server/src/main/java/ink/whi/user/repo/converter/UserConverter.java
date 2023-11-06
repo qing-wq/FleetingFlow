@@ -57,6 +57,9 @@ public class UserConverter {
     }
 
     public static UserInfoDO toUserInfoDo(UserSaveReq req) {
+        if (req == null) {
+            return null;
+        }
         UserInfoDO info = new UserInfoDO();
         BeanUtils.copyProperties(req, info);
         return info;
@@ -73,12 +76,18 @@ public class UserConverter {
     }
 
     public static UserFootDTO toDTO(UserFootDO foot) {
+        if (foot == null) {
+            return null;
+        }
         UserFootDTO dto = new UserFootDTO();
         BeanUtils.copyProperties(foot, dto);
         return dto;
     }
 
     public static SimpleUserInfoDTO toSimpleUserDTO(UserInfoDO user) {
+        if (user == null) {
+            return null;
+        }
         SimpleUserInfoDTO dto = new SimpleUserInfoDTO();
         BeanUtils.copyProperties(user, dto);
         return dto;

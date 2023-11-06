@@ -11,4 +11,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ScoreDao extends ServiceImpl<ScoreMapper, Score> {
+    public Score getScoreByVideoId(Long videoId, Long userId) {
+        return lambdaQuery().eq(Score::getVideoId, videoId)
+                .eq(Score::getUserId, userId)
+                .one();
+    }
 }
