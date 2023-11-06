@@ -48,7 +48,7 @@ mysql_settings = {
     'host': 'localhost',
     'port': 3306,
     'user': 'root',
-    'passwd': 'passwd',
+    'passwd': 'h20030825',
     'db': 'qiniu'  # 指定您的数据库名称
 }
 
@@ -88,7 +88,7 @@ def lightfm_library(train, test):
     user_id_mapping = {id:i for i, id in enumerate(train['userId'].unique())}
     movie_id_mapping = {id:i for i, id in enumerate(train['movieId'].unique())}
     movie_id_backup = train['movieId'].unique()
-    
+
     # Create correctly mapped train- & testset
     train_user_data = train['userId'].map(user_id_mapping)
     train_movie_data = train['movieId'].map(movie_id_mapping)
@@ -105,16 +105,19 @@ def lightfm_library(train, test):
     # Instantiate and train the model
     model = LightFM(loss='warp', no_components=20)
     model.fit(train_matrix, epochs=10, num_threads=4)
-    
+
     return model, user_id_mapping, movie_id_mapping, movie_id_backup
 
 
-def generate_fake_datas():
-    
+def generate_fake_datas(category_id = -1):
+
     video_df = read_table_to_pandas('video')
-    print(video_df.columns)
+    if category_id != -1:
+        video_df = video_df[video_df['category_id'] == category_id]
+        print('category_id:', category_id)
+    # print(video_df.columns)
     user_df = read_table_to_pandas('user')
-    print(user_df.columns)
+    # print(user_df.columns)
     score_df = read_table_to_pandas('score')
 
     video_ids = video_df['id'].unique()
