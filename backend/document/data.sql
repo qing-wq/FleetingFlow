@@ -18,12 +18,6 @@
 --
 -- Table structure for table `category`
 --
-drop database if exists `qiniu`;
-
-create database `qiniu`;
-
-use qiniu;
-
 
 DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -80,7 +74,7 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`),
   KEY `idx_article_id` (`video_id`),
   KEY `idx_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='评论表';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='评论表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +100,16 @@ INSERT INTO `comment` VALUES
 (14,219,1,'sed tempor pariatur non ad',0,0,0,'2023-11-03 10:08:43','2023-11-03 10:08:43'),
 (15,219,1,'sed tempor pariatur non ad',0,0,0,'2023-11-03 10:11:16','2023-11-03 10:11:16'),
 (16,219,1,'sed tempor pariatur non ad',0,0,0,'2023-11-03 10:11:31','2023-11-03 10:11:31'),
-(17,219,1,'sed tempor pariatur non ad',0,0,0,'2023-11-03 12:59:41','2023-11-03 12:59:41');
+(17,219,1,'sed tempor pariatur non ad',0,0,0,'2023-11-03 12:59:41','2023-11-03 12:59:41'),
+(18,219,5,'test',0,0,0,'2023-11-06 15:52:05','2023-11-06 15:52:05'),
+(19,219,5,'test1',0,0,0,'2023-11-06 15:53:44','2023-11-06 15:53:44'),
+(20,219,5,'测试评论',0,0,0,'2023-11-06 15:57:18','2023-11-06 15:57:18'),
+(21,219,5,'sub',18,18,0,'2023-11-06 16:30:45','2023-11-06 16:30:45'),
+(22,219,5,'sub2',18,21,0,'2023-11-06 16:30:52','2023-11-06 16:30:52'),
+(23,219,5,'说的是啥',12,12,0,'2023-11-06 16:31:41','2023-11-06 16:31:41'),
+(24,219,5,'ssssssssssssssssssssssssssssssssssssssssssssssssss',18,22,0,'2023-11-06 16:39:25','2023-11-06 16:39:25'),
+(25,219,5,'test测试测试从从从从从从从从从从从从从从从从从三从从从从从从从从从随从',0,0,0,'2023-11-06 16:42:19','2023-11-06 16:42:19'),
+(26,219,5,'?',18,24,0,'2023-11-06 16:47:49','2023-11-06 16:47:49');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +161,7 @@ CREATE TABLE `read_count` (
   `update_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '最后更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_document_id_type` (`video_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='计数表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='计数表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +170,10 @@ CREATE TABLE `read_count` (
 
 LOCK TABLES `read_count` WRITE;
 /*!40000 ALTER TABLE `read_count` DISABLE KEYS */;
+INSERT INTO `read_count` VALUES
+(2,175,1,'2023-11-05 18:59:28','2023-11-05 18:59:28'),
+(3,219,8,'2023-11-05 19:35:00','2023-11-05 19:35:00'),
+(4,402,1,'2023-11-06 11:40:40','2023-11-06 11:40:40');
 /*!40000 ALTER TABLE `read_count` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,6 +189,7 @@ CREATE TABLE `score` (
   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
   `video_id` int(11) NOT NULL DEFAULT 0 COMMENT '视频id',
   `score` float NOT NULL DEFAULT 0 COMMENT '分数',
+  `update_time` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分数';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1230,7 +1238,8 @@ CREATE TABLE `user` (
   `third_account_id` varchar(128) NOT NULL DEFAULT '' COMMENT '第三方用户ID',
   `user_name` varchar(64) NOT NULL DEFAULT '' COMMENT '用户名',
   `password` varchar(128) NOT NULL DEFAULT '' COMMENT '密码',
-  `login_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '登录方式: 0-微信登录，1-账号密码登录',
+  `email` varchar(50) NOT NULL DEFAULT '' COMMENT '邮箱',
+  `login_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '登录方式: 0-第三方登录，1-账号密码登录',
   `deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否删除',
   `create_time` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '最后更新时间',
@@ -1246,31 +1255,31 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES
-(1,'','admin','$2a$10$mva5SAaibyFPAkNfb8N7UOlkdYyUtycScQnNHxadDO.TW7Y18mIIy',0,0,'2023-10-24 17:30:44','2023-10-24 17:38:31'),
-(2,'','高强','$2a$10$.6MhKW6y9BXFZARSZY2p8e3bkCmvJ3CPGHkW1GQuOkoOcigPBNXiK',1,0,'2023-11-02 16:32:54','2023-11-02 16:32:54'),
-(3,'','胡平','$2a$10$jnyOV4ji/b2/K2iN6N.23elryRPFXuOG1kDVgWpJ2zSTqFmgu6F3m',1,0,'2023-11-02 17:09:23','2023-11-02 17:09:23'),
-(4,'','小刘呼呼睡💤','$2a$10$X.UYhmYdw5rgBmWTtTB.aORLv75o5N4GFBixUTNm/wA5SgakInXBG',1,0,'2023-11-02 17:39:34','2023-11-02 17:39:34'),
-(5,'','沈肉肉是个二哈🐶','$2a$10$yHcV.2YXhV3p4347nVI7Le7gm0vQk65U5i1kEZaQCf55.vJ13ogeG',1,0,'2023-11-02 17:39:34','2023-11-02 17:39:34'),
-(6,'','牧羊小队长😄','$2a$10$1dqkpQEt7WqpfDYXpxwks.gYy.VHwH/.UJ4ufboVlLBsWUWA88Nei',1,0,'2023-11-02 17:39:34','2023-11-02 17:39:34'),
-(7,'','边牧尘贝拉','$2a$10$B4.lnRUrvFManlYVR4L2OelCibSPvIvVdG.lzALD4lmv9e.IFonw.',1,0,'2023-11-02 17:39:34','2023-11-02 17:39:34'),
-(8,'','一点冷知识','$2a$10$p2TrCm/FneNgh2l95eTyDOxiw6c071paigdTbTXzvXDBXU9hLil8.',1,0,'2023-11-02 17:39:34','2023-11-02 17:39:34'),
-(9,'','科学号探长','$2a$10$Y0uX1FagK4kfSEbHmLEZLuYFY7lOHnXe0BsXeAeJMAEnplKDcBy0u',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(10,'','十二动漫','$2a$10$bQU9CTw9a8jue6ryyu84TeSL3J.ztncPFNi/0joBig9THs2YjXHue',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(11,'','不倒翁影视','$2a$10$6Yl3wDvzqY85ZbFG/KSQ4OXlK4arRlCJb.fGsOxiD0ul7su/B1rbW',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(12,'','诸葛佩奇','$2a$10$CCnnHJo/2/PkFdZJK0y2qepbpi3V8hZp66W9wmIcMDmRtjgiXTCNO',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(13,'','森纳映画','$2a$10$sRenygrs3.rMFP5TrvJwUuJpJU/LSKndlKhmf/naH.L4lLZJLXktC',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(14,'','一只吐槽圆','$2a$10$CZ3aHJ6bKb0icCCWX8KaFeD6RtcxW3deoNK68NwqR7NZ9w2mPnIgS',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(15,'','盘一手','$2a$10$LLkDY0vn3cTYIgssHR/rG.kttz1hueVBbIZiEp7TDjH7y6o4UiEmS',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(16,'','川Boy','$2a$10$CyvqZkv61r5F0VK4GJ0cVuViveE8a2m//iXb7MwpKFUNTUexDQooe',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(17,'','小熊益智动画','$2a$10$SRwg/kJXPNgtNoYmh8rmpux60oV4NzsICRFEQXCbUnjv4UoReOfFC',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(18,'','音乐人小山','$2a$10$tl0/.E98nkI/q135S4CemuTO3SYP..u2rLMNZAsBgILZhlIhcBBvO',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(19,'','徐梦圆','$2a$10$RwEOIWnhf01Lz4k9kpXweuE7wNPBk37aJaze1MNH26TpACgO3ic8i',1,0,'2023-11-02 17:39:35','2023-11-02 17:39:35'),
-(20,'','美食作家王刚','$2a$10$oViDtXf4GdOf1Pft2kbane0fL4TWQnl0cjlymTFs14ztxXPQhdk9K',1,0,'2023-11-02 17:39:36','2023-11-02 17:39:36'),
-(21,'','蚊子学做美食','$2a$10$syDCXaP2UThGcPyohUSqBO8S/6UxHKfRv3fwd76XX2eXbeOZtcx7a',1,0,'2023-11-02 17:39:36','2023-11-02 17:39:36'),
-(22,'','体育小助手','$2a$10$/Fm71YxPET/a7L6Vj1TfLejF2fbH/sUwdWqJQ2T3zxlpkAdvF6kAK',1,0,'2023-11-02 17:39:36','2023-11-02 17:39:36'),
-(23,'','热点体育🔥','$2a$10$/mAmLy3fCLo6J/46TgTPBeky3TDygWXM2zqMTFQAQP9jlw8Yaktz.',1,0,'2023-11-02 17:39:36','2023-11-02 17:39:36'),
-(24,'','时尚杂志','$2a$10$OXkOB2tFl/vF.lbfLFmWO.Mzn327FSqNGaSQ4.4IvQw.Nj5ixQBQe',1,0,'2023-11-02 17:39:36','2023-11-02 17:39:36'),
-(25,'','时尚芭莎','$2a$10$pCcYV9XUVBHXdje67q52.uxPXdKiCUCJtIazVVL.h/VZKJHfORBsu',1,0,'2023-11-02 17:39:36','2023-11-02 17:39:36');
+(1,'','admin','$2a$10$mva5SAaibyFPAkNfb8N7UOlkdYyUtycScQnNHxadDO.TW7Y18mIIy','123@qq.com',0,0,'2023-10-24 17:30:44','2023-11-05 12:43:47'),
+(2,'','高强','$2a$10$.6MhKW6y9BXFZARSZY2p8e3bkCmvJ3CPGHkW1GQuOkoOcigPBNXiK','e.ensaxdiw@qq.com',1,0,'2023-11-02 16:32:54','2023-11-05 18:45:22'),
+(3,'','胡平','$2a$10$jnyOV4ji/b2/K2iN6N.23elryRPFXuOG1kDVgWpJ2zSTqFmgu6F3m','d.vkozdzq@qq.com',1,0,'2023-11-02 17:09:23','2023-11-05 18:45:22'),
+(4,'','小刘呼呼睡💤','$2a$10$X.UYhmYdw5rgBmWTtTB.aORLv75o5N4GFBixUTNm/wA5SgakInXBG','q7RlvKNc@qq.com',1,0,'2023-11-02 17:39:34','2023-11-05 18:45:22'),
+(5,'','沈肉肉是个二哈🐶','$2a$10$mva5SAaibyFPAkNfb8N7UOlkdYyUtycScQnNHxadDO.TW7Y18mIIy','d14POIwM@qq.com',1,0,'2023-11-02 17:39:34','2023-11-05 18:48:40'),
+(6,'','牧羊小队长😄','$2a$10$1dqkpQEt7WqpfDYXpxwks.gYy.VHwH/.UJ4ufboVlLBsWUWA88Nei','IyEdFY2W@qq.com',1,0,'2023-11-02 17:39:34','2023-11-05 18:45:22'),
+(7,'','边牧尘贝拉','$2a$10$B4.lnRUrvFManlYVR4L2OelCibSPvIvVdG.lzALD4lmv9e.IFonw.','sDSaOdA5@qq.com',1,0,'2023-11-02 17:39:34','2023-11-05 18:45:22'),
+(8,'','一点冷知识','$2a$10$p2TrCm/FneNgh2l95eTyDOxiw6c071paigdTbTXzvXDBXU9hLil8.','AvpGyqQm@qq.com',1,0,'2023-11-02 17:39:34','2023-11-05 18:45:22'),
+(9,'','科学号探长','$2a$10$Y0uX1FagK4kfSEbHmLEZLuYFY7lOHnXe0BsXeAeJMAEnplKDcBy0u','0zpdQeZh@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(10,'','十二动漫','$2a$10$bQU9CTw9a8jue6ryyu84TeSL3J.ztncPFNi/0joBig9THs2YjXHue','5u9olT6n@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(11,'','不倒翁影视','$2a$10$6Yl3wDvzqY85ZbFG/KSQ4OXlK4arRlCJb.fGsOxiD0ul7su/B1rbW','gJK7EqFn@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(12,'','诸葛佩奇','$2a$10$CCnnHJo/2/PkFdZJK0y2qepbpi3V8hZp66W9wmIcMDmRtjgiXTCNO','E6D0Uqi8@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(13,'','森纳映画','$2a$10$sRenygrs3.rMFP5TrvJwUuJpJU/LSKndlKhmf/naH.L4lLZJLXktC','GUqWrcFo@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(14,'','一只吐槽圆','$2a$10$CZ3aHJ6bKb0icCCWX8KaFeD6RtcxW3deoNK68NwqR7NZ9w2mPnIgS','snWHmKlE@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(15,'','盘一手','$2a$10$LLkDY0vn3cTYIgssHR/rG.kttz1hueVBbIZiEp7TDjH7y6o4UiEmS','DwZBPG2c@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(16,'','川Boy','$2a$10$CyvqZkv61r5F0VK4GJ0cVuViveE8a2m//iXb7MwpKFUNTUexDQooe','TRPbSCw5@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(17,'','小熊益智动画','$2a$10$SRwg/kJXPNgtNoYmh8rmpux60oV4NzsICRFEQXCbUnjv4UoReOfFC','9TI5Rov3@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(18,'','音乐人小山','$2a$10$tl0/.E98nkI/q135S4CemuTO3SYP..u2rLMNZAsBgILZhlIhcBBvO','SwXHE8tJ@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(19,'','徐梦圆','$2a$10$RwEOIWnhf01Lz4k9kpXweuE7wNPBk37aJaze1MNH26TpACgO3ic8i','fjLlDt19@qq.com',1,0,'2023-11-02 17:39:35','2023-11-05 18:45:22'),
+(20,'','美食作家王刚','$2a$10$oViDtXf4GdOf1Pft2kbane0fL4TWQnl0cjlymTFs14ztxXPQhdk9K','FxUCvQy4@qq.com',1,0,'2023-11-02 17:39:36','2023-11-05 18:45:22'),
+(21,'','蚊子学做美食','$2a$10$syDCXaP2UThGcPyohUSqBO8S/6UxHKfRv3fwd76XX2eXbeOZtcx7a','QOfqjTv2@qq.com',1,0,'2023-11-02 17:39:36','2023-11-05 18:45:22'),
+(22,'','体育小助手','$2a$10$/Fm71YxPET/a7L6Vj1TfLejF2fbH/sUwdWqJQ2T3zxlpkAdvF6kAK','TENbdKUk@qq.com',1,0,'2023-11-02 17:39:36','2023-11-05 18:45:22'),
+(23,'','热点体育🔥','$2a$10$/mAmLy3fCLo6J/46TgTPBeky3TDygWXM2zqMTFQAQP9jlw8Yaktz.','w0FDs2Yd@qq.com',1,0,'2023-11-02 17:39:36','2023-11-05 18:45:22'),
+(24,'','时尚杂志','$2a$10$OXkOB2tFl/vF.lbfLFmWO.Mzn327FSqNGaSQ4.4IvQw.Nj5ixQBQe','sIABXnRJ@qq.com',1,0,'2023-11-02 17:39:36','2023-11-05 18:45:22'),
+(25,'','时尚芭莎','$2a$10$pCcYV9XUVBHXdje67q52.uxPXdKiCUCJtIazVVL.h/VZKJHfORBsu','JEjwoM74@qq.com',1,0,'2023-11-02 17:39:36','2023-11-05 18:45:22');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1296,7 +1305,7 @@ CREATE TABLE `user_foot` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_user_video` (`user_id`,`video_id`,`type`),
   KEY `idx_video_id` (`video_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户足迹表';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户足迹表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1309,7 +1318,24 @@ INSERT INTO `user_foot` VALUES
 (1,0,1,1,1,0,0,0,1,'2023-10-31 07:57:20','2023-10-31 07:57:20'),
 (6,1,1,1,1,0,0,0,1,'2023-10-31 12:29:41','2023-10-31 12:29:41'),
 (7,1,219,2,5,0,0,1,0,'2023-11-03 10:11:32','2023-11-03 10:11:32'),
-(8,1,219,1,5,0,0,1,0,'2023-11-03 12:59:41','2023-11-03 12:59:41');
+(8,1,219,1,5,0,1,1,1,'2023-11-03 12:59:41','2023-11-06 11:41:34'),
+(9,5,579,1,19,0,0,0,2,'2023-11-06 09:30:28','2023-11-06 09:36:10'),
+(10,5,402,1,16,1,0,0,1,'2023-11-06 09:30:39','2023-11-06 09:52:49'),
+(11,5,571,1,19,0,0,0,2,'2023-11-06 09:37:42','2023-11-06 09:37:46'),
+(12,5,580,1,19,0,0,0,2,'2023-11-06 09:38:14','2023-11-06 09:40:31'),
+(13,5,565,1,18,0,0,0,2,'2023-11-06 09:41:20','2023-11-06 09:41:28'),
+(14,5,570,1,19,0,0,0,1,'2023-11-06 09:43:57','2023-11-06 09:43:57'),
+(15,5,273,1,10,2,0,0,0,'2023-11-06 09:50:19','2023-11-06 09:50:41'),
+(16,0,219,1,5,0,0,0,0,'2023-11-06 09:53:10','2023-11-06 09:53:10'),
+(17,5,396,1,16,1,0,0,0,'2023-11-06 09:53:18','2023-11-06 09:53:18'),
+(18,0,402,1,16,0,0,0,1,'2023-11-06 09:53:35','2023-11-06 09:53:35'),
+(21,1,402,1,16,1,0,0,1,'2023-11-06 09:57:17','2023-11-06 10:36:38'),
+(22,5,405,1,17,0,0,0,1,'2023-11-06 09:58:16','2023-11-06 09:58:16'),
+(23,5,400,1,17,0,0,0,1,'2023-11-06 10:02:51','2023-11-06 10:02:51'),
+(24,5,406,1,0,1,0,0,1,'2023-11-06 11:13:59','2023-11-06 11:14:14'),
+(25,5,219,1,5,0,0,1,1,'2023-11-06 15:19:06','2023-11-06 15:53:44'),
+(26,5,18,2,5,0,0,1,0,'2023-11-06 16:30:45','2023-11-06 16:30:45'),
+(27,5,12,2,1,0,0,1,0,'2023-11-06 16:31:41','2023-11-06 16:31:41');
 /*!40000 ALTER TABLE `user_foot` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1334,6 +1360,7 @@ CREATE TABLE `user_info` (
   `create_time` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT '最后更新时间',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_email` (`email`),
   KEY `key_user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户个人信息表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3481,4 +3508,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-04 19:53:45
+-- Dump completed on 2023-11-07  1:10:52

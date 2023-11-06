@@ -45,12 +45,13 @@ import warnings
 warnings.filterwarnings('ignore')
 
 mysql_settings = {
-    'host': 'localhost',
+    'host': 'mysql',
     'port': 3306,
     'user': 'root',
-    'passwd': 'h20030825',
+    'passwd': 'password',
     'db': 'qiniu'  # 指定您的数据库名称
 }
+time.sleep(25)
 
 def read_table_to_pandas(table_name):
     # 建立与数据库的连接

@@ -4,6 +4,7 @@ import gradio as gr
 from rs_backend import *
 
 import random
+import time
 
 sample_size=10
 p_time = time.time()
@@ -11,14 +12,15 @@ p_time = time.time()
 train_data3, test_data3 = generate_fake_datas()
 model, user_id_mapping, movie_id_mapping, movie_id_backup = lightfm_library(train_data3, test_data3)
 
+per = -1
+
 def main(user_id, category_id):
-    global p_time, train_data3, test_data3, model, user_id_mapping, movie_id_mapping, movie_id_backup, sample_size
+    global p_time, train_data3, test_data3, model, user_id_mapping, movie_id_mapping, movie_id_backup, sample_size, per
     try:
 
-        if time.time() - p_time > 60 or category_id != -1:
-            train_data3, test_data3 = generate_fake_datas(category_id)
-            model, user_id_mapping, movie_id_mapping, movie_id_backup = lightfm_library(train_data3, test_data3)
-            p_time = time.time()
+        train_data3, test_data3 = generate_fake_datas(category_id)
+        model, user_id_mapping, movie_id_mapping, movie_id_backup = lightfm_library(train_data3, test_data3)
+        p_time = time.time()
 
         user_id_maped = user_id_mapping[user_id]
 
@@ -48,6 +50,8 @@ def main(user_id, category_id):
 if __name__ == '__main__':
     # inputs = gradio.inputs.Number(default=-1, label="User ID")
     # outputs = gradio.outputs.Textbox()
+    
+    print("Start Done!")
     gr.Interface(
         fn=main, inputs=['number', 'number'], outputs='text'
-        ).launch(server_name='0.0.0.0', share=True, server_port=7676)
+        ).launch(server_name='0.0.0.0', share=True, server_port=7671)
