@@ -136,7 +136,7 @@ public class UserClientRestController {
      * @param pageParam
      * @return
      */
-    @GetMapping(path = "client/foot/like")
+    @GetMapping(path = "foot/like")
     List<Long> queryUserPraiseVideoList(@RequestParam Long userId,  PageParam pageParam) {
         return userFootService.queryUserPraiseVideoList(userId, pageParam);
     }

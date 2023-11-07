@@ -3,6 +3,8 @@ package ink.whi.video.controller;
 import ink.whi.comment.client.CommentClient;
 import ink.whi.common.base.BaseRestController;
 import ink.whi.common.context.ReqInfoContext;
+import ink.whi.common.enums.OperateTypeEnum;
+import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.utils.JsonUtil;
 import ink.whi.common.utils.NumUtil;
@@ -14,10 +16,12 @@ import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.model.req.InteractionReq;
 import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.model.vo.VideoDetailVO;
+import ink.whi.video.repo.entity.Score;
 import ink.whi.video.service.QiNiuService;
 import ink.whi.video.service.ScoreService;
 import ink.whi.video.service.VideoService;
 import ink.whi.video.utils.AIUtil;
+import ink.whi.video.utils.UserInteractionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,18 +186,18 @@ public class VideoRestController extends BaseRestController {
      */
     @PostMapping(path = "interaction")
     public ResVo<String> interaction(@RequestBody InteractionReq req) {
-//        Score score = scoreService.queryScore(req.getVideoId(), ReqInfoContext.getReqInfo().getUserId());
-//        Float nowScore = score.getScore();
-//        float newScore = UserInteractionUtil.getScoreChange(req, nowScore);
-//        score.setScore(newScore);
-//        scoreService.updateScore(score);
-
-        try {
-            System.out.println(AIUtil.getVideoRecommendResults(3L, 3L));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        // 浏览记录
+        VideoInfoDTO video = videoService.queryBaseVideoInfo(req.getVideoId());
+        if (req.getVideoId() != null) {
+            userClient.saveUserFoot(VideoTypeEnum.VIDEO.getCode(), video.getVideoId(), video.getUserId(), userId, OperateTypeEnum.READ.getCode());
         }
 
+        Score score = scoreService.queryScore(req.getVideoId(), ReqInfoContext.getReqInfo().getUserId());
+        Float nowScore = score.getScore();
+        float newScore = UserInteractionUtil.getScoreChange(req, nowScore);
+        score.setScore(newScore);
+        scoreService.updateScore(score);
         return ResVo.ok("ok");
     }
 }

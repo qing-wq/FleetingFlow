@@ -350,6 +350,9 @@ public class VideoServiceImpl implements VideoService {
      * @return
      */
     private List<VideoDO> sortByIds(List<Long> videoIds, List<VideoDO> records) {
+        if (CollectionUtils.isEmpty(videoIds)) {
+            return null;
+        }
         List<VideoDO> articleDOS = new ArrayList<>();
         Map<Long, VideoDO> articleDOMap = MapUtils.toMap(records, VideoDO::getId, r -> r);
         videoIds.forEach(articleId -> {

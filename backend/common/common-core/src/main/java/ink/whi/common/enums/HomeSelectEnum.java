@@ -6,7 +6,7 @@ import lombok.Getter;
  * 用户页面选择枚举
  *
  * @author qing
- * @date 2022/7/19
+ * @date 2023/11/7
  */
 @Getter
 public enum HomeSelectEnum {

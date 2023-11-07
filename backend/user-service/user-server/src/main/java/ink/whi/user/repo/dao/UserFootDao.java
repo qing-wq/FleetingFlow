@@ -102,7 +102,7 @@ public class UserFootDao extends ServiceImpl<UserFootMapper, UserFootDO> {
      */
     public List<Long> listPraiseVideosByUserId(Long userId, PageParam pageParam) {
         List<UserFootDO> list = lambdaQuery().eq(UserFootDO::getUserId, userId)
-                .eq(UserFootDO::getCollectionStat, PraiseStatEnum.PRAISE.getCode())
+                .eq(UserFootDO::getPraiseStat, PraiseStatEnum.PRAISE.getCode())
                 .eq(UserFootDO::getType, VideoTypeEnum.VIDEO.getCode())
                 .orderByDesc(BaseDO::getUpdateTime)
                 .last(PageParam.getLimitSql(pageParam))
