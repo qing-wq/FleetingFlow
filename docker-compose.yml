@@ -2,7 +2,7 @@ version: '1'
 
 services:
   redis:
-    container_name: redis
+    container_name: flfl-redis
     image: redis:latest
     networks:
       - fleetingflow
@@ -10,7 +10,7 @@ services:
     #   - "6179:6379"
 
   mysql:
-    container_name: mysql
+    container_name: flfl-mysql
     image: mysql:5.7
     volumes:
       - ./backend/document/:/docker-entrypoint-initdb.d/
@@ -25,8 +25,63 @@ services:
       - "3306:3306"
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
+  rabbitmq:
+    image: rabbitmq:3.12.6-management
+    container_name: flfl-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./.rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - fleetingflow
+
+  nacos:
+    image: nacos/nacos-server:v2.2.0-slim
+    container_name: flfl-nacos
+    ports:
+      - "8848:8848"
+    volumes:
+      - ./.nacos-data:/home/nacos/data
+    networks:
+      - fleetingflow
+    environment:
+      - MODE=standalone
+      - PREFER_HOST_MODE=hostname
+      - TZ=Asia/Shanghai
+
+  elasticsearch:
+    image: elasticsearch:7.12.1
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - fleetingflow
+
+    volumes:
+      - ./.es-plugins:/usr/share/elasticsearch/plugins
+
+    
+
+  kibana:
+    image: kibana:7.12.1
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - I18N_LOCALE=zh-CN
+    links:
+      - elasticsearch
+    ports:
+      - 5601:5601
+    networks:
+      - fleetingflow
+
   aiapps:
-    container_name: aiapps
+    container_name: flfl-aiapps
     build:
       context: ./machine-learning
     networks:
@@ -37,10 +92,122 @@ services:
     links:
       - mysql
     ports:
+      - "7672:7672"
       - "7671:7671"
       - "7670:7670"
 
+  gateway-service:
+    container_name: flfl-gateway-service
+    build:
+      context: ./backend/gateway-service
+    ports:
+      - "4001:4000"
+
+    networks:
+      - fleetingflow
+    links:
+      - mysql
+      - redis
+      - rabbitmq
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq    
+    restart: always
+    
+  user-service:
+    container_name: flfl-user-service
+    
+    build:
+      context: ./backend/user-service/user-server
+    ports:
+      - "8000:8000"
+
+    networks:
+      - fleetingflow
+    links:
+      - mysql
+      - redis
+      - rabbitmq
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq    
+    restart: always
+
+  video-service:
+    container_name: flfl-video-service
+    build:
+      context: ./backend/video-service/video-server
+    ports:
+      - "8001:8001"
+
+    networks:
+      - fleetingflow
+    links:
+      - mysql
+      - redis
+      - rabbitmq
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq    
+    restart: always
+
+  comment-service:
+    container_name: flfl-comment-service
+    build:
+      context: ./backend/comment-service/comment-server
+    ports:
+      - "8002:8002"
+    networks:
+      - fleetingflow
+    links:
+      - mysql
+      - redis
+      - rabbitmq
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq    
+    restart: always
+
+  notification-service:
+    container_name: flfl-notification-service
+    build:
+      context: ./backend/notification-service/notification-server
+    ports:
+      - "8003:8003"
+    networks:
+      - fleetingflow
+    links:
+      - mysql
+      - redis
+      - rabbitmq
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq    
+    restart: always
+
+  video-search-service:
+    container_name: flfl-video-search-service
+    build:
+      context: ./backend/video-service/video-search-server
+    ports:
+      - "8004:8004"
+    networks:
+      - fleetingflow
+    links:
+      - mysql
+      - redis
+      - rabbitmq
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq    
+    restart: always
+
 networks:
-  # 默认将会创建为 docker-compose.yml所在 文件夹名_my_network 网络名称
   fleetingflow:
     driver: bridge
