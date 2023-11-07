@@ -1,14 +1,17 @@
 package ink.whi.video.utils;
 
+import ink.whi.video.config.AIConfigProperties;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
 
+@Component
 public class AIUtil {
 
     public static List<String> getTagRecommendResults(String str) throws JSONException {
@@ -27,7 +30,7 @@ public class AIUtil {
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         // 发送HTTP请求
-        ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:7672/run/predict", HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(AIConfigProperties.TagRecommendSystemUrl, HttpMethod.POST, requestEntity, String.class);
 
         // 获取响应
         JSONObject responseJson = new JSONObject(responseEntity.getBody());
@@ -55,7 +58,7 @@ public class AIUtil {
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         // 发送HTTP请求
-        ResponseEntity<String> responseEntity = restTemplate.exchange("http://10.60.99.144:7675/run/predict", HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(AIConfigProperties.CategoryRecommendSystemUrl, HttpMethod.POST, requestEntity, String.class);
 
         // 获取响应
         JSONObject responseJson = new JSONObject(responseEntity.getBody());
@@ -81,7 +84,7 @@ public class AIUtil {
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         // 发送HTTP请求
-        ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:7676/run/predict", HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(AIConfigProperties.VideoRecommendSystemUrl, HttpMethod.POST, requestEntity, String.class);
 
         // 获取响应
         JSONObject responseJson = new JSONObject(responseEntity.getBody());
