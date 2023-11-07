@@ -114,7 +114,7 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoDO> {
         return record.getId();
     }
 
-    public List<VideoDO> listVideoByIds(List<Integer> videoIds) {
+    public List<VideoDO> listVideoByIds(List<Long> videoIds) {
         return lambdaQuery().in(BaseDO::getId, videoIds)
                 .eq(VideoDO::getDeleted, YesOrNoEnum.NO.getCode())
                 .eq(VideoDO::getStatus, PushStatusEnum.ONLINE.getCode())

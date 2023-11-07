@@ -64,7 +64,7 @@ public class VideoClientRestController {
     }
 
     @PostMapping(path = "list")
-    PageListVo<VideoInfoDTO> listVideos(@RequestParam List<Integer> videoIds) {
+    PageListVo<VideoInfoDTO> listVideos(@RequestParam List<Long> videoIds) {
         return videoService.listVideos(videoIds);
     }
 

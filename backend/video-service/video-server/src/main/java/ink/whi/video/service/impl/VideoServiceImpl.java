@@ -35,7 +35,6 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author: qing
@@ -95,6 +94,7 @@ public class VideoServiceImpl implements VideoService {
 
         // 视频计数
         video.setCount(countReadService.queryVideoStatisticInfo(videoId));
+        video.setUrl(config.buildUrl(video.getUrl()));
         return video;
     }
 
@@ -120,12 +120,18 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, PageParam pageParam) {
-        List<VideoDO> list = videoDao.listVideosByCategory(categoryId, pageParam);
-        list.forEach(s -> {
-            s.setUrl(config.buildUrl(s.getUrl()));
-        });
-        return buildVideoListVo(list, pageParam.getPageSize());
+    public PageListVo<VideoInfoDTO> queryVideosByCategory(Long userId, Long categoryId, Integer pageSize) {
+        userId = userId == null ? -1 : userId;
+        categoryId = categoryId == null ? -1 : categoryId;
+        List<Long> videoRecommendResults = null;
+        try {
+            videoRecommendResults = AIUtil.getVideoRecommendResults(3L, 3L);
+        } catch (JSONException e) {
+            log.error("获取视频推荐列表失败：{}", e.getMessage());
+            e.printStackTrace();
+        }
+        List<VideoDO> list = videoDao.listVideoByIds(videoRecommendResults);
+        return buildVideoListVo(list, pageSize);
     }
 
     @Override
@@ -158,8 +164,12 @@ public class VideoServiceImpl implements VideoService {
     public Long saveVideo(VideoPostReq videoPostReq) throws IOException {
         String key = qiNiuService.upload(videoPostReq.getFile());
         long size = videoPostReq.getFile().getSize();
-        String format = FileUtil.getExtensionName(videoPostReq.getFile().getOriginalFilename());
+        String filename = videoPostReq.getFile().getOriginalFilename();
+        if (!FileUtil.hasVideoExtension(filename)) {
+            throw BusinessException.newInstance(StatusEnum.ILLEGAL_ARGUMENTS, "请上传视频文件");
+        }
 
+        String format = FileUtil.getExtensionName(filename);
         Long userId = ReqInfoContext.getReqInfo().getUserId();
         VideoDO video = VideoConverter.toDo(videoPostReq, userId);
         video.setFormat(format);
@@ -169,7 +179,7 @@ public class VideoServiceImpl implements VideoService {
         // 对标题进行自然语言处理，自动获取分类
         Long categoryId = null;
         try {
-            String category = AIUtil.getCategoryByTitle("狗狗被猫咪欺负了#萌宠 #狗狗 #金太阳原创");
+            String category = AIUtil.getCategoryByTitle(videoPostReq.getTitle() + videoPostReq.getThumbnail());
             categoryId = categoryService.queryCategoryId(category);
         } catch (JSONException e) {
             log.error("获取视频分类失败：{}", e.getMessage());
@@ -290,7 +300,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public PageListVo<VideoInfoDTO> listVideos(List<Integer> videoIds) {
+    public PageListVo<VideoInfoDTO> listVideos(List<Long> videoIds) {
         List<VideoDO> videoDOS = videoDao.listVideoByIds(videoIds);
         return buildVideoListVo(videoDOS, PageParam.DEFAULT_PAGE_SIZE);
     }

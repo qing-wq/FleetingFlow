@@ -46,7 +46,7 @@ public interface VideoClient {
     PageListVo<VideoInfoDTO> listVideosByUserId(@PathVariable Long userId, @SpringQueryMap PageParam pageParam);
 
     @PostMapping(path = "client/list")
-    PageListVo<VideoInfoDTO> listVideos(@RequestParam List<Integer> videoIds);
+    PageListVo<VideoInfoDTO> listVideos(@RequestParam List<Long> videoIds);
 
     @GetMapping(path = "client/user/type")
     PageListVo<VideoInfoDTO> queryVideosByUserAndType(@RequestParam Long userId, @SpringQueryMap PageParam pageParam,

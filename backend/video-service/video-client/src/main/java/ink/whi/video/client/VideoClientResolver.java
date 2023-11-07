@@ -43,7 +43,7 @@ public class VideoClientResolver implements VideoClient{
     }
 
     @Override
-    public PageListVo<VideoInfoDTO> listVideos(List<Integer> videoIds) {
+    public PageListVo<VideoInfoDTO> listVideos(List<Long> videoIds) {
         log.error("Video 服务异常：listVideos 请求失败");
         return null;
     }

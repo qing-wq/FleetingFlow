@@ -82,25 +82,23 @@ public class VideoRestController extends BaseRestController {
     }
 
     /**
-     * 获取视频流
+     * 视频推荐
      *
      * @param categoryId
-     * @param page
      * @param size
      * @return
      */
-    @GetMapping(path = "category/{category}")
-    public ResVo<PageListVo<VideoInfoDTO>> feed(@PathVariable("category") Long categoryId,
-                                                @RequestParam(name = "page") Long page,
-                                                @RequestParam(name = "size", required = false) Long size) {
-        PageParam pageParam = buildPageParam(page, size);
-        PageListVo<VideoInfoDTO> list = videoService.queryVideosByCategory(categoryId, pageParam);
+    @GetMapping(path = "recommend")
+    public ResVo<PageListVo<VideoInfoDTO>> feed(@RequestParam(name = "category", required = false) Long categoryId,
+                                                @RequestParam(name = "size") Integer size) {
+        Long userId = ReqInfoContext.getReqInfo().getUserId();
+        PageListVo<VideoInfoDTO> list = videoService.queryVideosByCategory(userId, categoryId, size);
         return ResVo.ok(list);
     }
 
     /**
      * 上传视频
-     * fixme: 分片上传，断点续传
+     * todo 分片上传，断点续传
      *
      * @param file 视频文件
      * @param json 其他参数的json封装
@@ -109,7 +107,7 @@ public class VideoRestController extends BaseRestController {
      */
     @PostMapping(path = "upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResVo<Long> upload(MultipartFile file, String json) throws IOException {
-        if (file == null) {  // todo：判断文件是否是视频
+        if (file == null) {
             return ResVo.fail(StatusEnum.ILLEGAL_ARGUMENTS_MIXED, "请上传视频文件");
         }
 
@@ -190,7 +188,6 @@ public class VideoRestController extends BaseRestController {
 //        scoreService.updateScore(score);
 
         try {
-            System.out.println(AIUtil.getCategoryByTitle("狗狗被猫咪欺负了#萌宠 #狗狗 #金太阳原创"));
             System.out.println(AIUtil.getVideoRecommendResults(3L, 3L));
         } catch (JSONException e) {
             e.printStackTrace();

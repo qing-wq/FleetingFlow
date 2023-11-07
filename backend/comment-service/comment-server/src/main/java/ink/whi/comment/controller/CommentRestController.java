@@ -53,15 +53,15 @@ public class CommentRestController extends BaseRestController {
      * 评论列表分页接口
      *
      * @param videoId
-     * @param pageNum
+     * @param page
      * @param pageSize
      * @return
      */
     @GetMapping(path = "page")
     public ResVo<PageListVo<TopCommentDTO>> list(@RequestParam(name = "videoId") Long videoId,
-                                                 @RequestParam(name = "page") Long pageNum,
-                                                 @RequestParam(name = "pageSize", required = false) Long pageSize) {
-        PageParam pageParam = buildPageParam(pageNum, pageSize);
+                                                 @RequestParam(name = "page") Long page,
+                                                 @RequestParam Long pageSize) {
+        PageParam pageParam = buildPageParam(page, pageSize);
         PageListVo<TopCommentDTO> vo = commentReadService.queryVideoComments(videoId, pageParam);
         return ResVo.ok(vo);
     }

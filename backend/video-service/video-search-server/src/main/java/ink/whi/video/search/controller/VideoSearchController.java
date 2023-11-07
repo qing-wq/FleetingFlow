@@ -55,7 +55,7 @@ public class VideoSearchController extends BaseRestController {
         if (CollectionUtils.isEmpty(docs)) {
             return ResVo.ok(null);
         }
-        List<Integer> videoIds = docs.stream().map(VideoDoc::getId).toList();
+        List<Long> videoIds = docs.stream().map(s -> s.getId().longValue()).toList();
         PageListVo<VideoInfoDTO> result = videoClient.listVideos(videoIds);
         // 替换高亮信息
 //        Map<Integer, VideoDoc> docMap = docs.stream().collect(Collectors.toMap(VideoDoc::getId, t -> t));

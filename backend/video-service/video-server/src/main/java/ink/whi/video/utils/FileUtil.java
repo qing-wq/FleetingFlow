@@ -40,6 +40,7 @@ import java.util.Random;
 public class FileUtil extends cn.hutool.core.io.FileUtil {
 
     private static final Logger log = LoggerFactory.getLogger(FileUtil.class);
+    private static final String[] VIDEO_EXTENSIONS = {".mp4", ".avi", ".mov", ".mkv", ".flv"};
 
     private final static Random random = new Random();
 
@@ -161,5 +162,19 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
             }
         }
         return getVideoInfo(tempFile);
+    }
+
+    /**
+     * 判断是否是视频文件
+     * @param fileName
+     * @return
+     */
+    public static boolean hasVideoExtension(String fileName) {
+        for (String extension : VIDEO_EXTENSIONS) {
+            if (fileName.toLowerCase().endsWith(extension)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

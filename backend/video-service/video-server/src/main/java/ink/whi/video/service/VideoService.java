@@ -18,7 +18,7 @@ public interface VideoService {
 
     VideoInfoDTO queryDetailVideoInfo(Long videoId);
 
-    PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, PageParam pageParam);
+    PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, Long id, Integer pageSize);
 
     Long saveVideo(VideoPostReq videoPostReq) throws IOException;
 
@@ -30,7 +30,7 @@ public interface VideoService {
 
     Long getTagId(String tag);
 
-    PageListVo<VideoInfoDTO> listVideos(List<Integer> videoIds);
+    PageListVo<VideoInfoDTO> listVideos(List<Long> videoIds);
 
     PageListVo<VideoInfoDTO> queryVideosByUserAndType(Long userId, PageParam pageParam, String code);
 }
