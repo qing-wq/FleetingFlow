@@ -11,6 +11,34 @@ import java.util.*;
 
 public class AIUtil {
 
+    public static List<String> getTagRecommendResults(String str) throws JSONException {
+        List<String> result = new ArrayList<>(15);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 设置请求头
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // 构建请求体
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("data", List.of(str));
+        // 创建请求实体
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        // 发送HTTP请求
+        ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:7672/run/predict", HttpMethod.POST, requestEntity, String.class);
+
+        // 获取响应
+        JSONObject responseJson = new JSONObject(responseEntity.getBody());
+        String data = (String) responseJson.getJSONArray("data").get(0);
+
+        result.addAll(Arrays.asList(data.split("%%")));
+
+        return result;
+    }
+
+
     public static String getCategoryByTitle(String str) throws JSONException {
 
         RestTemplate restTemplate = new RestTemplate();
