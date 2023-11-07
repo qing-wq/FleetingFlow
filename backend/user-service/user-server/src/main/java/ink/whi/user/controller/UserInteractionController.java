@@ -11,6 +11,7 @@ import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.notify.constants.VideoMqConstants;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.req.UserRelationReq;
+import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.entity.UserFootDO;
 import ink.whi.user.service.CountService;
 import ink.whi.user.service.UserFootService;
@@ -83,7 +84,7 @@ public class UserInteractionController extends BaseRestController {
         // 消息通知
         NotifyTypeEnum notifyType = OperateTypeEnum.getNotifyType(type);
         Optional.ofNullable(notifyType).ifPresent(s -> rabbitTemplate.convertAndSend(VideoMqConstants.VIDEO_TOPIC_EXCHANGE,
-                s == NotifyTypeEnum.PRAISE ? VideoMqConstants.VIDEO_PRAISE_KEY : VideoMqConstants.VIDEO_CANCEL_PRAISE_KEY, foot));
+                s == NotifyTypeEnum.PRAISE ? VideoMqConstants.VIDEO_PRAISE_KEY : VideoMqConstants.VIDEO_CANCEL_PRAISE_KEY, UserConverter.toUserFootDTO(foot)));
         return ResVo.ok(true);
     }
 

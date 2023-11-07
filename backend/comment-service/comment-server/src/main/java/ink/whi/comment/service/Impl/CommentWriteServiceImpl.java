@@ -66,9 +66,9 @@ public class CommentWriteServiceImpl implements CommentWriteService {
         userClient.saveCommentFoot(CommentConverter.toDto(comment), video.getAuthorId(), parentCommentUser);
 
         // 发布事件
-        rabbitTemplate.convertAndSend(VideoMqConstants.VIDEO_TOPIC_EXCHANGE, VideoMqConstants.VIDEO_COMMENT_KEY, comment);
+        rabbitTemplate.convertAndSend(VideoMqConstants.VIDEO_TOPIC_EXCHANGE, VideoMqConstants.VIDEO_COMMENT_KEY, CommentConverter.toDto(comment));
         if (NumUtil.upZero(parentCommentUser)){
-            rabbitTemplate.convertAndSend(VideoMqConstants.VIDEO_TOPIC_EXCHANGE, VideoMqConstants.VIDEO_REPLY_KEY, comment);
+            rabbitTemplate.convertAndSend(VideoMqConstants.VIDEO_TOPIC_EXCHANGE, VideoMqConstants.VIDEO_REPLY_KEY, CommentConverter.toDto(comment));
         }
         return comment;
     }

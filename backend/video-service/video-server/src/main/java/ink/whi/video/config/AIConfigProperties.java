@@ -17,15 +17,15 @@ public class AIConfigProperties {
     /**
      * 分类推荐系统
      */
-    public static String VideoRecommendSystemUrl;
+    public static String video;
 
     /**
      * tag推荐系统
      */
-    public static String TagRecommendSystemUrl;
+    public static String tag;
 
     /**
      * 分类推荐系统
      */
-    public static String CategoryRecommendSystemUrl;
+    public static String category;
 }

@@ -65,7 +65,7 @@ public class UserFootServiceImpl implements UserFootService {
     @Override
     public UserFootDTO queryUserFoot(Long commentId, Integer documentType, Long userId) {
         UserFootDO foot = userFootDao.getByDocumentAndUserId(commentId, documentType, userId);
-        return UserConverter.toDTO(foot);
+        return UserConverter.toUserFootDTO(foot);
     }
 
     /**

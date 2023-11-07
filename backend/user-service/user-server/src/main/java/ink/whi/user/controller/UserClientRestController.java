@@ -1,6 +1,5 @@
 package ink.whi.user.controller;
 
-import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
@@ -16,7 +15,6 @@ import ink.whi.user.service.UserService;
 import ink.whi.web.auth.Permission;
 import ink.whi.web.auth.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,7 +55,7 @@ public class UserClientRestController {
         VideoTypeEnum videoEnum = VideoTypeEnum.formCode(videoType);
         OperateTypeEnum operateEnum = OperateTypeEnum.fromCode(operate);
         UserFootDO foot = userFootService.saveOrUpdateUserFoot(videoEnum, videoId, author, userId, operateEnum);
-        return UserConverter.toDTO(foot);
+        return UserConverter.toUserFootDTO(foot);
     }
 
     /**
