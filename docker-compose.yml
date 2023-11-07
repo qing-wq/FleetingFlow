@@ -55,6 +55,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.12.1
+    container_name: flfl-elasticsearch
     environment:
       - discovery.type=single-node
     ports:
@@ -70,6 +71,7 @@ services:
 
   kibana:
     image: kibana:7.12.1
+    container_name: flfl-kibana
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
       - I18N_LOCALE=zh-CN
