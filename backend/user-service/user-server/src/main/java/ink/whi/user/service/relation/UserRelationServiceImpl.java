@@ -7,7 +7,6 @@ import ink.whi.common.model.page.PageParam;
 import ink.whi.notify.constants.UserMqConstants;
 import ink.whi.user.model.dto.FollowUserInfoDTO;
 import ink.whi.user.model.req.UserRelationReq;
-import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.dao.UserRelationDao;
 import ink.whi.user.repo.entity.UserRelationDO;
 import ink.whi.user.service.UserRelationService;
@@ -72,13 +71,13 @@ public class UserRelationServiceImpl implements UserRelationService {
             record = new UserRelationDO().setUserId(req.getUserId()).setFollowUserId(req.getFollowUserId()).setFollowState(state.getCode());
             userRelationDao.save(record);
             // 发布消息
-            rabbitTemplate.convertAndSend(UserMqConstants.USER_TOPIC_EXCHANGE, UserMqConstants.USER_FOLLOW_KEY, UserConverter.toUserRelationDto(record));
+            rabbitTemplate.convertAndSend(UserMqConstants.USER_TOPIC_EXCHANGE, UserMqConstants.USER_FOLLOW_KEY, record);
             return;
         }
 
         record.setFollowState(state.getCode());
         userRelationDao.updateById(record);
-        rabbitTemplate.convertAndSend(UserMqConstants.USER_TOPIC_EXCHANGE, UserMqConstants.USER_CANCEL_FOLLOW_KEY, UserConverter.toUserRelationDto(record));
+        rabbitTemplate.convertAndSend(UserMqConstants.USER_TOPIC_EXCHANGE, UserMqConstants.USER_CANCEL_FOLLOW_KEY, record);
     }
 
     /**

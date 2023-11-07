@@ -21,7 +21,6 @@ import java.util.List;
 @Component
 public class VideoClientResolver implements VideoClient{
 
-    @GetMapping(path = "client/video/{videoId}")
     @Override
     public SimpleVideoInfoDTO queryBasicVideoInfo(@PathVariable Long videoId) {
         log.error("Video 服务异常：queryBasicVideoInfo 请求失败");
@@ -34,7 +33,6 @@ public class VideoClientResolver implements VideoClient{
         return null;
     }
 
-    @GetMapping(path = "client/user/{userId}")
     @Override
     public PageListVo<VideoInfoDTO> listVideosByUserId(@PathVariable Long userId, PageParam pageParam) {
         log.error("Video 服务异常：listVideosByUserId 请求失败");

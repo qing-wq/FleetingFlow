@@ -63,8 +63,8 @@ public class UserRestController extends BaseRestController {
         vo.setUserHome(userInfo);
 
         // 视频列表
-        PageListVo<VideoInfoDTO> videos = videoClient.listVideosByUserId(userId, pageParam);
-        vo.setHomeSelectList(videos);
+//        PageListVo<VideoInfoDTO> videos = videoClient.listVideosByUserId(userId, pageParam);
+//        vo.setHomeSelectList(videos);
 
         return ResVo.ok(vo);
     }
@@ -89,8 +89,8 @@ public class UserRestController extends BaseRestController {
         vo.setUserHome(userInfo);
 
         // 视频列表
-        PageListVo<VideoInfoDTO> videos = videoClient.listVideosByUserId(userId, pageParam);
-        vo.setHomeSelectList(videos);
+//        PageListVo<VideoInfoDTO> videos = videoClient.listVideosByUserId(userId, pageParam);
+//        vo.setHomeSelectList(videos);
         return ResVo.ok(vo);
     }
 

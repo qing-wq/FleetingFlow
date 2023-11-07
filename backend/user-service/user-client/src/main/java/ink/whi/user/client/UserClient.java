@@ -56,4 +56,7 @@ public interface UserClient {
 
     @GetMapping(path = "client/foot/collect")
     List<Long> queryUserCollectionVideoList(@RequestParam Long userId, @SpringQueryMap PageParam pageParam);
+
+    @GetMapping(path = "client/foot/like")
+    List<Long> queryUserPraiseVideoList(@RequestParam Long userId, @SpringQueryMap PageParam pageParam);
 }

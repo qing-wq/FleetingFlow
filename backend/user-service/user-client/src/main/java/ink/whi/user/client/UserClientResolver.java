@@ -66,4 +66,10 @@ public class UserClientResolver implements UserClient {
 		log.error("User 服务异常：queryUserCollectionVideoList 请求失败");
 		return null;
 	}
+
+	@Override
+	public List<Long> queryUserPraiseVideoList(Long userId, PageParam pageParam) {
+		log.error("User 服务异常：queryUserPraiseVideoList 请求失败");
+		return null;
+	}
 }

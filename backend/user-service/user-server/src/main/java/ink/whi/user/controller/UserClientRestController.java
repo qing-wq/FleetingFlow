@@ -1,5 +1,6 @@
 package ink.whi.user.controller;
 
+import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.enums.OperateTypeEnum;
 import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
@@ -15,6 +16,7 @@ import ink.whi.user.service.UserService;
 import ink.whi.web.auth.Permission;
 import ink.whi.web.auth.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,7 +57,7 @@ public class UserClientRestController {
         VideoTypeEnum videoEnum = VideoTypeEnum.formCode(videoType);
         OperateTypeEnum operateEnum = OperateTypeEnum.fromCode(operate);
         UserFootDO foot = userFootService.saveOrUpdateUserFoot(videoEnum, videoId, author, userId, operateEnum);
-        return UserConverter.toUserFootDTO(foot);
+        return UserConverter.toDTO(foot);
     }
 
     /**
@@ -112,7 +114,7 @@ public class UserClientRestController {
      * @param pageParam
      * @return
      */
-    @GetMapping(path = "client/foot/read")
+    @GetMapping(path = "foot/read")
     List<Long> queryUserReadVideoList(@RequestParam Long userId, PageParam pageParam) {
         return userFootService.queryUserReadVideoList(userId, pageParam);
     }
@@ -123,8 +125,19 @@ public class UserClientRestController {
      * @param pageParam
      * @return
      */
-    @GetMapping(path = "client/foot/collect")
+    @GetMapping(path = "foot/collect")
     List<Long> queryUserCollectionVideoList(@RequestParam Long userId, PageParam pageParam) {
         return userFootService.queryUserCollectionVideoList(userId, pageParam);
+    }
+
+    /**
+     * 查询用户点赞记录
+     * @param userId
+     * @param pageParam
+     * @return
+     */
+    @GetMapping(path = "client/foot/like")
+    List<Long> queryUserPraiseVideoList(@RequestParam Long userId,  PageParam pageParam) {
+        return userFootService.queryUserPraiseVideoList(userId, pageParam);
     }
 }

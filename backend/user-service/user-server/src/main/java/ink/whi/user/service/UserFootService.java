@@ -22,5 +22,8 @@ public interface UserFootService {
 
     List<Long> queryUserCollectionVideoList(Long userId, PageParam pageParam);
 
+    List<Long> queryUserPraiseVideoList(Long userId, PageParam pageParam);
+
     void saveCommentFoot(CommentDTO comment, Long userId, Long parentCommentUser);
+
 }

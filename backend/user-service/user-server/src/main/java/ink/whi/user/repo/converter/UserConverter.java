@@ -5,7 +5,6 @@ import ink.whi.common.enums.RoleEnum;
 import ink.whi.common.model.dto.BaseUserDTO;
 import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.common.model.dto.UserFootDTO;
-import ink.whi.common.model.dto.UserRelationDTO;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.model.dto.UserStatisticInfoDTO;
 import ink.whi.user.model.req.UserInfoSaveReq;
@@ -13,7 +12,6 @@ import ink.whi.user.model.req.UserSaveReq;
 import ink.whi.user.repo.entity.UserDO;
 import ink.whi.user.repo.entity.UserFootDO;
 import ink.whi.user.repo.entity.UserInfoDO;
-import ink.whi.user.repo.entity.UserRelationDO;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -21,7 +19,7 @@ import org.springframework.beans.BeanUtils;
  */
 public class UserConverter {
 
-    public static BaseUserDTO toUserFootDTO(UserDO user) {
+    public static BaseUserDTO toDTO(UserDO user) {
         if (user == null) {
             return null;
         }
@@ -31,7 +29,7 @@ public class UserConverter {
         return dto;
     }
 
-    public static BaseUserInfoDTO toUserFootDTO(UserInfoDO info) {
+    public static BaseUserInfoDTO toDTO(UserInfoDO info) {
         if (info == null) {
             return null;
         }
@@ -77,7 +75,7 @@ public class UserConverter {
         return userInfoDO;
     }
 
-    public static UserFootDTO toUserFootDTO(UserFootDO foot) {
+    public static UserFootDTO toDTO(UserFootDO foot) {
         if (foot == null) {
             return null;
         }
@@ -92,12 +90,6 @@ public class UserConverter {
         }
         SimpleUserInfoDTO dto = new SimpleUserInfoDTO();
         BeanUtils.copyProperties(user, dto);
-        return dto;
-    }
-
-    public static UserRelationDTO toUserRelationDto(UserRelationDO record) {
-        UserRelationDTO dto = new UserRelationDTO();
-        BeanUtils.copyProperties(record, dto);
         return dto;
     }
 }

@@ -1,6 +1,5 @@
 package ink.whi.video.utils;
 
-import ink.whi.common.utils.SpringUtil;
 import ink.whi.video.config.AIConfigProperties;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.*;
 
 
+@Component
 public class AIUtil {
 
     public static List<String> getTagRecommendResults(String str) throws JSONException {
@@ -30,8 +30,7 @@ public class AIUtil {
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         // 发送HTTP请求
-        System.out.println(SpringUtil.getConfig("ai.config.tag"));
-        ResponseEntity<String> responseEntity = restTemplate.exchange(SpringUtil.getConfig("ai.config.tag"), HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(AIConfigProperties.TagRecommendSystemUrl, HttpMethod.POST, requestEntity, String.class);
 
         // 获取响应
         JSONObject responseJson = new JSONObject(responseEntity.getBody());
@@ -59,7 +58,7 @@ public class AIUtil {
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         // 发送HTTP请求
-        ResponseEntity<String> responseEntity = restTemplate.exchange(SpringUtil.getConfig("ai.config.category"), HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(AIConfigProperties.CategoryRecommendSystemUrl, HttpMethod.POST, requestEntity, String.class);
 
         // 获取响应
         JSONObject responseJson = new JSONObject(responseEntity.getBody());
@@ -85,7 +84,7 @@ public class AIUtil {
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
         // 发送HTTP请求
-        ResponseEntity<String> responseEntity = restTemplate.exchange(SpringUtil.getConfig("ai.config.video"), HttpMethod.POST, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(AIConfigProperties.VideoRecommendSystemUrl, HttpMethod.POST, requestEntity, String.class);
 
         // 获取响应
         JSONObject responseJson = new JSONObject(responseEntity.getBody());

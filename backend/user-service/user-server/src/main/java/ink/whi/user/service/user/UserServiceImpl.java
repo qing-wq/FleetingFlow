@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public BaseUserDTO queryUserByUserId(Long userId) {
         UserDO user = userDao.getUser(userId);
-        return UserConverter.toUserFootDTO(user);
+        return UserConverter.toDTO(user);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw BusinessException.newInstance(StatusEnum.USER_NOT_EXISTS, userId);
         }
-        return UserConverter.toUserFootDTO(user);
+        return UserConverter.toDTO(user);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class UserDao extends ServiceImpl<UserInfoMapper, UserInfoDO> {
                 .eq(UserDO::getPassword, password)
                 .eq(UserDO::getDeleted, 0)
                 .one();
-        return UserConverter.toUserFootDTO(user);
+        return UserConverter.toDTO(user);
     }
 
     public UserInfoDO getByUserId(Long userId) {

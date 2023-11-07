@@ -65,7 +65,7 @@ public class UserFootServiceImpl implements UserFootService {
     @Override
     public UserFootDTO queryUserFoot(Long commentId, Integer documentType, Long userId) {
         UserFootDO foot = userFootDao.getByDocumentAndUserId(commentId, documentType, userId);
-        return UserConverter.toUserFootDTO(foot);
+        return UserConverter.toDTO(foot);
     }
 
     /**
@@ -88,6 +88,11 @@ public class UserFootServiceImpl implements UserFootService {
     @Override
     public List<Long> queryUserCollectionVideoList(Long userId, PageParam pageParam) {
         return userFootDao.listCollectedVideosByUserId(userId, pageParam);
+    }
+
+    @Override
+    public List<Long> queryUserPraiseVideoList(Long userId, PageParam pageParam) {
+        return userFootDao.listPraiseVideosByUserId(userId, pageParam);
     }
 
     @Override

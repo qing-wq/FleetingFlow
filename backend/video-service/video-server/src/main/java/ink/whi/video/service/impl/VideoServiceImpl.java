@@ -329,6 +329,11 @@ public class VideoServiceImpl implements VideoService {
             List<Long> articleIds = userClient.queryUserCollectionVideoList(userId, pageParam);
             records = CollectionUtils.isEmpty(articleIds) ? Collections.emptyList() : videoDao.listByIds(articleIds);
             records = sortByIds(articleIds, records);
+        } else if (select == HomeSelectEnum.LIKE) {
+            // 用户的点赞列表
+            List<Long> articleIds = userClient.queryUserPraiseVideoList(userId, pageParam);
+            records = CollectionUtils.isEmpty(articleIds) ? Collections.emptyList() : videoDao.listByIds(articleIds);
+            records = sortByIds(articleIds, records);
         }
 
         if (CollectionUtils.isEmpty(records)) {
