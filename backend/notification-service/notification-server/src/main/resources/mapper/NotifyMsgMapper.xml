@@ -44,4 +44,21 @@
         <include refid="limit"/>
     </select>
 
+    <select id="listUnreadNotices" resultType="ink.whi.common.model.dto.NotifyMsgDTO">
+        select m.id as msgId,
+        m.operate_user_id as operateUserId,
+        u.user_name as operateUserName,
+        u.picture as operateUserPhoto,
+        m.msg as msg,
+        m.type as type,
+        m.state as state,
+        m.create_time as createTime
+        from notify_msg as m
+        left join user_info as u on m.operate_user_id = u.user_id
+        where
+        m.notify_user_id = #{userId}
+        order by m.create_time desc
+        <include refid="limit"/>
+    </select>
+
 </mapper>

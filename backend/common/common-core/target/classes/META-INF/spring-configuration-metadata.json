@@ -40,8 +40,7 @@
       "name": "qiniu.config.type",
       "type": "java.lang.String",
       "description": "空间类型：公开\/私有",
-      "sourceType": "ink.whi.common.properties.QiniuConfigProperties",
-      "defaultValue": "公开"
+      "sourceType": "ink.whi.common.properties.QiniuConfigProperties"
     },
     {
       "name": "qiniu.config.zone",

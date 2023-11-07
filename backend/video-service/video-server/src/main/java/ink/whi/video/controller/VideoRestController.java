@@ -93,6 +93,7 @@ public class VideoRestController extends BaseRestController {
                                                 @RequestParam(name = "size") Integer size) {
         Long userId = ReqInfoContext.getReqInfo().getUserId();
         PageListVo<VideoInfoDTO> list = videoService.queryVideosByCategory(userId, categoryId, size);
+        list.setHasMore(true);
         return ResVo.ok(list);
     }
 

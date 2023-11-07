@@ -29,4 +29,6 @@ public interface NotifyMsgMapper extends BaseMapper<NotifyMsgDO> {
      * @return
      */
     List<NotifyMsgDTO> listNormalNotices(Long userId, Integer type, PageParam pageParam);
+
+    List<NotifyMsgDTO> listUnreadNotices(Long userId, PageParam pageParam);
 }

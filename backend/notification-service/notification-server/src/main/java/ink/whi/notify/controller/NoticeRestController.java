@@ -31,18 +31,18 @@ public class NoticeRestController extends BaseRestController {
 
     /**
      * 消息列表
-     * @param type 消息类型，如：comment、reply、praise、collect、follow、system
+     * @param type 消息类型，如：all、comment、reply、praise、collect、follow、system
      * @return
      */
-    @GetMapping(path = {"/", "/{type}"})
-    public ResVo<NoticeResVo> list(@PathVariable(name = "type", required = false) String type) {
+    @GetMapping(path = { "/{type}"})
+    public ResVo<NoticeResVo> list(@PathVariable(name = "type") String type) {
         Long loginUserId = ReqInfoContext.getReqInfo().getUserId();
         Map<String, Integer> map = notifyService.queryUnreadCounts(loginUserId);
 
-        NotifyTypeEnum typeEnum = type == null ? NotifyTypeEnum.COMMENT : NotifyTypeEnum.typeOf(type);
+        NotifyTypeEnum typeEnum = type == null ? NotifyTypeEnum.ALL : NotifyTypeEnum.typeOf(type);
 
         NoticeResVo vo = new NoticeResVo();
-        vo.setList(notifyService.queryUserNotices(loginUserId, typeEnum, new PageParam(1, 10, 0, 50)));
+        vo.setList(notifyService.queryUserNotices(loginUserId, typeEnum, PageParam.newPageInstance()));
         vo.setSelectType(typeEnum.name().toLowerCase());
         vo.setUnreadCountMap(map);
         return ResVo.ok(vo);

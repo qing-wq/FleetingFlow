@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ink.whi.common.enums.NotifyStatEnum;
 import ink.whi.common.enums.NotifyTypeEnum;
+import ink.whi.common.model.base.BaseDO;
 import ink.whi.common.model.dto.*;
 import ink.whi.common.utils.SpringUtil;
 import ink.whi.common.model.page.PageParam;
@@ -14,6 +15,7 @@ import ink.whi.notify.repo.mapper.NotifyMsgMapper;
 import ink.whi.user.client.UserClient;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,7 @@ import java.util.Map;
 public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
     private static final Long ADMIN_ID = 0L;
 
+    @Resource
     private UserClient userClient;
 
     /**
@@ -65,6 +68,8 @@ public class NotifyMsgDao extends ServiceImpl<NotifyMsgMapper, NotifyMsgDO> {
      */
     public List<NotifyMsgDTO> listNotifyMsgByUserIdAndType(Long userId, NotifyTypeEnum type, PageParam page) {
         switch (type) {
+            case ALL:
+                return baseMapper.listUnreadNotices(userId, page);
             case REPLY:
             case COMMENT:
             case COLLECT:

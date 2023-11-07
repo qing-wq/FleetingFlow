@@ -8,6 +8,7 @@ import java.util.Map;
 
 @Getter
 public enum NotifyTypeEnum {
+    ALL(0, "all"),
     COMMENT(1, "comment"),
     REPLY(2, "reply"),
     PRAISE(3, "praise"),

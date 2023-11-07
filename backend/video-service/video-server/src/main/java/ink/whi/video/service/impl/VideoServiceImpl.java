@@ -125,7 +125,7 @@ public class VideoServiceImpl implements VideoService {
         categoryId = categoryId == null ? -1 : categoryId;
         List<Long> videoRecommendResults = null;
         try {
-            videoRecommendResults = AIUtil.getVideoRecommendResults(3L, 3L);
+            videoRecommendResults = AIUtil.getVideoRecommendResults(userId, categoryId);
         } catch (JSONException e) {
             log.error("获取视频推荐列表失败：{}", e.getMessage());
             e.printStackTrace();
