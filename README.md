@@ -9,6 +9,8 @@
 
 备用链接: https://pan.baidu.com/s/1-WBUI5S3ctbFOYWPo2WuVg?pwd=w4h3 提取码: w4h3
 
+项目文档：https://github.com/qing-wq/FleetingFlow/blob/master/doc.pdf
+
 # 环境要求
 
 > 环境要求：由于`FleetingFlow-backend`使用分布式架构、ElasticSearch搜索引擎等，并且部署了基于`Transformer`的深度学习模型`BERT`，所以内存空间占用较多。
