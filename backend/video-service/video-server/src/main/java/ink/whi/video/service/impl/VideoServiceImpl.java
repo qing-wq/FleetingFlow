@@ -5,7 +5,8 @@ import ink.whi.common.enums.*;
 import ink.whi.common.exception.BusinessException;
 import ink.whi.common.exception.StatusEnum;
 import ink.whi.common.properties.QiniuConfigProperties;
-import ink.whi.video.service.CountReadService;
+import ink.whi.common.utils.MapUtils;
+import ink.whi.video.service.*;
 import ink.whi.common.utils.NumUtil;
 import ink.whi.common.model.dto.UserFootDTO;
 import ink.whi.common.model.page.PageListVo;
@@ -20,26 +21,27 @@ import ink.whi.video.repo.converter.VideoConverter;
 import ink.whi.video.repo.dao.VideoDao;
 import ink.whi.video.repo.dao.VideoTagDao;
 import ink.whi.video.repo.entity.VideoDO;
-import ink.whi.video.service.CountService;
-import ink.whi.video.service.QiNiuService;
-import ink.whi.video.service.VideoService;
+import ink.whi.video.utils.AIUtil;
 import ink.whi.video.utils.FileUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author: qing
  * @Date: 2023/10/26
  */
+@Slf4j
 @Service
 public class VideoServiceImpl implements VideoService {
 
@@ -54,6 +56,9 @@ public class VideoServiceImpl implements VideoService {
 
     @Autowired
     private CountReadService countReadService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Resource
     private UserClient userClient;
@@ -142,7 +147,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     /**
-     * 上传视频
+     * 保存视频
      *
      * @param videoPostReq
      * @return videoId
@@ -150,7 +155,7 @@ public class VideoServiceImpl implements VideoService {
      */
     @Override
 //    @Transactional(rollbackFor = Exception.class)
-    public Long upload(VideoPostReq videoPostReq) throws IOException {
+    public Long saveVideo(VideoPostReq videoPostReq) throws IOException {
         String key = qiNiuService.upload(videoPostReq.getFile());
         long size = videoPostReq.getFile().getSize();
         String format = FileUtil.getExtensionName(videoPostReq.getFile().getOriginalFilename());
@@ -160,6 +165,17 @@ public class VideoServiceImpl implements VideoService {
         video.setFormat(format);
         video.setSize(FileUtil.getSize(size));
         video.setUrl(key);
+
+        // 对标题进行自然语言处理，自动获取分类
+        Long categoryId = null;
+        try {
+            String category = AIUtil.getCategoryByTitle("狗狗被猫咪欺负了#萌宠 #狗狗 #金太阳原创");
+            categoryId = categoryService.queryCategoryId(category);
+        } catch (JSONException e) {
+            log.error("获取视频分类失败：{}", e.getMessage());
+        }
+        // 默认分类 娱乐
+        video.setCategoryId(categoryId == null ? 5 : categoryId);
 
         return transactionTemplate.execute(new TransactionCallback<Long>() {
             @Override
@@ -219,6 +235,7 @@ public class VideoServiceImpl implements VideoService {
     public VideoInfoDTO fillVideoInfo(VideoDO record) {
         VideoInfoDTO dto = VideoConverter.toDto(record);
         Long videoId = record.getId();
+        dto.setUrl(config.buildUrl(dto.getUrl()));
 
         // 标签
         dto.setTags(videoDao.listTagsDetail(videoId));
@@ -270,5 +287,62 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Long getTagId(String tag) {
         return videoDao.getTagId(tag);
+    }
+
+    @Override
+    public PageListVo<VideoInfoDTO> listVideos(List<Integer> videoIds) {
+        List<VideoDO> videoDOS = videoDao.listVideoByIds(videoIds);
+        return buildVideoListVo(videoDOS, PageParam.DEFAULT_PAGE_SIZE);
+    }
+
+    /**
+     * 根据首页分类查询视频信息
+     * @param userId
+     * @param pageParam
+     * @param code
+     * @return
+     */
+    @Override
+    public PageListVo<VideoInfoDTO> queryVideosByUserAndType(Long userId, PageParam pageParam, String code) {
+        List<VideoDO> records = null;
+        HomeSelectEnum select = HomeSelectEnum.fromCode(code);
+        if (select == HomeSelectEnum.WORKS) {
+            // 用户的文章列表
+            records = videoDao.listVideoByUserId(userId, pageParam);
+        } else if (select == HomeSelectEnum.HISTORY) {
+            // 用户的阅读记录
+            List<Long> articleIds = userClient.queryUserReadVideoList(userId, pageParam);
+            records = CollectionUtils.isEmpty(articleIds) ? Collections.emptyList() : videoDao.listByIds(articleIds);
+            records = sortByIds(articleIds, records);
+        } else if (select == HomeSelectEnum.COLLECTION) {
+            // 用户的收藏列表
+            List<Long> articleIds = userClient.queryUserCollectionVideoList(userId, pageParam);
+            records = CollectionUtils.isEmpty(articleIds) ? Collections.emptyList() : videoDao.listByIds(articleIds);
+            records = sortByIds(articleIds, records);
+        }
+
+        if (CollectionUtils.isEmpty(records)) {
+            return PageListVo.emptyVo();
+        }
+        return buildVideoListVo(records, pageParam.getPageSize());
+    }
+
+    /**
+     * 排序
+     *
+     * @param videoIds
+     * @param records
+     * @return
+     */
+    private List<VideoDO> sortByIds(List<Long> videoIds, List<VideoDO> records) {
+        List<VideoDO> articleDOS = new ArrayList<>();
+        Map<Long, VideoDO> articleDOMap = MapUtils.toMap(records, VideoDO::getId, r -> r);
+        videoIds.forEach(articleId -> {
+            VideoDO article = articleDOMap.get(articleId);
+            if (article != null && article.getDeleted() == YesOrNoEnum.NO.getCode()) {
+                articleDOS.add(article);
+            }
+        });
+        return articleDOS;
     }
 }
