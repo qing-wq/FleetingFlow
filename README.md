@@ -4,6 +4,8 @@
 
 前端仓库：[https://github.com/LunaSekiii/qiniu-shortvideo](https://github.com/LunaSekiii/qiniu-shortvideo)
 
+演示Demo：[https://github.com/qing-wq/FleetingFlow/blob/master/imgs/FleetingFlowDemo.mp4](https://github.com/qing-wq/FleetingFlow/blob/master/imgs/FleetingFlowDemo.mp4)
+
 # 环境要求
 
 > 环境要求：由于`FleetingFlow-backend`使用分布式架构、ElasticSearch搜索引擎等，并且部署了基于`Transformer`的深度学习模型`BERT`，所以内存空间占用较多。
