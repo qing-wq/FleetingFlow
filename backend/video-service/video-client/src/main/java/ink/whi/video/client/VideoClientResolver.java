@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 /**
  * @author: qing
  * @Date: 2023/10/29
@@ -32,10 +34,23 @@ public class VideoClientResolver implements VideoClient{
         return null;
     }
 
+    @GetMapping(path = "client/user/{userId}")
     @Override
-    public PageListVo<VideoInfoDTO> listVideosByUserId(Long userId, PageParam pageParam) {
+    public PageListVo<VideoInfoDTO> listVideosByUserId(@PathVariable Long userId, PageParam pageParam) {
         log.error("Video 服务异常：listVideosByUserId 请求失败");
         throw BusinessException.newInstance(StatusEnum.UNEXPECT_ERROR, " video-server 服务异常");
 //        return null;
+    }
+
+    @Override
+    public PageListVo<VideoInfoDTO> listVideos(List<Integer> videoIds) {
+        log.error("Video 服务异常：listVideos 请求失败");
+        return null;
+    }
+
+    @Override
+    public PageListVo<VideoInfoDTO> queryVideosByUserAndType(Long userId, PageParam pageParam, String code) {
+        log.error("Video 服务异常：queryVideosByUserAndType 请求失败");
+        return null;
     }
 }

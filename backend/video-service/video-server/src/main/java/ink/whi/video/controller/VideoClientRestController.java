@@ -7,7 +7,10 @@ import ink.whi.video.dto.VideoInfoDTO;
 import ink.whi.video.service.CountService;
 import ink.whi.video.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 视频远程调用接口
@@ -58,5 +61,16 @@ public class VideoClientRestController {
     @GetMapping(path = "user/{userId}")
     PageListVo<VideoInfoDTO> listVideosByUserId(@PathVariable Long userId, PageParam pageParam) {
         return videoService.queryUserVideoList(userId, pageParam);
+    }
+
+    @PostMapping(path = "list")
+    PageListVo<VideoInfoDTO> listVideos(@RequestParam List<Integer> videoIds) {
+        return videoService.listVideos(videoIds);
+    }
+
+    @GetMapping(path = "user/type")
+    PageListVo<VideoInfoDTO> queryVideosByUserAndType(@RequestParam Long userId, PageParam pageParam,
+                                                      @RequestParam String code) {
+        return videoService.queryVideosByUserAndType(userId, pageParam, code);
     }
 }

@@ -17,32 +17,17 @@ public class UserInfoSaveReq {
     /**
      * 用户名
      */
-    private String username;
+    private String userName;
 
     /**
      * 用户头像
      */
-    private String photo;
-
-    /**
-     * 学号
-     */
-    private String studentId;
-
-    /**
-     * 学院
-     */
-    private String college;
+    private String picture;
 
     /**
      * 邮箱
      */
     private String email;
-
-    /**
-     * 专业
-     */
-    private String major;
 
     /**
      * 个人简介

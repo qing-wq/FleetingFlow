@@ -1,6 +1,5 @@
 package ink.whi.video.service;
 
-import ink.whi.common.model.dto.SimpleVideoInfoDTO;
 import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.video.dto.VideoInfoDTO;
@@ -8,6 +7,7 @@ import ink.whi.video.model.req.VideoPostReq;
 import ink.whi.video.dto.TagDTO;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author: qing
@@ -20,7 +20,7 @@ public interface VideoService {
 
     PageListVo<VideoInfoDTO> queryVideosByCategory(Long categoryId, PageParam pageParam);
 
-    Long upload(VideoPostReq videoPostReq) throws IOException;
+    Long saveVideo(VideoPostReq videoPostReq) throws IOException;
 
     VideoInfoDTO queryBaseVideoInfo(Long videoId);
 
@@ -29,4 +29,8 @@ public interface VideoService {
     PageListVo<VideoInfoDTO> queryUserVideoList(Long userId, PageParam pageParam);
 
     Long getTagId(String tag);
+
+    PageListVo<VideoInfoDTO> listVideos(List<Integer> videoIds);
+
+    PageListVo<VideoInfoDTO> queryVideosByUserAndType(Long userId, PageParam pageParam, String code);
 }

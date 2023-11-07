@@ -21,6 +21,7 @@ spring:
     import:
       - application-es.yaml
       - application-dal.yaml
+      - application-qiniu.yaml
       - optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
 
 database:

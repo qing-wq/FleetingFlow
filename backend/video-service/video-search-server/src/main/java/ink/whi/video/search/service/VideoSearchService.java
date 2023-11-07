@@ -1,8 +1,9 @@
 package ink.whi.video.search.service;
 
-import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.video.search.repo.entity.VideoDoc;
+
+import java.util.List;
 
 /**
  * @author qing
@@ -16,5 +17,5 @@ public interface VideoSearchService {
 	 * @param searchKey 关键字
 	 * @return
 	 */
-	PageListVo<VideoDoc> searchVideo(String searchKey, PageParam pageParam);
+	List<VideoDoc> searchVideo(String searchKey, PageParam pageParam);
 }

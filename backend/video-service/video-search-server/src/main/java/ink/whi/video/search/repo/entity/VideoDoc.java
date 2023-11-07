@@ -31,6 +31,9 @@ public class VideoDoc {
 	@Field(type = FieldType.Integer)
 	Integer authorId;
 
+	@Field(type = FieldType.Text, index = false)
+	String url;
+
 	/**
 	 * 标题
 	 */

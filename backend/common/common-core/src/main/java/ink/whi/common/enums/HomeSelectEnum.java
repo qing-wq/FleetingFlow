@@ -12,7 +12,7 @@ import lombok.Getter;
 public enum HomeSelectEnum {
 
     WORKS("video", "作品"),
-    READ("history", "浏览记录"),
+    HISTORY("history", "浏览记录"),
     COLLECTION("collection", "收藏"),
     LIKE("like", "喜欢");
 

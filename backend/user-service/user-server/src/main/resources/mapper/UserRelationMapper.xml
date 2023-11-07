@@ -14,7 +14,7 @@
         SELECT
             u.user_id as userId,
             u.user_name as userName,
-            u.photo as avatar,
+            u.picture as avatar,
             r.id as relationId,
             true as followed
         FROM user_relation as r
@@ -31,7 +31,7 @@
         SELECT
             u.user_id as userId,
             u.user_name as userName,
-            u.photo as avatar,
+            u.picture as avatar,
             r.id as relationId
             FROM user_relation as r
             left join user_info as u on r.follow_user_id = u.user_id

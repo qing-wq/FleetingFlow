@@ -5,9 +5,12 @@ import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
 import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.common.model.dto.UserFootDTO;
+import ink.whi.common.model.page.PageParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 /**
  * @author: qing
@@ -49,6 +52,18 @@ public class UserClientResolver implements UserClient {
 	@Override
 	public UserFootDTO queryUserFoot(Long commentId, Integer type, Long loginUserId) {
 		log.error("User 服务异常：queryUserFoot 请求失败");
+		return null;
+	}
+
+	@Override
+	public List<Long> queryUserReadVideoList(Long userId, PageParam pageParam) {
+		log.error("User 服务异常：queryUserReadVideoList 请求失败");
+		return null;
+	}
+
+	@Override
+	public List<Long> queryUserCollectionVideoList(Long userId, PageParam pageParam) {
+		log.error("User 服务异常：queryUserCollectionVideoList 请求失败");
 		return null;
 	}
 }

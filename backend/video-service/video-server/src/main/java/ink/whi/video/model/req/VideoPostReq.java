@@ -39,7 +39,7 @@ public class VideoPostReq implements Serializable {
     private String title;
 
     /**
-     * 分类
+     * 分类(不用填)
      */
     private Long categoryId;
 

@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     public BaseUserInfoDTO queryBasicUserInfo(Long userId) {
         UserInfoDO user = userDao.getByUserId(userId);
         if (user == null) {
-            throw BusinessException.newInstance(StatusEnum.USER_NOT_EXISTS, "userId=" + userId);
+            throw BusinessException.newInstance(StatusEnum.USER_NOT_EXISTS, userId);
         }
         return UserConverter.toDTO(user);
     }
@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
 
         // 用户计数信息
         UserStatisticInfoDTO videoFootCount = countService.queryUserStatisticInfo(userId);
+        System.out.println(videoFootCount + "=================");
         if (videoFootCount != null) {
             userHomeDTO.setPraiseCount(videoFootCount.getPraiseCount());
             userHomeDTO.setCollectionCount(videoFootCount.getCollectionCount());

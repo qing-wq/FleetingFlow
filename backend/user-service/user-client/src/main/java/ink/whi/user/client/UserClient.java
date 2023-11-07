@@ -5,9 +5,12 @@ import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
 import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.common.model.dto.UserFootDTO;
+import ink.whi.common.model.page.PageParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author: qing
@@ -47,4 +50,10 @@ public interface UserClient {
      */
     @GetMapping(path = "client/foot/praise")
     UserFootDTO queryUserFoot(@RequestParam Long commentId, @RequestParam Integer type, @RequestParam Long loginUserId);
+
+    @GetMapping(path = "client/foot/read")
+    List<Long> queryUserReadVideoList(@RequestParam Long userId, @SpringQueryMap PageParam pageParam);
+
+    @GetMapping(path = "client/foot/collect")
+    List<Long> queryUserCollectionVideoList(@RequestParam Long userId, @SpringQueryMap PageParam pageParam);
 }

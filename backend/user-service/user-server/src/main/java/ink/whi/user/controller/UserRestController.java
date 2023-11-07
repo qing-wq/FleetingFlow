@@ -83,6 +83,14 @@ public class UserRestController extends BaseRestController {
                                   @RequestParam(name = "pageSize", required = false) Long pageSize) {
         PageParam pageParam = buildPageParam(page, pageSize);
         UserHomeVo vo = initUserHomeVo(userId, homeSelectType, pageParam);
+
+        // 用户信息
+        UserStatisticInfoDTO userInfo = userService.queryUserInfoWithStatistic(userId);
+        vo.setUserHome(userInfo);
+
+        // 视频列表
+        PageListVo<VideoInfoDTO> videos = videoClient.listVideosByUserId(userId, pageParam);
+        vo.setHomeSelectList(videos);
         return ResVo.ok(vo);
     }
 
@@ -108,20 +116,8 @@ public class UserRestController extends BaseRestController {
         if (select == null) {
             return;
         }
-
-        switch (select) {
-            case WORKS:
-            case READ:
-            case COLLECTION:
-//                PageListVo<VideoInfoDTO> dto = videoReadService.queryVideosByUserAndType(userId, pageParam, select);
-//                vo.setHomeSelectList(dto);
-                return;
-            case LIKE:
-                vo.setHomeSelectList(PageListVo.emptyVo());
-//                initFollowFansList(vo, userId, pageParam);
-                return;
-            default:
-        }
+        PageListVo<VideoInfoDTO> dto = videoClient.queryVideosByUserAndType(userId, pageParam, select.getCode());
+        vo.setHomeSelectList(dto);
     }
 
     /**

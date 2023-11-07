@@ -116,7 +116,7 @@ public class VideoRestController extends BaseRestController {
         VideoPostReq videoPostReq = JsonUtil.toObj(json, VideoPostReq.class);
         log.info("接收到视频：" + videoPostReq);
         videoPostReq.setFile(file);
-        Long videoId = videoService.upload(videoPostReq);
+        Long videoId = videoService.saveVideo(videoPostReq);
         return ResVo.ok(videoId);
     }
 

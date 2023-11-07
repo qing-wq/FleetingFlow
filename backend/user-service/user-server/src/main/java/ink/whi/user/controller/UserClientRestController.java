@@ -6,6 +6,7 @@ import ink.whi.common.enums.VideoTypeEnum;
 import ink.whi.common.model.dto.CommentDTO;
 import ink.whi.common.model.dto.SimpleUserInfoDTO;
 import ink.whi.common.model.dto.UserFootDTO;
+import ink.whi.common.model.page.PageParam;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
 import ink.whi.user.repo.converter.UserConverter;
 import ink.whi.user.repo.entity.UserFootDO;
@@ -15,7 +16,10 @@ import ink.whi.user.service.UserService;
 import ink.whi.web.auth.Permission;
 import ink.whi.web.auth.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * feign 远程调用接口
@@ -102,5 +106,27 @@ public class UserClientRestController {
     @GetMapping(path = "comment/{commentId}")
     public Integer queryCommentPraiseCount(@PathVariable Long commentId){
         return countService.queryCommentPraiseCount(commentId);
+    }
+
+    /**
+     * 查询用户阅读记录
+     * @param userId
+     * @param pageParam
+     * @return
+     */
+    @GetMapping(path = "client/foot/read")
+    List<Long> queryUserReadVideoList(@RequestParam Long userId, PageParam pageParam) {
+        return userFootService.queryUserReadVideoList(userId, pageParam);
+    }
+
+    /**
+     * 查询用户收藏记录
+     * @param userId
+     * @param pageParam
+     * @return
+     */
+    @GetMapping(path = "client/foot/collect")
+    List<Long> queryUserCollectionVideoList(@RequestParam Long userId, PageParam pageParam) {
+        return userFootService.queryUserCollectionVideoList(userId, pageParam);
     }
 }

@@ -24,11 +24,6 @@ public class UserHomeVo {
     private PageListVo<VideoInfoDTO> homeSelectList;
 
     /**
-     * 关注列表/粉丝列表
-     */
-    private PageListVo<FollowUserInfoDTO> followList;
-
-    /**
      * 用户个人信息
      */
     private UserStatisticInfoDTO userHome;

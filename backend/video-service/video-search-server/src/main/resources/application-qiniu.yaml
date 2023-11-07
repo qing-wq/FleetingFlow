@@ -1,0 +1,8 @@
+qiniu:
+  config:
+    access_key: 1m4VsXAkDQBzfxxjr1eVzcfUJ16cbNm55_Oy2CzE
+    secret_key: ftZEHzmDXr1CgTCkgTvkHM2-Ms-GvpwoaD_jO6nN
+    bucket: fleetingflow-origin
+    host: s3anmft1h.hn-bkt.clouddn.com
+    type: '公开'
+    zone: '华南'

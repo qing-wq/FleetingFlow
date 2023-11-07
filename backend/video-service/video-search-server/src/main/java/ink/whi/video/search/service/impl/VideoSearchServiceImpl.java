@@ -1,6 +1,5 @@
 package ink.whi.video.search.service.impl;
 
-import ink.whi.common.model.page.PageListVo;
 import ink.whi.common.model.page.PageParam;
 import ink.whi.common.properties.QiniuConfigProperties;
 import ink.whi.video.search.repo.entity.VideoDoc;
@@ -40,11 +39,10 @@ public class VideoSearchServiceImpl implements VideoSearchService {
      * @return
      */
     @Override
-    public PageListVo<VideoDoc> searchVideo(String searchKey, PageParam pageParam) {
-        log.debug("searchQuery:{}", searchKey);
+    public List<VideoDoc> searchVideo(String searchKey, PageParam pageParam) {
+        log.info("searchQuery:{}", searchKey);
         SearchPage<VideoDoc> searchPage = videoSearchRepository.findByDescriptiveContent(searchKey,
                 PageRequest.of((int) (pageParam.getPageNum() - 1), (int) pageParam.getPageSize()));
-        log.debug("result number:{}", searchPage.getTotalElements());
         // 数据解析
         List<SearchHit<VideoDoc>> searchHitList = searchPage.getContent();
         ArrayList<VideoDoc> videoDocList = new ArrayList<>(searchHitList.size());
@@ -53,11 +51,9 @@ public class VideoSearchServiceImpl implements VideoSearchService {
             VideoDoc VideoDoc = blogHit.getContent();
             // 2.获取高亮数据
             Map<String, List<String>> fields = blogHit.getHighlightFields();
-            System.out.println("fields " + fields);
             if (fields.size() > 0) {
                 // 将高亮数据替换到原来的数据中
                 BeanMap beanMap = BeanMap.create(VideoDoc);
-                System.out.println("beanMap: " + beanMap);
                 for (String name : fields.keySet()) {
                     beanMap.put(name, fields.get(name).get(0));
                 }
@@ -69,7 +65,7 @@ public class VideoSearchServiceImpl implements VideoSearchService {
             }
             videoDocList.add(VideoDoc);
         }
-        return PageListVo.newVo(videoDocList, pageParam.getPageSize());
+        return videoDocList;
     }
 
 }

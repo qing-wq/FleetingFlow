@@ -82,7 +82,7 @@ public class UserRelationServiceImpl implements UserRelationService {
 
     /**
      * 查询粉丝列表时，更新映射关系，判断userId是否有关注这个用户
-     * todo: 这种方式比较消耗性能，可以在粉丝列表中筛除userId关注的用户
+     * todo 这种方式比较消耗性能，可以在粉丝列表中筛除userId关注的用户
      * @param followList
      * @param loginUserId
      */

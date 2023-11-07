@@ -1,6 +1,8 @@
 package ink.whi.video.search;
 
+import ink.whi.web.hook.interceptor.AuthorizeInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -16,7 +18,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ServletComponentScan
 @SpringBootApplication
 @EnableDiscoveryClient
-public class SearchServiceApplication {
+@EnableFeignClients(basePackages = "ink.whi.video.client")
+public class SearchServiceApplication implements WebMvcConfigurer{
+
+    @Autowired
+    private AuthorizeInterceptor authorizeInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authorizeInterceptor).addPathPatterns("/**");
+    }
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(SearchServiceApplication.class).run(args);

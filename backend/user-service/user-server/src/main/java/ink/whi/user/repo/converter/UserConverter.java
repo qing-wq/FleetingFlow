@@ -70,7 +70,7 @@ public class UserConverter {
             return null;
         }
         UserInfoDO userInfoDO = new UserInfoDO();
-        userInfoDO.setUserName(req.getUsername());
+        userInfoDO.setUserName(req.getUserName());
         BeanUtils.copyProperties(req, userInfoDO);
         return userInfoDO;
     }
