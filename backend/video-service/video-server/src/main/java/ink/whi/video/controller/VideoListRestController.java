@@ -8,6 +8,8 @@ import ink.whi.video.dto.CategoryDTO;
 import ink.whi.video.dto.TagDTO;
 import ink.whi.video.service.CategoryService;
 import ink.whi.video.service.VideoService;
+import ink.whi.video.utils.AIUtil;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,5 +55,17 @@ public class VideoListRestController extends BaseRestController {
         PageParam pageParam = buildPageParam(pageNum, pageSize);
         PageListVo<TagDTO> list = videoService.queryTagsList(categoryId, pageParam);
         return ResVo.ok(list);
+    }
+
+    /**
+     * 标签推荐
+     * @param key
+     * @return
+     * @throws JSONException
+     */
+    @GetMapping("tags/recommend")
+    public ResVo<List<String>> tags(@RequestParam String key) throws JSONException {
+        List<String> tagRecommendResults = AIUtil.getTagRecommendResults(key);
+        return ResVo.ok(tagRecommendResults);
     }
 }
