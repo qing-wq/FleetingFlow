@@ -4,24 +4,314 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85743d03-e393-4eeb-9fab-61c09f667d2f" name="Changes" comment="feat: 添加视频列表接口定义，调整数据模型定义，增加清晰度规则">
-      <change afterPath="$PROJECT_DIR$/common/common-core/src/main/java/ink/whi/common/enums/FileTypeEnum.java" afterDir="false" />
+    <list default="true" id="85743d03-e393-4eeb-9fab-61c09f667d2f" name="Changes" comment="fix: 修复用户主页点赞、收藏、历史数据 错误问题">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-client.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/comment-service.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-auth.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-cache.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/common-auth/common-auth.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/common-cache/common-cache.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/document/qiniu.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notification-client.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notification-server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notification-service.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/video-sdk.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/video-search-server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/video-service/video-client/video-client.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/video-service/video-search-server/video-search-server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/video-service/video-server/video-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa3f7d4f-b353-4830-b9b5-c0c7e47b6961.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa3f7d4f-b353-4830-b9b5-c0c7e47b6961/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa3f7d4f-b353-4830-b9b5-c0c7e47b6961/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/aa3f7d4f-b353-4830-b9b5-c0c7e47b6961/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_5_8_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_cloud_spring_cloud_alibaba_commons_2021_0_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_cloud_spring_cloud_starter_alibaba_nacos_config_2021_0_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_cloud_spring_cloud_starter_alibaba_nacos_discovery_2021_0_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_spring_boot_starter_1_1_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_nacos_nacos_auth_plugin_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_nacos_nacos_client_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_nacos_nacos_encryption_plugin_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_spring_spring_context_support_1_0_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_auth0_java_jwt_4_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_extension_3_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_4_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_13_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_ben_manes_caffeine_caffeine_2_9_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_06.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_11_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_failureaccess_1_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_31_1_jre.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_6_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_qiniu_qiniu_java_sdk_7_9_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_rabbitmq_amqp_client_5_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_14_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_4_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_SparseBitSet_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_11_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_openfeign_feign_core_11_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_openfeign_feign_slf4j_11_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_openfeign_form_feign_form_3_8_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_openfeign_form_feign_form_spring_3_8_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_annotations_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_circuitbreaker_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_circularbuffer_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_consumer_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_core_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_framework_common_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_micrometer_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_ratelimiter_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_retry_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_spring_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_spring_boot2_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_resilience4j_resilience4j_timelimiter_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_lettuce_lettuce_core_6_1_10_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_micrometer_micrometer_core_1_8_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_dns_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_http2_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_http_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_socks_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_proxy_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_dns_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_dns_classes_macos_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_dns_native_macos_osx_x86_64_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_classes_epoll_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_native_epoll_linux_x86_64_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_native_unix_common_4_1_84_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_addons_reactor_extra_3_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_netty_reactor_netty_core_1_0_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_netty_reactor_netty_http_1_0_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_reactor_core_3_4_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_prometheus_simpleclient_0_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_prometheus_simpleclient_tracer_common_0_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_prometheus_simpleclient_tracer_otel_0_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_prometheus_simpleclient_tracer_otel_agent_0_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_vavr_vavr_0_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_vavr_vavr_match_0_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_aws_brave_propagation_aws_0_21_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_context_slf4j_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_http_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_httpasyncclient_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_httpclient_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_jms_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_kafka_clients_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_kafka_streams_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_messaging_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_mongodb_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_rpc_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_brave_brave_instrumentation_spring_rabbit_5_13_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_reporter2_zipkin_reporter_2_16_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_reporter2_zipkin_reporter_metrics_micrometer_2_16_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_zipkin_zipkin2_zipkin_2_23_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_28.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_11_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_11_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_2_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_4_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpasyncclient_4_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_nio_4_4_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_5_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_5_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_lite_5_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_68.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_68.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_68.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_5_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjrt_1_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_21_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_69.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_69.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcutil_jdk15on_1_69.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_3_12_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_3_19_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hdrhistogram_HdrHistogram_2_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_2_5_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_3_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_6_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_6_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_6_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_6_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_latencyutils_LatencyUtils_2_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_4_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_4_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_5_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_amqp_spring_amqp_2_4_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_amqp_spring_rabbit_2_4_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_actuator_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_actuator_autoconfigure_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_configuration_processor_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_actuator_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_amqp_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_cache_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_reactor_netty_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_webflux_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_6_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_circuitbreaker_resilience4j_2_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_commons_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_context_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_gateway_server_3_1_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_loadbalancer_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_openfeign_core_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_sleuth_api_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_sleuth_autoconfigure_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_sleuth_brave_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_sleuth_instrumentation_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_gateway_3_1_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_openfeign_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_sleuth_3_1_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_6_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_6_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_6_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_retry_spring_retry_1_3_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_crypto_5_6_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_rsa_1_0_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webflux_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_8_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xerces_xercesImpl_2_12_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-service/comment-server/src/main/resources/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-service/comment-server/src/main/resources/application-dal.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-service/comment-server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/comment-service/comment-server/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/common-core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/common-web.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/common.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common-core/src/main/resources/application-qiniu.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/common/common-core/src/main/resources/application-qiniu.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common-core/target/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/common/common-core/target/classes/META-INF/spring-configuration-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common-core/target/classes/ink/whi/common/enums/NotifyTypeEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/common-core/target/classes/ink/whi/common/enums/NotifyTypeEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common-core/target/classes/ink/whi/common/utils/JwtUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/common-core/target/classes/ink/whi/common/utils/JwtUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common-core/target/classes/ink/whi/common/utils/SpringUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/common-core/target/classes/ink/whi/common/utils/SpringUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/document/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway-service/gateway-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/gateway-service.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway-service/src/main/resources/gateway-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/src/main/resources/gateway-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway-service/src/main/resources/gateway.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-service/src/main/resources/gateway.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/notification-server/src/main/resources/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/notification-server/src/main/resources/application-dal.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/notification-server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/notification-server/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/notification-server/src/main/resources/default-rabbitmq.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/notification-server/src/main/resources/default-rabbitmq.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/user-client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/user-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-client/target/classes/ink/whi/user/client/UserClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-client/target/classes/ink/whi/user/client/UserClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-client/target/classes/ink/whi/user/client/UserClientResolver.class" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-client/target/classes/ink/whi/user/client/UserClientResolver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/src/main/java/ink/whi/user/controller/LoginRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/src/main/java/ink/whi/user/controller/LoginRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application-dal.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application-email.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application-email.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application-qiniu.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application-qiniu.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/cache/RedisConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/cache/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/controller/VideoRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/controller/VideoRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoInfoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoInfoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoStatisticDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/model/dto/VideoStatisticDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/dao/QiniuContentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/dao/QiniuContentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/entity/QiniuContentDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/entity/QiniuContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/mapper/QiniuContentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/mapper/QiniuContentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/converter/VideoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/converter/VideoConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/entity/VideoDO.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/video/entity/VideoDO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/service/impl/VideoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/service/impl/VideoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/resources/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/resources/application-dal.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/video-service/src/test/java/VideoMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/src/test/java/VideoMapperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/target/classes/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/target/classes/application-dal.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/target/classes/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/target/classes/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/user-server/target/classes/mapper/UserRelationMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/user-server/target/classes/mapper/UserRelationMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application-dal.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application-es.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application-es.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application-rabbit.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application-rabbit.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/video-search-server/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/video-server/src/main/resources/application-ai.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/video-server/src/main/resources/application-ai.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/video-server/src/main/resources/application-dal.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/video-server/src/main/resources/application-dal.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video-service/video-server/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/video-service/video-server/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,30 +321,39 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="backend" />
+        <entry key="$PROJECT_DIR$/.." value="master_new" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="b3e1a983-9e20-4485-a153-8762a23a8365" />
+        <option name="url" value="git@github.com:qing-wq/FleetingFlow.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2XAaJiJipbsbs8mgD3Uat01v5eF" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -63,48 +362,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "import_schema_mapping": "<schema-mapping>\n  <databases>\n    <list>\n      <schema-mapping-item>\n        <source-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</source-data-source-id>\n        <source-path>schema/&quot;eladmin&quot;</source-path>\n        <target-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</target-data-source-id>\n        <target-path>schema/&quot;qiniu&quot;</target-path>\n      </schema-mapping-item>\n      <schema-mapping-item>\n        <source-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</source-data-source-id>\n        <source-path>schema/&quot;sai-forum&quot;</source-path>\n        <target-data-source-id>aa3f7d4f-b353-4830-b9b5-c0c7e47b6961</target-data-source-id>\n        <target-path>schema/&quot;qiniu&quot;</target-path>\n      </schema-mapping-item>\n    </list>\n  </databases>\n</schema-mapping>",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/home/qing/MyDocument/code/match/qiniu-dnwtn/backend/user-service/user-client/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.14053535",
-    "project.structure.side.proportion": "0.2",
-    "settings.build.tools.auto.reload": "ALL",
-    "settings.editor.selected.configurable": "preferences.fileTypes",
-    "spring.configuration.checksum": "1c15b296d17a8db77eb476c7c426a3e6",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;import_schema_mapping&quot;: &quot;&lt;schema-mapping&gt;\n  &lt;databases&gt;\n    &lt;list&gt;\n      &lt;schema-mapping-item&gt;\n        &lt;source-data-source-id&gt;aa3f7d4f-b353-4830-b9b5-c0c7e47b6961&lt;/source-data-source-id&gt;\n        &lt;source-path&gt;schema/&amp;quot;eladmin&amp;quot;&lt;/source-path&gt;\n        &lt;target-data-source-id&gt;aa3f7d4f-b353-4830-b9b5-c0c7e47b6961&lt;/target-data-source-id&gt;\n        &lt;target-path&gt;schema/&amp;quot;qiniu&amp;quot;&lt;/target-path&gt;\n      &lt;/schema-mapping-item&gt;\n      &lt;schema-mapping-item&gt;\n        &lt;source-data-source-id&gt;aa3f7d4f-b353-4830-b9b5-c0c7e47b6961&lt;/source-data-source-id&gt;\n        &lt;source-path&gt;schema/&amp;quot;sai-forum&amp;quot;&lt;/source-path&gt;\n        &lt;target-data-source-id&gt;aa3f7d4f-b353-4830-b9b5-c0c7e47b6961&lt;/target-data-source-id&gt;\n        &lt;target-path&gt;schema/&amp;quot;qiniu&amp;quot;&lt;/target-path&gt;\n      &lt;/schema-mapping-item&gt;\n    &lt;/list&gt;\n  &lt;/databases&gt;\n&lt;/schema-mapping&gt;&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/qing/MyDocuments/code/match/qiniu-dnwtn/FleetingFlow/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.14053535&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;3d23939738f53a6a8eb9f4b4309d5817&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;,
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/user-service/user-client/src/main/resources" />
-      <recent name="$PROJECT_DIR$/user-service/user-server/src/main/resources" />
-      <recent name="$PROJECT_DIR$/user-service/user-server/src/main/java/ink/whi" />
-      <recent name="$PROJECT_DIR$/user-service/user-client/src/main/java/ink/whi/user" />
-      <recent name="$PROJECT_DIR$/video-service/src/main/java/ink/whi/video/repo/qiniu/dao" />
+      <recent name="$PROJECT_DIR$/video-service/video-server/src/main/resources" />
+      <recent name="$PROJECT_DIR$/video-service/video-search-server/src/main/resources" />
+      <recent name="$PROJECT_DIR$/video-service/video-server/src/test/java" />
+      <recent name="$PROJECT_DIR$/video-service/video-search-server/src/test/java" />
+      <recent name="$PROJECT_DIR$/document" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/video-service/video-search-server/src/main/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/common/src/main/java/ink/whi/common" />
     </key>
@@ -112,56 +417,39 @@
       <recent name="ink.whi" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="" />
-      <recent name="ink.whi.video.repo.video.entity" />
-      <recent name="ink.whi.common.vo.dto" />
-      <recent name="ink.whi.video.config" />
-      <recent name="ink.whi.video.utils" />
+      <recent name="ink.whi.video.dto" />
+      <recent name="ink.whi.user.utils" />
+      <recent name="ink.whi.user.model.vo" />
+      <recent name="ink.whi.common.model.dto" />
+      <recent name="ink.whi.web.hook.filter" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.VideoServiceApplication">
-    <configuration name="VideoServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ink.whi.video.VideoServiceApplication" />
-      <module name="video-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ink.whi.video.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="generated-requests | #14" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="14" requestIdentifier="#14" runType="Run single request">
+  <component name="RunManager" selected="Spring Boot.CommentApplication">
+    <configuration name="generated-requests | #18" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="18" requestIdentifier="#18" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="MyTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-service" />
+    <configuration name="generated-requests | #19" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="19" requestIdentifier="#19" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #20" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="20" requestIdentifier="#20" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #22" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="22" requestIdentifier="#22" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="BasicTest.Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="video-server" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MyTest" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="BasicTest" />
+      <option name="METHOD_NAME" value="Test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="video-service" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MyTest" />
-      <option name="METHOD_NAME" value="test1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="VideoMapperTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="video-service" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="VideoMapperTest" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="method" />
+    <configuration name="CommentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="comment-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.comment.CommentApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -173,34 +461,74 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="NotificationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="notification-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.notify.NotificationApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SearchServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="video-search-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.video.search.SearchServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UserServiceApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="user-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.user.UserServiceApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="user-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.user.UserServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="VideoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="video-service" />
+    <configuration name="VideoServiceApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="video-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ink.whi.video.VideoServiceApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="HTTP Request.generated-requests | #18" />
+      <item itemvalue="HTTP Request.generated-requests | #19" />
+      <item itemvalue="HTTP Request.generated-requests | #20" />
+      <item itemvalue="HTTP Request.generated-requests | #22" />
+      <item itemvalue="JUnit.BasicTest.Test" />
+      <item itemvalue="Spring Boot.CommentApplication" />
+      <item itemvalue="Spring Boot.GatewayApplication" />
+      <item itemvalue="Spring Boot.NotificationApplication" />
+      <item itemvalue="Spring Boot.SearchServiceApplication" />
+      <item itemvalue="Spring Boot.UserServiceApplication (1)" />
+      <item itemvalue="Spring Boot.VideoServiceApplication (1)" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.generated-requests | #14" />
-        <item itemvalue="JUnit.VideoMapperTest.test" />
-        <item itemvalue="JUnit.MyTest.test1" />
-        <item itemvalue="JUnit.MyTest.test" />
-        <item itemvalue="Application.VideoServiceApplication" />
+        <item itemvalue="JUnit.BasicTest.Test" />
+        <item itemvalue="HTTP Request.generated-requests | #22" />
+        <item itemvalue="HTTP Request.generated-requests | #20" />
+        <item itemvalue="HTTP Request.generated-requests | #19" />
+        <item itemvalue="HTTP Request.generated-requests | #18" />
       </list>
     </recent_temporary>
   </component>
@@ -221,6 +549,33 @@
       <workItem from="1698148453410" duration="14025000" />
       <workItem from="1698207069298" duration="38669000" />
       <workItem from="1698329931615" duration="32524000" />
+      <workItem from="1698945112953" duration="319000" />
+      <workItem from="1698945446352" duration="8201000" />
+      <workItem from="1698981154579" duration="9665000" />
+      <workItem from="1698991618334" duration="30485000" />
+      <workItem from="1699072470047" duration="4418000" />
+      <workItem from="1699084808503" duration="3141000" />
+      <workItem from="1699097355385" duration="127000" />
+      <workItem from="1699097490738" duration="3161000" />
+      <workItem from="1699107060607" duration="53029000" />
+      <workItem from="1699251783670" duration="1331000" />
+      <workItem from="1699253333014" duration="77450000" />
+      <workItem from="1699368959698" duration="409000" />
+      <workItem from="1699369384472" duration="149000" />
+      <workItem from="1699369548130" duration="3495000" />
+      <workItem from="1699430115401" duration="122000" />
+      <workItem from="1699468808755" duration="22000" />
+      <workItem from="1699620604545" duration="2182000" />
+      <workItem from="1699847193079" duration="698000" />
+      <workItem from="1701759476474" duration="1474000" />
+      <workItem from="1701761792715" duration="3500000" />
+      <workItem from="1701776054951" duration="1308000" />
+      <workItem from="1701964036529" duration="3220000" />
+      <workItem from="1702002583065" duration="25000" />
+      <workItem from="1702002777731" duration="4000" />
+      <workItem from="1702009607991" duration="991000" />
+      <workItem from="1702027620574" duration="16399000" />
+      <workItem from="1702217002069" duration="1300000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 项目初始化，用户系统搭建">
       <created>1698214305943</created>
@@ -271,7 +626,203 @@
       <option name="project" value="LOCAL" />
       <updated>1698403335194</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix: 修复MultipartFile文件转为File异常">
+      <created>1698894765613</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698894765613</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: 搭建消息模块，对用户、视频、评论模块的消息进行监听">
+      <created>1698928171330</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698928171330</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: 搭建评论模块">
+      <created>1698928495333</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1698928495333</updated>
+    </task>
+    <task id="LOCAL-00011" summary="update: common模块结构调整">
+      <created>1698928721703</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1698928721703</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update: 项目结构调整">
+      <created>1698928866543</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1698928866543</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: 实现评论发布、评论点赞等接口，完善评论模块">
+      <created>1699007309391</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699007309391</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: 增加视频模块创建标签、图片上传接口">
+      <created>1699007485867</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699007485867</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: 修复feign远程调用传参问题">
+      <created>1699007694422</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1699007694422</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: 完善系统配置文件，添加feign基础配置">
+      <created>1699017680745</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1699017680745</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: 优化七牛云配置方式">
+      <created>1699030780256</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699030780256</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: 增加分数模块，作为推荐系统的权重">
+      <created>1699030914634</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1699030914634</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: 视频搜索模块搭建，使用ES作为搜索引擎">
+      <created>1699099083813</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1699099083813</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat: 认证模块调整">
+      <created>1699109602192</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1699109602192</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: 模块调整，完善用户主页">
+      <created>1699210557490</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1699210557490</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix: 修复feign远程调用格式问题">
+      <created>1699239274332</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1699239274332</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix: 修复video-service无法启动问题">
+      <created>1699257684821</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1699257684822</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: 添加Maven打包依赖，完成项目构建">
+      <created>1699298599764</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1699298599764</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat: 添加Feign远程调用拦截器，用于传递用户身份信息">
+      <created>1699298635937</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1699298635937</updated>
+    </task>
+    <task id="LOCAL-00026" summary="feat: 完善视频列表中用户信息，交互信息，修复ElasticsearchRepository调用问题">
+      <created>1699298767846</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1699298767846</updated>
+    </task>
+    <task id="LOCAL-00027" summary="feat: 完善视频模块和用户模块交互，添加用户关注/粉丝列表，用户主页分类">
+      <created>1699335303045</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1699335303045</updated>
+    </task>
+    <task id="LOCAL-00028" summary="feat: 对视频标题进行自然语言处理，自动获取分类">
+      <created>1699335323505</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1699335323505</updated>
+    </task>
+    <task id="LOCAL-00029" summary="feat: 使用lightfm算法进行视频推荐，并适应冷启动问题">
+      <created>1699339701825</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1699339701825</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: 增加全部消息分类">
+      <created>1699345413664</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1699345413664</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: 增加标签推荐接口">
+      <created>1699345925320</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1699345925320</updated>
+    </task>
+    <task id="LOCAL-00032" summary="feat: ai系统封装">
+      <created>1699347375092</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1699347375092</updated>
+    </task>
+    <task id="LOCAL-00033" summary="feat: ai系统封装">
+      <created>1699351247449</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1699351247449</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fix: 修复用户主页点赞、收藏、历史数据 错误问题">
+      <created>1699370121588</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1699370121588</updated>
+    </task>
+    <task id="LOCAL-00035" summary="fix: 修复用户主页点赞、收藏、历史数据 错误问题">
+      <created>1699372237808</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1699372237808</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,14 +840,51 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: 项目初始化，用户系统搭建" />
-    <MESSAGE value="feat: 网关系统" />
-    <MESSAGE value="feat: 网关系统搭建" />
-    <MESSAGE value="feat:  添加七牛云配置信息" />
-    <MESSAGE value="feat: 视频系统数据层搭建" />
-    <MESSAGE value="feat: 添加评论功能、七牛云配置" />
-    <MESSAGE value="feat: 分离用户系统远程调用模块，实现不同微服务之间局部依赖" />
-    <MESSAGE value="feat: 添加视频列表接口定义，调整数据模型定义，增加清晰度规则" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加视频列表接口定义，调整数据模型定义，增加清晰度规则" />
+    <MESSAGE value="update: 项目结构调整" />
+    <MESSAGE value="feat: 实现评论发布、评论点赞等接口，完善评论模块" />
+    <MESSAGE value="feat: 增加视频模块创建标签、图片上传接口" />
+    <MESSAGE value="fix: 修复feign远程调用传参问题" />
+    <MESSAGE value="feat: 完善系统配置文件，添加feign基础配置" />
+    <MESSAGE value="feat: 优化七牛云配置方式" />
+    <MESSAGE value="feat: 增加分数模块，作为推荐系统的权重" />
+    <MESSAGE value="feat: 视频搜索模块搭建，使用ES作为搜索引擎" />
+    <MESSAGE value="feat: 认证模块调整" />
+    <MESSAGE value="feat: 实现用户注册，使用邮箱验证码验证用户邮箱" />
+    <MESSAGE value="feat: 模块调整，完善用户主页" />
+    <MESSAGE value="fix: 修复feign远程调用格式问题" />
+    <MESSAGE value="fix: 修复video-service无法启动问题" />
+    <MESSAGE value="fix: 添加Maven打包依赖，完成项目构建" />
+    <MESSAGE value="feat: 添加Maven打包依赖，完成项目构建" />
+    <MESSAGE value="feat: 添加Feign远程调用拦截器，用于传递用户身份信息" />
+    <MESSAGE value="feat: 完善视频列表中用户信息，交互信息，修复ElasticsearchRepository调用问题" />
+    <MESSAGE value="feat: 完善视频模块和用户模块交互" />
+    <MESSAGE value="feat: 完善视频模块和用户模块交互，添加用户关注/粉丝列表，用户主页分类" />
+    <MESSAGE value="feat: 对视频标题进行自然语言处理，自动获取分类" />
+    <MESSAGE value="feat: 使用lightfm算法进行视频推荐，并适应冷启动问题" />
+    <MESSAGE value="feat: 增加全部消息分类" />
+    <MESSAGE value="feat: 增加标签推荐接口" />
+    <MESSAGE value="feat: ai系统封装" />
+    <MESSAGE value="fix: 修复用户主页点赞、收藏、历史数据 错误问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 修复用户主页点赞、收藏、历史数据 错误问题" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.springframework.mail.javamail.MimeMessageHelper" memberName="mimeMessage" />
+        <PinnedItemInfo parentTag="javax.mail.internet.InternetHeaders" memberName="headers" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

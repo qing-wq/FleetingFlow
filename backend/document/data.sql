@@ -18,6 +18,9 @@
 --
 -- Table structure for table `category`
 --
+create database `qiniu`;
+
+use `qiniu`;
 
 DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -1188,8 +1191,6 @@ CREATE TABLE `tool_qiniu_config` (
 
 LOCK TABLES `tool_qiniu_config` WRITE;
 /*!40000 ALTER TABLE `tool_qiniu_config` DISABLE KEYS */;
-INSERT INTO `tool_qiniu_config` VALUES
-(1,'1m4VsXAkDQBzfxxjr1eVzcfUJ16cbNm55_Oy2CzE','fleetingflow-origin','s3anmft1h.hn-bkt.clouddn.com','ftZEHzmDXr1CgTCkgTvkHM2-Ms-GvpwoaD_jO6nN','公开','华南');
 /*!40000 ALTER TABLE `tool_qiniu_config` ENABLE KEYS */;
 UNLOCK TABLES;
 

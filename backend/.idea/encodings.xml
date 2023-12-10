@@ -3,6 +3,12 @@
   <component name="Encoding">
     <file url="file://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-parent/2.6.11/src/main/resources" charset="UTF-8" />
     <file url="file://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-parent/2.6.13/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/comment-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/comment-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/comment-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-cache/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/common-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/common-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
@@ -10,6 +16,10 @@
     <file url="file://$PROJECT_DIR$/gateway-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway-service/src/main/resources-env/${env}" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification-service/notification-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification-service/notification-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />
@@ -17,5 +27,10 @@
     <file url="file://$PROJECT_DIR$/user-service/user-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-service/user-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/video-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/video-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/video-service/video-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/video-service/video-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/video-service/video-search-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/video-service/video-server/src/main/java" charset="UTF-8" />
   </component>
 </project>

@@ -17,10 +17,10 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: nacos:8848
+        server-addr: 10.60.98.242:8848
         file-extension: yml
       discovery:
-        server-addr: nacos:8848
+        server-addr: 10.60.98.242:8848
   main:
     allow-circular-references: true
   config:

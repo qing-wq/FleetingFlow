@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/backend.iml" filepath="$PROJECT_DIR$/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comment-client.iml" filepath="$PROJECT_DIR$/comment-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comment-server.iml" filepath="$PROJECT_DIR$/comment-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comment-service.iml" filepath="$PROJECT_DIR$/comment-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/common.iml" filepath="$PROJECT_DIR$/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-auth/common-auth.iml" filepath="$PROJECT_DIR$/common/common-auth/common-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-cache/common-cache.iml" filepath="$PROJECT_DIR$/common/common-cache/common-cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/common-core.iml" filepath="$PROJECT_DIR$/common-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/common-web.iml" filepath="$PROJECT_DIR$/common-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/gateway-service/gateway-service.iml" filepath="$PROJECT_DIR$/gateway-service/gateway-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notification-client.iml" filepath="$PROJECT_DIR$/notification-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notification-server.iml" filepath="$PROJECT_DIR$/notification-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notification-service.iml" filepath="$PROJECT_DIR$/notification-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-client.iml" filepath="$PROJECT_DIR$/user-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-server.iml" filepath="$PROJECT_DIR$/user-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-service.iml" filepath="$PROJECT_DIR$/user-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video-service/video-client/video-client.iml" filepath="$PROJECT_DIR$/video-service/video-client/video-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video-service/video-search-server/video-search-server.iml" filepath="$PROJECT_DIR$/video-service/video-search-server/video-search-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video-service/video-server/video-server.iml" filepath="$PROJECT_DIR$/video-service/video-server/video-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/video-service.iml" filepath="$PROJECT_DIR$/video-service.iml" />
     </modules>
   </component>

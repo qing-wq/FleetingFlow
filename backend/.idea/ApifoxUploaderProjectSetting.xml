@@ -9,6 +9,11 @@
         <option value="sai-web:2654035" />
         <option value="user-service:3473115" />
         <option value="video-service:3485737" />
+        <option value="video-server:3533097" />
+        <option value="comment-server:3533097" />
+        <option value="user-server:3533097" />
+        <option value="video-search-server:3533097" />
+        <option value="notification-server:3533097" />
       </array>
     </option>
     <option name="yapiTokens" value="" />

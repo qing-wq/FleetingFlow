@@ -96,7 +96,7 @@ public class LoginRestController {
         if (StringUtils.isBlank(token)) {
             return ResVo.fail(StatusEnum.TOKEN_NOT_EXISTS);
         }
-        response.addCookie(SessionUtil.newCookie(SSLIOSession.SESSION_KEY, token));
+        response.addCookie(SessionUtil.newCookie(SESSION_KEY, token));
         return ResVo.ok(userId);
     }
 

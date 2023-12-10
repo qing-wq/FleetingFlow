@@ -1,8 +1,8 @@
 ai:
   config:
     # tag推荐系统
-    tag: "http://aiapps:7672/run/predict"
+    tag: "http://localhost:7672/run/predict"
     # 视频推荐系统
-    video: "http://aiapps:7676/run/predict"
+    video: "http://localhost:7676/run/predict"
     # 分类推荐系统
     category: "http://10.60.99.144:7675/run/predict"

@@ -7,37 +7,49 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="user-client" />
-        <module name="common-web" />
-        <module name="video-service" />
-        <module name="gateway-service" />
         <module name="user-server" />
+        <module name="video-server" />
+        <module name="video-search-server" />
+        <module name="comment-server" />
+        <module name="notification-server" />
+        <module name="video-client" />
+        <module name="notification-client" />
+        <module name="comment-client" />
+        <module name="gateway-service" />
+        <module name="common-auth" />
+        <module name="user-client" />
         <module name="common-core" />
+        <module name="common-cache" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="backend" target="17" />
-      <module name="common" target="17" />
-      <module name="common-core" target="17" />
       <module name="common-web" target="17" />
-      <module name="gateway-service" target="17" />
-      <module name="user-client" target="17" />
-      <module name="user-server" target="17" />
-      <module name="user-service" target="17" />
-      <module name="video-service" target="17" />
+      <module name="video-sdk" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="backend" options="" />
+      <module name="comment-client" options="-parameters" />
+      <module name="comment-server" options="-parameters" />
+      <module name="comment-service" options="" />
       <module name="common" options="" />
+      <module name="common-auth" options="-parameters" />
+      <module name="common-cache" options="-parameters" />
       <module name="common-core" options="-parameters" />
       <module name="common-web" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
+      <module name="notification-client" options="-parameters" />
+      <module name="notification-server" options="-parameters" />
+      <module name="notification-service" options="" />
       <module name="user-client" options="-parameters" />
       <module name="user-server" options="-parameters" />
       <module name="user-service" options="" />
-      <module name="video-service" options="-parameters" />
+      <module name="video-client" options="-parameters" />
+      <module name="video-sdk" options="-parameters" />
+      <module name="video-search-server" options="-parameters" />
+      <module name="video-server" options="-parameters" />
+      <module name="video-service" options="" />
     </option>
   </component>
 </project>
