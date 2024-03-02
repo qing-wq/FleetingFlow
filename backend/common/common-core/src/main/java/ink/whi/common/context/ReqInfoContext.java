@@ -61,5 +61,9 @@ public class ReqInfoContext {
          * 消息数量
          */
         private Integer msgNum;
+        /**
+         * 客户端ip
+         */
+        private String clientIp;
     }
 }

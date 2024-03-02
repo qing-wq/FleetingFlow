@@ -44,8 +44,9 @@ public enum StatusEnum {
     TOKEN_CREATE_EXISTS(500_500_003, "token创建异常"),
 
     // 服务异常
-    SERVER_ERROR(600_500_001, "服务器冒烟啦，要不稍后再试试吧！！")
-    ;
+    SERVER_ERROR(600_500_001, "服务器冒烟啦，要不稍后再试试吧！！"),
+    // 限流
+    ACCESS_FREQUENT(600_429_001, "访问过于频繁");
 
     private int code;
 

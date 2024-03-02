@@ -2,6 +2,8 @@ package ink.whi.user.controller;
 
 import ink.whi.common.context.ReqInfoContext;
 import ink.whi.common.exception.StatusEnum;
+import ink.whi.common.limit.Limit;
+import ink.whi.common.limit.LimitType;
 import ink.whi.common.utils.JwtUtil;
 import ink.whi.common.model.ResVo;
 import ink.whi.user.model.dto.BaseUserInfoDTO;
@@ -82,6 +84,7 @@ public class LoginRestController {
      * @param req
      * @return
      */
+    @Limit(key = "register", period = 60, count = 1, limitType = LimitType.IP)
     @PostMapping(path = "register")
     public ResVo<Long> register(@Validated @RequestBody UserSaveReq req, HttpServletResponse response) {
         if (StringUtils.isBlank(req.getUsername()) || StringUtils.isBlank(req.getPassword())) {
