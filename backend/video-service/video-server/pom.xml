@@ -60,6 +60,12 @@
             <artifactId>qiniu-java-sdk</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>ink.whi</groupId>
+            <artifactId>notification-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!--nacos-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

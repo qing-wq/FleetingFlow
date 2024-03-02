@@ -26,4 +26,5 @@ public class VideoMqConstants {
     public static final String VIDEO_UPDATE_KEY = "video.update";
     public static final String VIDEO_DELETE_KEY = "video.delete";
     public static final String VIDEO_REFRESH_ES_KEY = "video.refresh.es";
+    public static final String AI_VIDEO_RECOMMEND_KEY = "ai.video.recommend";
 }
