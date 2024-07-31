@@ -1,4 +1,14 @@
-# FleetingFlow
+FleetingFlow
+============
+
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/815942d3-e513-4b73-9ebd-ad38e3add1e6" width="40%" />
+
+![GitHub Last Commit]
+[![Apache License][Apache License Badge]][Apache License URL]
+
+</div>
+
 —— Web 短视频项目（后端）
 
 队伍：`不想起名`
@@ -11,21 +21,24 @@
 
 项目文档：https://github.com/qing-wq/FleetingFlow/blob/master/doc.pdf
 
-# 环境要求
+环境要求
+-------
 
 > 环境要求：由于`FleetingFlow-backend`使用分布式架构、ElasticSearch搜索引擎等，并且部署了基于`Transformer`的深度学习模型`BERT`，所以内存空间占用较多。
   - 至少需要41G内存空间
   - 至少需要6.5G磁盘空间
 
-![](https://camo.githubusercontent.com/be02fa9c441bee2a4b2e6f8c2553a2ccbd19cbdf2f792fd4dc313b6dd8383b0c/68747470733a2f2f73322e6c6f6c692e6e65742f323032332f31312f30372f586e57345631656c4459744a794c322e706e67)
+![Qiniu Shortvideo Frontend](https://github.com/user-attachments/assets/c76d2e6a-23ac-4ba4-813e-5a53beea6659)
 
-![](https://camo.githubusercontent.com/a3c3f7a63b1f30c4c30809bf06066a25393b7c5df61cb13e9a40a55ffd7ade2d/68747470733a2f2f73322e6c6f6c692e6e65742f323032332f31312f30372f36545833507853516659574335756c2e706e67)
+![Qiniu Shortvideo Frontend (1)](https://github.com/user-attachments/assets/cb873f3f-89ab-4554-b121-b967b7c1f28b)
 
-![](https://camo.githubusercontent.com/8b752fe0528dabb8e5cb05159953c83a7c4de34bcd63c5d6c81cbc6c593a43b0/68747470733a2f2f73322e6c6f6c692e6e65742f323032332f31312f30372f435047693544674666744a415242622e706e67)
+![Qiniu Shortvideo Frontend (2)](https://github.com/user-attachments/assets/ff634135-f129-408b-8220-6ac8d9175fab)
 
-# 项目部署
 
-## Docker部署
+项目部署
+-------
+
+### Docker部署
 
 `FleetingFlow-backend`使用docker封装，项目启动：
 
@@ -38,17 +51,18 @@ bash es_init.sh
 
 ```
 
-## 源代码部署
+### 源代码部署
 
 使用Maven读取pom文件即可，可分别运行各种微服务。
 
-### 部署现有 SQL 数据
+#### 部署现有 SQL 数据
 
 运行` ./backend/document/data.sql`，即可导入现有的数据，能够正常实现视频的播放等功能。
 
-## AI应用部署
+AI应用部署
+---------
 
-### Docker部署
+#### Docker部署
 
 ```Bash
 cd /path/to/FleetingFlow/machine-learning
@@ -61,7 +75,7 @@ docker run -p 7670:7670 -p 7671:7671 -p 7672:7672 fleetingflow_ml
 
 ```
 
-### 源代码部署
+#### 源代码部署
 
 首先安装依赖：
 
@@ -96,14 +110,19 @@ cd ./title-classification
 python predict.py
 ```
 
-# API文档
+API文档
+------
 
 地址：[https://github.com/qing-wq/FleetingFlow/blob/master/api.md](https://github.com/qing-wq/FleetingFlow/blob/master/api.md)
 
-# 测试
+测试
+---
 
 测试帐号：admin
 
 测试密码：123456
 
----
+
+[GitHub Last Commit]: https://img.shields.io/github/last-commit/qing-wq/FleetingFlow/master?logo=github&style=for-the-badge
+[Apache License Badge]: https://img.shields.io/badge/Apache%202.0-F25910.svg?style=for-the-badge&logo=Apache&logoColor=white
+[Apache License URL]: https://www.apache.org/licenses/LICENSE-2.0
