@@ -21,17 +21,17 @@ FleetingFlow
 
 项目文档：https://github.com/qing-wq/FleetingFlow/blob/master/doc.pdf
 
-项目架构图
--------
-
-<img width="1497" alt="59783EEC088A18CA7530C7AC68426316" src="https://github.com/user-attachments/assets/ec91add0-87c4-47b8-b24b-5125490c88db">
-
 环境要求
 -------
 
 > 环境要求：由于`FleetingFlow-backend`使用分布式架构、ElasticSearch搜索引擎等，并且部署了基于`Transformer`的深度学习模型`BERT`，所以内存空间占用较多。
   - 至少需要41G内存空间
   - 至少需要6.5G磁盘空间
+
+项目架构图
+-------
+
+<img width="1497" alt="59783EEC088A18CA7530C7AC68426316" src="https://github.com/user-attachments/assets/ec91add0-87c4-47b8-b24b-5125490c88db">
 
 ![Qiniu Shortvideo Frontend](https://github.com/user-attachments/assets/c76d2e6a-23ac-4ba4-813e-5a53beea6659)
 
