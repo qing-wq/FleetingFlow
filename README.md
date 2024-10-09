@@ -21,6 +21,11 @@ FleetingFlow
 
 项目文档：https://github.com/qing-wq/FleetingFlow/blob/master/doc.pdf
 
+项目架构图
+-------
+
+<img width="1497" alt="59783EEC088A18CA7530C7AC68426316" src="https://github.com/user-attachments/assets/ec91add0-87c4-47b8-b24b-5125490c88db">
+
 环境要求
 -------
 
